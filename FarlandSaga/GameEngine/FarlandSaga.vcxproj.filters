@@ -1,0 +1,123 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Debug">
+      <UniqueIdentifier>{c050d207-d3e4-496f-bdbb-bbd64ffaed4d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="IO">
+      <UniqueIdentifier>{3ecef9c5-1c2b-4d95-b526-7bcd825cbf53}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Math">
+      <UniqueIdentifier>{ac305e84-bc5d-4f26-b31e-9cb873b6d970}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{e07166c8-a421-4240-a6f1-495a692a1601}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="String">
+      <UniqueIdentifier>{4fbfc78c-5698-4395-a97b-1f13c6f5619a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{8a6ff424-ff9a-432d-8a1d-8a9a1c150349}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="WindowsOS">
+      <UniqueIdentifier>{ae069e6e-5c71-485b-85ad-c8c3f8ac9753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Sound">
+      <UniqueIdentifier>{85ab961a-5e97-405b-bac9-94d154af6f57}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GameEngineDebug.h">
+      <Filter>Debug</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDirectory.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEnginePath.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineReadFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineWriteFile.h">
+      <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineMath.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRandom.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTime.h">
+      <Filter>Math</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineNameObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineUpdateObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineString.h">
+      <Filter>String</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineSound.h">
+      <Filter>ThirdParty\Sound</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineInput.h">
+      <Filter>WindowsOS</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineWindow.h">
+      <Filter>WindowsOS</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="GameEngineDebug.cpp">
+      <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDirectory.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEnginePath.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineReadFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineWriteFile.cpp">
+      <Filter>IO</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineMath.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRandom.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTime.cpp">
+      <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineNameObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineUpdateObject.cpp">
+      <Filter>Object</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineString.cpp">
+      <Filter>String</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineSound.cpp">
+      <Filter>ThirdParty\Sound</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineInput.cpp">
+      <Filter>WindowsOS</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineWindow.cpp">
+      <Filter>WindowsOS</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32421.90
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineBase", "GameEngine\FarlandSaga.vcxproj", "{BEB630B6-5B59-4FD5-8069-A902245797F7}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level0", "Level0", "{198FB64E-B7FF-4264-A361-59D4A0EEEF0D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level1", "Level1", "{A9239964-2606-4E2C-A2E9-C13EC54FCC4E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level2", "Level2", "{A209D33C-4556-4A94-ACBA-400A23A68A42}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level3", "Level3", "{324811A8-ACDA-4C4F-B737-18904B78DB11}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level4", "Level4", "{C94AFA91-D0D6-4948-843D-DD9BC1047A95}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Level5", "Level5", "{8D18A386-CF6A-42D9-9C69-01C9171A82F0}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineApp", "GameEngineApp\GameEngineApp.vcxproj", "{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Debug|x64.ActiveCfg = Debug|x64
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Debug|x64.Build.0 = Debug|x64
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Debug|x86.ActiveCfg = Debug|Win32
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Debug|x86.Build.0 = Debug|Win32
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Release|x64.ActiveCfg = Release|x64
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Release|x64.Build.0 = Release|x64
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Release|x86.ActiveCfg = Release|Win32
+		{BEB630B6-5B59-4FD5-8069-A902245797F7}.Release|x86.Build.0 = Release|Win32
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Debug|x64.ActiveCfg = Debug|x64
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Debug|x64.Build.0 = Debug|x64
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Debug|x86.ActiveCfg = Debug|Win32
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Debug|x86.Build.0 = Debug|Win32
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Release|x64.ActiveCfg = Release|x64
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Release|x64.Build.0 = Release|x64
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Release|x86.ActiveCfg = Release|Win32
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{BEB630B6-5B59-4FD5-8069-A902245797F7} = {198FB64E-B7FF-4264-A361-59D4A0EEEF0D}
+		{0CFF8B1D-B09C-4DB1-BA04-848AA6659DC1} = {8D18A386-CF6A-42D9-9C69-01C9171A82F0}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {7B2BB4F6-B644-45E7-8505-7C2DE94D7D7F}
+	EndGlobalSection
+EndGlobal
