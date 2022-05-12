@@ -47,7 +47,7 @@ void GameEngineDirectory::MoveParent()
 
 bool GameEngineDirectory::IsRoot()
 {
-	return "\\" == Path_.parent_path().string();
+	return Path_ == Path_.root_path();
 }
 
 void GameEngineDirectory::MoveParent(const std::string& _Name)

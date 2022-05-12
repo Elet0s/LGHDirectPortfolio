@@ -2,10 +2,10 @@
 #include "GameEnginePath.h"
 
 class GameEngineFile;
-class GameEngineDirectory : public GameEnginePath //실직적으로 경로를 변경하기 위한 함수
+class GameEngineDirectory : public GameEnginePath
 {
 public:
-
+	// constrcuter destructer
 	GameEngineDirectory();
 	GameEngineDirectory(const char* _Path);
 	GameEngineDirectory(std::filesystem::path _Path);
