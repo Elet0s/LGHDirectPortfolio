@@ -129,15 +129,15 @@ void GameEngineWindow::ShowGameWindow()
 }
 
 
-void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)())
+void GameEngineWindow::MessageLoop(std::function<void()> _Init, std::function<void()> _Loop)
 {
     // 윈도우는 다 준비되었다.
     // 루프를 돌기전에
     // 뭔가 준비할게 있다면 준비함수를 실행해달라.
 
-    if (nullptr != _InitFunction)
+    if (nullptr != _Init)
     {
-        _InitFunction();
+        _Init();
     }
 
     MSG msg;
@@ -160,12 +160,12 @@ void GameEngineWindow::MessageLoop(void(*_InitFunction)(), void(*_LoopFunction)(
         // 윈도우가 일하지 않는 데드 타임.
         // 여기서 무슨게임을 돌릴까요?
 
-        if (nullptr == _LoopFunction)
+        if (nullptr == _Loop)
         {
             continue;
         }
 
-        _LoopFunction();
+        _Loop();
 
 
     }
