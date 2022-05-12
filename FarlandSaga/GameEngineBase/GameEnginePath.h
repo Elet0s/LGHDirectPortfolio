@@ -1,14 +1,16 @@
 #pragma once
 #include <filesystem>
 
-class GameEnginePath //폴더 경로를 관리하는 클래스
+// 설명 :
+class GameEnginePath
 {
 public:
-
+	// constrcuter destructer
 	GameEnginePath();
 	GameEnginePath(const std::filesystem::path& _Path);
 	~GameEnginePath();
 
+	// delete Function
 	GameEnginePath(const GameEnginePath& _Other) = delete;
 	GameEnginePath(GameEnginePath&& _Other) noexcept = delete;
 	GameEnginePath& operator=(const GameEnginePath& _Other) = delete;
@@ -18,11 +20,11 @@ public:
 
 	bool IsExits();
 
-	std::string GetExtension();
+	std::string GetExtension() const;
 
-	std::string GetFileName();
+	std::string GetFileName() const;
 
-	std::string GetFullPath();
+	std::string GetFullPath() const;
 
 protected:
 	std::filesystem::path Path_;

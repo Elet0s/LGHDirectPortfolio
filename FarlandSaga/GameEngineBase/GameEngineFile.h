@@ -7,16 +7,18 @@ enum class OpenMode
 	Write,
 };
 
-class GameEngineFile : public GameEnginePath //파일경로를 이용해 파일을 관리하는 클래스
+// 설명 :
+class GameEngineFile : public GameEnginePath
 {
 public:
-
+	// constrcuter destructer
 	GameEngineFile();
 	GameEngineFile(const char* _Path);
 	GameEngineFile(std::filesystem::path _Path);
 	GameEngineFile(const GameEngineFile& _Other);
 	~GameEngineFile();
 
+	// delete Function
 	void Open(OpenMode _Mode);
 
 	void ReadOpen()

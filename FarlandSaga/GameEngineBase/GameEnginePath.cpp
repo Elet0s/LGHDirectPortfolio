@@ -25,17 +25,17 @@ bool GameEnginePath::IsExits()
 	return std::filesystem::exists(Path_);
 }
 
-std::string GameEnginePath::GetExtension()
+std::string GameEnginePath::GetExtension() const
 {
 	return Path_.extension().string();
 }
 
-std::string GameEnginePath::GetFileName()
+std::string GameEnginePath::GetFileName()  const
 {
 	return Path_.filename().string();
 }
 
-std::string GameEnginePath::GetFullPath()
+std::string GameEnginePath::GetFullPath() const
 {
 	return Path_.string();
 }
