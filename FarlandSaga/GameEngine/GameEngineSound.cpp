@@ -3,7 +3,6 @@
 #include "GameEngineDebug.h"
 #include "GameEngineString.h"
 
-
 #pragma comment(lib, "fmod_vc.lib")
 
 FMOD::System* SoundSystem_ = nullptr;
@@ -59,7 +58,7 @@ GameEngineSoundPlayer GameEngineSound::SoundPlayControl(const std::string& _Name
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
-	GameEngineSound* FindSound = FindRes(UpperName);
+	GameEngineSound* FindSound = FindRessource(UpperName);
 
 	if (nullptr == FindSound)
 	{
@@ -79,7 +78,7 @@ void GameEngineSound::SoundPlayOneShot(const std::string& _Name, int LoopCount /
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
-	GameEngineSound* FindSound = FindRes(UpperName);
+	GameEngineSound* FindSound = FindRessource(UpperName);
 
 	if (nullptr == FindSound)
 	{
@@ -111,7 +110,7 @@ void GameEngineSound::Update()
 std::map<std::string, GameEngineSound*> GameEngineSound::AllRes;
 
 
-GameEngineSound* GameEngineSound::FindRes(const std::string& _Name)
+GameEngineSound* GameEngineSound::FindRessource(const std::string& _Name)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
@@ -124,12 +123,18 @@ GameEngineSound* GameEngineSound::FindRes(const std::string& _Name)
 
 	return FindIter->second;
 }
-GameEngineSound* GameEngineSound::LoadRes(const std::string& _Path)
+
+GameEngineSound* GameEngineSound::LoadRessource(const GameEngineFile& _Path)
+{
+	return LoadRessource(_Path.GetFullPath());
+}
+
+GameEngineSound* GameEngineSound::LoadRessource(const std::string& _Path)
 {
 	GameEnginePath NewPath = GameEnginePath(_Path);
-	return LoadRes(_Path, NewPath.GetFileName());	//경로와 파일이름(ex.idle.bmp)을 Map의 key,value로 넣기위해 각각 넘겨준다.
+	return LoadRessource(_Path, NewPath.GetFileName());	//경로와 파일이름(ex.idle.bmp)을 Map의 key,value로 넣기위해 각각 넘겨준다.
 }
-GameEngineSound* GameEngineSound::LoadRes(const std::string& _Path, const std::string& _Name)
+GameEngineSound* GameEngineSound::LoadRessource(const std::string& _Path, const std::string& _Name)
 {
 	std::string UpperName = GameEngineString::ToUpperReturn(_Name);
 
