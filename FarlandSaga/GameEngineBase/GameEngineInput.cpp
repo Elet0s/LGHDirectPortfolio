@@ -51,6 +51,8 @@ void GameEngineInput::GameEngineKey::Update(float _DeltaTime)
 GameEngineInput* GameEngineInput::Inst_ = new GameEngineInput();
 
 GameEngineInput::GameEngineInput()
+	: WheelValue(),
+	CurWheelValue()
 {
 }
 

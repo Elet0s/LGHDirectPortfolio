@@ -1,23 +1,14 @@
 #pragma once
-#include <GameEngineCore/GameEngineLevel.h>
-
-// Ό³Έν :
-class PlayLevel : public GameEngineLevel
+class Player
 {
-public:
+private:
 	// constrcuter destructer
-	PlayLevel();
-	~PlayLevel();
+	Player();
+	~Player();
 
 	// delete Function
-	PlayLevel(const PlayLevel& _Other) = delete;
-	PlayLevel(PlayLevel&& _Other) noexcept = delete;
-	PlayLevel& operator=(const PlayLevel& _Other) = delete;
-	PlayLevel& operator=(PlayLevel&& _Other) noexcept = delete;
-
-protected:
-
-private:
-
+	Player(const Player& _Other) = delete;
+	Player(Player&& _Other) noexcept = delete;
+	Player& operator=(const Player& _Other) = delete;
+	Player& operator=(Player&& _Other) noexcept = delete;
 };
-

@@ -12,9 +12,9 @@ private:
 	static GameEngineWindow* Inst_;
 
 public:
-	inline static GameEngineWindow& GetInst()
+	inline static GameEngineWindow* GetInst()
 	{
-		return *Inst_;
+		return Inst_;
 	}
 
 	static void Destroy()

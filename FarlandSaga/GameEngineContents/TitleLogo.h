@@ -1,23 +1,14 @@
 #pragma once
-#include <GameEngineCore/GameEngineLevel.h>
-
-// Ό³Έν :
-class TitleLevel : public GameEngineLevel
+class TitleLogo
 {
-public:
+private:
 	// constrcuter destructer
-	TitleLevel();
-	~TitleLevel();
+	TitleLogo();
+	~TitleLogo();
 
 	// delete Function
-	TitleLevel(const TitleLevel& _Other) = delete;
-	TitleLevel(TitleLevel&& _Other) noexcept = delete;
-	TitleLevel& operator=(const TitleLevel& _Other) = delete;
-	TitleLevel& operator=(TitleLevel&& _Other) noexcept = delete;
-
-protected:
-
-private:
-
+	TitleLogo(const TitleLogo& _Other) = delete;
+	TitleLogo(TitleLogo&& _Other) noexcept = delete;
+	TitleLogo& operator=(const TitleLogo& _Other) = delete;
+	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;
 };
-

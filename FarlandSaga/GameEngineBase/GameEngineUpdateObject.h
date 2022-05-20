@@ -88,6 +88,9 @@ public:
 		Order_ = _Order;
 	}
 
+	virtual void OnEvent() {}
+	virtual void OffEvent() {}
+
 private:
 	int Order_;
 	bool IsReleaseUpdate_;
