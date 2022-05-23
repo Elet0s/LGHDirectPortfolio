@@ -106,17 +106,21 @@ public:
 		return Lerp(p1, p2, Time);
 	}
 
+
 	//X = P1X * cosf(40) - P1Y * sinf(40)
 	//Y = P1X * sinf(40) + P1Y * cosf(40)
 
 
 
 public:
-	static float4 LEFT;
-	static float4 RIGHT;
-	static float4 UP;
-	static float4 DOWN;
-	static float4 ZERO;
+	static const float4 LEFT;
+	static const float4 RIGHT;
+	static const float4 UP;
+	static const float4 DOWN;
+	static const float4 ZERO;
+	static const float4 ONE;
+
+
 
 public:
 	float x;
@@ -151,6 +155,11 @@ public:
 		return static_cast<int>(w);
 	}
 
+	POINT GetConvertWindowPOINT()
+	{
+		return POINT(ix(), iy());
+	}
+
 	int hix() const
 	{
 		return static_cast<int>(x * 0.5f);
@@ -175,6 +184,12 @@ public:
 	{
 		// sqrtf 제곱근 구해줍니다.
 		return sqrtf((x * x) + (y * y));
+	}
+
+	float Len3D() const
+	{
+		// sqrtf 제곱근 구해줍니다.
+		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
 	void Normal2D()
@@ -300,7 +315,7 @@ public:
 
 	}
 	float4(float _x, float _y)
-		: x(_x), y(_y), z(0.0f), w(1.0f)
+		: x(_x), y(_y), z(1.0f), w(1.0f)
 	{
 
 	}

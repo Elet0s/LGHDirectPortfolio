@@ -75,6 +75,9 @@
     <ClInclude Include="GameEngineWindow.h">
       <Filter>WindowsOS</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineTransform.h">
+      <Filter>Math</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -121,6 +124,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineWindow.cpp">
       <Filter>WindowsOS</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransform.cpp">
+      <Filter>Math</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

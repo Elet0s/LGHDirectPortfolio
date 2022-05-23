@@ -1,10 +1,10 @@
-#include"GameEngineComponent.h"
+#include "GameEngineComponent.h"
 
 GameEngineComponent::GameEngineComponent()
 {
-
 }
+
 GameEngineComponent::~GameEngineComponent()
 {
-
 }
+

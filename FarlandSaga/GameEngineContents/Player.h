@@ -1,7 +1,10 @@
 #pragma once
-class Player
+#include <GameEngineCore/GameEngineActor.h>
+
+// Ό³Έν :
+class Player : public GameEngineActor
 {
-private:
+public:
 	// constrcuter destructer
 	Player();
 	~Player();
@@ -11,4 +14,9 @@ private:
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
 	Player& operator=(Player&& _Other) noexcept = delete;
+
+protected:
+
+private:
 };
+

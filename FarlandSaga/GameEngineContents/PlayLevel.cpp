@@ -8,6 +8,6 @@ PlayLevel::~PlayLevel()
 {
 }
 
-void PlayLevel::UserStart() {}
-void PlayLevel::UserUpdate(float _DeltaTime) {}
-void PlayLevel::UserEnd() {}
+void PlayLevel::Start() {}
+void PlayLevel::Update(float _DeltaTime) {}
+void PlayLevel::End() {}

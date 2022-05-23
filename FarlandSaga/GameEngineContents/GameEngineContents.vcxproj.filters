@@ -14,10 +14,10 @@
       <UniqueIdentifier>{d0791d11-f97b-4b44-9845-4bf7c2abe563}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Play">
-      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
+      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
     </Filter>
     <Filter Include="Actor\Title">
-      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
+      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -34,10 +34,10 @@
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\Title</Filter>
+      <Filter>Actor\Play</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Title</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -51,10 +51,10 @@
       <Filter>Level</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Actor\Title</Filter>
+      <Filter>Actor\Play</Filter>
     </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Title</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
