@@ -1,7 +1,10 @@
 #pragma once
-class TitleLogo
+#include <GameEngineCore/GameEngineActor.h>
+
+// Ό³Έν :
+class TitleLogo : public GameEngineActor
 {
-private:
+public:
 	// constrcuter destructer
 	TitleLogo();
 	~TitleLogo();
@@ -11,4 +14,12 @@ private:
 	TitleLogo(TitleLogo&& _Other) noexcept = delete;
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
 	TitleLogo& operator=(TitleLogo&& _Other) noexcept = delete;
+
+protected:
+	void UserStart() override;
+	void UserUpdate(float _DeltaTime) override;
+	void UserEnd() override;
+
+private:
 };
+

@@ -63,8 +63,8 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 
 		CurrentLevel = NextLevel;
 		NextLevel = nullptr;
-
 		CurrentLevel->OnEvent();
+		GameEngineTime::GetInst()->Reset();
 	}
 
 
@@ -75,11 +75,15 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 
 	GameEngineTime::GetInst()->Update();
 
-	_UserCore->UserUpdate();
+	// 엔진수준에서 유저가 하고 싶은일.
+	_UserCore->UserUpdate(GameEngineTime::GetInst()->GetDeltaTime());
 
-	// 
+	// 레벨수준에서 유저가 하고 싶은일.
 	CurrentLevel->AddAccTime(GameEngineTime::GetDeltaTime());
-	CurrentLevel->UserUpdate();
+	CurrentLevel->UserUpdate(GameEngineTime::GetDeltaTime());
+
+	// CurrentLevel->
+
 }
 
 void GameEngineCore::CoreEnd(GameEngineCore* _UserCore)

@@ -9,5 +9,5 @@ PlayLevel::~PlayLevel()
 }
 
 void PlayLevel::UserStart() {}
-void PlayLevel::UserUpdate() {}
+void PlayLevel::UserUpdate(float _DeltaTime) {}
 void PlayLevel::UserEnd() {}
