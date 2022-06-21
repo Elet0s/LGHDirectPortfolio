@@ -7,18 +7,16 @@ enum class OpenMode
 	Write,
 };
 
-// Ό³Έν :
 class GameEngineFile : public GameEnginePath
 {
 public:
-	// constrcuter destructer
+
 	GameEngineFile();
 	GameEngineFile(const char* _Path);
 	GameEngineFile(std::filesystem::path _Path);
 	GameEngineFile(const GameEngineFile& _Other);
 	~GameEngineFile();
 
-	// delete Function
 	void Open(OpenMode _Mode);
 
 	void ReadOpen()

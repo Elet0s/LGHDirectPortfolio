@@ -8,13 +8,14 @@ class GameEngineDebug
 {
 public:
 	static void LeakCheckOn();
-
-	//  전역 쓸때 const & 오류 메세지 띄우주는 함수니까 const &! 
-	// static void MsgBoxAssert(const std::string& _Text);
+	static void ConsoleOpen();
+	static void OutPutString(const std::string& _Text);
+	static void Destroy();
 
 protected:
 
 private:
+	static HANDLE hConsole;
 
 	GameEngineDebug();
 	~GameEngineDebug();

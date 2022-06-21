@@ -28,6 +28,9 @@
     <Filter Include="ThirdParty\Lib">
       <UniqueIdentifier>{cc310001-70b7-416c-b9bc-c139efdaad45}</UniqueIdentifier>
     </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{9db26297-f51a-4f7c-ab8e-2c4a238004b8}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h">
@@ -78,6 +81,9 @@
     <ClInclude Include="GameEngineTransform.h">
       <Filter>Math</Filter>
     </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -127,6 +133,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineTransform.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

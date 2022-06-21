@@ -1,11 +1,9 @@
 #pragma once
 #include "GameEngineFile.h"
 
-// Ό³Έν :
 class GameEngineReadFile : private GameEngineFile
 {
 public:
-	// constrcuter destructer
 	GameEngineReadFile();
 	GameEngineReadFile(const std::string& _Path);
 	GameEngineReadFile(std::filesystem::path _Path);

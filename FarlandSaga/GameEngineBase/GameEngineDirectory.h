@@ -5,7 +5,6 @@ class GameEngineFile;
 class GameEngineDirectory : public GameEnginePath
 {
 public:
-	// constrcuter destructer
 	GameEngineDirectory();
 	GameEngineDirectory(const char* _Path);
 	GameEngineDirectory(std::filesystem::path _Path);
