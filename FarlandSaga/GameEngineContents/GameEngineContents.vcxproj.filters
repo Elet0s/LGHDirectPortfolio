@@ -19,6 +19,12 @@
     <Filter Include="Actor\Title">
       <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\Play\Com">
+      <UniqueIdentifier>{c994f204-506b-4a3e-9ef5-79a745d95f9d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{8f97320b-7e97-41f8-b6cb-e84026fbb289}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -39,6 +45,16 @@
     <ClInclude Include="TitleLogo.h">
       <Filter>Actor\Title</Filter>
     </ClInclude>
+    <ClInclude Include="ScoreTestComponent.h">
+      <Filter>Actor\Play\Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Play</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="GlobalContentsValue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -56,5 +72,15 @@
     <ClCompile Include="TitleLogo.cpp">
       <Filter>Actor\Title</Filter>
     </ClCompile>
+    <ClCompile Include="ScoreTestComponent.cpp">
+      <Filter>Actor\Play\Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Play</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalContentsValue.cpp" />
   </ItemGroup>
 </Project>

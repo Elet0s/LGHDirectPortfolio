@@ -9,7 +9,9 @@ class GameEngineDebug
 public:
 	static void LeakCheckOn();
 	static void ConsoleOpen();
+
 	static void OutPutString(const std::string& _Text);
+	
 	static void Destroy();
 
 protected:

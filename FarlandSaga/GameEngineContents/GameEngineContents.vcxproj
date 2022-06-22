@@ -172,11 +172,27 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="GlobalContentsValue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
     </ClInclude>
     <ClInclude Include="PlayLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ScoreTestComponent.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -194,11 +210,27 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GlobalContentsValue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>
     <ClCompile Include="PlayLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ScoreTestComponent.cpp">
       <SubType>
       </SubType>
     </ClCompile>
