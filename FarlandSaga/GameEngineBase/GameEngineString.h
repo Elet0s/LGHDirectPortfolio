@@ -2,7 +2,6 @@
 #include <string>
 #include <algorithm>
 
-// Ό³Έν :
 class GameEngineString
 {
 public:
@@ -37,11 +36,9 @@ public:
 protected:
 
 private:
-	// constrcuter destructer
 	GameEngineString();
 	~GameEngineString();
 
-	// delete Function
 	GameEngineString(const GameEngineString& _Other) = delete;
 	GameEngineString(GameEngineString&& _Other) noexcept = delete;
 	GameEngineString& operator=(const GameEngineString& _Other) = delete;

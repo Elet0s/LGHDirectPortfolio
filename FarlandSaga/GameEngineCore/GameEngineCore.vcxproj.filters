@@ -22,6 +22,12 @@
     <Filter Include="Object\Component\Collision">
       <UniqueIdentifier>{091c4cff-cce4-43ae-bfd6-9fec38d46cdc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Device">
+      <UniqueIdentifier>{fcca89f2-3fed-4ae3-b27a-5d31791bf724}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="PreCompile">
+      <UniqueIdentifier>{3929613d-3024-4352-b55b-b2f701f7510b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -46,15 +52,40 @@
     <ClInclude Include="GameEngineIndexBuffer.h">
       <Filter>Resources</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineMesh.h">
-      <Filter>Resources</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineRes.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineVertexBuffer.h">
       <Filter>Resources</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDevice.h">
+      <Filter>Device</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollision.h">
+      <Filter>Object\Component\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCamera.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineCameraActor.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTransformBase.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTransformComponent.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="PreCompile.h">
+      <Filter>PreCompile</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineTextrue.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderTarget.h">
+      <Filter>Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="CoreMinimal.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -79,9 +110,6 @@
     <ClCompile Include="GameEngineIndexBuffer.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineMesh.cpp">
-      <Filter>Resources</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineRes.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
@@ -90,6 +118,33 @@
     </ClCompile>
     <ClCompile Include="GameEngineCore_Resources.cpp">
       <Filter>Core</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDevice.cpp">
+      <Filter>Device</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCollision.cpp">
+      <Filter>Object\Component\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCamera.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineCameraActor.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransformBase.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransformComponent.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="PreCompile.cpp">
+      <Filter>PreCompile</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTextrue.cpp">
+      <Filter>Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderTarget.cpp">
+      <Filter>Resources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

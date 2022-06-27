@@ -51,7 +51,20 @@ private:
 class float4
 {
 public:
-	// 외적이란 두방향벡터가 있을때 그 두방향벡터에 각각 수직임을 만족하는 한 방향벡터
+		// Dir
+	static const float4 LEFT;
+	static const float4 RIGHT;
+	static const float4 UP;
+	static const float4 DOWN;
+	static const float4 FORWARD;
+	static const float4 BACK;
+	static const float4 ZERO;
+	static const float4 ONE;
+	// Color
+	static const float4 BLUE;
+	static const float4 RED;
+
+	// 외적(Cross)이란 두방향벡터가 있을때 그 두방향벡터에 각각 수직임을 만족하는 한 방향벡터
 	// 위와 같은 특징때문에 방향에 따라 +,-값이 나온다.
 	// 외적을 쓸수 있는곳
 	// 1. 마우스 클릭시 회전방향 알아낼때.
@@ -204,18 +217,6 @@ public:
 		float fValue = _Left.x * _Right.x + _Left.y * _Right.y + _Left.z * _Right.z;
 		return fValue;
 	}
-
-
-
-public:
-	static const float4 LEFT;
-	static const float4 RIGHT;
-	static const float4 UP;
-	static const float4 DOWN;
-	static const float4 FORWARD;
-	static const float4 BACK;
-	static const float4 ZERO;
-	static const float4 ONE;
 
 public:
 	union

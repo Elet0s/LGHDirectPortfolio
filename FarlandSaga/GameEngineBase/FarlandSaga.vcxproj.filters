@@ -84,6 +84,9 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDebugObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineDebug.cpp">
@@ -139,6 +142,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineTransform_Collision.cpp">
       <Filter>Math</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDebugObject.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

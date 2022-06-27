@@ -5,15 +5,14 @@
 #include <map>
 
 class GameEngineSoundPlayer;
-// Ό³Έν :
+
 class GameEngineSound : public GameEngineNameObject
 {
 public:
-	// constrcuter destructer
+
 	GameEngineSound();
 	~GameEngineSound();
 
-	// delete Function
 	GameEngineSound(const GameEngineSound& _Other) = delete;
 	GameEngineSound(GameEngineSound&& _Other) noexcept = delete;
 	GameEngineSound& operator=(const GameEngineSound& _Other) = delete;

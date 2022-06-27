@@ -2,7 +2,6 @@
 #include <map>
 #include <chrono>
 
-// Ό³Έν :
 class GameEngineTime
 {
 

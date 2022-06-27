@@ -1,8 +1,11 @@
+#include "PreCompile.h"
 #include "GameEngineCore.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineBase/GameEngineInput.h>
 #include <GameEngineBase/GameEngineTime.h>
+#include <GameEngineCore/GameEngineDevice.h>
 #include "GameEngineLevel.h"
+#include "GameEngineDevice.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 

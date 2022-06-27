@@ -1,4 +1,7 @@
+#include "PreCompile.h"
 #include "GEngine.h"
+#include "GameEngineActor.h"
+#include "GameEngineLevel.h"
 
 GEngine::GEngine()
 {

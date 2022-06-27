@@ -167,7 +167,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="CoreMinimal.h" />
     <ClInclude Include="GameEngineActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineCamera.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineCameraActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineCollision.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -179,6 +192,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineDevice.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineIndexBuffer.h">
       <SubType>
       </SubType>
@@ -187,11 +204,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineMesh.h">
+    <ClInclude Include="GameEngineRenderer.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineRenderer.h">
+    <ClInclude Include="GameEngineRenderTarget.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -203,6 +220,18 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineTextrue.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineTransformBase.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineTransformComponent.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineVertexBuffer.h">
       <SubType>
       </SubType>
@@ -211,9 +240,22 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="PreCompile.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineCamera.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineCameraActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineCollision.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -226,6 +268,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineCore_Resources.cpp" />
+    <ClCompile Include="GameEngineDevice.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineIndexBuffer.cpp">
       <SubType>
       </SubType>
@@ -234,11 +280,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineMesh.cpp">
+    <ClCompile Include="GameEngineRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineRenderer.cpp">
+    <ClCompile Include="GameEngineRenderTarget.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -250,6 +296,18 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineTextrue.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransformBase.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineTransformComponent.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GameEngineVertexBuffer.cpp">
       <SubType>
       </SubType>
@@ -258,6 +316,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="PreCompile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\GameEngineBase\FarlandSaga.vcxproj">
