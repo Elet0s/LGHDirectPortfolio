@@ -1,15 +1,12 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
-// Ό³Έν :
 class TitleLogo : public GameEngineActor
 {
 public:
-	// constrcuter destructer
 	TitleLogo();
 	~TitleLogo();
 
-	// delete Function
 	TitleLogo(const TitleLogo& _Other) = delete;
 	TitleLogo(TitleLogo&& _Other) noexcept = delete;
 	TitleLogo& operator=(const TitleLogo& _Other) = delete;
@@ -21,5 +18,7 @@ protected:
 	void End() override;
 
 private:
+
+	float TimeAngle;
 };
 

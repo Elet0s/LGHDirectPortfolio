@@ -1,8 +1,10 @@
+#include "PreCompile.h"
 #include "TitleLogo.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineRenderer.h>
 
 TitleLogo::TitleLogo()
+	: TimeAngle(0.0f)
 {
 }
 
@@ -10,30 +12,27 @@ TitleLogo::~TitleLogo()
 {
 }
 
+GameEngineRenderer* RendererTest = nullptr;
+
 void TitleLogo::Start()
 {
-	GetTransform().SetScale({ 100, 100 });
-	GetTransform().SetPosition({ 300, 300, 100 });
+	// 1280 720
+	GetTransform().SetLocalPosition({ 0, 200, 0 });
+
 	{
-		GameEngineRenderer* Renderer = CreateComponent<GameEngineRenderer>();
-		// Renderer->ChangeOrder();
+		GameEngineRenderer* RendererTest = CreateComponent<GameEngineRenderer>();
+		RendererTest->GetTransform().SetLocalScale({ 800, 400, 0 });
 	}
 
-
-	// 액터는 => 존재
-	// 특화하지 않으면
-	// 컴포넌트의 뜻 => 기능
-
-
+	TimeAngle = 0.0f;
 }
 
 void TitleLogo::Update(float _DeltaTime)
 {
-	//if (3.0f < GetAccTime())
-	//{
-	//	GEngine::ChangeLevel("Play");
-	//	// GetLevel()->CreateActor();
-	//}
+	//TimeAngle += _DeltaTime * 20.0f;
+
+	//GetTransform().SetLocalRotation({ 0.0f , 0.0f, TimeAngle });
+	//RendererTest->GetTransform().SetLocalRotation({ TimeAngle , TimeAngle, TimeAngle });
 }
 
 void TitleLogo::End()

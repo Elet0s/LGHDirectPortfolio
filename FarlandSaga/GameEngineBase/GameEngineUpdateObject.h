@@ -1,14 +1,18 @@
 #pragma once
 #include <string>
+#include <list>
 #include "GameEngineTime.h"
+#include "GameEngineDebugObject.h"
 
 
-class GameEngineUpdateObject
+class GameEngineUpdateObject : public GameEngineDebugObject
 {
 public:
+	// constrcuter destructer
 	GameEngineUpdateObject();
-	~GameEngineUpdateObject();
+	virtual ~GameEngineUpdateObject();
 
+	// delete Function
 	GameEngineUpdateObject(const GameEngineUpdateObject& _Other) = delete;
 	GameEngineUpdateObject(GameEngineUpdateObject&& _Other) noexcept = delete;
 	GameEngineUpdateObject& operator=(const GameEngineUpdateObject& _Other) = delete;
@@ -25,7 +29,7 @@ public:
 		IsUpdate_ = false;
 	}
 
-	inline virtual bool IsUpdate()
+	inline bool IsUpdate()
 	{
 		if (nullptr != Parent)
 		{
@@ -35,9 +39,10 @@ public:
 		{
 			return IsUpdate_ && false == IsDeath_;
 		}
+
 	}
 
-	inline virtual bool IsDeath()
+	inline bool IsDeath()
 	{
 		if (nullptr != Parent)
 		{
@@ -68,14 +73,14 @@ public:
 		IsDeath_ = true;
 	}
 
-	void ReleaseUpdate()
+	void ReleaseUpdate(float _DeltaTime)
 	{
 		if (false == IsReleaseUpdate_)
 		{
 			return;
 		}
 
-		DeathTime_ -= GameEngineTime::GetDeltaTime();
+		DeathTime_ -= _DeltaTime;
 
 		if (0.0f >= DeathTime_)
 		{
@@ -98,22 +103,19 @@ public:
 	{
 		Order_ = _Order;
 	}
-	
+
 	template<typename ParentType>
 	ParentType* GetParent()
 	{
 		return dynamic_cast<ParentType*>(Parent);
 	}
 
-	virtual inline void SetOrder(int _Order)
-	{
-		Order_ = _Order;
-	}
 	GameEngineUpdateObject* GetParent()
 	{
 		return Parent;
 	}
-	
+
+
 	virtual void SetParent(GameEngineUpdateObject* _Parent);
 	virtual void DetachObject();
 

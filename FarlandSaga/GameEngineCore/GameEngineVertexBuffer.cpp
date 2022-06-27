@@ -1,3 +1,4 @@
+#include "PreCompile.h"
 #include "GameEngineVertexBuffer.h"
 #include <GameEngineBase/GameEngineString.h>
 

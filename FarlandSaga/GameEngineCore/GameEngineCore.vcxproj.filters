@@ -79,7 +79,7 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineTextrue.h">
+    <ClInclude Include="GameEngineTexture.h">
       <Filter>Resources</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRenderTarget.h">
@@ -140,7 +140,7 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineTextrue.cpp">
+    <ClCompile Include="GameEngineTexture.cpp">
       <Filter>Resources</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRenderTarget.cpp">

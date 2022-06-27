@@ -2,13 +2,16 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineUpdateObject.h>
 #include <list>
-#include <GameEngineBase/GameEngineTransform.h>
+#include "GameEngineTransformBase.h"
+
 
 // 설명 : 화면에 등장하는 모든것을 표현하기 위한 클래스
 class GameEngineComponent;
+class GameEngineTransformComponent;
 class GameEngineActor :
 	public GameEngineNameObject,
-	public GameEngineUpdateObject
+	public GameEngineUpdateObject,
+	public GameEngineTransformBase
 {
 	friend class GameEngineLevel;
 
@@ -23,17 +26,25 @@ public:
 	GameEngineActor& operator=(const GameEngineActor& _Other) = delete;
 	GameEngineActor& operator=(GameEngineActor&& _Other) noexcept = delete;
 
-	inline GameEngineLevel* GetLevel() { return ParentLevel; }
-
-	template<typename Componenttype>
-	Componenttype* CreateComponent()
+	inline GameEngineLevel* GetLevel()
 	{
-		GameEngineComponent* NewComponent = new Componenttype();
-		NewComponent->ParentActor = this;
-		NewComponent->Start();
-		AllComList.push_back(NewComponent);
-		return dynamic_cast<Componenttype*>(NewComponent);
+		return ParentLevel;
 	}
+
+	template<typename ComponentType>
+	ComponentType* CreateComponent(const std::string& _Name = "")
+	{
+		GameEngineComponent* NewComponent = new ComponentType();
+		NewComponent->SetName(_Name);
+		NewComponent->SetParent(this);
+		NewComponent->Start();
+
+		return dynamic_cast<ComponentType*>(NewComponent);
+	}
+
+	void DetachObject() override;
+
+	void SetParent(GameEngineUpdateObject*) override;
 
 protected:
 	virtual void Start() override;
@@ -41,25 +52,13 @@ protected:
 	virtual void End() override;
 
 private:
-	void ComponentUpdate(float _ScaleDeltaTime, float _DeltaTime);
-
-	std::list<class GameEngineComponent*> AllComList;
+	void AllUpdate(float _ScaleDeltaTime, float _DeltaTime);
 
 	class GameEngineLevel* ParentLevel;
 
 	void SetLevel(GameEngineLevel* _ParentLevel)
 	{
 		ParentLevel = _ParentLevel;
-	}
-
-	/////////////////////////////////////////////////// 기하관련
-private:
-	GameEngineTransform Transform;
-
-public:
-	GameEngineTransform& GetTransform()
-	{
-		return Transform;
 	}
 };
 

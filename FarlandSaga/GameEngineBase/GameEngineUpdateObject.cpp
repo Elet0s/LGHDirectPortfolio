@@ -16,7 +16,6 @@ GameEngineUpdateObject::~GameEngineUpdateObject()
 {
 }
 
-
 void GameEngineUpdateObject::ReleaseHierarchy()
 {
 	std::list<GameEngineUpdateObject*>::iterator StartIter = Childs.begin();

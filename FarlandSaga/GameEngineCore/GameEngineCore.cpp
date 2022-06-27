@@ -62,6 +62,13 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 {
 	if (nullptr != NextLevel)
 	{
+
+
+		Rectangle(GameEngineWindow::GetInst()->GetHDC()
+			, 0
+			, 0
+			, GameEngineWindow::GetInst()->GetScale().ix(), GameEngineWindow::GetInst()->GetScale().iy());
+
 		if (nullptr != CurrentLevel)
 		{
 			CurrentLevel->OffEvent();
@@ -88,15 +95,11 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 
 	float DeltaTime = GameEngineTime::GetDeltaTime();
 
+	GameEngineInput::GetInst()->Update(DeltaTime);
 	// 엔진수준에서 유저가 하고 싶은일.
 	_UserCore->Update(DeltaTime);
 
-	// 레벨수준에서 유저가 하고 싶은일.
-	CurrentLevel->AddAccTime(DeltaTime);
-	CurrentLevel->Update(DeltaTime);
-	CurrentLevel->ActorUpdate(DeltaTime);
-	CurrentLevel->Render(DeltaTime);
-	// CurrentLevel->
+	CurrentLevel->LevelUpdate(DeltaTime);
 
 }
 
@@ -118,8 +121,8 @@ void GameEngineCore::CoreEnd(GameEngineCore* _UserCore)
 
 	GameEngineWindow::Destroy();
 	GameEngineInput::Destroy();
+	GameEngineDebug::Destroy();
 	GameEngineTime::Destroy();
-
 }
 
 
@@ -128,11 +131,18 @@ void GameEngineCore::WindowCreate(const std::string& _Name, GameEngineCore* _Use
 	GameEngineWindow::GetInst()->CreateGameWindow(nullptr, _Name.c_str());
 	GameEngineWindow::GetInst()->SetWindowScaleAndPosition({ 0,0 }, { 1280, 720 });
 	GameEngineWindow::GetInst()->ShowGameWindow();
+	GameEngineDevice::Initialize();
+
+
+
+
+	// 엔진의 실행인데.
 	GameEngineWindow::GetInst()->MessageLoop(
 		std::bind(&GameEngineCore::CoreStart, _UserCore),
 		std::bind(&GameEngineCore::CoreUpdate, _UserCore),
 		std::bind(&GameEngineCore::CoreEnd, _UserCore)
 	);
+
 }
 
 void GameEngineCore::InitializeLevel(GameEngineLevel* _Level, const std::string _Name)

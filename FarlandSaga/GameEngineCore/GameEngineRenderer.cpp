@@ -1,3 +1,4 @@
+#include "PreCompile.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineActor.h"
 #include "GameEngineLevel.h"
@@ -23,8 +24,12 @@ void GameEngineRenderer::Start()
 
 void GameEngineRenderer::Render(float _DeltaTime)
 {
-	GameEngineVertexBuffer* Vertex = GameEngineVertexBuffer::Find("Rect");
-	GameEngineIndexBuffer* Index = GameEngineIndexBuffer::Find("Rect");
+	// 랜더링
+	//GameEngineVertexBuffer* Vertex = GameEngineVertexBuffer::Find("Rect");
+	//GameEngineIndexBuffer* Index = GameEngineIndexBuffer::Find("Rect");
+
+	GameEngineVertexBuffer* Vertex = GameEngineVertexBuffer::Find("Box");
+	GameEngineIndexBuffer* Index = GameEngineIndexBuffer::Find("Box");
 
 	std::vector<POINT> DrawVertex;
 	DrawVertex.resize(Index->Indexs.size());
@@ -33,35 +38,31 @@ void GameEngineRenderer::Render(float _DeltaTime)
 	CopyBuffer.resize(Index->Indexs.size());
 
 
-
 	for (size_t i = 0; i < Index->Indexs.size(); i++)
 	{
 		int TriIndex = Index->Indexs[i];
 
 		// 0 번째 순서의 점이 됩니다.
+		// 최초에 원본 매쉬의 점을 복사합니다.
 		CopyBuffer[i] = Vertex->Vertexs[TriIndex];
 
-		// [0.5f] [0.5f] []                  [100] [100] [] 
-		// 크
-		CopyBuffer[i] *= GetActor()->GetTransform().GetScale();
+		auto& tran = GetTransform();
 
-		// 자전
-		// CopyBuffer[TriIndex] *= GetActor()->GetTransform().GetScale();
-
-		// 이동
-		CopyBuffer[i] += GetActor()->GetTransform().GetPosition();
+		// 버텍스쉐이더
+		CopyBuffer[i] = CopyBuffer[i] * GetTransform().GetWorldViewProjection();
 
 
+		// 레스터라이저
+		//// 기록해놨던 z값으로 나뉘는것
+		CopyBuffer[i] = CopyBuffer[i] / CopyBuffer[i].w;
+
+		CopyBuffer[i] = CopyBuffer[i] * ViewPort;
 
 		DrawVertex[i] = CopyBuffer[i].GetConvertWindowPOINT();
 	}
-
 
 	for (size_t i = 0; i < DrawVertex.size(); i += 3)
 	{
 		Polygon(GameEngineWindow::GetHDC(), &DrawVertex[i], 3);
 	}
-
-
-	// Rectangle(GameEngineWindow::GetHDC(), LeftTop.ix(), LeftTop.iy(), RightBot.ix(), RightBot.iy());
 }

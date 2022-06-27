@@ -6,7 +6,6 @@
 #include <map>
 #include <list>
 
-// Ό³Έν :
 class GameEngineIndexBuffer : public GameEngineRes<GameEngineIndexBuffer>
 {
 	friend GameEngineRes<GameEngineIndexBuffer>;
@@ -19,11 +18,9 @@ public:
 	static void Create(const std::vector<int>& _Indexs);
 
 private:
-	// constrcuter destructer
 	GameEngineIndexBuffer();
 	~GameEngineIndexBuffer();
 
-	// delete Function
 	GameEngineIndexBuffer(const GameEngineIndexBuffer& _Other) = delete;
 	GameEngineIndexBuffer(GameEngineIndexBuffer&& _Other) noexcept = delete;
 	GameEngineIndexBuffer& operator=(const GameEngineIndexBuffer& _Other) = delete;
