@@ -12,12 +12,17 @@ class GameEngineVertexBuffer : public GameEngineRes<GameEngineVertexBuffer>
 public:
 	friend GameEngineRes<GameEngineVertexBuffer>;
 
-private:
-	static GameEngineVertexBuffer* CreateRes(const std::vector<float4>& _Vertex, const std::string& _Name = "");
-
 public:
-	static void Create(const std::string& _Name, const std::vector<float4>& _Vertex);
-	static void Create(const std::vector<float4>& _Vertex);
+
+	template<typename VertexType>
+	static GameEngineVertexBuffer* Create(const std::string& _Name, const std::vector<VertexType>& _Vertex)
+	{
+		return Create(_Name, &_Vertex[0], _Vertex.size() * sizeof(VertexType));
+	}
+
+
+	static GameEngineVertexBuffer* Create(const std::string& _Name, const void* _Data, size_t _Size);
+	// static GameEngineVertexBuffer* Create(const std::vector<float4>& _Vertex);
 
 private:
 	// constrcuter destructer
@@ -34,10 +39,12 @@ protected:
 
 
 private:
+	// nullptr
+	D3D11_BUFFER_DESC BufferDesc;
 
-public:
-	std::vector<float4> Vertexs;
+	D3D11_SUBRESOURCE_DATA Data;
 
+	ID3D11Buffer* Buffer;
 
 };
 

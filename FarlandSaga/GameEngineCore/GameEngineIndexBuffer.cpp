@@ -11,24 +11,16 @@ GameEngineIndexBuffer::~GameEngineIndexBuffer()
 }
 
 
-GameEngineIndexBuffer* GameEngineIndexBuffer::CreateRes(const std::vector<int>& _Indexs, const std::string& _Name /*= ""*/)
+GameEngineIndexBuffer* GameEngineIndexBuffer::Create(const std::string& _Name, const std::vector<int>& _Indexs)
 {
-	std::string Name = GameEngineString::ToUpperReturn(_Name);
-
-	GameEngineIndexBuffer* NewMesh = new GameEngineIndexBuffer();
-	NewMesh->SetName(Name);
-	NewMesh->Indexs = _Indexs;
-	return NewMesh;
+	GameEngineIndexBuffer* NewRes = CreateResName(_Name);
+	NewRes->Indexs = _Indexs;
+	return NewRes;
 }
 
-void GameEngineIndexBuffer::Create(const std::string& _Name, const std::vector<int>& _Indexs)
+GameEngineIndexBuffer* GameEngineIndexBuffer::Create(const std::vector<int>& _Indexs)
 {
-	GameEngineIndexBuffer* NewMesh = CreateRes(_Indexs, _Name);
-	NamedRes.insert(std::make_pair(NewMesh->GetNameCopy(), NewMesh));
-}
-
-void GameEngineIndexBuffer::Create(const std::vector<int>& _Indexs)
-{
-	GameEngineIndexBuffer* NewMesh = CreateRes(_Indexs);
-	UnNamedRes.push_back(NewMesh);
+	GameEngineIndexBuffer* NewRes = CreateResUnName();
+	NewRes->Indexs = _Indexs;
+	return NewRes;
 }

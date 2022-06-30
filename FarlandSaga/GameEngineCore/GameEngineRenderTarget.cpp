@@ -53,5 +53,5 @@ void GameEngineRenderTarget::Setting()
 		MsgBoxAssert("랜더타겟뷰가 존재하지 않는 랜더타겟을 세팅하려고 했습니다.");
 	}
 
-	GameEngineDevice::GetContext()->OMSetRenderTargets(RenderTargetViews.size(), &RenderTargetViews[0], DepthStencilView);
+	GameEngineDevice::GetContext()->OMSetRenderTargets(static_cast<UINT>(RenderTargetViews.size()), &RenderTargetViews[0], DepthStencilView);
 }
