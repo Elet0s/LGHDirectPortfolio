@@ -204,10 +204,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineReadFile.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GameEngineSound.h">
       <SubType>
       </SubType>
@@ -229,10 +225,6 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="GameEngineWindow.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
-    <ClInclude Include="GameEngineWriteFile.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -280,10 +272,6 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="GameEngineReadFile.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="GameEngineSound.cpp">
       <SubType>
       </SubType>
@@ -306,10 +294,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineWindow.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineWriteFile.cpp">
       <SubType>
       </SubType>
     </ClCompile>

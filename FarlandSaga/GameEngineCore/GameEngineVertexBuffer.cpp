@@ -10,6 +10,10 @@ GameEngineVertexBuffer::GameEngineVertexBuffer()
 
 GameEngineVertexBuffer::~GameEngineVertexBuffer()
 {
+	if (nullptr != Buffer)
+	{
+		Buffer->Release();
+	}
 }
 
 

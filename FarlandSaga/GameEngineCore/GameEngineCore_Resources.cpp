@@ -27,10 +27,10 @@ void EngineMesh()
 
 	{
 		std::vector<GameEngineVertex> Vertex;
-		Vertex.push_back({ float4(-0.5f, 0.5f) });
-		Vertex.push_back({ float4(0.5f, 0.5f) });
-		Vertex.push_back({ float4(0.5f, -0.5f) });
-		Vertex.push_back({ float4(-0.5f, -0.5f) });
+		Vertex.push_back({ float4(-0.5f, 0.5f), float4() });
+		Vertex.push_back({ float4(0.5f, 0.5f), float4() });
+		Vertex.push_back({ float4(0.5f, -0.5f), float4() });
+		Vertex.push_back({ float4(-0.5f, -0.5f), float4() });
 		GameEngineVertexBuffer::Create("Rect", Vertex);
 	}
 
@@ -125,9 +125,8 @@ void ShaderCompile()
 
 	for (size_t i = 0; i < Shaders.size(); i++)
 	{
-		GameEngineVertexShader::Load(Shaders[i].GetFullPath());
+		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
 	}
-
 }
 
 void GameEngineCore::EngineResourcesInitialize()
@@ -146,6 +145,7 @@ void GameEngineCore::EngineResourcesInitialize()
 
 void GameEngineCore::EngineResourcesDestroy()
 {
+	GameEngineVertexShader::ResourcesDestroy();
 	GameEngineVertexBuffer::ResourcesDestroy();
 	GameEngineIndexBuffer::ResourcesDestroy();
 	GameEngineRenderTarget::ResourcesDestroy();
