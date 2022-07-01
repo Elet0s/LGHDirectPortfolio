@@ -28,15 +28,20 @@ public:
 
 protected:
 	GameEngineInputLayOut* InputLayOut; // 인풋어셈블러1 세팅
-
 	GameEngineVertexBuffer* VertexBuffer; // 인풋어셈블러1 세팅
 
-	GameEngineVertexShader* VertexShader; // 레스터라이저 세팅
+	// HLSL이라는 다른 언어를 사용하는 단계에요.
+	// HLSL은 그래픽카드에 특정 데이터에 대한 처리 단계를 우리가 직접 작성해서
+	// 그래픽카드에 올려줄수 있는 겁니다.
+
+	// 정점을 이렇게 처리해.
+	GameEngineVertexShader* VertexShader; // 버텍스쉐이더 세팅
 
 	GameEngineIndexBuffer* IndexBuffer; // 인풋어셈블러2 세팅
 
 	GameEngineRasterizer* Rasterizer; // 레스터라이저 세팅
 
+	// 픽셀을 이렇게 처리해.
 	GameEnginePixelShader* PixelShader; // 픽셀쉐이더 세팅
 
 	GameEngineDepthStencil* DepthStencil; // 아웃풋머저 누가 앞인지 세팅 

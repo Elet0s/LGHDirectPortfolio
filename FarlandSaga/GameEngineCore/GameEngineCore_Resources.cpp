@@ -7,18 +7,23 @@
 #include "GameEngineVertexs.h"
 #include <math.h>
 
+
 // Resources Header
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineTexture.h"
 #include "GameEngineRenderTarget.h"
 
+#include "GameEngineVertexShader.h"
 
-void GameEngineCore::EngineResourcesInitialize()
+void EngineInputLayOut()
 {
-	// 사각형 박스 에러용 텍스처 등등
-	// 엔진수준에서 기본적으로 지원줘야 한다고 생각하는
-	// 리소스들을 이니셜라이즈하는 단계
+	GameEngineVertex::LayOut.AddInputLayOut("POSITION", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+	GameEngineVertex::LayOut.AddInputLayOut("COLOR", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+}
+
+void EngineMesh()
+{
 
 	{
 		std::vector<GameEngineVertex> Vertex;
@@ -107,6 +112,34 @@ void GameEngineCore::EngineResourcesInitialize()
 
 		GameEngineIndexBuffer::Create("Box", Index);
 	}
+}
+
+void ShaderCompile()
+{
+	GameEngineDirectory Dir;
+
+	Dir.MoveParentToExitsChildDirectory("Shader");
+	Dir.Move("Shader");
+
+	std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
+
+	for (size_t i = 0; i < Shaders.size(); i++)
+	{
+		GameEngineVertexShader::Load(Shaders[i].GetFullPath());
+	}
+
+}
+
+void GameEngineCore::EngineResourcesInitialize()
+{
+	// 사각형 박스 에러용 텍스처 등등
+	// 엔진수준에서 기본적으로 지원줘야 한다고 생각하는
+	// 리소스들을 이니셜라이즈하는 단계
+	EngineInputLayOut();
+	EngineMesh();
+	ShaderCompile();
+
+	// 쉐이더 로드
 
 }
 

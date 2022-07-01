@@ -218,5 +218,8 @@
     <ClCompile Include="GameEngineDefaultRenderer.cpp">
       <Filter>Object\Component\Rendering</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineVertexs.cpp">
+      <Filter>Resources\InputAssembler</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

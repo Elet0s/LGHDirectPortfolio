@@ -381,6 +381,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="GameEngineVertexs.cpp" />
     <ClCompile Include="GameEngineVertexShader.cpp">
       <SubType>
       </SubType>
