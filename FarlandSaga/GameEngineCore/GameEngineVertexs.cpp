@@ -181,10 +181,3 @@ void GameEngineLayOutDesc::AddInputLayOut(
 }
 
 GameEngineLayOutDesc GameEngineVertex::LayOut;
-
-GameEngineInputLayout* GameEngineLayOutDesc::CreateInputLayOut(GameEngineVertexShader* _Shader)
-{
-
-
-	return nullptr;
-}

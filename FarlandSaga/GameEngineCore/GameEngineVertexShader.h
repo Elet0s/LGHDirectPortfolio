@@ -1,13 +1,19 @@
 #pragma once
 #include "GameEngineShader.h"
+#include "GameEngineRes.h"
 
 // Ό³Έν :
+class GameEngineInputLayOut;
 class GameEngineVertexShader
 	: public GameEngineRes<GameEngineVertexShader>
 	, public GameEngineShader
 
 {
-public:
+	friend GameEngineInputLayOut;
+	friend GameEngineShader;
+	friend GameEngineRes<GameEngineVertexShader>;
+
+private:
 	// constrcuter destructer
 	GameEngineVertexShader();
 	~GameEngineVertexShader();
@@ -24,7 +30,10 @@ public:
 
 protected:
 
+	void ShaderCompile(std::string _Path, std::string _EntryPoint, UINT _VersionHigh, UINT _VersionLow);
+
 private:
+	ID3D11VertexShader* ShaderPtr;
 
 };
 

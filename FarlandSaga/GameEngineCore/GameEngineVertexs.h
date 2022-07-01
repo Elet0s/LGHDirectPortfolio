@@ -4,6 +4,8 @@
 class GameEngineLayOutDesc
 {
 	// 일반적인 맴버변수를 가지면 안됩니다.
+	friend class GameEngineInputLayOut;
+
 public:
 	unsigned int LayOutOffset;
 	std::map<const char*, int> SemanticIndexData;
@@ -17,8 +19,6 @@ public:
 		unsigned int _InputSlot = 0,
 		unsigned int _InstanceDataStepRate = 0
 	);
-
-	class GameEngineInputLayout* CreateInputLayOut(class GameEngineVertexShader* _Shader);
 
 public:
 	GameEngineLayOutDesc()

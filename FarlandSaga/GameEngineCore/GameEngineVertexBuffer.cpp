@@ -20,7 +20,12 @@ GameEngineVertexBuffer::~GameEngineVertexBuffer()
 GameEngineVertexBuffer* GameEngineVertexBuffer::Create(const std::string& _Name, const void* _Data, size_t _Size)
 {
 	GameEngineVertexBuffer* NewRes = CreateResName(_Name);
+	NewRes->BufferCreate(_Data, _Size);
+	return NewRes;
+}
 
+void GameEngineVertexBuffer::BufferCreate(const void* _Data, size_t _Size)
+{
 	D3D11_SUBRESOURCE_DATA Data;
 	Data.pSysMem = _Data;
 
@@ -31,21 +36,19 @@ GameEngineVertexBuffer* GameEngineVertexBuffer::Create(const std::string& _Name,
 	//UINT MiscFlags; // 
 	//UINT StructureByteStride;
 
-	NewRes->BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	NewRes->BufferDesc.ByteWidth = static_cast<UINT>(_Size);
-	NewRes->BufferDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
+	BufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
+	BufferDesc.ByteWidth = static_cast<UINT>(_Size);
+	BufferDesc.Usage = D3D11_USAGE::D3D11_USAGE_DEFAULT;
 	// BufferDesc.CPUAccessFlags = D3D11_CPU_ACCESS_FLAG::D3D11_CPU_ACCESS_READ;
-	NewRes->BufferDesc.CPUAccessFlags = 0;
+	BufferDesc.CPUAccessFlags = 0;
 
 	// 추가 옵션인데 쓰지 않을겁니다.
-	NewRes->BufferDesc.MiscFlags = 0;
+	BufferDesc.MiscFlags = 0;
 	// 버텍스 버퍼에서는 세팅해줄 필요도 없다.
-	NewRes->BufferDesc.StructureByteStride = 0;
+	BufferDesc.StructureByteStride = 0;
 
-	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(&NewRes->BufferDesc, &Data, &NewRes->Buffer))
+	if (S_OK != GameEngineDevice::GetDevice()->CreateBuffer(&BufferDesc, &Data, &Buffer))
 	{
 		MsgBoxAssert("버텍스 버퍼 생성에 실패했습니다.");
 	}
-
-	return NewRes;
 }

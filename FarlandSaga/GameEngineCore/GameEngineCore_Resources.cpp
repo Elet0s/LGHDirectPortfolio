@@ -15,11 +15,26 @@
 #include "GameEngineRenderTarget.h"
 
 #include "GameEngineVertexShader.h"
+#include "GameEnginePixelShader.h"
+#include "GameEngineRenderingPipeLine.h"
 
 void EngineInputLayOut()
 {
 	GameEngineVertex::LayOut.AddInputLayOut("POSITION", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
 	GameEngineVertex::LayOut.AddInputLayOut("COLOR", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+}
+
+void EngineRenderingPipeLine()
+{
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Color");
+		NewPipe->SetInputAssembler1VertexBufferSetting("Rect");
+		NewPipe->SetInputAssembler2IndexBufferSetting("Rect");
+		NewPipe->SetVertexShaderSetting("Color.hlsl");
+		NewPipe->SetPixelShaderSetting("Color.hlsl");
+
+	}
+
 }
 
 void EngineMesh()
@@ -127,6 +142,29 @@ void ShaderCompile()
 	{
 		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
 	}
+
+	//GameEngineVertexShader::create("struct Input
+	//{
+	//	float4 Pos : POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//struct Output
+	//{
+	//	float4 Pos : SV_POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//Output Color_VS(Input _Input)
+	//{
+	//	// 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
+	//	// 0
+	//	Output NewOutPut = (Output)0;
+	//	NewOutPut.Pos = _Input.Pos;
+	//	NewOutPut.Color = _Input.Color;
+
+	//	return NewOutPut;
+	//}");
 }
 
 void GameEngineCore::EngineResourcesInitialize()
@@ -137,6 +175,7 @@ void GameEngineCore::EngineResourcesInitialize()
 	EngineInputLayOut();
 	EngineMesh();
 	ShaderCompile();
+	EngineRenderingPipeLine();
 
 	// 쉐이더 로드
 
@@ -145,7 +184,11 @@ void GameEngineCore::EngineResourcesInitialize()
 
 void GameEngineCore::EngineResourcesDestroy()
 {
+	GameEngineRenderingPipeLine::ResourcesDestroy();
+
+	GameEnginePixelShader::ResourcesDestroy();
 	GameEngineVertexShader::ResourcesDestroy();
+
 	GameEngineVertexBuffer::ResourcesDestroy();
 	GameEngineIndexBuffer::ResourcesDestroy();
 	GameEngineRenderTarget::ResourcesDestroy();

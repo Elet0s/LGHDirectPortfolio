@@ -27,20 +27,18 @@ void GameEngineShader::AutoCompile(const std::string& _Path)
 		// substr(2, 3); "234"
 
 		// ' 'Color_VS 
-		std::string EntryName = AllHlslCode.substr(FirstIndex + 1, VSEntryIndex - FirstIndex);
+		std::string EntryName = AllHlslCode.substr(FirstIndex + 1, VSEntryIndex - FirstIndex - 1);
 		EntryName += "_VS";
 		GameEngineVertexShader::Load(_Path, EntryName);
-
-		int a = 0;
-		// GameEngineVertexShader::Load(_Path, );
 	}
 
 	size_t PSEntryIndex = AllHlslCode.find("_PS(");
 	if (std::string::npos != PSEntryIndex)
 	{
-		AllHlslCode.find_last_of(" ", PSEntryIndex);
-
-		int a = 0;
+		size_t FirstIndex = AllHlslCode.find_last_of(" ", VSEntryIndex);
+		std::string EntryName = AllHlslCode.substr(FirstIndex + 1, VSEntryIndex - FirstIndex - 1);
+		EntryName += "_PS";
+		GameEnginePixelShader::Load(_Path, EntryName);
 	}
 
 	// File.GetFileSize();
@@ -49,11 +47,17 @@ void GameEngineShader::AutoCompile(const std::string& _Path)
 
 GameEngineShader::GameEngineShader()
 	: Version("")
+	, BinaryPtr(nullptr)
 {
 }
 
 GameEngineShader::~GameEngineShader()
 {
+	if (nullptr != BinaryPtr)
+	{
+		BinaryPtr->Release();
+		BinaryPtr = nullptr;
+	}
 }
 
 

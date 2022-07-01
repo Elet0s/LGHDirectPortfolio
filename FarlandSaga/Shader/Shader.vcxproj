@@ -128,7 +128,6 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <FxCompile Include="Color.hlsl" />
-    <FxCompile Include="Color2.hlsl" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
