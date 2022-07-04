@@ -27,25 +27,23 @@ public:
 	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _Other) = delete;
 	GameEngineRenderingPipeLine& operator=(GameEngineRenderingPipeLine&& _Other) noexcept = delete;
 
-	void Draw();
-
 	// void SetInputAssembler1InputLayOutSetting(const std::string& _Name);
 
-	void SetInputAssembler1VertexBufferSetting(const std::string& _Name);
+	void SetInputAssembler1VertexBuffer(const std::string& _Name);
 
-	void SetVertexShaderSetting(const std::string& _Name);
+	void SetVertexShader(const std::string& _Name);
 
-	void SetInputAssembler2IndexBufferSetting(const std::string& _Name);
+	void SetInputAssembler2IndexBuffer(const std::string& _Name);
 
-	void SetRasterizerSetting(const std::string& _Name);
+	void SetRasterizer(const std::string& _Name);
 
-	void SetPixelShaderSetting(const std::string& _Name);
+	void SetPixelShader(const std::string& _Name);
 
-	void SetOutputMergerBlendSetting(const std::string& _Name);
+	void SetOutputMergerBlend(const std::string& _Name);
 
-	void SetOutputMergerDepthStencilSetting(const std::string& _Name);
+	void SetOutputMergerDepthStencil(const std::string& _Name);
 
-
+	void Rendering();
 
 protected:
 
@@ -63,6 +61,8 @@ private:
 
 	GameEngineIndexBuffer* IndexBuffer; // 인풋어셈블러2 세팅
 
+	D3D11_PRIMITIVE_TOPOLOGY Topology;// 인풋어셈블러2 세팅
+
 	GameEngineRasterizer* Rasterizer; // 레스터라이저 세팅
 
 	// 픽셀을 이렇게 처리해.
@@ -74,10 +74,29 @@ private:
 
 
 
-
 	// 아웃풋 머저중 랜더타겟세팅은 이미 해놨다.
 	// 디바이스의 백버퍼를 사용해서 만든 랜터타겟이 매번 세팅되고 있다.
 	// 거기에 그려라.
+
+	// 내가 세팅해준다.
+
+	// 아래쪽 함수들의 실행
+	void InputAssembler1VertexBufferSetting();
+
+	void VertexShaderSetting();
+
+	void InputAssembler2IndexBufferSetting();
+
+	void RasterizerSetting();
+
+	void PixelShaderSetting();
+
+	void OutputMergerBlendSetting();
+
+	void OutputMergerDepthStencilSetting();
+
+	void Draw();
+
 };
 
 

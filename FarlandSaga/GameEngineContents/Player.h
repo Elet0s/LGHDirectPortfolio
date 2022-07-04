@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
 
+class GameEngineDefaultRenderer;
 class Player : public GameEngineActor
 {
 public:
@@ -16,7 +17,7 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime);
 	void End() {}
-
+	GameEngineDefaultRenderer* Renderer;
 private:
 	float Speed;
 };

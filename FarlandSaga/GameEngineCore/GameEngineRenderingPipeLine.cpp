@@ -20,17 +20,21 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 	, PixelShader(nullptr)
 	, DepthStencil(nullptr)
 	, Blend(nullptr)
+	, Topology(D3D11_PRIMITIVE_TOPOLOGY::D3D10_PRIMITIVE_TOPOLOGY_TRIANGLELIST)
 {
 }
 
 GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 {
+	// 다른애들은 포인터만 얻어다 쓰기 때문에 삭제하면 안되지만
+	// InputLayOut은 자신스스로 new를 하고 자기 스스로 지워야 합니다.
+	if (nullptr != InputLayOut)
+	{
+		delete InputLayOut;
+		InputLayOut = nullptr;
+	}
 }
 
-void GameEngineRenderingPipeLine::Draw()
-{
-
-}
 //
 //void GameEngineRenderingPipeLine::SetInputAssembler1InputLayOutSetting(const std::string& _Name)
 //{
@@ -48,7 +52,7 @@ GameEngineRenderingPipeLine* GameEngineRenderingPipeLine::Create(const std::stri
 	return CreateResName(_Name);
 }
 
-void GameEngineRenderingPipeLine::SetInputAssembler1VertexBufferSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetInputAssembler1VertexBuffer(const std::string& _Name)
 {
 	VertexBuffer = GameEngineVertexBuffer::Find(_Name);
 
@@ -58,13 +62,14 @@ void GameEngineRenderingPipeLine::SetInputAssembler1VertexBufferSetting(const st
 		return;
 	}
 
-	//if (nullptr != VertexShader)
-	//{
-	//	InputLayOut = new GameEngineInputLayOut();
-	//}
+	if (nullptr == InputLayOut && nullptr != VertexShader)
+	{
+		InputLayOut = new GameEngineInputLayOut();
+		InputLayOut->Create(*VertexBuffer->GetLayOutDesc(), VertexShader);
+	}
 }
 
-void GameEngineRenderingPipeLine::SetVertexShaderSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetVertexShader(const std::string& _Name)
 {
 	VertexShader = GameEngineVertexShader::Find(_Name);
 
@@ -74,13 +79,15 @@ void GameEngineRenderingPipeLine::SetVertexShaderSetting(const std::string& _Nam
 		return;
 	}
 
-	//if (nullptr != VertexBuffer)
-	//{
-	//	InputLayOut = new GameEngineInputLayOut();
-	//}
+	// 인풋레이아웃이 만들어지지 않았는데.
+	if (nullptr == InputLayOut && nullptr != VertexBuffer)
+	{
+		InputLayOut = new GameEngineInputLayOut();
+		InputLayOut->Create(*VertexBuffer->GetLayOutDesc(), VertexShader);
+	}
 }
 
-void GameEngineRenderingPipeLine::SetInputAssembler2IndexBufferSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetInputAssembler2IndexBuffer(const std::string& _Name)
 {
 	IndexBuffer = GameEngineIndexBuffer::Find(_Name);
 
@@ -91,7 +98,7 @@ void GameEngineRenderingPipeLine::SetInputAssembler2IndexBufferSetting(const std
 	}
 }
 
-void GameEngineRenderingPipeLine::SetRasterizerSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetRasterizer(const std::string& _Name)
 {
 	Rasterizer = GameEngineRasterizer::Find(_Name);
 
@@ -104,7 +111,7 @@ void GameEngineRenderingPipeLine::SetRasterizerSetting(const std::string& _Name)
 }
 
 
-void GameEngineRenderingPipeLine::SetPixelShaderSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetPixelShader(const std::string& _Name)
 {
 	PixelShader = GameEnginePixelShader::Find(_Name);
 
@@ -118,7 +125,7 @@ void GameEngineRenderingPipeLine::SetPixelShaderSetting(const std::string& _Name
 
 
 
-void GameEngineRenderingPipeLine::SetOutputMergerDepthStencilSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetOutputMergerDepthStencil(const std::string& _Name)
 {
 	DepthStencil = GameEngineDepthStencil::Find(_Name);
 
@@ -131,7 +138,7 @@ void GameEngineRenderingPipeLine::SetOutputMergerDepthStencilSetting(const std::
 }
 
 
-void GameEngineRenderingPipeLine::SetOutputMergerBlendSetting(const std::string& _Name)
+void GameEngineRenderingPipeLine::SetOutputMergerBlend(const std::string& _Name)
 {
 	Blend = GameEngineBlend::Find(_Name);
 
@@ -142,4 +149,71 @@ void GameEngineRenderingPipeLine::SetOutputMergerBlendSetting(const std::string&
 	}
 }
 
+void GameEngineRenderingPipeLine::Rendering()
+{
+	InputAssembler1VertexBufferSetting();
 
+	VertexShaderSetting();
+
+	InputAssembler2IndexBufferSetting();
+
+	RasterizerSetting();
+
+	PixelShaderSetting();
+
+	OutputMergerBlendSetting();
+
+	OutputMergerDepthStencilSetting();
+
+	Draw();
+
+}
+
+// 실직적으로 세팅의 순서는 그다지 중요하지 않다.
+
+void GameEngineRenderingPipeLine::InputAssembler1VertexBufferSetting()
+{
+	// 그래픽리소스에 Setting이라는 함수가 존재한다면
+	// 그건 이제부터 그 설정으로 랜더링 파이프라인이 돌아가게 된다는 뜻이 됩니다.
+	InputLayOut->Setting();
+	// 버텍스 버퍼는 세팅할게 없다.
+	VertexBuffer->Setting();
+}
+
+void GameEngineRenderingPipeLine::VertexShaderSetting()
+{
+	VertexShader->Setting();
+	GameEngineDevice::GetContext()->IASetPrimitiveTopology(Topology);
+	// D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
+}
+
+void GameEngineRenderingPipeLine::InputAssembler2IndexBufferSetting()
+{
+	IndexBuffer->Setting();
+}
+
+void GameEngineRenderingPipeLine::RasterizerSetting()
+{
+	Rasterizer->Setting();
+}
+
+void GameEngineRenderingPipeLine::PixelShaderSetting()
+{
+	PixelShader->Setting();
+}
+
+void GameEngineRenderingPipeLine::OutputMergerBlendSetting()
+{
+
+}
+
+void GameEngineRenderingPipeLine::OutputMergerDepthStencilSetting()
+{
+
+}
+
+
+void GameEngineRenderingPipeLine::Draw()
+{
+	GameEngineDevice::GetContext()->DrawIndexed(IndexBuffer->GetIndexCount(), 0, 0);
+}

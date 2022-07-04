@@ -35,8 +35,8 @@ void GameEngineShader::AutoCompile(const std::string& _Path)
 	size_t PSEntryIndex = AllHlslCode.find("_PS(");
 	if (std::string::npos != PSEntryIndex)
 	{
-		size_t FirstIndex = AllHlslCode.find_last_of(" ", VSEntryIndex);
-		std::string EntryName = AllHlslCode.substr(FirstIndex + 1, VSEntryIndex - FirstIndex - 1);
+		size_t FirstIndex = AllHlslCode.find_last_of(" ", PSEntryIndex);
+		std::string EntryName = AllHlslCode.substr(FirstIndex + 1, PSEntryIndex - FirstIndex - 1);
 		EntryName += "_PS";
 		GameEnginePixelShader::Load(_Path, EntryName);
 	}

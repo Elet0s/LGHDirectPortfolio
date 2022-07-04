@@ -13,6 +13,15 @@ GameEngineCamera::GameEngineCamera()
 	Near = 0.1f;
 	Far = 1000.0f;
 	Fov = 60.0f;
+
+	ViewPortDesc.TopLeftX = 0;
+	ViewPortDesc.TopLeftY = 0;
+	ViewPortDesc.Width = Size.uix();
+	ViewPortDesc.Height = Size.uiy();
+	ViewPortDesc.MinDepth = 0.0f;
+	ViewPortDesc.MaxDepth = 0.0f;
+
+
 }
 
 GameEngineCamera::~GameEngineCamera()
@@ -21,6 +30,9 @@ GameEngineCamera::~GameEngineCamera()
 
 void GameEngineCamera::Render(float _DeltaTime)
 {
+	// 순서적으로보면 레스터라이저 단계이지만 변경이 거의 없을거기 때문에.
+	GameEngineDevice::GetContext()->RSSetViewports(0, &ViewPortDesc);
+
 	// 랜더하기 전에 
 	View.LookAtLH(
 		GetActor()->GetTransform().GetLocalPosition(),

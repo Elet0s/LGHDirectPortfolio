@@ -4,6 +4,7 @@
 class GameEngineLayOutDesc
 {
 	// 일반적인 맴버변수를 가지면 안됩니다.
+
 	friend class GameEngineInputLayOut;
 
 public:
@@ -30,6 +31,7 @@ public:
 
 struct GameEngineVertex
 {
+public:
 	static GameEngineLayOutDesc LayOut;
 
 public:

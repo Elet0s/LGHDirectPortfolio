@@ -24,6 +24,8 @@ public:
 
 	virtual void Render(float _DeltaTime);
 
+	void SetPipeLine(const std::string& _Name);
+
 protected:
 	virtual void Start();
 	virtual void Update(float _DeltaTime) {}

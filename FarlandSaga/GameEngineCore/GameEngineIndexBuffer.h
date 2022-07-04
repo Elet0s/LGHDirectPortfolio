@@ -15,11 +15,11 @@ public:
 	template<typename IndexType>
 	static GameEngineIndexBuffer* Create(const std::string& _Name, const std::vector<IndexType>& _Vertex)
 	{
-		return Create(_Name, &_Vertex[0], _Vertex.size() * sizeof(IndexType));
+		return Create(_Name, &_Vertex[0], _Vertex.size(), sizeof(IndexType));
 	}
 
 
-	static GameEngineIndexBuffer* Create(const std::string& _Name, const void* _Data, size_t _Size);
+	static GameEngineIndexBuffer* Create(const std::string& _Name, const void* _Data, UINT _IndexSize, UINT _IndexCount);
 
 private:
 	// constrcuter destructer
@@ -32,8 +32,16 @@ private:
 	GameEngineIndexBuffer& operator=(const GameEngineIndexBuffer& _Other) = delete;
 	GameEngineIndexBuffer& operator=(GameEngineIndexBuffer&& _Other) noexcept = delete;
 
+public:
+	void Setting();
+
+	inline UINT GetIndexCount()
+	{
+		return IndexCount;
+	}
+
 protected:
-	void BufferCreate(const void* _Data, size_t _Size);
+	void BufferCreate(const void* _Data, UINT _IndexSize, UINT _IndexCount);
 
 
 private:
@@ -44,5 +52,10 @@ private:
 
 	ID3D11Buffer* Buffer;
 
+	UINT IndexSize;
+
+	UINT IndexCount;
+
+	UINT Offset;
 };
 

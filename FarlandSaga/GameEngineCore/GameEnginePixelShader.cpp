@@ -96,3 +96,15 @@ void GameEnginePixelShader::ShaderCompile(std::string _Path, std::string _EntryP
 
 
 }
+
+
+void GameEnginePixelShader::Setting()
+{
+	if (nullptr == ShaderPtr)
+	{
+		MsgBoxAssert("쉐이더 세팅 오류");
+	}
+
+	// 두번째 인자는 #include나 #define등 hlsl에서 사용할 헤더나 디파인의 객체를 넣어줄수 있다.
+	GameEngineDevice::GetContext()->PSSetShader(ShaderPtr, nullptr, 0);
+}

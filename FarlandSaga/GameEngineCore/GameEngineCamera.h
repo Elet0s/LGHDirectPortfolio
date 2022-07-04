@@ -8,6 +8,7 @@ enum class CAMERAPROJECTIONMODE
 	Orthographic,
 };
 
+// Ό³Έν :
 class GameEngineLevel;
 class GameEngineCamera;
 class GameEngineCamera : public GameEngineTransformComponent
@@ -15,9 +16,11 @@ class GameEngineCamera : public GameEngineTransformComponent
 	friend GameEngineLevel;
 
 public:
+	// constrcuter destructer
 	GameEngineCamera();
 	~GameEngineCamera();
 
+	// delete Function
 	GameEngineCamera(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera(GameEngineCamera&& _Other) noexcept = delete;
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
@@ -36,6 +39,8 @@ private:
 	float4x4 ViewPort;
 	float4x4 Projection;
 	CAMERAPROJECTIONMODE Mode;
+
+	D3D11_VIEWPORT ViewPortDesc;
 
 	// Projection Data
 	float4 Size;
