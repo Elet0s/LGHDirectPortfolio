@@ -22,27 +22,14 @@ public:
 
 
 	static GameEngineVertexBuffer* Create(const std::string& _Name, const void* _Data, UINT _VertexSize, UINT _VertexCount, const GameEngineLayOutDesc& _LayOut);
-	// static GameEngineVertexBuffer* Create(const std::vector<float4>& _Vertex);
 
+public:
 	const GameEngineLayOutDesc* GetLayOutDesc()
 	{
 		return LayOutDesc;
 	}
 
 	void Setting();
-
-private:
-	// constrcuter destructer
-	GameEngineVertexBuffer();
-	~GameEngineVertexBuffer();
-
-	// delete Function
-	GameEngineVertexBuffer(const GameEngineVertexBuffer& _Other) = delete;
-	GameEngineVertexBuffer(GameEngineVertexBuffer&& _Other) noexcept = delete;
-	GameEngineVertexBuffer& operator=(const GameEngineVertexBuffer& _Other) = delete;
-	GameEngineVertexBuffer& operator=(GameEngineVertexBuffer&& _Other) noexcept = delete;
-
-
 
 protected:
 	void BufferCreate(const void* _Data, UINT _VertexSize, UINT _VertexCount);
@@ -62,5 +49,12 @@ private:
 
 	const GameEngineLayOutDesc* LayOutDesc;
 
+	GameEngineVertexBuffer();
+	~GameEngineVertexBuffer();
+
+	GameEngineVertexBuffer(const GameEngineVertexBuffer& _Other) = delete;
+	GameEngineVertexBuffer(GameEngineVertexBuffer&& _Other) noexcept = delete;
+	GameEngineVertexBuffer& operator=(const GameEngineVertexBuffer& _Other) = delete;
+	GameEngineVertexBuffer& operator=(GameEngineVertexBuffer&& _Other) noexcept = delete;
 };
 

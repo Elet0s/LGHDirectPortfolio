@@ -16,8 +16,8 @@ GameEngineCamera::GameEngineCamera()
 
 	ViewPortDesc.TopLeftX = 0;
 	ViewPortDesc.TopLeftY = 0;
-	ViewPortDesc.Width = Size.uix();
-	ViewPortDesc.Height = Size.uiy();
+	ViewPortDesc.Width = Size.x;
+	ViewPortDesc.Height = Size.y;
 	ViewPortDesc.MinDepth = 0.0f;
 	ViewPortDesc.MaxDepth = 0.0f;
 
