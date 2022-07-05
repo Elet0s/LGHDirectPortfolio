@@ -3,7 +3,6 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <map>
 
-// Ό³Έν :
 class GameEngineCore
 {
 	friend class GEngine;

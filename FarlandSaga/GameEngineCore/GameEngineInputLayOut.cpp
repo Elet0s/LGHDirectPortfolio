@@ -26,7 +26,8 @@ void GameEngineInputLayOut::Setting()
 
 	GameEngineDevice::GetContext()->IASetInputLayout(InputLayOut);
 }
-
+// GameEngineDevice::GetContext()->VSSetConstantBuffers(0, 1, nullptr);
+// GameEngineDevice::GetContext()->VSSetConstantBuffers(5, 1, nullptr);
 void GameEngineInputLayOut::Create(const GameEngineLayOutDesc& _Desc, GameEngineVertexShader* _Shader)
 {
 	if (

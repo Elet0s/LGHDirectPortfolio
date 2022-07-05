@@ -4,13 +4,13 @@
 
 
 void GameEngineTransform::CollisionScaleSetting() {
-	CollisionDataObject.OBB.Extents = WorldScale * 0.5f;
+	CollisionDataObject.OBB.Extents = Data.WorldScaling * 0.5f;
 }
 void GameEngineTransform::CollisionRotationSetting() {
-	CollisionDataObject.OBB.Orientation = WorldRotation.DegreeRotationToQuaternionReturn();
+	CollisionDataObject.OBB.Orientation = Data.WorldRotation.DegreeRotationToQuaternionReturn();
 }
 void GameEngineTransform::CollisionPositionSetting() {
-	CollisionDataObject.OBB.Center = WorldPosition;
+	CollisionDataObject.OBB.Center = Data.WorldPosition;
 }
 
 void GameEngineTransform::CollisionDataSetting()

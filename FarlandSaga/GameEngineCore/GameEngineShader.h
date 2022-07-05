@@ -1,5 +1,11 @@
 #pragma once
 #include <string>
+#include <map>
+
+class ConstantBuffer
+{
+
+};
 
 class GameEngineShader
 {
@@ -27,8 +33,10 @@ protected:
 
 	std::string Version;
 
+	void ShaderResCheak();
+
 private:
 	std::string EntryPoint;
-
+	std::map<unsigned int, ConstantBuffer> ShaderMap;
 };
 

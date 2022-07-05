@@ -2,13 +2,7 @@
 #include "GameEngineTransform.h"
 
 GameEngineTransform::GameEngineTransform()
-	: LocalScale(float4::ONE)
-	, LocalPosition(float4::ZERO)
-	, LocalRotation(float4::ZERO)
-	, WorldScale(float4::ONE)
-	, WorldPosition(float4::ZERO)
-	, WorldRotation(float4::ZERO)
-	, Parent(nullptr)
+	: Parent(nullptr)
 	, CollisionDataObject()
 {
 	CollisionDataSetting();
@@ -21,18 +15,21 @@ GameEngineTransform::~GameEngineTransform()
 
 void GameEngineTransform::CalculateWorld()
 {
+	//if (IsDebug())
+	//{
+	//	int a = 0;
+	//}
 
-	LocalWorldMat = LocalScaleMat * LocalRotateMat * LocalPositionMat;
+	Data.LocalWorldMatrix = Data.LocalScalingMatrix * Data.LocalRotationMatrix * Data.LocalPositionMatrix;
 
 	if (nullptr != Parent)
 	{
-		// Parent 컴포넌트일 경우에는 액터의 트랜스폼을 부모로 가지게 된다. 
-		// 엑터 트랜스폼 - 부모 컴포넌트 - 자식 컴포넌트
-		WorldWorldMat = LocalWorldMat * Parent->GetWorldWorld();
+		// Parent 컴포넌트일 경우에는 액터의 트랜스폼을 부모로 가지게 된다.
+		Data.WorldWorldMatrix = Data.LocalWorldMatrix * Parent->GetWorldWorld();
 	}
 	else
 	{
-		WorldWorldMat = LocalWorldMat;
+		Data.WorldWorldMatrix = Data.LocalWorldMatrix;
 	}
 
 	for (GameEngineTransform* Child : Childs)
@@ -43,8 +40,8 @@ void GameEngineTransform::CalculateWorld()
 
 void GameEngineTransform::CalculateWorldViewProjection()
 {
-	WorldViewMat = WorldWorldMat * View;
-	WorldViewProjectMat = WorldViewMat * Projection;
+	Data.WorldViewMatrix = Data.WorldWorldMatrix * Data.ViewMatrix;
+	Data.WorldViewProjectionMatrix = Data.WorldViewMatrix * Data.ProjectionMatrix;
 }
 
 void GameEngineTransform::DetachTransform()
@@ -71,7 +68,7 @@ void GameEngineTransform::SetParentTransform(GameEngineTransform& _Parent)
 	Parent = &_Parent;
 	_Parent.Childs.push_back(this);
 
-	SetLocalScale(LocalScale);
-	SetLocalRotation(LocalRotation);
-	SetLocalPosition(LocalPosition);
+	SetLocalScale(Data.LocalScaling);
+	SetLocalRotation(Data.LocalRotation);
+	SetLocalPosition(Data.LocalPosition);
 }

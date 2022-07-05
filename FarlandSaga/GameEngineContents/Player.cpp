@@ -44,6 +44,10 @@ void Player::Start()
 
 		Renderer->SetPipeLine("Color");
 
+	// 버텍스쉐이더와
+	// 픽셀스쉐이더가
+	// Renderer->상수버퍼세팅("mycolor", float4::RED);
+	// Renderer->상수버퍼세팅("mycolor", float4::RED);
 	}
 
 	//ScoreCom->SetParent(CurRenderer);

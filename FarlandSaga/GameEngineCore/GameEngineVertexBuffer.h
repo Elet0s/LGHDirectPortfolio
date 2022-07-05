@@ -17,7 +17,7 @@ public:
 	template<typename VertexType>
 	static GameEngineVertexBuffer* Create(const std::string& _Name, const std::vector<VertexType>& _Vertex)
 	{
-		return Create(_Name, &_Vertex[0], static_cast<UINT>(_Vertex.size()), static_cast<UINT>(sizeof(VertexType)), VertexType::LayOut);
+		return Create(_Name, &_Vertex[0], static_cast<UINT>(sizeof(VertexType)), static_cast<UINT>(_Vertex.size()), VertexType::LayOut);
 	}
 
 
