@@ -91,10 +91,10 @@ void GameEnginePixelShader::ShaderCompile(std::string _Path, std::string _EntryP
 		nullptr,
 		&ShaderPtr))
 	{
-		MsgBoxAssert("버텍스 쉐이더 핸들 생성에 실패했습니다.");
+		MsgBoxAssert("PixelShader 핸들 생성에 실패했습니다.");
 	}
 
-
+	ShaderResCheak();
 }
 
 

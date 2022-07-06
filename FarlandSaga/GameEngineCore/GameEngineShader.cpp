@@ -2,6 +2,7 @@
 #include "GameEngineShader.h"
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
+#include "GameEngineConstantBuffer.h"
 
 void GameEngineShader::AutoCompile(const std::string& _Path)
 {
@@ -93,5 +94,64 @@ void GameEngineShader::ShaderResCheak()
 		reinterpret_cast<void**>(&CompileInfo)
 	))
 	{
+		MsgBoxAssert("쉐이더 리플렉션이 잘못 되었습니다.");
+		return;
 	}
+
+	D3D11_SHADER_DESC Info;
+	CompileInfo->GetDesc(&Info);
+
+	D3D11_SHADER_INPUT_BIND_DESC ResInfo;
+	//Info.BoundResources 이게 이 쉐이더에서 사용된 총 리소스 양
+	for (UINT i = 0; i < Info.BoundResources; i++)
+	{
+		CompileInfo->GetResourceBindingDesc(i, &ResInfo);
+		// 리소스가 존재한다.
+		std::string Name = GameEngineString::ToUpperReturn(ResInfo.Name);
+
+		// ResInfo
+
+		D3D_SHADER_INPUT_TYPE Type = ResInfo.Type;
+
+		switch (Type)
+		{
+		case D3D_SIT_CBUFFER:
+		{
+			// 리소스가 상수버퍼라면
+			ID3D11ShaderReflectionConstantBuffer* CBufferPtr = CompileInfo->GetConstantBufferByName(ResInfo.Name);
+
+			D3D11_SHADER_BUFFER_DESC BufferDesc;
+			CBufferPtr->GetDesc(&BufferDesc);
+
+			// 5번에 세팅되는 
+			// ResInfo.BindPoint;
+
+			GameEngineConstantShaderResSetter NewSetter;
+
+			// 중복으로 만드는일이 생기면 안되니까.
+			// 만든걸 또 만들라고 하는게 
+			NewSetter.Buffer = GameEngineConstantBuffer::Create(Name, BufferDesc, CBufferPtr);
+			NewSetter.BindPoint = ResInfo.BindPoint;
+
+
+			ResSetterMap.insert(std::make_pair(Name, NewSetter));
+
+			break;
+		}
+		default:
+			MsgBoxAssert("아직 처리하지 않은 쉐이더 리소스");
+			break;
+		}
+
+
+		// 이 순간 상수버퍼가 만들어져야 합니다.
+
+		int a = 0;
+
+	}
+
+	// 상수버는 몇개 쓰는지 크기는 얼마인지 이런것들을 알아내줍니다.
+	// CompileInfo
+
+	// BinaryPtr
 }

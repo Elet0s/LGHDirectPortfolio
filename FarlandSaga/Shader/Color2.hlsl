@@ -66,17 +66,11 @@ Output Color_VS(Input _Input)
     return NewOutPut;
 }
 
-cbuffer ResultColor : register(b0)
+cbuffer ResultColor : register(b2)
 {
     float4 PlusColor;
     float4 MultyplyColor;
 }
-
-//cbuffer ResultColor2 : register(b2)
-//{
-//    float4 PlusColor2;
-//    float4 MultyplyColor2;
-//}
 
 float4 Color_PS(Output _Input) : SV_Target0
 {

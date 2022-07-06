@@ -6,6 +6,18 @@ class ConstantBuffer
 {
 
 };
+class ShaderResSetter
+{
+public:
+	int BindPoint;
+};
+
+class GameEngineConstantBuffer;
+class GameEngineConstantShaderResSetter : public ShaderResSetter
+{
+public:
+	GameEngineConstantBuffer* Buffer;
+};
 
 class GameEngineShader
 {
@@ -36,7 +48,8 @@ protected:
 	void ShaderResCheak();
 
 private:
+	std::map<std::string, GameEngineConstantShaderResSetter>ResSetterMap;
 	std::string EntryPoint;
-	std::map<unsigned int, ConstantBuffer> ShaderMap;
+//	std::map<unsigned int, ConstantBuffer> ShaderMap;
 };
 

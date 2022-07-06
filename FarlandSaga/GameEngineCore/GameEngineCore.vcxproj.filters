@@ -43,6 +43,9 @@
     <Filter Include="Resources\InputAssembler">
       <UniqueIdentifier>{3063bc75-ba3a-4c17-9f48-455ade9eab7c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resources\ShaderResources">
+      <UniqueIdentifier>{94f3bda8-71f7-4e88-844b-b11c489e3c5c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -130,6 +133,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineDefaultRenderer.h">
       <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineConstantBuffer.h">
+      <Filter>Resources\ShaderResources</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineVertexs.cpp">
       <Filter>Resources\InputAssembler</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineConstantBuffer.cpp">
+      <Filter>Resources\ShaderResources</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
