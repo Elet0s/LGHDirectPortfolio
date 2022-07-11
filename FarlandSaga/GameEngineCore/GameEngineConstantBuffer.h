@@ -5,6 +5,7 @@
 #include <GameEngineBase/GameEngineString.h>
 #include <GameEngineBase/GameEngineNameObject.h>
 
+// 설명 :
 class GameEngineConstantBuffer : public GameEngineNameObject
 {
 private:
@@ -41,21 +42,26 @@ public:
 	{
 		GameEngineConstantBuffer* NewBuffer = CreateResName(_Name, _Desc.Size);
 
+		NewBuffer->Create(_Desc, _CBufferPtr);
+
 		return NewBuffer;
 	}
 
-	//static void ResourcesDestroy()
-	//{
-	//	for (auto& Res : UnNamedRes)
-	//	{
-	//		delete Res;
-	//	}
+	static void ResourcesDestroy()
+	{
+		//for (auto& Res : UnNamedRes)
+		//{
+		//	delete Res;
+		//}
 
-	//	for (auto& Res : NamedRes)
-	//	{
-	//		delete Res.second;
-	//	}
-	//}
+		for (auto& NameRes : NamedRes)
+		{
+			for (auto& SizeRes : NameRes.second)
+			{
+				delete SizeRes.second;
+			}
+		}
+	}
 
 protected:
 	//              이름                바이트 사이즈
@@ -80,14 +86,9 @@ protected:
 		{
 			return FindBuffer;
 		}
+
 		GameEngineConstantBuffer* Res = CreateRes(Name);
-
-		// std::map<int, GameEngineConstantBuffer*> NamedRes[Name].find();
-
-		// std::map<std::string, std::map<int, GameEngineConstantBuffer*>>::iterator SizeIter = NamedRes.find(Name);
-
-		// SizeIter->second.find(_ByteSize);
-
+		NamedRes[Name][_ByteSize] = Res;
 
 		return Res;
 	}
@@ -104,18 +105,26 @@ private:
 
 
 public:
-	D3D11_SHADER_BUFFER_DESC Desc;
+	ID3D11Buffer* Buffer;
+	D3D11_BUFFER_DESC BufferDesc;
+	D3D11_SHADER_BUFFER_DESC ShaderDesc;
+	D3D11_MAPPED_SUBRESOURCE SettingResources;
 
+	// constrcuter destructer
 	GameEngineConstantBuffer();
 	~GameEngineConstantBuffer();
 
+	// delete Function
 	GameEngineConstantBuffer(const GameEngineConstantBuffer& _Other) = delete;
 	GameEngineConstantBuffer(GameEngineConstantBuffer&& _Other) noexcept = delete;
 	GameEngineConstantBuffer& operator=(const GameEngineConstantBuffer& _Other) = delete;
 	GameEngineConstantBuffer& operator=(GameEngineConstantBuffer&& _Other) noexcept = delete;
 
+	void ChangeData(const void* _Data, size_t _Size);
+
 protected:
 
 private:
+	void Create(const D3D11_SHADER_BUFFER_DESC& _Desc, ID3D11ShaderReflectionConstantBuffer* _CBufferPtr);
 };
 

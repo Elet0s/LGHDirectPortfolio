@@ -11,8 +11,14 @@ class GameEngineDefaultRenderer : public GameEngineRenderer
 
 	// 하나의 랜더타겟
 
+
 public:
 	// constrcuter destructer
+	GameEngineRenderingPipeLine* GetPipeLine()
+	{
+		return PipeLine;
+	}
+
 	GameEngineDefaultRenderer();
 	~GameEngineDefaultRenderer();
 

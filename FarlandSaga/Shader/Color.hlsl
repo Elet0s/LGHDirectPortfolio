@@ -6,29 +6,7 @@
 // t1
 
 // Create("TransformData");
-
-cbuffer TransformData : register(b0)
-{
-    float4 LocalPosition;
-    float4 LocalRotation;
-    float4 LocalScaling;
-    
-    float4 WorldPosition;
-    float4 WorldRotation;
-    float4 WorldScaling;
-    
-    float4x4 LocalPositionMatrix;
-    float4x4 LocalRotationMatrix;
-    float4x4 LocalScalingMatrix;
-    
-    float4x4 LocalWorldMatrix;
-    float4x4 WorldWorldMatrix;
-    float4x4 View;
-    float4x4 Projection;
-    
-    float4x4 WorldView;
-    float4x4 WorldViewProjection;
-};
+#include "TransformHeader.fx"
 
 struct Input
 {
@@ -38,7 +16,11 @@ struct Input
 
 struct Output
 {
+    // 레스터라이저한테 뷰포트를 곱해서 이녀석으로 픽셀을 건져내줘.
     float4 Pos : SV_POSITION;
+    
+    // 레스터라이저한테 뷰포트를 곱해서 이녀석으로 픽셀을 건져내줘.
+    float4 Pos2 : POSITION;
     float4 Color : COLOR;
 };
 
@@ -60,6 +42,8 @@ Output Color_VS(Input _Input)
     NewOutPut.Pos = _Input.Pos;
     NewOutPut.Pos.w = 1.0f;
     NewOutPut.Pos = mul(NewOutPut.Pos, WorldViewProjection);
+    
+    NewOutPut.Pos2 = _Input.Pos;
     // NewOutPut.Pos.w = 1.0f;
     NewOutPut.Color = _Input.Color;
     
@@ -80,5 +64,29 @@ cbuffer ResultColor : register(b0)
 
 float4 Color_PS(Output _Input) : SV_Target0
 {
-    return _Input.Color * MultyplyColor + PlusColor;
+    // 어떤 벡터를 넣으면 길이를 리턴해줍니다.
+    
+    // float4 ScreenSize = { 1280, 720 };
+    
+    // float Len = length(_Input.Pos);
+    
+    // 출력하지 마라.
+    
+    //      1
+    //if (_Input.Pos.x >= 2.0f)
+    //{
+    //    clip(-1);
+    //}
+    
+    //if (_Input.Pos2.x >= -0.2f)
+    //{
+    //    clip(-1);
+    //}
+    
+    //for (int i = 0; i < 10; ++i)
+    //{
+        
+    //}
+    
+    return _Input.Color/* * MultyplyColor + PlusColor*/;
 }

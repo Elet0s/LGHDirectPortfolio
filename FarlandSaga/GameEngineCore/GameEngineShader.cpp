@@ -61,6 +61,8 @@ GameEngineShader::~GameEngineShader()
 	}
 }
 
+
+
 void GameEngineShader::CreateVersion(const std::string& _ShaderType, UINT _VersionHigh, UINT _VersionLow)
 {
 	Version = "";
@@ -70,21 +72,19 @@ void GameEngineShader::CreateVersion(const std::string& _ShaderType, UINT _Versi
 	Version += std::to_string(_VersionLow); // vs_5_0
 }
 
-//쉐이더에서 상수버퍼를 사용했는지 텍스처를 사용했는지
-void GameEngineShader::ShaderResCheak()
+// 쉐이더에서 상수버퍼를 사용했는지 텍스처를 썼는지
+void GameEngineShader::ShaderResCheck()
 {
-	//BinaryPtr 완전히 빌드된 쉐이더 파일의 2진 메모리
+	// BinaryPtr 완전히 빌드된 쉐이더 파일의 2진 메모리
 	if (nullptr == BinaryPtr)
 	{
-		MsgBoxAssert("쉐이더 리소스가 만들어지지 않았는데 리소스(상수버퍼, 텍스처) 체크를 하려고 했습니다.");
+		MsgBoxAssert("쉐이더 리소스가 만들어지지 않았는데 리소스(상수버퍼 and 텍스처) 체크를 하려고 했습니다.");
 		return;
 	}
 
-
-	//Reflection
-	//class의 세부 정보를 언어차원에서 우리에게 제공해줄 때 그 class나 함수들이 이런 이름을 가지고 있다.
-	//이런 이름의 인터페이스
-
+	// Reflection 
+	// 클래스의 세부 정보를 언어차원에서 우리에게 제공해줄때 그 클래스나 함수들이 이런 이름을 가지고 있다.
+	// 이런 이름의 인터페이스 
 	ID3D11ShaderReflection* CompileInfo = nullptr;
 
 	if (S_OK != D3DReflect(
@@ -94,15 +94,18 @@ void GameEngineShader::ShaderResCheak()
 		reinterpret_cast<void**>(&CompileInfo)
 	))
 	{
-		MsgBoxAssert("쉐이더 리플렉션이 잘못 되었습니다.");
+		MsgBoxAssert("쉐이더 쉐이더 리플렉션이 잘못 돼었습니다.");
 		return;
 	}
+
+
 
 	D3D11_SHADER_DESC Info;
 	CompileInfo->GetDesc(&Info);
 
 	D3D11_SHADER_INPUT_BIND_DESC ResInfo;
-	//Info.BoundResources 이게 이 쉐이더에서 사용된 총 리소스 양
+
+	// Info.BoundResources 이게 이 쉐이더에서 사용된 총 리소스 양
 	for (UINT i = 0; i < Info.BoundResources; i++)
 	{
 		CompileInfo->GetResourceBindingDesc(i, &ResInfo);
@@ -126,15 +129,14 @@ void GameEngineShader::ShaderResCheak()
 			// 5번에 세팅되는 
 			// ResInfo.BindPoint;
 
-			GameEngineConstantShaderResSetter NewSetter;
+			GameEngineConstantBufferSetter NewSetter;
 
 			// 중복으로 만드는일이 생기면 안되니까.
 			// 만든걸 또 만들라고 하는게 
 			NewSetter.Buffer = GameEngineConstantBuffer::Create(Name, BufferDesc, CBufferPtr);
 			NewSetter.BindPoint = ResInfo.BindPoint;
 
-
-			ResSetterMap.insert(std::make_pair(Name, NewSetter));
+			ConstantBufferMap.insert(std::make_pair(Name, NewSetter));
 
 			break;
 		}
@@ -150,8 +152,23 @@ void GameEngineShader::ShaderResCheak()
 
 	}
 
+	ConstantBufferMap;
+	TextureSetterMap;
+
 	// 상수버는 몇개 쓰는지 크기는 얼마인지 이런것들을 알아내줍니다.
 	// CompileInfo
 
-	// BinaryPtr
+	// CompileInfo->Release();
+}
+
+GameEngineConstantBufferSetter& GameEngineShader::GetConstantBufferSetter(std::string _Name)
+{
+	std::string Name = GameEngineString::ToUpperReturn(_Name);
+
+	if (ConstantBufferMap.end() == ConstantBufferMap.find(Name))
+	{
+		MsgBoxAssert("존재하지 않는 상수버퍼를 찾으려고 했습니다.");
+	}
+
+	return ConstantBufferMap[Name];
 }

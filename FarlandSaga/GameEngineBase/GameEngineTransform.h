@@ -230,6 +230,11 @@ public:
 		Data.ProjectionMatrix = _Mat;
 	}
 
+	const TransformData& GetTransformData()
+	{
+		return Data;
+	}
+
 protected:
 
 private:
