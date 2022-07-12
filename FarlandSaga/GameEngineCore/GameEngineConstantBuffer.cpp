@@ -47,6 +47,7 @@ void GameEngineConstantBuffer::ChangeData(const void* _Data, size_t _Size) const
 
 	if (BufferDesc.ByteWidth != _Size)
 	{
+		MsgBoxAssertString(GetNameCopy() + "  상수버퍼의 바이트 크기가 서로 맞지 않습니다.");
 	}
 
 	static D3D11_MAPPED_SUBRESOURCE SettingResources = {};

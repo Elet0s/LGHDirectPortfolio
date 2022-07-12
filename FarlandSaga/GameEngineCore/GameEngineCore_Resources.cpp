@@ -37,6 +37,61 @@ void EngineRasterizer()
 
 }
 
+void EngineTextureLoad()
+{
+	GameEngineDirectory Dir;
+
+	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+	Dir.Move("GameEngineResources");
+	Dir.Move("Texture");
+
+	std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+
+	for (size_t i = 0; i < Shaders.size(); i++)
+	{
+		GameEngineTexture::Load(Shaders[i].GetFullPath());
+	}
+}
+
+void ShaderCompile()
+{
+	GameEngineDirectory Dir;
+
+	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+	Dir.Move("GameEngineResources");
+	Dir.Move("GameEngineShader");
+
+	std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
+
+	for (size_t i = 0; i < Shaders.size(); i++)
+	{
+		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
+	}
+
+	//GameEngineVertexShader::create("struct Input
+	//{
+	//	float4 Pos : POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//struct Output
+	//{
+	//	float4 Pos : SV_POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//Output Color_VS(Input _Input)
+	//{
+	//	// 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
+	//	// 0
+	//	Output NewOutPut = (Output)0;
+	//	NewOutPut.Pos = _Input.Pos;
+	//	NewOutPut.Color = _Input.Color;
+
+	//	return NewOutPut;
+	//}");
+}
+
 
 
 void EngineRenderingPipeLine()
@@ -152,45 +207,6 @@ void EngineMesh()
 	}
 }
 
-void ShaderCompile()
-{
-	GameEngineDirectory Dir;
-
-	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
-	Dir.Move("GameEngineResources");
-	Dir.Move("GameEngineShader");
-
-	std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
-
-	for (size_t i = 0; i < Shaders.size(); i++)
-	{
-		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
-	}
-
-	//GameEngineVertexShader::create("struct Input
-	//{
-	//	float4 Pos : POSITION;
-	//	float4 Color : COLOR;
-	//};
-
-	//struct Output
-	//{
-	//	float4 Pos : SV_POSITION;
-	//	float4 Color : COLOR;
-	//};
-
-	//Output Color_VS(Input _Input)
-	//{
-	//	// 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
-	//	// 0
-	//	Output NewOutPut = (Output)0;
-	//	NewOutPut.Pos = _Input.Pos;
-	//	NewOutPut.Color = _Input.Color;
-
-	//	return NewOutPut;
-	//}");
-}
-
 void GameEngineCore::EngineResourcesInitialize()
 {
 	// 사각형 박스 에러용 텍스처 등등
@@ -200,6 +216,7 @@ void GameEngineCore::EngineResourcesInitialize()
 	EngineMesh();
 	EngineRasterizer();
 	ShaderCompile();
+	EngineTextureLoad();
 
 	EngineRenderingPipeLine();
 

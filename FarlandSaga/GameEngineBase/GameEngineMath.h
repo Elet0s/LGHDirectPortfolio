@@ -11,6 +11,8 @@
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
 
+
+// Ό³Έν :
 class GameEngineMath
 {
 public:
@@ -37,9 +39,11 @@ public:
 	}
 
 private:
+	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();
 
+	// delete Function
 	GameEngineMath(const GameEngineMath& _Other) = delete;
 	GameEngineMath(GameEngineMath&& _Other) noexcept = delete;
 	GameEngineMath& operator=(const GameEngineMath& _Other) = delete;
