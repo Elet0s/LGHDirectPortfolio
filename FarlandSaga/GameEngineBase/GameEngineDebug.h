@@ -11,14 +11,13 @@ public:
 	static void ConsoleOpen();
 
 	static void OutPutString(const std::string& _Text);
-	
+
 	static void Destroy();
 
 protected:
 
 private:
 	static HANDLE hConsole;
-
 	GameEngineDebug();
 	~GameEngineDebug();
 
@@ -28,6 +27,9 @@ private:
 	GameEngineDebug& operator=(GameEngineDebug&& _Other) noexcept = delete;
 
 };
+
+#define MsgBox(Text) 	MessageBeep(0); \
+MessageBoxA(nullptr, Text, "Error", MB_OK);  
 
 #define MsgBoxAssert(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, Text, "Error", MB_OK); \

@@ -52,7 +52,7 @@ class float4x4;
 class float4
 {
 public:
-		// Dir
+	// Dir
 	static const float4 LEFT;
 	static const float4 RIGHT;
 	static const float4 UP;
@@ -61,16 +61,18 @@ public:
 	static const float4 BACK;
 	static const float4 ZERO;
 	static const float4 ONE;
+
 	// Color
 	static const float4 BLUE;
 	static const float4 RED;
 
-	// 외적(Cross)이란 두방향벡터가 있을때 그 두방향벡터에 각각 수직임을 만족하는 한 방향벡터
-	// 위와 같은 특징때문에 방향에 따라 +,-값이 나온다.
+public:
 	// 외적을 쓸수 있는곳
-	// 1. 마우스 클릭시 회전방향 알아낼때.
+	// 마우스 클릭시 회전방향 알아낼때.
 	static float4 Cross(const float4& _Left, const float4& _Right)
 	{
+		// DirectX::XMVector3Cross()
+
 		float4 vResult = float4(
 			(_Left.Arr1D[1] * _Right.Arr1D[2]) - (_Left.Arr1D[2] * _Right.Arr1D[1]),
 			(_Left.Arr1D[2] * _Right.Arr1D[0]) - (_Left.Arr1D[0] * _Right.Arr1D[2]),
@@ -115,8 +117,15 @@ public:
 		else {
 			Return.w = _Left.w;
 		}
+
+		//Return.Arr1DInt[0] = (_Left.Arr1DInt[0] & ~_Control.Arr1DInt[0]) | (_Right.Arr1DInt[0] & _Control.Arr1DInt[0]);
+		//Return.Arr1DInt[1] = (_Left.Arr1DInt[1] & ~_Control.Arr1DInt[1]) | (_Right.Arr1DInt[1] & _Control.Arr1DInt[1]);
+		//Return.Arr1DInt[2] = (_Left.Arr1DInt[2] & ~_Control.Arr1DInt[2]) | (_Right.Arr1DInt[2] & _Control.Arr1DInt[2]);
+		//Return.Arr1DInt[3] = (_Left.Arr1DInt[3] & ~_Control.Arr1DInt[3]) | (_Right.Arr1DInt[3] & _Control.Arr1DInt[3]);
 		return Return;
 	}
+
+
 
 	static float4 NormalizeReturn(const float4& _Value)
 	{
@@ -134,6 +143,8 @@ public:
 	{
 		float4 Dir = _Target - _Postion;
 		Dir.Normalize();
+		// cos(90) => 1.5
+		// acos(1.5) => 90
 		float Angle = acosf(Dir.x);
 
 		if (_Postion.y > _Target.y)
@@ -188,6 +199,9 @@ public:
 		return VectorRotationToRadianXAxis(_Value, _Degree * GameEngineMath::DegreeToRadian);
 	}
 
+	// [][] * cosf   -sinf
+	// [][]   sinf   cosf
+
 	static float4 VectorRotationToRadianXAxis(const float4& _Value, float _Radian)
 	{
 		float4 Rot;
@@ -197,13 +211,15 @@ public:
 		return Rot;
 	}
 
-	static float4 Lerp(const float4& p1, const float4& p2, float Time)//Linear Interpolation 선형보간
+
+
+	static float4 Lerp(const float4& p1, const float4& p2, float Time)
 	{
 		return p1 * (1.0f - Time) + p2 * Time;
 	}
 
-	// 보통 누적된 시간을 Time 이라고 함
-	static float4 LerpLimit(const float4& p1, const float4& p2, float Time)//Deltatime이 정확한 시간을 체크하지 못하기 때문에 함수를 따로 둠
+	// 보통 누적된 시간을 Time
+	static float4 LerpLimit(const float4& p1, const float4& p2, float Time)
 	{
 		if (1.0f <= Time)
 		{
@@ -213,11 +229,18 @@ public:
 		return Lerp(p1, p2, Time);
 	}
 
+	//           []
+	//           []
+	//           []
+	// [][][][]  []
+
 	static float DotProduct3D(const float4& _Left, const float4& _Right)
 	{
+		// DirectX::XMVector3Dot
 		float fValue = _Left.x * _Right.x + _Left.y * _Right.y + _Left.z * _Right.z;
 		return fValue;
 	}
+
 
 public:
 	union
@@ -229,6 +252,23 @@ public:
 			float z;
 			float w;
 		};
+
+		struct
+		{
+			float r;
+			float g;
+			float b;
+			float a;
+		};
+
+		struct
+		{
+			int IntValueX;
+			int IntValueY;
+			int IntValueZ;
+			int IntValueW;
+		};
+
 
 		float Arr1D[4];
 
@@ -304,17 +344,13 @@ public:
 
 	float Length() const
 	{
-		//3차원공간에서 벡터가 표현될 때 벡터는 각축에대한 성분들로 나눌수 있다. 그리고 이런 성분들이 합해진 벡터를 선형결합(Linear Combination)이라고 한다.
-		//이렇게 선형결합 되어진 벡터의 크기를 구하는 공식이 Lenth함수와 같다. 빗변 구하는 공식의 3차원 버전이라고 보면된다.
-		return sqrtf((x * x) + (y * y) +(z * z));	// sqrtf 제곱근 구해주는 함수
-		//이러한 벡터의 크기를 노름(Norm)이라고 한다.
+		// sqrtf 제곱근 구해줍니다.
+		return sqrtf((x * x) + (y * y) + (z * z));
 	}
 
 	void Normalize()
 	{
-		//각 성분들을 노름으로 나누게 되면 정규화된 벡터를 구할 수 있게 된다.
 		float Len = Length();
-
 		if (0 == Len)
 		{
 			return;
@@ -324,8 +360,8 @@ public:
 		y /= Len;
 		z /= Len;
 
+		// sqrtf 제곱근 구해줍니다.
 		return;
-		//정규화된 성분값들에 대한 노름을 다시 구하게 되면 1이 나온다.
 	}
 
 	float4 NormalizeReturn() const
@@ -472,9 +508,13 @@ public:
 	}
 
 	void TransformCoord(const float4x4& _Value);
-	float4 TransformCoordReturn(const float4x4& _Vlaue);
-	void  TransformNormal(const float4x4& _Value);
+
+	float4 TransformCoordReturn(const float4x4& _Value);
+
+	void TransformNormal(const float4x4& _Value);
+
 	float4 TransformNormalReturn(const float4x4& _Value);
+
 
 public:
 	float4()
@@ -924,6 +964,8 @@ public:
 		DirectX::XMMATRIX Result = DirectX::XMMatrixInverse(nullptr, DirectMatrix);
 		return Result;
 	}
+
+
 
 	void Transpose()
 	{

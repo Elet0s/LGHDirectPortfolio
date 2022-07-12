@@ -4,6 +4,23 @@
 #include "GameEnginePixelShader.h"
 #include "GameEngineConstantBuffer.h"
 
+void GameEngineConstantBufferSetter::Setting() const
+{
+	Res->ChangeData(SetData, Size);
+
+	switch (ShaderType)
+	{
+	case ShaderType::Vertex:
+		Res->VSSetting();
+		break;
+	case ShaderType::Pixel:
+		Res->PSSetting();
+		break;
+	default:
+		break;
+	}
+}
+
 void GameEngineShader::AutoCompile(const std::string& _Path)
 {
 	GameEngineFile File = GameEngineFile(_Path);
@@ -135,7 +152,7 @@ void GameEngineShader::ShaderResCheck()
 			// 중복으로 만드는일이 생기면 안되니까.
 			// 만든걸 또 만들라고 하는게 
 			NewSetter.ShaderType = ShaderSettingType;
-			NewSetter.Buffer = GameEngineConstantBuffer::CreateAndFind(Name, BufferDesc, CBufferPtr);
+			NewSetter.Res = GameEngineConstantBuffer::CreateAndFind(Name, BufferDesc, CBufferPtr);
 			NewSetter.BindPoint = ResInfo.BindPoint;
 			ConstantBufferMap.insert(std::make_pair(Name, NewSetter));
 

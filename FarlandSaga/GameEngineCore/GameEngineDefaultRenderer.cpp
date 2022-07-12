@@ -32,7 +32,7 @@ void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
 
 	if (true == PipeLineHelper.IsConstantBufferSetter("TRANSFORMDATA"))
 	{
-		int a = 0;
+		PipeLineHelper.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
 	}
 
 }
@@ -44,6 +44,8 @@ void GameEngineDefaultRenderer::Render(float _DeltaTime)
 		MsgBoxAssert("랜더링 파이프라인이 세팅되지 않으면 랜더링을 할수 없습니다.");
 	}
 
+	// 준비된 모든 리소스들을 다 세팅해준다.
+	PipeLineHelper.AllResourcesSetting();
 	PipeLine->Rendering();
 }
 

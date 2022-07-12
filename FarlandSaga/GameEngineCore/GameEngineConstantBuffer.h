@@ -1,151 +1,226 @@
-#pragma once
-#include <string>
-#include <list>
-#include <map>
-#include <GameEngineBase/GameEngineString.h>
-#include <GameEngineBase/GameEngineNameObject.h>
+#include "PreCompile.h"
+#include "GameEngineCore.h"
+#include <GameEngineBase/GameEngineWindow.h>
+#include <GameEngineBase/GameEngineInput.h>
+#include <GameEngineBase/GameEngineTime.h>
+#include "GameEngineLevel.h"
+#include "GameEngineVertexs.h"
+#include "GameEngineConstantBuffer.h"
+#include <math.h>
 
-class GameEngineConstantBuffer : public GameEngineNameObject
+
+// Resources Header
+#include "GameEngineVertexBuffer.h"
+#include "GameEngineIndexBuffer.h"
+#include "GameEngineTexture.h"
+#include "GameEngineRenderTarget.h"
+
+#include "GameEngineVertexShader.h"
+#include "GameEnginePixelShader.h"
+#include "GameEngineRasterizer.h"
+#include "GameEngineRenderingPipeLine.h"
+
+void EngineInputLayOut()
 {
-private:
+	GameEngineVertex::LayOut.AddInputLayOut("POSITION", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+	GameEngineVertex::LayOut.AddInputLayOut("COLOR", DXGI_FORMAT::DXGI_FORMAT_R32G32B32A32_FLOAT);
+}
 
-public:
-	static GameEngineConstantBuffer* Find(const std::string& _Name, int _ByteSize)
+void EngineRasterizer()
+{
+	D3D11_RASTERIZER_DESC Desc = {};
+
+	Desc.FillMode = D3D11_FILL_MODE::D3D11_FILL_SOLID;
+	Desc.CullMode = D3D11_CULL_MODE::D3D11_CULL_NONE;
+
+	GameEngineRasterizer::Create("EngineRasterizer", Desc);
+
+}
+
+
+
+void EngineRenderingPipeLine()
+{
 	{
-		std::string UpperName = GameEngineString::ToUpperReturn(_Name);
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Color");
+		NewPipe->SetInputAssembler1VertexBuffer("Rect");
+		NewPipe->SetInputAssembler2IndexBuffer("Rect");
+		NewPipe->SetVertexShader("Color.hlsl");
+		NewPipe->SetPixelShader("Color.hlsl");
+		NewPipe->SetRasterizer("EngineRasterizer");
+	}
+}
 
-		std::map<std::string, std::map<int, GameEngineConstantBuffer*>>::iterator NameIter = NamedRes.find(UpperName);
+void EngineMesh()
+{
 
-		if (NamedRes.end() == NameIter)
-		{
-			return nullptr;
-		}
-
-		std::map<int, GameEngineConstantBuffer*>& SizeMap = NameIter->second;
-
-		std::map<int, GameEngineConstantBuffer*>::iterator SizeIter = SizeMap.find(_ByteSize);
-
-		if (SizeIter == SizeMap.end())
-		{
-			return nullptr;
-		}
-
-		return SizeIter->second;
+	{
+		std::vector<GameEngineVertex> Vertex;
+		Vertex.push_back({ float4(-0.5f, 0.5f), float4() });
+		Vertex.push_back({ float4(0.5f, 0.5f), float4(1.0f, 0.0f, 0.0f, 1.0f) });
+		Vertex.push_back({ float4(0.5f, -0.5f), float4() });
+		Vertex.push_back({ float4(-0.5f, -0.5f), float4() });
+		GameEngineVertexBuffer::Create("Rect", Vertex);
 	}
 
-	static GameEngineConstantBuffer* Create(
-		const std::string& _Name,
-		D3D11_SHADER_BUFFER_DESC _Desc,
-		ID3D11ShaderReflectionConstantBuffer* _CBufferPtr
-	)
-	{
-		GameEngineConstantBuffer* NewBuffer = CreateResName(_Name, _Desc.Size);
-
-		NewBuffer->Create(_Desc, _CBufferPtr);
-
-		return NewBuffer;
-	}
-
-
-	static GameEngineConstantBuffer* CreateAndFind(
-		const std::string& _Name,
-		D3D11_SHADER_BUFFER_DESC _Desc,
-		ID3D11ShaderReflectionConstantBuffer* _CBufferPtr
-	)
-	{
-		GameEngineConstantBuffer* FindBuffer = Find(_Name, _Desc.Size);
-
-		if (nullptr != FindBuffer)
-		{
-			return FindBuffer;
-		}
-
-		GameEngineConstantBuffer* NewBuffer = CreateResName(_Name, _Desc.Size);
-
-		NewBuffer->Create(_Desc, _CBufferPtr);
-
-		return NewBuffer;
-	}
-
-
-	static void ResourcesDestroy()
-	{
-		//for (auto& Res : UnNamedRes)
-		//{
-		//	delete Res;
-		//}
-
-		for (auto& NameRes : NamedRes)
-		{
-			for (auto& SizeRes : NameRes.second)
-			{
-				delete SizeRes.second;
-			}
-		}
-	}
-
-protected:
-	//              이름                바이트 사이즈
-
-	// 상수버퍼에 이름이 없으면 
-	static GameEngineConstantBuffer* CreateRes(const std::string& _Name)
-	{
-
-		GameEngineConstantBuffer* NewRes = new GameEngineConstantBuffer();
-		NewRes->SetName(_Name);
-
-		return NewRes;
-	}
-
-	static GameEngineConstantBuffer* CreateResName(const std::string& _Name, int _ByteSize)
-	{
-		std::string Name = GameEngineString::ToUpperReturn(_Name);
-
-		GameEngineConstantBuffer* FindBuffer = Find(_Name, _ByteSize);
-
-		if (nullptr != FindBuffer)
-		{
-			return FindBuffer;
-		}
-
-		GameEngineConstantBuffer* Res = CreateRes(Name);
-		NamedRes[Name][_ByteSize] = Res;
-
-		return Res;
-	}
-
-	//static ResType* CreateResUnName()
 	//{
-	//	ResType* Res = CreateRes();
-	//	UnNamedRes.push_back(Res);
-	//	return Res;
+	//	std::vector<GameEngineVertex> Vertex;
+	//	Vertex.push_back({ float4(-1.0f, 1.0f), float4() });
+	//	Vertex.push_back({ float4(1.0f, 1.0f), float4() });
+	//	Vertex.push_back({ float4(1.0f, -1.0f), float4() });
+	//	Vertex.push_back({ float4(-1.0f, -1.0f), float4() });
+	//	GameEngineVertexBuffer::Create("FullRect", Vertex);
 	//}
 
-private:
-	static std::map<std::string, std::map<int, GameEngineConstantBuffer*>> NamedRes;
+	{
+		std::vector<int> Index;
+
+		// 첫번째 삼각형
+		// 디폴트 생성자로 인자를 뒤에 추가해주는 요소 추가 함수.
+		Index.resize(6);
+
+		// 첫번째
+		Index[0] = 0;
+		Index[1] = 1;
+		Index[2] = 2;
+
+		// 두번째
+		Index[3] = 0;
+		Index[4] = 2;
+		Index[5] = 3;
+
+		GameEngineIndexBuffer::Create("Rect", Index);
+	}
+
+	{
+		std::vector<GameEngineVertex> Vertex;
+		Vertex.resize(24);
+		// 앞면
+		Vertex[0] = { float4(-0.5f, 0.5f, 0.5f) };
+		Vertex[1] = { float4(0.5f, 0.5f, 0.5f) };
+		Vertex[2] = { float4(0.5f, -0.5f, 0.5f) };
+		Vertex[3] = { float4(-0.5f, -0.5f, 0.5f) };
+
+		// 뒷면
+		Vertex[4] = { float4::VectorRotationToDegreeXAxis(Vertex[0].POSITION, 180.f) };
+		Vertex[5] = { float4::VectorRotationToDegreeXAxis(Vertex[1].POSITION, 180.f) };
+		Vertex[6] = { float4::VectorRotationToDegreeXAxis(Vertex[2].POSITION, 180.f) };
+		Vertex[7] = { float4::VectorRotationToDegreeXAxis(Vertex[3].POSITION, 180.f) };
+
+		// 왼쪽
+		Vertex[8] = { float4::VectorRotationToDegreeYAxis(Vertex[0].POSITION, -90.f) };
+		Vertex[9] = { float4::VectorRotationToDegreeYAxis(Vertex[1].POSITION, -90.f) };
+		Vertex[11] = { float4::VectorRotationToDegreeYAxis(Vertex[3].POSITION, -90.f) };
+		Vertex[10] = { float4::VectorRotationToDegreeYAxis(Vertex[2].POSITION, -90.f) };
+
+		// 오른쪽
+		Vertex[12] = { float4::VectorRotationToDegreeYAxis(Vertex[0].POSITION, 90.f) };
+		Vertex[13] = { float4::VectorRotationToDegreeYAxis(Vertex[1].POSITION, 90.f) };
+		Vertex[14] = { float4::VectorRotationToDegreeYAxis(Vertex[2].POSITION, 90.f) };
+		Vertex[15] = { float4::VectorRotationToDegreeYAxis(Vertex[3].POSITION, 90.f) };
+
+		// 위
+		Vertex[16] = { float4::VectorRotationToDegreeXAxis(Vertex[0].POSITION, -90.f) };
+		Vertex[17] = { float4::VectorRotationToDegreeXAxis(Vertex[1].POSITION, -90.f) };
+		Vertex[18] = { float4::VectorRotationToDegreeXAxis(Vertex[2].POSITION, -90.f) };
+		Vertex[19] = { float4::VectorRotationToDegreeXAxis(Vertex[3].POSITION, -90.f) };
+
+		// 아래
+		Vertex[20] = { float4::VectorRotationToDegreeXAxis(Vertex[0].POSITION, 90.f) };
+		Vertex[21] = { float4::VectorRotationToDegreeXAxis(Vertex[1].POSITION, 90.f) };
+		Vertex[22] = { float4::VectorRotationToDegreeXAxis(Vertex[2].POSITION, 90.f) };
+		Vertex[23] = { float4::VectorRotationToDegreeXAxis(Vertex[3].POSITION, 90.f) };
 
 
-public:
-	ID3D11Buffer* Buffer;
-	D3D11_BUFFER_DESC BufferDesc;
-	D3D11_SHADER_BUFFER_DESC ShaderDesc;
-	D3D11_MAPPED_SUBRESOURCE SettingResources;
+		GameEngineVertexBuffer::Create("Box", Vertex);
+	}
 
-	// constrcuter destructer
-	GameEngineConstantBuffer();
-	~GameEngineConstantBuffer();
+	{
+		std::vector<int> Index;
+		Index.resize(36);
+		for (int i = 0; i < 6; i++)
+		{
+			Index[0 + i * 6] = 0 + 4 * i;
+			Index[1 + i * 6] = 1 + 4 * i;
+			Index[2 + i * 6] = 2 + 4 * i;
+			Index[3 + i * 6] = 0 + 4 * i;
+			Index[4 + i * 6] = 2 + 4 * i;
+			Index[5 + i * 6] = 3 + 4 * i;
+		}
 
-	// delete Function
-	GameEngineConstantBuffer(const GameEngineConstantBuffer& _Other) = delete;
-	GameEngineConstantBuffer(GameEngineConstantBuffer&& _Other) noexcept = delete;
-	GameEngineConstantBuffer& operator=(const GameEngineConstantBuffer& _Other) = delete;
-	GameEngineConstantBuffer& operator=(GameEngineConstantBuffer&& _Other) noexcept = delete;
+		GameEngineIndexBuffer::Create("Box", Index);
+	}
+}
 
-	void ChangeData(const void* _Data, size_t _Size);
+void ShaderCompile()
+{
+	GameEngineDirectory Dir;
 
-protected:
+	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+	Dir.Move("GameEngineResources");
+	Dir.Move("GameEngineShader");
 
-private:
-	void Create(const D3D11_SHADER_BUFFER_DESC& _Desc, ID3D11ShaderReflectionConstantBuffer* _CBufferPtr);
-};
+	std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
 
+	for (size_t i = 0; i < Shaders.size(); i++)
+	{
+		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
+	}
+
+	//GameEngineVertexShader::create("struct Input
+	//{
+	//	float4 Pos : POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//struct Output
+	//{
+	//	float4 Pos : SV_POSITION;
+	//	float4 Color : COLOR;
+	//};
+
+	//Output Color_VS(Input _Input)
+	//{
+	//	// 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
+	//	// 0
+	//	Output NewOutPut = (Output)0;
+	//	NewOutPut.Pos = _Input.Pos;
+	//	NewOutPut.Color = _Input.Color;
+
+	//	return NewOutPut;
+	//}");
+}
+
+void GameEngineCore::EngineResourcesInitialize()
+{
+	// 사각형 박스 에러용 텍스처 등등
+	// 엔진수준에서 기본적으로 지원줘야 한다고 생각하는
+	// 리소스들을 이니셜라이즈하는 단계
+	EngineInputLayOut();
+	EngineMesh();
+	EngineRasterizer();
+	ShaderCompile();
+
+	EngineRenderingPipeLine();
+
+	// 쉐이더 로드
+
+}
+
+
+void GameEngineCore::EngineResourcesDestroy()
+{
+	GameEngineRenderingPipeLine::ResourcesDestroy();
+
+	GameEnginePixelShader::ResourcesDestroy();
+	GameEngineVertexShader::ResourcesDestroy();
+
+	GameEngineVertexBuffer::ResourcesDestroy();
+	GameEngineIndexBuffer::ResourcesDestroy();
+	GameEngineRenderTarget::ResourcesDestroy();
+	GameEngineTexture::ResourcesDestroy();
+	GameEngineRasterizer::ResourcesDestroy();
+	GameEngineConstantBuffer::ResourcesDestroy();
+
+	GameEngineDevice::Destroy();
+}

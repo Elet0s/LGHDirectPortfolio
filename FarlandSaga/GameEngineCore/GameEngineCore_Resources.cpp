@@ -156,8 +156,9 @@ void ShaderCompile()
 {
 	GameEngineDirectory Dir;
 
-	Dir.MoveParentToExitsChildDirectory("Shader");
-	Dir.Move("Shader");
+	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+	Dir.Move("GameEngineResources");
+	Dir.Move("GameEngineShader");
 
 	std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
 
