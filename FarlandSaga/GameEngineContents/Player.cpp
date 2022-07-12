@@ -44,6 +44,9 @@ void Player::Start()
 		Renderer->SetPipeLine("Color");
 		// 내 맴버변수가 아니라 다른객체의 맴버변수를 사용했다면
 		// 이건 터질수 있다.
+
+		Color = { 0.5f, 0.5f, 0.1f, 1.0f };
+
 		Renderer->PipeLineHelper.SetConstantBufferLink("ResultColor", Color);
 	}
 }
