@@ -1,91 +1,101 @@
-#include "PreCompile.h"
-#include "GameEngineShaderResourcesHelper.h"
-#include "GameEnginePixelShader.h"
-#include "GameEngineVertexShader.h"
+#pragma once
+#include <string>
+#include <map>
+#include <GameEngineBase/GameEngineNameObject.h>
+#include <functional>
 
-GameEngineShaderResourcesHelper::GameEngineShaderResourcesHelper()
+
+enum class ShaderType
 {
-}
+	Vertex,
+	Pixel,
+};
 
-GameEngineShaderResourcesHelper::~GameEngineShaderResourcesHelper()
+class ShaderResSetter : public GameEngineNameObject
 {
-}
+public:
+	ShaderType ShaderType;
+	int BindPoint;
+	std::function<void()> SettingFunction;
+};
 
-void GameEngineShaderResourcesHelper::AllResourcesSetting()
+class GameEngineConstantBuffer;
+class GameEngineConstantBufferSetter : public ShaderResSetter
 {
-	for (const std::pair<std::string, GameEngineConstantBufferSetter>& Setter : ConstantBufferMap)
-	{
-		Setter.second.Setting();
-	}
-}
-
-void GameEngineShaderResourcesHelper::ResourcesCheck(GameEngineRenderingPipeLine* _Line)
-{
-	ShaderCheck(_Line->GetVertexShader());
-	ShaderCheck(_Line->GetPixelShader());
-
-}
-
-void GameEngineShaderResourcesHelper::ShaderCheck(GameEngineShader* _Shader)
-{
-	// 픽셀쉐이더와 버텍스 쉐이더에서 transform데이터 같은 중요 상수버퍼의 이름을 똑같이 해서 사용하고 싶다면??????
-	for (const std::pair<std::string, GameEngineConstantBufferSetter>& Data : _Shader->ConstantBufferMap)
-	{
-		ConstantBufferMap.insert(std::make_pair(Data.first, Data.second));
-	}
-
-	for (const std::pair<std::string, GameEngineTextureSetter>& Data : _Shader->TextureSetterMap)
-	{
-		TextureSetterMap.insert(std::make_pair(Data.first, Data.second));
-	}
+public:
+	GameEngineConstantBuffer* Res;
+	// 각자가 가진 정보에 대한 주소
+	const void* SetData;
+	UINT Size;
 
 
-}
+	// 자기메모리로 할당할 것이다.
+	std::vector<char> OriginalData;
 
-bool GameEngineShaderResourcesHelper::IsConstantBufferSetter(const std::string& _Name)
-{
-	std::string Key = GameEngineString::ToUpperReturn(_Name);
+	void Setting() const;
 
-	if (ConstantBufferMap.end() != ConstantBufferMap.find(Key))
-	{
-		return true;
-	}
-
-	return false;
-}
-
-void GameEngineShaderResourcesHelper::SetConstantBufferLink(
-	const std::string& _Name,
-	const void* _Data,
-	UINT _Size)
-{
-	if (false == IsConstantBufferSetter(_Name))
+public:
+	GameEngineConstantBufferSetter()
+		: Res(nullptr)
+		, SetData(nullptr)
+		, Size(-1)
 	{
 
-		MsgBox("존재하지 않는 상수버퍼를 세팅하려고 했습니다.");
-		return;
 	}
+};
 
-	if (16 > _Size)
+class GameEngineConstantBuffer;
+class GameEngineTextureSetter : public ShaderResSetter
+{
+};
+
+
+// 설명 :
+class GameEngineShaderResourcesHelper;
+class GameEngineShader
+{
+	friend GameEngineShaderResourcesHelper;
+
+public:
+	static void AutoCompile(const std::string& _Path);
+
+public:
+	// constrcuter destructer
+	GameEngineShader();
+	virtual ~GameEngineShader();
+
+	// delete Function
+	GameEngineShader(const GameEngineShader& _Other) = delete;
+	GameEngineShader(GameEngineShader&& _Other) noexcept = delete;
+	GameEngineShader& operator=(const GameEngineShader& _Other) = delete;
+	GameEngineShader& operator=(GameEngineShader&& _Other) noexcept = delete;
+
+	GameEngineConstantBufferSetter& GetConstantBufferSetter(std::string _Name);
+
+protected:
+	void CreateVersion(const std::string& _ShaderType, UINT _VersionHigh, UINT _VersionLow);
+	void SetEntryPoint(const std::string& _EntryPoint)
 	{
-
-		MsgBox("최소한 16바이트 이상의 세팅을 해줘야 합니다.");
-		return;
+		EntryPoint = _EntryPoint;
 	}
 
-	std::string Name = GameEngineString::ToUpperReturn(_Name);
+	ID3DBlob* BinaryPtr;
 
-	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameStartIter
-		= ConstantBufferMap.lower_bound(Name);
+	std::string Version;
 
-	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameEndIter
-		= ConstantBufferMap.upper_bound(Name);
+	void ShaderResCheck();
 
-	for (; NameStartIter != NameEndIter; ++NameStartIter)
-	{
-		// 트랜스폼이 바뀌면
-		NameStartIter->second.SetData = _Data;
-		NameStartIter->second.Size = _Size;
-	}
+	ShaderType ShaderSettingType;
 
-}
+private:
+	std::map<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;
+	std::map<std::string, GameEngineTextureSetter> TextureSetterMap;
+
+	std::string EntryPoint;
+
+	// std::map<unsigned int, ConstantBuffer> 
+
+	// void SetConstantBuffer() override;
+
+};
+

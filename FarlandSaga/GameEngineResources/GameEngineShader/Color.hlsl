@@ -47,7 +47,7 @@ Output Color_VS(Input _Input)
     // 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
     Output NewOutPut = (Output) 0;
     NewOutPut.Pos = mul(_Input.Pos, WorldViewProjection);
-    NewOutPut.Pos.w = 1.0f;
+    NewOutPut.Pos.w = 500.0f;
     
     NewOutPut.PosLocal = _Input.Pos;
     

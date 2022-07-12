@@ -8,17 +8,24 @@ void GameEngineConstantBufferSetter::Setting() const
 {
 	Res->ChangeData(SetData, Size);
 
-	switch (ShaderType)
-	{
-	case ShaderType::Vertex:
-		Res->VSSetting();
-		break;
-	case ShaderType::Pixel:
-		Res->PSSetting();
-		break;
-	default:
-		break;
-	}
+	// 함수포인터(BindPoint);
+
+	//void(GameEngineConstantBuffer:: * GetNameConstPtr)(int);
+	//GetNameConstPtr = GameEngineConstantBuffer::VSSetting;
+
+	SettingFunction();
+
+	//switch (ShaderType)
+	//{
+	//case ShaderType::Vertex:
+	//	Res->VSSetting(BindPoint);
+	//	break;
+	//case ShaderType::Pixel:
+	//	Res->PSSetting(BindPoint);
+	//	break;
+	//default:
+	//	break;
+	//}
 }
 
 void GameEngineShader::AutoCompile(const std::string& _Path)
@@ -116,7 +123,6 @@ void GameEngineShader::ShaderResCheck()
 	}
 
 
-
 	D3D11_SHADER_DESC Info;
 	CompileInfo->GetDesc(&Info);
 
@@ -151,6 +157,7 @@ void GameEngineShader::ShaderResCheck()
 
 			// 중복으로 만드는일이 생기면 안되니까.
 			// 만든걸 또 만들라고 하는게 
+			NewSetter.SetName(Name);
 			NewSetter.ShaderType = ShaderSettingType;
 			NewSetter.Res = GameEngineConstantBuffer::CreateAndFind(Name, BufferDesc, CBufferPtr);
 			NewSetter.BindPoint = ResInfo.BindPoint;

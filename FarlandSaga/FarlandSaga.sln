@@ -31,7 +31,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineContents", "GameE
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineBase", "GameEngineBase\FarlandSaga.vcxproj", "{BEB630B6-5B59-4FD5-8069-A902245797F7}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineShader", "GameEngineShader\GameEngineShader.vcxproj", "{86BDD78F-F202-4208-B48D-3275D20A300F}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GameEngineShader", "GameEngineResources\GameEngineShader\GameEngineShader.vcxproj", "{86BDD78F-F202-4208-B48D-3275D20A300F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
