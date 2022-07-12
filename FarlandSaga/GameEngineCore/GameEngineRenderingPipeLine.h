@@ -1,8 +1,6 @@
 #pragma once
 #include "GameEngineRes.h"
 
-
-// Ό³Έν :
 class GameEngineInputLayOut;
 class GameEngineVertexBuffer;
 class GameEngineVertexShader;
@@ -17,11 +15,9 @@ public:
 	static GameEngineRenderingPipeLine* Create(const std::string& _Name);
 
 public:
-	// constrcuter destructer
 	GameEngineRenderingPipeLine();
 	~GameEngineRenderingPipeLine();
 
-	// delete Function
 	GameEngineRenderingPipeLine(const GameEngineRenderingPipeLine& _Other) = delete;
 	GameEngineRenderingPipeLine(GameEngineRenderingPipeLine&& _Other) noexcept = delete;
 	GameEngineRenderingPipeLine& operator=(const GameEngineRenderingPipeLine& _Other) = delete;
@@ -48,6 +44,11 @@ public:
 	inline GameEngineVertexShader* GetVertexShader()
 	{
 		return VertexShader;
+	}
+
+	inline GameEnginePixelShader* GetPixelShader()
+	{
+		return PixelShader;
 	}
 
 protected:

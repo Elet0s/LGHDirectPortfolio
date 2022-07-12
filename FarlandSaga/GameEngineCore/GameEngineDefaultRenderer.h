@@ -1,7 +1,7 @@
 #pragma once
 #include "GameEngineRenderer.h"
+#include "GameEngineShaderResourcesHelper.h"
 
-// 설명 :
 class GameEngineRenderingPipeLine;
 class GameEngineDefaultRenderer : public GameEngineRenderer
 {
@@ -13,7 +13,6 @@ class GameEngineDefaultRenderer : public GameEngineRenderer
 
 
 public:
-	// constrcuter destructer
 	GameEngineRenderingPipeLine* GetPipeLine()
 	{
 		return PipeLine;
@@ -22,7 +21,6 @@ public:
 	GameEngineDefaultRenderer();
 	~GameEngineDefaultRenderer();
 
-	// delete Function
 	GameEngineDefaultRenderer(const GameEngineDefaultRenderer& _Other) = delete;
 	GameEngineDefaultRenderer(GameEngineDefaultRenderer&& _Other) noexcept = delete;
 	GameEngineDefaultRenderer& operator=(const GameEngineDefaultRenderer& _Other) = delete;
@@ -39,7 +37,10 @@ protected:
 
 
 private:
-	// 네모난 빨간색을 출력한다.
+	// 공통적인 메모리 공유하는 메로리들을 들고 있고
 	GameEngineRenderingPipeLine* PipeLine;
+
+	// 그중에서 어떤애를 바꾸고 싶은데?
+	GameEngineShaderResourcesHelper PipeLineHelper;
 };
 

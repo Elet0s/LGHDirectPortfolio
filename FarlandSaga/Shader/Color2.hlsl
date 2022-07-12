@@ -97,5 +97,5 @@ float4 Color_PS(Output _Input) : SV_Target0
         
     //}
     
-    return _Input.Color/* * MultyplyColor + PlusColor*/;
+    return _Input.Color /** MultyplyColor + PlusColor*/;
 }

@@ -46,6 +46,21 @@
     <Filter Include="Resources\ShaderResources">
       <UniqueIdentifier>{94f3bda8-71f7-4e88-844b-b11c489e3c5c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ThirdParty">
+      <UniqueIdentifier>{7ee1b331-2fc9-4433-a4ec-18a098a948b1}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Lib">
+      <UniqueIdentifier>{bc587bef-02a1-4d93-a81e-3b2c9de0c6fc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Lib\Debug">
+      <UniqueIdentifier>{e38b5c0c-6b95-4d79-830b-dd0bb67d9a52}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\Lib\Release">
+      <UniqueIdentifier>{6f0f8127-0e8a-48a0-904e-f8df0eebe834}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ThirdParty\inc">
+      <UniqueIdentifier>{8883bb33-905a-4ff0-ae79-572c3e2e0453}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -137,8 +152,11 @@
     <ClInclude Include="GameEngineConstantBuffer.h">
       <Filter>Resources\ShaderResources</Filter>
     </ClInclude>
+    <ClInclude Include="ThirdParty\bin\Release\DirectXTex.h">
+      <Filter>ThirdParty\inc</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngineShaderResourcesHelper.h">
-      <Filter>Resources</Filter>
+      <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -234,7 +252,15 @@
       <Filter>Resources\ShaderResources</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineShaderResourcesHelper.cpp">
-      <Filter>Resources</Filter>
+      <Filter>Object\Component\Rendering</Filter>
     </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CopyFileToFolders Include="ThirdParty\bin\Debug\DirectXTex.lib">
+      <Filter>ThirdParty\Lib\Debug</Filter>
+    </CopyFileToFolders>
+    <CopyFileToFolders Include="ThirdParty\bin\Release\DirectXTex.lib">
+      <Filter>ThirdParty\Lib\Release</Filter>
+    </CopyFileToFolders>
   </ItemGroup>
 </Project>

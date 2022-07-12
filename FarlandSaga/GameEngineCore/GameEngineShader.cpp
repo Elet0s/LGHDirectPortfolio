@@ -120,6 +120,7 @@ void GameEngineShader::ShaderResCheck()
 		{
 		case D3D_SIT_CBUFFER:
 		{
+
 			// 리소스가 상수버퍼라면
 			ID3D11ShaderReflectionConstantBuffer* CBufferPtr = CompileInfo->GetConstantBufferByName(ResInfo.Name);
 
@@ -133,9 +134,9 @@ void GameEngineShader::ShaderResCheck()
 
 			// 중복으로 만드는일이 생기면 안되니까.
 			// 만든걸 또 만들라고 하는게 
-			NewSetter.Buffer = GameEngineConstantBuffer::Create(Name, BufferDesc, CBufferPtr);
+			NewSetter.ShaderType = ShaderSettingType;
+			NewSetter.Buffer = GameEngineConstantBuffer::CreateAndFind(Name, BufferDesc, CBufferPtr);
 			NewSetter.BindPoint = ResInfo.BindPoint;
-
 			ConstantBufferMap.insert(std::make_pair(Name, NewSetter));
 
 			break;

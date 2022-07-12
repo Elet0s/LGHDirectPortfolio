@@ -4,6 +4,7 @@
 GameEnginePixelShader::GameEnginePixelShader()
 	: ShaderPtr(nullptr)
 {
+	ShaderSettingType = ShaderType::Pixel;
 }
 
 GameEnginePixelShader::~GameEnginePixelShader()

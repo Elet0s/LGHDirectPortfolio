@@ -48,7 +48,7 @@ void Player::Start()
 	ScoreTestComponent* ScoreCom = CreateComponent<ScoreTestComponent>();
 	{
 		Renderer = CreateComponent<GameEngineDefaultRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
+		Renderer->GetTransform().SetLocalScale({ 1280, 720, 100 });
 		Renderer->SetPipeLine("Color");
 
 		// 버텍스쉐이더와

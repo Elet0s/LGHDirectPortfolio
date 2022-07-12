@@ -2,6 +2,10 @@
 #include <GameEngineBase/GameEngineMath.h>
 #include "GameEngineRes.h"
 
+#include "../GameEngineCore/ThirdParty/inc/DirectXTex.h"
+
+#pragma comment(lib, "DirectXTex.lib")
+
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 public:

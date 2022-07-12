@@ -3,5 +3,6 @@
   <ItemGroup>
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="TransformHeader.fx" />
+    <FxCompile Include="Color2.hlsl" />
   </ItemGroup>
 </Project>

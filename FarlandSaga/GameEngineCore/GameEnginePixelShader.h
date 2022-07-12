@@ -2,10 +2,9 @@
 #include "GameEngineShader.h"
 #include "GameEngineRes.h"
 
-// Ό³Έν :
 class GameEnginePixelShader
-	: public GameEngineRes<GameEnginePixelShader>
-	, public GameEngineShader
+	: public GameEngineShader
+	, public GameEngineRes<GameEnginePixelShader>
 {
 	friend GameEngineShader;
 	friend GameEngineRes<GameEnginePixelShader>;
@@ -16,11 +15,9 @@ public:
 	static GameEnginePixelShader* Load(std::string _Path, std::string _Name, std::string _EntryPoint, UINT _VersionHigh, UINT _VersionLow);
 
 private:
-	// constrcuter destructer
 	GameEnginePixelShader();
 	~GameEnginePixelShader();
 
-	// delete Function
 	GameEnginePixelShader(const GameEnginePixelShader& _Other) = delete;
 	GameEnginePixelShader(GameEnginePixelShader&& _Other) noexcept = delete;
 	GameEnginePixelShader& operator=(const GameEnginePixelShader& _Other) = delete;

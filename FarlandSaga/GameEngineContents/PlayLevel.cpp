@@ -34,7 +34,7 @@ void PlayLevel::Start()
 
 	{
 		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	}
 

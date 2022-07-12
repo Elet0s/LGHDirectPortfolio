@@ -2,6 +2,13 @@
 #include <string>
 #include <map>
 
+
+enum class ShaderType
+{
+	Vertex,
+	Pixel,
+};
+
 class ConstantBuffer
 {
 
@@ -10,6 +17,7 @@ class ConstantBuffer
 class ShaderResSetter
 {
 public:
+	ShaderType ShaderType;
 	int BindPoint;
 	std::string* Name;
 };
@@ -26,7 +34,7 @@ class GameEngineTextureSetter : public ShaderResSetter
 {
 };
 
-// Ό³Έν :
+
 class GameEngineShaderResourcesHelper;
 class GameEngineShader
 {
@@ -36,11 +44,9 @@ public:
 	static void AutoCompile(const std::string& _Path);
 
 public:
-	// constrcuter destructer
 	GameEngineShader();
-	~GameEngineShader();
+	virtual ~GameEngineShader();
 
-	// delete Function
 	GameEngineShader(const GameEngineShader& _Other) = delete;
 	GameEngineShader(GameEngineShader&& _Other) noexcept = delete;
 	GameEngineShader& operator=(const GameEngineShader& _Other) = delete;
@@ -60,6 +66,8 @@ protected:
 	std::string Version;
 
 	void ShaderResCheck();
+
+	ShaderType ShaderSettingType;
 
 private:
 	std::map<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;

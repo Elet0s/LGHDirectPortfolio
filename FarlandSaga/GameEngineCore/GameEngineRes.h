@@ -5,14 +5,13 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineString.h>
 
-
 template<typename ResType>
 class GameEngineRes : public GameEngineNameObject
 {
 
 public:
 	GameEngineRes() {}
-	~GameEngineRes() {}
+	virtual ~GameEngineRes() {}
 
 	GameEngineRes(const GameEngineRes& _Other) = delete;
 	GameEngineRes(GameEngineRes&& _Other) noexcept = delete;
