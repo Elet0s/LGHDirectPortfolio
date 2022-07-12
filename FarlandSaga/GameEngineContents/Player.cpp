@@ -47,7 +47,7 @@ void Player::Start()
 
 		Color = { 0.5f, 0.5f, 0.1f, 1.0f };
 
-		Renderer->PipeLineHelper.SetConstantBufferLink("ResultColor", Color);
+		Renderer->PipeLineHelper.SetConstantBufferNew("ResultColor", Color);
 	}
 }
 

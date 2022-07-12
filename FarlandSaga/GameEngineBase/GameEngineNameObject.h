@@ -1,11 +1,9 @@
 #pragma once
 #include <string>
 
-// Ό³Έν :
 class GameEngineNameObject
 {
 public:
-	// constrcuter destructer
 	GameEngineNameObject();
 	virtual ~GameEngineNameObject();
 
