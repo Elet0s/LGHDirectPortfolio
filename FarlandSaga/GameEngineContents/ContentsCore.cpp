@@ -30,19 +30,19 @@ void ContentsCore::Start()
 		GameEngineTexture::Load(Shaders[i].GetFullPath());
 	}
 
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
-	Dir.Move("Texture");
-
-	std::vector<GameEngineFile> Shaders2 = Dir.GetAllFile();
-
-	for (size_t i = 0; i < Shaders2.size(); i++)
-	{
-		GameEngineTexture::Load(Shaders2[i].GetFullPath());
-	}
+	//Dir.MoveParentToExitsChildDirectory("ConstantResources");
+	//Dir.Move("ConstantResources");
+	//Dir.Move("Texture");
+	//
+	//std::vector<GameEngineFile> Shaders2 = Dir.GetAllFile();
+	//
+	//for (size_t i = 0; i < Shaders2.size(); i++)
+	//{
+	//	GameEngineTexture::Load(Shaders2[i].GetFullPath());
+	//}
 
 	// 이걸 해줘야 합니다.
-	GameEngineTexture::Cut("Boss_Left.bmp", 5, 7);
+	//GameEngineTexture::Cut("Boss_Left.bmp", 5, 7);
 
 
 

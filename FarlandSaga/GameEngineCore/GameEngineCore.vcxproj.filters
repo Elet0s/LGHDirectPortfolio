@@ -155,9 +155,6 @@
     <ClInclude Include="GameEngineConstantBuffer.h">
       <Filter>Resources\ShaderResources</Filter>
     </ClInclude>
-    <ClInclude Include="ThirdParty\bin\Release\DirectXTex.h">
-      <Filter>ThirdParty\inc</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineShaderResourcesHelper.h">
       <Filter>Object\Component\Rendering</Filter>
     </ClInclude>
@@ -166,6 +163,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineTextureRenderer.h">
       <Filter>Object\Component\Rendering\Content</Filter>
+    </ClInclude>
+    <ClInclude Include="ThirdParty\bin\Release\DirectXTex.h">
+      <Filter>ThirdParty\inc</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

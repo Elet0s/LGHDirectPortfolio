@@ -41,7 +41,7 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
-		Renderer->SetTexture("Boss_Left.bmp", 5);
+	//	Renderer->SetTexture("Boss_Left.bmp", 5);
 	}
 }
 
