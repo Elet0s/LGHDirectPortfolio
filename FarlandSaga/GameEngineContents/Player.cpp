@@ -10,6 +10,7 @@
 #include <GameEngineCore/GameEngineVertexShader.h>
 #include <GameEngineCore/GameEngineConstantBuffer.h>
 #include <GameEngineCore/GameEngineDevice.h>
+#include <GameEngineCore/GameEngineTextureRenderer.h>
 
 Player::Player()
 	: Speed(50.0f)
@@ -34,25 +35,38 @@ void Player::Start()
 		GameEngineInput::GetInst()->CreateKey("Rot-", VK_NUMPAD2);
 	}
 
-
 	GetTransform().SetLocalScale({ 1, 1, 1 });
 
 	ScoreTestComponent* ScoreCom = CreateComponent<ScoreTestComponent>();
 	{
-		Renderer = CreateComponent<GameEngineDefaultRenderer>();
+		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
-		Renderer->SetPipeLine("Texture");
-		// 내 맴버변수가 아니라 다른객체의 맴버변수를 사용했다면
-		// 이건 터질수 있다.
-
-		// Color = { 0.5f, 0.5f, 0.1f, 1.0f };
-
-		// Renderer->PipeLineHelper.SetConstantBufferNew("ResultColor", Color);
+		Renderer->SetTexture("Boss_Left.bmp", 5);
 	}
 }
 
 void Player::Update(float _DeltaTime)
 {
+	static int Frame = 0;
+	static float Time = 0.0f;
+
+	Time += _DeltaTime;
+
+	if (0.1f <= Time)
+	{
+		++Frame;
+		Renderer->SetFrame(Frame);
+
+		if (Frame == 5)
+		{
+			Frame = 0;
+		}
+
+		Time -= 0.1f;
+	}
+
+
+
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft"))
 	{
 		Color.r += 1.0f * _DeltaTime;
@@ -81,18 +95,4 @@ void Player::Update(float _DeltaTime)
 	{
 		GetTransform().SetWorldMove(GetTransform().GetBackVector() * Speed * _DeltaTime);
 	}
-
-	//if (true == GameEngineInput::GetInst()->IsPress("Rot+"))
-	//{
-	//	CurRenderer->GetTransform().SetLocalRotate({ 0.0f, 0.0f, 360.0f * _DeltaTime });
-	//}
-	//if (true == GameEngineInput::GetInst()->IsPress("Rot-"))
-	//{
-	//	CurRenderer->GetTransform().SetLocalRotate({ 0.0f, 0.0f, -360.0f * _DeltaTime });
-	//}
-
-	// GlobalContentsValue::Actors::TestMonster
-
-	// ChildRenderer->GetTransform().SetWorldPosition({ 150.0f, 100.0f, 30.0f });
-
 }

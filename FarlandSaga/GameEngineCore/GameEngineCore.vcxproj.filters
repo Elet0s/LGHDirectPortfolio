@@ -61,6 +61,9 @@
     <Filter Include="ThirdParty\inc">
       <UniqueIdentifier>{8883bb33-905a-4ff0-ae79-572c3e2e0453}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Component\Rendering\Content">
+      <UniqueIdentifier>{5bce0168-5fc2-43e8-98a9-ab1f17e066be}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -161,6 +164,9 @@
     <ClInclude Include="GameEngineSampler.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineTextureRenderer.h">
+      <Filter>Object\Component\Rendering\Content</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -259,6 +265,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineSampler.cpp">
       <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineTextureRenderer.cpp">
+      <Filter>Object\Component\Rendering\Content</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -129,6 +129,7 @@
   <ItemGroup>
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="Texture.hlsl" />
+    <FxCompile Include="TextureAtlas.hlsl" />
     <FxCompile Include="TransformHeader.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

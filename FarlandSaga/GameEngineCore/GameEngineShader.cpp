@@ -166,8 +166,9 @@ void GameEngineShader::ShaderResCheck()
 			NewSetter.ParentShader = this;
 			NewSetter.SetName(Name);
 			NewSetter.ShaderType = ShaderSettingType;
-			NewSetter.Res = GameEngineTexture::Find("NSet.jpg");
-			TextureSetterMap.insert(std::make_pair(Name, NewSetter));
+			NewSetter.Res = GameEngineTexture::Find("NSet.png");
+			NewSetter.BindPoint = ResInfo.BindPoint;
+			TextureMap.insert(std::make_pair(Name, NewSetter));
 			break;
 		}
 		case D3D_SIT_SAMPLER:
@@ -177,7 +178,8 @@ void GameEngineShader::ShaderResCheck()
 			NewSetter.SetName(Name);
 			NewSetter.ShaderType = ShaderSettingType;
 			NewSetter.Res = GameEngineSampler::Find("EngineSampler");
-			SamplerSetterMap.insert(std::make_pair(Name, NewSetter));
+			NewSetter.BindPoint = ResInfo.BindPoint;
+			SamplerMap.insert(std::make_pair(Name, NewSetter));
 			break;
 		}
 		default:
@@ -193,7 +195,7 @@ void GameEngineShader::ShaderResCheck()
 	}
 
 	ConstantBufferMap;
-	TextureSetterMap;
+	TextureMap;
 
 	// 상수버는 몇개 쓰는지 크기는 얼마인지 이런것들을 알아내줍니다.
 	// CompileInfo

@@ -30,11 +30,29 @@ public:
 	static GameEngineTexture* Create(const std::string& _Name, ID3D11Texture2D* _Texture);
 	static GameEngineTexture* Create(ID3D11Texture2D* _Texture);
 
+	// static void Cut("Boss_Left.bmp", 5, 7);
+	static void Cut(const std::string& _Name, UINT _X, UINT _Y);
+
 	// Member
 	ID3D11RenderTargetView* CreateRenderTargetView();
 
 	void VSSetting(int _BindPoint);
 	void PSSetting(int _BindPoint);
+
+	float4 GetFrameData(UINT _Index)
+	{
+		if (true == CutData.empty())
+		{
+			MsgBoxAssertString(GetNameCopy() + " 자르지 않은 텍스처를 사용하려고 했습니다.");
+		}
+
+		if (CutData.size() <= _Index)
+		{
+			MsgBoxAssertString(GetNameCopy() + " 프레임 범위를 초과했습니다.");
+		}
+
+		return CutData[_Index];
+	}
 
 protected:
 
@@ -48,7 +66,9 @@ private:
 	// 이녀석은 텍스처를 통해서 
 	// ID3D11RenderTargetView* Render;
 
-	void TextureLoad(const std::string& _Path);
+	std::vector<float4> CutData;
 
+	void TextureLoad(const std::string& _Path);
+	void Cut(UINT _X, UINT _Y);
 };
 

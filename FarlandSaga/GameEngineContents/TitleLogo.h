@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class GameEngineTextureRenderer;
 class TitleLogo : public GameEngineActor
 {
 public:
@@ -16,6 +17,8 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override;
+
+	GameEngineTextureRenderer* Renderer;
 
 private:
 

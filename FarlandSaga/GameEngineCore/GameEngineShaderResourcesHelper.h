@@ -28,7 +28,8 @@ public:
 
 	void ResourcesCheck(GameEngineRenderingPipeLine* _Line);
 
-	bool IsConstantBufferSetter(const std::string& _Name);
+	// 상수버퍼 계열
+	bool IsConstantBuffer(const std::string& _Name);
 
 	template<typename Res>
 	void SetConstantBufferLink(const std::string& _Name, const Res& Data)
@@ -46,17 +47,25 @@ public:
 
 	void SetConstantBufferNew(const std::string& _Name, const void* Data, UINT _Size);
 
+	// 텍스처 계열
+	bool IsTexture(const std::string& _Name);
+
+	GameEngineTexture* SetTexture(const std::string& _Name, const std::string& _TextureName);
+
 protected:
 	void ShaderCheck(GameEngineShader* _Shader);
 
 private:
-
 	// 컬러가 
 	// 픽셀 쉐이더에서는 같은 Color(바이트 덩어리)인데 레드를 세팅해주고 싶고
 	// 버텍스 쉐이더에서는 같은 Color(바이트 덩어리)인데 블루를 세팅해주고 싶고
 	// 그건 아직 구분하지 않겠습니다.
-	std::multimap<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;
-	std::multimap<std::string, GameEngineTextureSetter> TextureSetterMap;
-	std::multimap<std::string, GameEngineSamplerSetter> SamplerSetterMap;
+	std::multimap<std::string, GameEngineConstantBufferSetter> ConstantBufferSettingMap;
+	std::multimap<std::string, GameEngineTextureSetter> TextureSettingMap;
+	std::multimap<std::string, GameEngineSamplerSetter> SamplerSettingMap;
+
+	void BindConstantBuffer(GameEngineConstantBufferSetter& _Setter, GameEngineConstantBuffer* _Res);
+	void BindSampler(GameEngineSamplerSetter& _Setter, GameEngineSampler* _Res);
+	void BindTexture(GameEngineTextureSetter& _Setter, GameEngineTexture* _Res);
 };
 

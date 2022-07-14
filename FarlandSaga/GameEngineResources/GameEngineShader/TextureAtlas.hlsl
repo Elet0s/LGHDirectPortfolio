@@ -31,20 +31,41 @@ struct Output
 // 0010
 // 0001
 
-Output Texture_VS(Input _Input)
+cbuffer AtlasData : register(b1)
+{
+    float2 TextureFramePos;
+    float2 TextureFrameSize;
+};
+
+
+Output TextureAtlas_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
     NewOutPut.Pos = mul(_Input.Pos, WorldViewProjection);
     NewOutPut.Pos.w = 1.0f;
     NewOutPut.PosLocal = _Input.Pos;
-    NewOutPut.Tex = _Input.Tex;
+    
+    // 버텍스가 몇번째 버텍스 인지 알수가 없다.
+    // NewOutPut.Tex
+    // 00    10
+    
+    // 10    11
+    
+    // 0.5 0.5    1 0.5
+    
+    // 1 0.5    1 1
+    
+    // 0.5 0.5 
+    
+    NewOutPut.Tex.x = (_Input.Tex.x * TextureFrameSize.x) + TextureFramePos.x;
+    NewOutPut.Tex.y = (_Input.Tex.y * TextureFrameSize.y) + TextureFramePos.y;
     
     return NewOutPut;
 }
 
 Texture2D Tex : register(t0);
 SamplerState Sam : register(s0);
-float4 Texture_PS(Output _Input) : SV_Target0
+float4 TextureAtlas_PS(Output _Input) : SV_Target0
 {
     return Tex.Sample(Sam, _Input.Tex.xy);
 }

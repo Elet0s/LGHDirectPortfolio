@@ -30,7 +30,8 @@ const float4 float4::BACK = { 0.0f, 0.0f, -1.0f, 1.0f };
 const float4 float4::ZERO = { 0.0f, 0.0f, 0.0f, 0.0f };
 const float4 float4::ONE = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-const float4 float4::BLUE = { 0.0f, 0.0f, 1.0f, 1.0f };
+const float4 float4::BLUE = { 0.0f, 0.0f, 1.0f, 1.0f };//백그라운드
+const float4 float4::BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };//백그라운드
 
 float4 operator*(const float4& _Vector, const float4x4& _Value)
 {

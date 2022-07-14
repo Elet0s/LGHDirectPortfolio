@@ -110,8 +110,8 @@ protected:
 
 private:
 	std::map<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;
-	std::map<std::string, GameEngineTextureSetter> TextureSetterMap;
-	std::map<std::string, GameEngineSamplerSetter> SamplerSetterMap;
+	std::map<std::string, GameEngineTextureSetter> TextureMap;
+	std::map<std::string, GameEngineSamplerSetter> SamplerMap;
 
 	std::string EntryPoint;
 

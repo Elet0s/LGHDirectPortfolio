@@ -16,17 +16,17 @@ GameEngineShaderResourcesHelper::~GameEngineShaderResourcesHelper()
 
 void GameEngineShaderResourcesHelper::AllResourcesSetting()
 {
-	for (const std::pair<std::string, GameEngineConstantBufferSetter>& Setter : ConstantBufferMap)
+	for (const std::pair<std::string, GameEngineConstantBufferSetter>& Setter : ConstantBufferSettingMap)
 	{
 		Setter.second.Setting();
 	}
 
-	for (const std::pair<std::string, GameEngineTextureSetter>& Setter : TextureSetterMap)
+	for (const std::pair<std::string, GameEngineTextureSetter>& Setter : TextureSettingMap)
 	{
 		Setter.second.Setting();
 	}
 
-	for (const std::pair<std::string, GameEngineSamplerSetter>& Setter : SamplerSetterMap)
+	for (const std::pair<std::string, GameEngineSamplerSetter>& Setter : SamplerSettingMap)
 	{
 		Setter.second.Setting();
 	}
@@ -50,76 +50,37 @@ void GameEngineShaderResourcesHelper::ShaderCheck(GameEngineShader* _Shader)
 	for (const std::pair<std::string, GameEngineConstantBufferSetter>& Data : _Shader->ConstantBufferMap)
 	{
 		std::multimap<std::string, GameEngineConstantBufferSetter>::iterator InsertIter =
-			ConstantBufferMap.insert(std::make_pair(Data.first, Data.second));
+			ConstantBufferSettingMap.insert(std::make_pair(Data.first, Data.second));
 
-		GameEngineConstantBufferSetter& Setter = InsertIter->second;
-
-		switch (InsertIter->second.ShaderType)
-		{
-		case ShaderType::Vertex:
-			Setter.SettingFunction = std::bind(&GameEngineConstantBuffer::VSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		case ShaderType::Pixel:
-			Setter.SettingFunction = std::bind(&GameEngineConstantBuffer::PSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		default:
-			break;
-		}
-
-
+		BindConstantBuffer(InsertIter->second, Data.second.Res);
 	}
 
-	for (const std::pair<std::string, GameEngineTextureSetter>& Data : _Shader->TextureSetterMap)
+	for (const std::pair<std::string, GameEngineTextureSetter>& Data : _Shader->TextureMap)
 	{
 		std::multimap<std::string, GameEngineTextureSetter>::iterator InsertIter =
-			TextureSetterMap.insert(std::make_pair(Data.first, Data.second));
+			TextureSettingMap.insert(std::make_pair(Data.first, Data.second));
 
-		GameEngineTextureSetter& Setter = InsertIter->second;
-
-		switch (InsertIter->second.ShaderType)
-		{
-		case ShaderType::Vertex:
-			Setter.SettingFunction = std::bind(&GameEngineTexture::VSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		case ShaderType::Pixel:
-			Setter.SettingFunction = std::bind(&GameEngineTexture::PSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		default:
-			break;
-		}
+		BindTexture(InsertIter->second, Data.second.Res);
 
 	}
 
 
-	for (const std::pair<std::string, GameEngineSamplerSetter>& Data : _Shader->SamplerSetterMap)
+	for (const std::pair<std::string, GameEngineSamplerSetter>& Data : _Shader->SamplerMap)
 	{
 		std::multimap<std::string, GameEngineSamplerSetter>::iterator InsertIter =
-			SamplerSetterMap.insert(std::make_pair(Data.first, Data.second));
+			SamplerSettingMap.insert(std::make_pair(Data.first, Data.second));
 
-		GameEngineSamplerSetter& Setter = InsertIter->second;
-
-		switch (InsertIter->second.ShaderType)
-		{
-		case ShaderType::Vertex:
-			Setter.SettingFunction = std::bind(&GameEngineSampler::VSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		case ShaderType::Pixel:
-			Setter.SettingFunction = std::bind(&GameEngineSampler::PSSetting, Setter.Res, Setter.BindPoint);
-			break;
-		default:
-			break;
-		}
-
+		BindSampler(InsertIter->second, Data.second.Res);
 	}
 
 
 }
 
-bool GameEngineShaderResourcesHelper::IsConstantBufferSetter(const std::string& _Name)
+bool GameEngineShaderResourcesHelper::IsConstantBuffer(const std::string& _Name)
 {
 	std::string Key = GameEngineString::ToUpperReturn(_Name);
 
-	if (ConstantBufferMap.end() != ConstantBufferMap.find(Key))
+	if (ConstantBufferSettingMap.end() != ConstantBufferSettingMap.find(Key))
 	{
 		return true;
 	}
@@ -129,9 +90,9 @@ bool GameEngineShaderResourcesHelper::IsConstantBufferSetter(const std::string& 
 
 void GameEngineShaderResourcesHelper::SetConstantBufferNew(const std::string& _Name, const void* _Data, UINT _Size)
 {
-	if (false == IsConstantBufferSetter(_Name))
+	if (false == IsConstantBuffer(_Name))
 	{
-		MsgBoxAssertString(_Name + " 존재하지 않는 상수버퍼를 세팅하려고 했습니다.");
+		MsgBoxAssertString(_Name + "쉐이더에서 이러한 이름의 상수버퍼를 사용한 적이 없습니다.");
 		return;
 	}
 
@@ -145,10 +106,10 @@ void GameEngineShaderResourcesHelper::SetConstantBufferNew(const std::string& _N
 	std::string Name = GameEngineString::ToUpperReturn(_Name);
 
 	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameStartIter
-		= ConstantBufferMap.lower_bound(Name);
+		= ConstantBufferSettingMap.lower_bound(Name);
 
 	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameEndIter
-		= ConstantBufferMap.upper_bound(Name);
+		= ConstantBufferSettingMap.upper_bound(Name);
 
 	for (; NameStartIter != NameEndIter; ++NameStartIter)
 	{
@@ -172,10 +133,9 @@ void GameEngineShaderResourcesHelper::SetConstantBufferLink(
 	const void* _Data,
 	UINT _Size)
 {
-	if (false == IsConstantBufferSetter(_Name))
+	if (false == IsConstantBuffer(_Name))
 	{
-
-		MsgBox("존재하지 않는 상수버퍼를 세팅하려고 했습니다.");
+		MsgBoxAssertString(_Name + "쉐이더에서 이러한 이름의 상수버퍼를 사용한 적이 없습니다.");
 		return;
 	}
 
@@ -189,10 +149,10 @@ void GameEngineShaderResourcesHelper::SetConstantBufferLink(
 	std::string Name = GameEngineString::ToUpperReturn(_Name);
 
 	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameStartIter
-		= ConstantBufferMap.lower_bound(Name);
+		= ConstantBufferSettingMap.lower_bound(Name);
 
 	std::multimap<std::string, GameEngineConstantBufferSetter>::iterator NameEndIter
-		= ConstantBufferMap.upper_bound(Name);
+		= ConstantBufferSettingMap.upper_bound(Name);
 
 	for (; NameStartIter != NameEndIter; ++NameStartIter)
 	{
@@ -201,4 +161,99 @@ void GameEngineShaderResourcesHelper::SetConstantBufferLink(
 		NameStartIter->second.Size = _Size;
 	}
 
+}
+
+bool GameEngineShaderResourcesHelper::IsTexture(const std::string& _Name)
+{
+	std::string Key = GameEngineString::ToUpperReturn(_Name);
+
+	if (TextureSettingMap.end() != TextureSettingMap.find(Key))
+	{
+		return true;
+	}
+
+	return false;
+}
+
+GameEngineTexture* GameEngineShaderResourcesHelper::SetTexture(const std::string& _Name, const std::string& _TextureName)
+{
+	if (false == IsTexture(_Name))
+	{
+		MsgBox("쉐이더에서 이러한 이름의 텍스처세팅를 사용한 적이 없습니다.");
+		return nullptr;
+	}
+
+	std::string Name = GameEngineString::ToUpperReturn(_Name);
+
+	GameEngineTexture* FindTexture = GameEngineTexture::Find(_TextureName);
+
+	if (nullptr == FindTexture)
+	{
+		MsgBox("존재하지 않는 텍스처를 세팅 하려고 했습니다.");
+		return nullptr;
+	}
+
+	std::multimap<std::string, GameEngineTextureSetter>::iterator NameStartIter
+		= TextureSettingMap.lower_bound(Name);
+
+	std::multimap<std::string, GameEngineTextureSetter>::iterator NameEndIter
+		= TextureSettingMap.upper_bound(Name);
+
+	for (; NameStartIter != NameEndIter; ++NameStartIter)
+	{
+		BindTexture(NameStartIter->second, FindTexture);
+	}
+
+	return FindTexture;
+}
+
+void GameEngineShaderResourcesHelper::BindTexture(GameEngineTextureSetter& _Setter, GameEngineTexture* _Res)
+{
+	_Setter.Res = _Res;
+
+	switch (_Setter.ShaderType)
+	{
+	case ShaderType::Vertex:
+		_Setter.SettingFunction = std::bind(&GameEngineTexture::VSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	case ShaderType::Pixel:
+		_Setter.SettingFunction = std::bind(&GameEngineTexture::PSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	default:
+		break;
+	}
+}
+
+void GameEngineShaderResourcesHelper::BindConstantBuffer(GameEngineConstantBufferSetter& _Setter, GameEngineConstantBuffer* _Res)
+{
+	_Setter.Res = _Res;
+
+	switch (_Setter.ShaderType)
+	{
+	case ShaderType::Vertex:
+		_Setter.SettingFunction = std::bind(&GameEngineConstantBuffer::VSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	case ShaderType::Pixel:
+		_Setter.SettingFunction = std::bind(&GameEngineConstantBuffer::PSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	default:
+		break;
+	}
+}
+
+void GameEngineShaderResourcesHelper::BindSampler(GameEngineSamplerSetter& _Setter, GameEngineSampler* _Res)
+{
+	_Setter.Res = _Res;
+
+	switch (_Setter.ShaderType)
+	{
+	case ShaderType::Vertex:
+		_Setter.SettingFunction = std::bind(&GameEngineSampler::VSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	case ShaderType::Pixel:
+		_Setter.SettingFunction = std::bind(&GameEngineSampler::PSSetting, _Setter.Res, _Setter.BindPoint);
+		break;
+	default:
+		break;
+	}
 }

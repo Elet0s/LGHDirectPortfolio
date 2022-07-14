@@ -1,13 +1,16 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
 
-class GameEngineDefaultRenderer;
+// Ό³Έν :
+class GameEngineTextureRenderer;
 class Player : public GameEngineActor
 {
 public:
+	// constrcuter destructer
 	Player();
 	~Player();
 
+	// delete Function
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
@@ -18,7 +21,7 @@ protected:
 	void Update(float _DeltaTime);
 	void End() {}
 
-	GameEngineDefaultRenderer* Renderer;
+	GameEngineTextureRenderer* Renderer;
 
 	float4 Color;
 

@@ -14,7 +14,7 @@ class GameEngineDefaultRenderer : public GameEngineRenderer
 
 
 public:
-	GameEngineShaderResourcesHelper PipeLineHelper;
+	GameEngineShaderResourcesHelper ShaderResources;
 
 	// constrcuter destructer
 	GameEngineRenderingPipeLine* GetPipeLine()

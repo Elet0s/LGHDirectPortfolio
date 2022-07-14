@@ -11,6 +11,8 @@
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
 
+
+// 설명 :
 class GameEngineMath
 {
 public:
@@ -37,9 +39,11 @@ public:
 	}
 
 private:
+	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();
 
+	// delete Function
 	GameEngineMath(const GameEngineMath& _Other) = delete;
 	GameEngineMath(GameEngineMath&& _Other) noexcept = delete;
 	GameEngineMath& operator=(const GameEngineMath& _Other) = delete;
@@ -65,6 +69,7 @@ public:
 	// Color
 	static const float4 BLUE;
 	static const float4 RED;
+	static const float4 BLACK;
 
 public:
 	// 외적을 쓸수 있는곳
@@ -264,6 +269,14 @@ public:
 			float g;
 			float b;
 			float a;
+		};
+
+		struct
+		{
+			float PosX;
+			float PosY;
+			float SizeX;
+			float SizeY;
 		};
 
 		struct

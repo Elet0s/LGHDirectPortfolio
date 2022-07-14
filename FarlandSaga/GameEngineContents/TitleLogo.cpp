@@ -2,6 +2,7 @@
 #include "TitleLogo.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
+#include <GameEngineCore/GameEngineTextureRenderer.h>
 
 TitleLogo::TitleLogo()
 	: TimeAngle(0.0f)
@@ -17,14 +18,14 @@ GameEngineRenderer* RendererTest = nullptr;
 void TitleLogo::Start()
 {
 	// 1280 720
-	GetTransform().SetLocalPosition({ 0, 200, 0 });
+	GetTransform().SetLocalPosition({ 1, 1, 1 });
 
 	{
-		GameEngineRenderer* RendererTest = CreateComponent<GameEngineDefaultRenderer>();
-		RendererTest->GetTransform().SetLocalScale({ 800, 400, 0 });
+		//TimeAngle = 0.0f;
+		Renderer = CreateComponent<GameEngineTextureRenderer>();
+		Renderer->GetTransform().SetLocalScale({ 640, 480, 0 });
+		Renderer->SetTexture("title.bmp");
 	}
-
-	TimeAngle = 0.0f;
 }
 
 void TitleLogo::Update(float _DeltaTime)

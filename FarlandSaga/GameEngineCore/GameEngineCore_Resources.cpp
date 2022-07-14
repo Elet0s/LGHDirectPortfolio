@@ -42,26 +42,10 @@ void EngineRasterizer()
 void EngineTextureLoad()
 {
 	{
-		//D3D11_FILTER Filter;
-		//D3D11_TEXTURE_ADDRESS_MODE AddressU;
-		//D3D11_TEXTURE_ADDRESS_MODE AddressV;
-		//D3D11_TEXTURE_ADDRESS_MODE AddressW;
-		//FLOAT MipLODBias;
-		//UINT MaxAnisotropy;
-		//D3D11_COMPARISON_FUNC ComparisonFunc;
-		//FLOAT BorderColor[4];
-		//FLOAT MinLOD;
-		//FLOAT MaxLOD;
-
 		D3D11_SAMPLER_DESC Desc = { D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR, };
-		// D3D11_FILTER::D3D11_FILTER_MIN_MAG_MIP_LINEAR 민맵이 있으면 사용하면서 색깔을 섞겠다.
-		// D3D11_FILTER::D3D11_FILTER_MIN_LINEAR_MAG_MIP_POINT 도트 게임 만들면 이걸로 해야하겠죠.
-
-		// D3D11_TEXTURE_ADDRESS_MIRROR
 		Desc.AddressU = D3D11_TEXTURE_ADDRESS_CLAMP;
 		Desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 		Desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
-
 		Desc.MipLODBias = 0.0f;
 		Desc.MaxAnisotropy = 1.0f;
 		Desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
@@ -99,29 +83,6 @@ void ShaderCompile()
 	{
 		GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
 	}
-
-	//GameEngineVertexShader::create("struct Input
-	//{
-	//	float4 Pos : POSITION;
-	//	float4 Color : COLOR;
-	//};
-
-	//struct Output
-	//{
-	//	float4 Pos : SV_POSITION;
-	//	float4 Color : COLOR;
-	//};
-
-	//Output Color_VS(Input _Input)
-	//{
-	//	// 쉐이더의 경우에는 대부분의 상황에서 형변환이 가능하다.
-	//	// 0
-	//	Output NewOutPut = (Output)0;
-	//	NewOutPut.Pos = _Input.Pos;
-	//	NewOutPut.Color = _Input.Color;
-
-	//	return NewOutPut;
-	//}");
 }
 
 
@@ -139,6 +100,12 @@ void EngineRenderingPipeLine()
 		NewPipe->SetVertexShader("Texture.hlsl");
 		NewPipe->SetPixelShader("Texture.hlsl");
 	}
+
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlas");
+		NewPipe->SetVertexShader("TextureAtlas.hlsl");
+		NewPipe->SetPixelShader("TextureAtlas.hlsl");
+	}
 }
 
 void EngineMesh()
@@ -153,14 +120,6 @@ void EngineMesh()
 		GameEngineVertexBuffer::Create("Rect", Vertex);
 	}
 
-	//{
-	//	std::vector<GameEngineVertex> Vertex;
-	//	Vertex.push_back({ float4(-1.0f, 1.0f), float4() });
-	//	Vertex.push_back({ float4(1.0f, 1.0f), float4() });
-	//	Vertex.push_back({ float4(1.0f, -1.0f), float4() });
-	//	Vertex.push_back({ float4(-1.0f, -1.0f), float4() });
-	//	GameEngineVertexBuffer::Create("FullRect", Vertex);
-	//}
 
 	{
 		std::vector<int> Index;
