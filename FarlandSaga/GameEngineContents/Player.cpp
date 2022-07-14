@@ -41,13 +41,13 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineDefaultRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
-		Renderer->SetPipeLine("Color");
+		Renderer->SetPipeLine("Texture");
 		// 내 맴버변수가 아니라 다른객체의 맴버변수를 사용했다면
 		// 이건 터질수 있다.
 
-		Color = { 0.5f, 0.5f, 0.1f, 1.0f };
+		// Color = { 0.5f, 0.5f, 0.1f, 1.0f };
 
-		Renderer->PipeLineHelper.SetConstantBufferNew("ResultColor", Color);
+		// Renderer->PipeLineHelper.SetConstantBufferNew("ResultColor", Color);
 	}
 }
 

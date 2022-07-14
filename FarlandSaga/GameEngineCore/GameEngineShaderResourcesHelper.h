@@ -57,5 +57,6 @@ private:
 	// 그건 아직 구분하지 않겠습니다.
 	std::multimap<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;
 	std::multimap<std::string, GameEngineTextureSetter> TextureSetterMap;
+	std::multimap<std::string, GameEngineSamplerSetter> SamplerSetterMap;
 };
 

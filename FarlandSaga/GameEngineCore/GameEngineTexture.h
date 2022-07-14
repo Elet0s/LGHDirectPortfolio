@@ -10,7 +10,6 @@
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 public:
-	// constrcuter destructer
 	GameEngineTexture();
 	~GameEngineTexture();
 
