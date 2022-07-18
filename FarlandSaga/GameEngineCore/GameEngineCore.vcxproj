@@ -216,6 +216,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineFolderTexture.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineIndexBuffer.h">
       <SubType>
       </SubType>
@@ -343,6 +347,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineDevice.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineFolderTexture.cpp">
       <SubType>
       </SubType>
     </ClCompile>

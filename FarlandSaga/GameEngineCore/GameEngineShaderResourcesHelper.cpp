@@ -187,9 +187,18 @@ GameEngineTexture* GameEngineShaderResourcesHelper::SetTexture(const std::string
 
 	GameEngineTexture* FindTexture = GameEngineTexture::Find(_TextureName);
 
-	if (nullptr == FindTexture)
+	SetTexture(_Name, FindTexture);
+
+	return FindTexture;
+}
+
+GameEngineTexture* GameEngineShaderResourcesHelper::SetTexture(const std::string& _Name, GameEngineTexture* _Texture)
+{
+	std::string Name = GameEngineString::ToUpperReturn(_Name);
+
+	if (false == IsTexture(_Name))
 	{
-		MsgBox("존재하지 않는 텍스처를 세팅 하려고 했습니다.");
+		MsgBox("쉐이더에서 이러한 이름의 텍스처세팅를 사용한 적이 없습니다.");
 		return nullptr;
 	}
 
@@ -201,10 +210,10 @@ GameEngineTexture* GameEngineShaderResourcesHelper::SetTexture(const std::string
 
 	for (; NameStartIter != NameEndIter; ++NameStartIter)
 	{
-		BindTexture(NameStartIter->second, FindTexture);
+		BindTexture(NameStartIter->second, _Texture);
 	}
 
-	return FindTexture;
+	return _Texture;
 }
 
 void GameEngineShaderResourcesHelper::BindTexture(GameEngineTextureSetter& _Setter, GameEngineTexture* _Res)

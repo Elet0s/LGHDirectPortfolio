@@ -6,14 +6,12 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
-// Ό³Έν : 
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 public:
 	GameEngineTexture();
 	~GameEngineTexture();
 
-	// delete Function
 	GameEngineTexture(const GameEngineTexture& _Other) = delete;
 	GameEngineTexture(GameEngineTexture&& _Other) noexcept = delete;
 	GameEngineTexture& operator=(const GameEngineTexture& _Other) = delete;
@@ -54,6 +52,8 @@ public:
 		return CutData[_Index];
 	}
 
+	void TextureLoad(const std::string& _Path);
+
 protected:
 
 private:
@@ -68,7 +68,7 @@ private:
 
 	std::vector<float4> CutData;
 
-	void TextureLoad(const std::string& _Path);
+
 	void Cut(UINT _X, UINT _Y);
 };
 

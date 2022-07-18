@@ -13,6 +13,7 @@
 #include "GameEngineVertexBuffer.h"
 #include "GameEngineIndexBuffer.h"
 #include "GameEngineTexture.h"
+#include "GameEngineFolderTexture.h"
 #include "GameEngineSampler.h"
 #include "GameEngineRenderTarget.h"
 
@@ -47,7 +48,7 @@ void EngineTextureLoad()
 		Desc.AddressV = D3D11_TEXTURE_ADDRESS_CLAMP;
 		Desc.AddressW = D3D11_TEXTURE_ADDRESS_CLAMP;
 		Desc.MipLODBias = 0.0f;
-		Desc.MaxAnisotropy = 1.0f;
+		Desc.MaxAnisotropy = 1;
 		Desc.ComparisonFunc = D3D11_COMPARISON_ALWAYS;
 		Desc.MinLOD = -FLT_MAX;
 		Desc.MaxLOD = FLT_MAX;
@@ -230,6 +231,7 @@ void GameEngineCore::EngineResourcesDestroy()
 	GameEngineIndexBuffer::ResourcesDestroy();
 	GameEngineRenderTarget::ResourcesDestroy();
 	GameEngineTexture::ResourcesDestroy();
+	GameEngineFolderTexture::ResourcesDestroy();
 	GameEngineSampler::ResourcesDestroy();
 	GameEngineRasterizer::ResourcesDestroy();
 	GameEngineConstantBuffer::ResourcesDestroy();

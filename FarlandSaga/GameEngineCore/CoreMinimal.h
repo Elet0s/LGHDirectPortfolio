@@ -10,6 +10,7 @@
 
 // Res
 #include <GameEngineCore/GameEngineTexture.h>
+#include <GameEngineCore/GameEngineFolderTexture.h>
 
 // Object
 #include <GameEngineCore/GameEngineLevel.h>

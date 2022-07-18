@@ -167,6 +167,9 @@
     <ClInclude Include="ThirdParty\bin\Release\DirectXTex.h">
       <Filter>ThirdParty\inc</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineFolderTexture.h">
+      <Filter>Resources\Texture</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -268,6 +271,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineTextureRenderer.cpp">
       <Filter>Object\Component\Rendering\Content</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineFolderTexture.cpp">
+      <Filter>Resources\Texture</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

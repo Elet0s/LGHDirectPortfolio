@@ -28,9 +28,6 @@ void GameEngineShader::AutoCompile(const std::string& _Path)
 	File.Open(OpenMode::Read, FileMode::Text);
 
 	std::string AllHlslCode = File.GetString();
-	AllHlslCode.resize(File.GetFileSize());
-
-	File.Read(&AllHlslCode[0], AllHlslCode.size(), AllHlslCode.size());
 
 	size_t VSEntryIndex = AllHlslCode.find("_VS(");
 	// 0123456789
