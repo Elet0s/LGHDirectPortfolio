@@ -18,12 +18,13 @@ GameEngineRenderer* RendererTest = nullptr;
 void TitleLogo::Start()
 {
 	// 1280 720
+	//1024¡¿768
 	GetTransform().SetLocalPosition({ 1, 1, 1 });
 
 	{
 		//TimeAngle = 0.0f;
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 640, 480, 0 });
+		Renderer->GetTransform().SetLocalScale({ 1024, 768, 0 });
 		Renderer->SetTexture("title.bmp");
 	}
 }

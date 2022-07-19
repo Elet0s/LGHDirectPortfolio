@@ -129,7 +129,7 @@ void GameEngineCore::CoreEnd(GameEngineCore* _UserCore)
 void GameEngineCore::WindowCreate(const std::string& _Name, GameEngineCore* _UserCore)
 {
 	GameEngineWindow::GetInst()->CreateGameWindow(nullptr, _Name.c_str());
-	GameEngineWindow::GetInst()->SetWindowScaleAndPosition({ 0,0 }, { 680, 480 });
+	GameEngineWindow::GetInst()->SetWindowScaleAndPosition({ 0,0 }, { 1024, 768 });
 	GameEngineWindow::GetInst()->ShowGameWindow();
 	GameEngineDevice::Initialize();
 

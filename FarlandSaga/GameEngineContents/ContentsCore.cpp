@@ -18,8 +18,8 @@ void ContentsCore::Start()
 {
 
 	GameEngineDirectory Dir;
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
+	Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+	Dir.Move("GameEngineResources");
 	Dir.Move("Texture");
 
 	std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
@@ -29,14 +29,10 @@ void ContentsCore::Start()
 		GameEngineTexture::Load(Shaders[i].GetFullPath());
 	}
 
-	Dir.Move("BlackSet");
-
-	GameEngineFolderTexture::Load(Dir.GetFullPath());
 
 	Dir.MoveParentToExitsChildDirectory("ConstantResources");
 	Dir.Move("ConstantResources");
 	Dir.Move("BMP");
-
 
 	std::vector<GameEngineFile> Shaders2 = Dir.GetAllFile();
 
@@ -47,7 +43,7 @@ void ContentsCore::Start()
 
 
 	// 이걸 해줘야 합니다.
-	GameEngineTexture::Cut("Boss_Left.bmp", 5, 7);
+//	GameEngineTexture::Cut("Boss_Left.bmp", 5, 7);
 
 
 

@@ -61,18 +61,18 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
-		Renderer->SetTexture("Boss_Left.bmp", 0);
+		Renderer->SetTexture("NSet.png");
 
 
-		Renderer->CreateFrameAnimation("Test", FrameAnimation_DESC("Boss_Left.bmp", 0, 5, 0.1f));
-		Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("BlackSet", 0.1f));
+	//	Renderer->CreateFrameAnimation("Test", FrameAnimation_DESC("Boss_Left.bmp", 0, 5, 0.1f));
+		//Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("BlackSet", 0.1f));
 
-		Renderer->AnimationBindTime("Test2", Test2Time);
-		Renderer->AnimationBindFrame("Test2", Test2Frame);
-		Renderer->AnimationBindStart("Test2", Test2Start);
-		Renderer->AnimationBindEnd("Test2", Test2End);
+		//Renderer->AnimationBindTime("Test2", Test2Time);
+		//Renderer->AnimationBindFrame("Test2", Test2Frame);
+		//Renderer->AnimationBindStart("Test2", Test2Start);
+		//Renderer->AnimationBindEnd("Test2", Test2End);
 
-		Renderer->ChangeFrameAnimation("Test");
+		//Renderer->ChangeFrameAnimation("Test");
 	}
 }
 
@@ -82,11 +82,11 @@ void Player::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft"))
 	{
-		Color.r += 1.0f * _DeltaTime;
+		//Color.r += 1.0f * _DeltaTime;
 
 		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * _DeltaTime);
 
-		Renderer->ChangeFrameAnimation("Test2");
+	//	Renderer->ChangeFrameAnimation("Test2");
 
 	}
 

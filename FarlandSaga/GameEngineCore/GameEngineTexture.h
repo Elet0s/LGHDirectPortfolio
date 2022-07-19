@@ -6,12 +6,14 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
+// Ό³Έν : 
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 public:
 	GameEngineTexture();
 	~GameEngineTexture();
 
+	// delete Function
 	GameEngineTexture(const GameEngineTexture& _Other) = delete;
 	GameEngineTexture(GameEngineTexture&& _Other) noexcept = delete;
 	GameEngineTexture& operator=(const GameEngineTexture& _Other) = delete;
