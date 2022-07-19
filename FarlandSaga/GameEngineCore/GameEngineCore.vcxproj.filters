@@ -34,9 +34,6 @@
     <Filter Include="Resources\Shader">
       <UniqueIdentifier>{74342c5b-bf7e-4d63-8898-e77f8a802bef}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\Rasterizer">
-      <UniqueIdentifier>{bb4c61f4-546b-4f48-b4c8-1d895052c767}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\OutputMerger">
       <UniqueIdentifier>{7e7e1266-e1a4-43b2-a738-a926e3d773d3}</UniqueIdentifier>
     </Filter>
@@ -63,6 +60,9 @@
     </Filter>
     <Filter Include="Object\Component\Rendering\Content">
       <UniqueIdentifier>{5bce0168-5fc2-43e8-98a9-ab1f17e066be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resources\OutputMerger\Rasterizer">
+      <UniqueIdentifier>{bb4c61f4-546b-4f48-b4c8-1d895052c767}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -138,7 +138,7 @@
       <Filter>Resources\OutputMerger</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h">
-      <Filter>Resources\Rasterizer</Filter>
+      <Filter>Resources\OutputMerger\Rasterizer</Filter>
     </ClInclude>
     <ClInclude Include="GameEnginePixelShader.h">
       <Filter>Resources\Shader</Filter>
@@ -243,7 +243,7 @@
       <Filter>Resources\OutputMerger</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
-      <Filter>Resources\Rasterizer</Filter>
+      <Filter>Resources\OutputMerger\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="GameEnginePixelShader.cpp">
       <Filter>Resources\Shader</Filter>

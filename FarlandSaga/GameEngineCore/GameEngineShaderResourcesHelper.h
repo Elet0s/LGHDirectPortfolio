@@ -2,6 +2,7 @@
 #include "GameEngineRenderingPipeLine.h"
 #include "GameEngineShader.h"
 
+// Ό³Έν :
 class GameEngineShader;
 class GameEngineShaderResourcesHelper
 {
@@ -13,9 +14,11 @@ class GameEngineShaderResourcesHelper
 
 
 public:
+	// constrcuter destructer
 	GameEngineShaderResourcesHelper();
 	~GameEngineShaderResourcesHelper();
 
+	// delete Function
 	GameEngineShaderResourcesHelper(const GameEngineShaderResourcesHelper& _Other) = delete;
 	GameEngineShaderResourcesHelper(GameEngineShaderResourcesHelper&& _Other) noexcept = delete;
 	GameEngineShaderResourcesHelper& operator=(const GameEngineShaderResourcesHelper& _Other) = delete;
@@ -50,6 +53,12 @@ public:
 	GameEngineTexture* SetTexture(const std::string& _Name, const std::string& _TextureName);
 
 	GameEngineTexture* SetTexture(const std::string& _Name, GameEngineTexture* _TextureName);
+
+	bool IsSampler(const std::string& _Name);
+
+	GameEngineSampler* SetSampler(const std::string& _Name, const std::string& _TextureName);
+
+	GameEngineSampler* SetSampler(const std::string& _Name, GameEngineSampler* _SamplerName);
 
 
 protected:

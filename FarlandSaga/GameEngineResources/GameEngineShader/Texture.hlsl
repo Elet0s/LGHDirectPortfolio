@@ -31,6 +31,8 @@ struct Output
 // 0010
 // 0001
 
+
+// 그래픽카드에서 이뤄지는것.
 Output Texture_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
