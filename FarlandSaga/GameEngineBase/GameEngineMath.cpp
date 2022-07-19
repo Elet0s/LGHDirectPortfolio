@@ -30,8 +30,7 @@ const float4 float4::BACK = { 0.0f, 0.0f, -1.0f, 1.0f };
 const float4 float4::ZERO = { 0.0f, 0.0f, 0.0f, 0.0f };
 const float4 float4::ONE = { 1.0f, 1.0f, 1.0f, 1.0f };
 
-const float4 float4::BLUE = { 0.0f, 0.0f, 1.0f, 1.0f };//백그라운드
-const float4 float4::BLACK = { 0.0f, 0.0f, 0.0f, 1.0f };//백그라운드
+const float4 float4::BLUE = { 0.0f, 0.0f, 1.0f, 1.0f };
 
 float4 operator*(const float4& _Vector, const float4x4& _Value)
 {
@@ -52,20 +51,23 @@ float4& operator*=(float4& _Vector, const float4x4& _Value)
 
 void float4::TransformCoord(const float4x4& _Value)
 {
-	//DirectX::XMVector3TransformCoord
+	// DirectX::XMVector3TransformCoord
 	*this = TransformCoordReturn(_Value);
 }
+
 float4 float4::TransformCoordReturn(const float4x4& _Value)
 {
 	float4 Return = *this;
 	Return.w = 1.0f;
 	DirectVector = DirectX::XMVector4Transform(Return.DirectVector, _Value.DirectMatrix);
 	return Return;
-} 
-void  float4::TransformNormal(const float4x4& _Value)
+}
+
+void float4::TransformNormal(const float4x4& _Value)
 {
 	*this = TransformNormalReturn(_Value);
 }
+
 float4 float4::TransformNormalReturn(const float4x4& _Value)
 {
 	float4 Return = *this;

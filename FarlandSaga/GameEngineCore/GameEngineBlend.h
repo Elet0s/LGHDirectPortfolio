@@ -8,11 +8,9 @@ public:
 	static GameEngineBlend* Create(const std::string& _Name, const D3D11_BLEND_DESC& _Desc);
 
 public:
-	// constrcuter destructer
 	GameEngineBlend();
 	~GameEngineBlend();
 
-	// delete Function
 	GameEngineBlend(const GameEngineBlend& _Other) = delete;
 	GameEngineBlend(GameEngineBlend&& _Other) noexcept = delete;
 	GameEngineBlend& operator=(const GameEngineBlend& _Other) = delete;

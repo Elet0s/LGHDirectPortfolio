@@ -13,20 +13,17 @@ enum class FileMode
 	Text,
 };
 
-// Ό³Έν :
 class GameEngineFile : public GameEnginePath
 {
 public:
 	static uintmax_t GetFileSize(const std::filesystem::path& _Path);
 
-	// constrcuter destructer
 	GameEngineFile();
 	GameEngineFile(const char* _Path);
-	GameEngineFile(std::filesystem::path _Path);
+	GameEngineFile(const std::filesystem::path& _Path);
 	GameEngineFile(const GameEngineFile& _Other);
 	~GameEngineFile();
 
-	// delete Function
 	void Open(OpenMode _Mode, FileMode _Open);
 
 	void Close();

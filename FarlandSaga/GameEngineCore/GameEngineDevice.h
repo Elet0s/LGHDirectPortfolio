@@ -7,7 +7,7 @@
 class GameEngineDevice
 {
 public:
-	~GameEngineDevice();
+	~GameEngineDevice() {}
 
 	GameEngineDevice(const GameEngineDevice& _Other) = delete;
 	GameEngineDevice(GameEngineDevice&& _Other) noexcept = delete;

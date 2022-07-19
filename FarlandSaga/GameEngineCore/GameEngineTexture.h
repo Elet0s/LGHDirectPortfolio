@@ -6,14 +6,12 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
-// 설명 : 
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 public:
 	GameEngineTexture();
 	~GameEngineTexture();
 
-	// delete Function
 	GameEngineTexture(const GameEngineTexture& _Other) = delete;
 	GameEngineTexture(GameEngineTexture&& _Other) noexcept = delete;
 	GameEngineTexture& operator=(const GameEngineTexture& _Other) = delete;
@@ -56,6 +54,13 @@ public:
 
 	void TextureLoad(const std::string& _Path);
 
+	float4 GetScale()
+	{
+		return { static_cast<float>(Metadata.width), static_cast<float>(Metadata.height) };
+	}
+
+	void TextureCreate(const D3D11_TEXTURE2D_DESC& _Desc);
+
 protected:
 
 private:
@@ -65,11 +70,12 @@ private:
 
 	DirectX::TexMetadata Metadata;
 	DirectX::ScratchImage Image;
+
+	D3D11_TEXTURE2D_DESC Desc;
 	// 이녀석은 텍스처를 통해서 
 	// ID3D11RenderTargetView* Render;
 
 	std::vector<float4> CutData;
-
 
 	void Cut(UINT _X, UINT _Y);
 };

@@ -7,7 +7,6 @@
 #include <list>
 #include "GameEngineVertexs.h"
 
-// Ό³Έν :
 class GameEngineVertexBuffer : public GameEngineRes<GameEngineVertexBuffer>
 {
 public:

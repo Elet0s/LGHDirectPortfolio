@@ -10,9 +10,16 @@ class GameEnginePixelShader
 	friend GameEngineRes<GameEnginePixelShader>;
 
 public:
-	static GameEnginePixelShader* Load(std::string _Path, std::string _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0);
+	static GameEnginePixelShader* Load(
+		const std::string& _Path,
+		const std::string& _EntryPoint,
+		UINT _VersionHigh = 5, UINT _VersionLow = 0);
 
-	static GameEnginePixelShader* Load(std::string _Path, std::string _Name, std::string _EntryPoint, UINT _VersionHigh, UINT _VersionLow);
+	static GameEnginePixelShader* Load(
+		const std::string& _Path,
+		const std::string& _Name,
+		const std::string& _EntryPoint,
+		UINT _VersionHigh, UINT _VersionLow);
 
 private:
 	GameEnginePixelShader();
@@ -27,7 +34,10 @@ public:
 	void Setting();
 
 protected:
-	void ShaderCompile(std::string _Path, std::string _EntryPoint, UINT _VersionHigh, UINT _VersionLow);
+	void ShaderCompile(
+		const std::string& _Path,
+		const std::string& _EntryPoint,
+		UINT _VersionHigh, UINT _VersionLow);
 
 private:
 	ID3D11PixelShader* ShaderPtr;

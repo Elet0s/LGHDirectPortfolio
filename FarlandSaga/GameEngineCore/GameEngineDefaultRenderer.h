@@ -2,7 +2,6 @@
 #include "GameEngineRenderer.h"
 #include "GameEngineShaderResourcesHelper.h"
 
-// Ό³Έν :
 class GameEngineRenderingPipeLine;
 class GameEngineDefaultRenderer : public GameEngineRenderer
 {
@@ -16,7 +15,6 @@ class GameEngineDefaultRenderer : public GameEngineRenderer
 public:
 	GameEngineShaderResourcesHelper ShaderResources;
 
-	// constrcuter destructer
 	GameEngineRenderingPipeLine* GetPipeLine()
 	{
 		return PipeLine;
@@ -25,7 +23,6 @@ public:
 	GameEngineDefaultRenderer();
 	~GameEngineDefaultRenderer();
 
-	// delete Function
 	GameEngineDefaultRenderer(const GameEngineDefaultRenderer& _Other) = delete;
 	GameEngineDefaultRenderer(GameEngineDefaultRenderer&& _Other) noexcept = delete;
 	GameEngineDefaultRenderer& operator=(const GameEngineDefaultRenderer& _Other) = delete;

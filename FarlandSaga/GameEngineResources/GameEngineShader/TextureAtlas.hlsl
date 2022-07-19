@@ -51,7 +51,6 @@ Output TextureAtlas_VS(Input _Input)
     
     // 10    11
     
-    
     NewOutPut.Tex.x = (_Input.Tex.x * TextureFrameSize.x) + TextureFramePos.x;
     NewOutPut.Tex.y = (_Input.Tex.y * TextureFrameSize.y) + TextureFramePos.y;
     

@@ -11,7 +11,6 @@
 
 // 유니폼 클래스가 있고
 
-// 설명 :
 class GameEngineRandom
 {
 public:
@@ -37,11 +36,9 @@ public:
 	}
 
 public:
-	// constrcuter destructer
 	GameEngineRandom(long long _Seed = -1);
 	~GameEngineRandom();
 
-	// delete Function
 	GameEngineRandom(const GameEngineRandom& _Other) = delete;
 	GameEngineRandom(GameEngineRandom&& _Other) noexcept = delete;
 	GameEngineRandom& operator=(const GameEngineRandom& _Other) = delete;

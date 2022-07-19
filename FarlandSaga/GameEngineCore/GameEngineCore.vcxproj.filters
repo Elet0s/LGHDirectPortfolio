@@ -61,7 +61,7 @@
     <Filter Include="Object\Component\Rendering\Content">
       <UniqueIdentifier>{5bce0168-5fc2-43e8-98a9-ab1f17e066be}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Resources\OutputMerger\Rasterizer">
+    <Filter Include="Resources\Rasterizer">
       <UniqueIdentifier>{bb4c61f4-546b-4f48-b4c8-1d895052c767}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -138,7 +138,7 @@
       <Filter>Resources\OutputMerger</Filter>
     </ClInclude>
     <ClInclude Include="GameEngineRasterizer.h">
-      <Filter>Resources\OutputMerger\Rasterizer</Filter>
+      <Filter>Resources\Rasterizer</Filter>
     </ClInclude>
     <ClInclude Include="GameEnginePixelShader.h">
       <Filter>Resources\Shader</Filter>
@@ -169,6 +169,9 @@
     </ClInclude>
     <ClInclude Include="GameEngineFolderTexture.h">
       <Filter>Resources\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineDepthStencilTexture.h">
+      <Filter>Resources\OutputMerger</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -243,7 +246,7 @@
       <Filter>Resources\OutputMerger</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineRasterizer.cpp">
-      <Filter>Resources\OutputMerger\Rasterizer</Filter>
+      <Filter>Resources\Rasterizer</Filter>
     </ClCompile>
     <ClCompile Include="GameEnginePixelShader.cpp">
       <Filter>Resources\Shader</Filter>
@@ -274,6 +277,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp">
       <Filter>Resources\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineDepthStencilTexture.cpp">
+      <Filter>Resources\OutputMerger</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

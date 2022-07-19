@@ -5,7 +5,6 @@
 #include <GameEngineBase/GameEngineString.h>
 #include <GameEngineBase/GameEngineNameObject.h>
 
-// Ό³Έν :
 class GameEngineConstantBuffer : public GameEngineNameObject
 {
 private:
@@ -127,11 +126,9 @@ private:
 
 
 public:
-	// constrcuter destructer
 	GameEngineConstantBuffer();
 	~GameEngineConstantBuffer();
 
-	// delete Function
 	GameEngineConstantBuffer(const GameEngineConstantBuffer& _Other) = delete;
 	GameEngineConstantBuffer(GameEngineConstantBuffer&& _Other) noexcept = delete;
 	GameEngineConstantBuffer& operator=(const GameEngineConstantBuffer& _Other) = delete;

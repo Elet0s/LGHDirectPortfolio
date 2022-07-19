@@ -14,7 +14,7 @@ GameEngineFile::GameEngineFile(const char* _Path)
 	Path_ = _Path;
 }
 
-GameEngineFile::GameEngineFile(std::filesystem::path _Path)
+GameEngineFile::GameEngineFile(const std::filesystem::path& _Path)
 	: FilePtr(nullptr)
 {
 	Path_ = _Path;
@@ -39,9 +39,6 @@ void GameEngineFile::Close()
 		FilePtr = nullptr;
 	}
 }
-
-// "text"
-// 
 
 void GameEngineFile::Open(OpenMode _OpenMode, FileMode _FileMode)
 {
@@ -99,7 +96,6 @@ void GameEngineFile::Write(void* _WriteData, size_t _DataSize)
 
 void GameEngineFile::Read(void* _Buffer, size_t _BufferSize, size_t _ReadSize)
 {
-	// 
 	fread_s(_Buffer, _BufferSize, _ReadSize, 1, FilePtr);
 }
 

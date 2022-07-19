@@ -5,6 +5,7 @@
 GameEngineVertexShader::GameEngineVertexShader()
 	: ShaderPtr(nullptr)
 {
+	ShaderSettingType = ShaderType::Vertex;
 }
 
 GameEngineVertexShader::~GameEngineVertexShader()

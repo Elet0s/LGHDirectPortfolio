@@ -1,6 +1,9 @@
 #include "PreCompile.h"
 #include "GameEngineVertexs.h"
 #include "GameEngineVertexShader.h"
+#include "GameEngineInputLayOut.h"
+
+GameEngineLayOutDesc GameEngineVertex::LayOut;
 
 unsigned int FormatToByteScale(DXGI_FORMAT _Format)
 {
@@ -179,5 +182,3 @@ void GameEngineLayOutDesc::AddInputLayOut(
 
 	InputLayOutDesc.push_back(LayOutDesc);
 }
-
-GameEngineLayOutDesc GameEngineVertex::LayOut;

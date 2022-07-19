@@ -4,8 +4,6 @@
 #include <assert.h>
 #include <Windows.h>
 
-
-// Ό³Έν :
 class GameEngineDebug
 {
 public:
@@ -20,11 +18,9 @@ protected:
 
 private:
 	static HANDLE hConsole;
-	// constrcuter destructer
 	GameEngineDebug();
 	~GameEngineDebug();
 
-	// delete Function
 	GameEngineDebug(const GameEngineDebug& _Other) = delete;
 	GameEngineDebug(GameEngineDebug&& _Other) noexcept = delete;
 	GameEngineDebug& operator=(const GameEngineDebug& _Other) = delete;

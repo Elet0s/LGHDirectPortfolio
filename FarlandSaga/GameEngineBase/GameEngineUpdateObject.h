@@ -8,11 +8,9 @@
 class GameEngineUpdateObject : public GameEngineDebugObject
 {
 public:
-	// constrcuter destructer
 	GameEngineUpdateObject();
 	virtual ~GameEngineUpdateObject();
 
-	// delete Function
 	GameEngineUpdateObject(const GameEngineUpdateObject& _Other) = delete;
 	GameEngineUpdateObject(GameEngineUpdateObject&& _Other) noexcept = delete;
 	GameEngineUpdateObject& operator=(const GameEngineUpdateObject& _Other) = delete;

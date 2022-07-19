@@ -12,10 +12,9 @@ public:
 protected:
 
 private:
-	// constrcuter destructer
 	GEngine();
 	virtual ~GEngine() = 0;
-	// delete Function
+
 	GEngine(const GEngine& _Other) = delete;
 	GEngine(GEngine&& _Other) noexcept = delete;
 	GEngine& operator=(const GEngine& _Other) = delete;
