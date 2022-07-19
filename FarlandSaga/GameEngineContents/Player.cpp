@@ -12,23 +12,32 @@
 #include <GameEngineCore/GameEngineDevice.h>
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 
+
 Player::Player()
 	: Speed(50.0f)
 {
+	
+
 }
 
 Player::~Player()
 {
 }
 
-void Test2Start(const FrameAnimation_DESC& _Info)
+void Player::Test2Start(const FrameAnimation_DESC& _Info)
 {
+
 	GameEngineDebug::OutPutString("½ºÅ¸Æ®\n");
+	Renderer->ChangeFrameAnimation("Test1");
 }
+
+
 
 void Test2End(const FrameAnimation_DESC& _Info)
 {
+
 	GameEngineDebug::OutPutString("¾Øµå\n");
+
 }
 
 void Test2Frame(const FrameAnimation_DESC& _Info)
@@ -45,15 +54,11 @@ void Player::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("PlayerLeft", VK_NUMPAD4);
-		GameEngineInput::GetInst()->CreateKey("PlayerRight", VK_NUMPAD6);
-		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_NUMPAD9);
-		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_NUMPAD7);
-		GameEngineInput::GetInst()->CreateKey("PlayerForward", VK_NUMPAD8);
-		GameEngineInput::GetInst()->CreateKey("PlayerBack", VK_NUMPAD5);
-		GameEngineInput::GetInst()->CreateKey("Rot+", VK_NUMPAD1);
-		GameEngineInput::GetInst()->CreateKey("Rot-", VK_NUMPAD2);
+		GameEngineInput::GetInst()->CreateKey("L", 'L');
+		GameEngineInput::GetInst()->CreateKey("R", 'R');
 	}
+
+
 
 	GetTransform().SetLocalScale({ 1, 1, 1 });
 
@@ -61,18 +66,11 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
-		Renderer->SetTexture("NSet.png");
+		Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("CUP", 0.1f));
+		Renderer->CreateFrameAnimationFolder("Test1", FrameAnimation_DESC("AN", 0.1f));
+		Renderer->ChangeFrameAnimation("Test2");
+		Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2Start, this, std::placeholders::_1));
 
-
-	//	Renderer->CreateFrameAnimation("Test", FrameAnimation_DESC("Boss_Left.bmp", 0, 5, 0.1f));
-		//Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("BlackSet", 0.1f));
-
-		//Renderer->AnimationBindTime("Test2", Test2Time);
-		//Renderer->AnimationBindFrame("Test2", Test2Frame);
-		//Renderer->AnimationBindStart("Test2", Test2Start);
-		//Renderer->AnimationBindEnd("Test2", Test2End);
-
-		//Renderer->ChangeFrameAnimation("Test");
 	}
 }
 
@@ -80,35 +78,4 @@ void Player::Update(float _DeltaTime)
 {
 
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft"))
-	{
-		//Color.r += 1.0f * _DeltaTime;
-
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * _DeltaTime);
-
-	//	Renderer->ChangeFrameAnimation("Test2");
-
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerRight"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerUp"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerDown"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerForward"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetForwardVector() * Speed * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerBack"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetBackVector() * Speed * _DeltaTime);
-	}
 }

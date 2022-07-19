@@ -53,7 +53,7 @@ void PlayLevel::Start()
 	{
 		Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
 		actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
-		actor->GetTransform().SetWorldScale(float4(50.0f, 50.f, 50.0f));
+		actor->GetTransform().SetWorldScale(float4(1.0f,1.0f, 1.0f));
 		actor->SetParent(NewPlayer);
 	}
 
