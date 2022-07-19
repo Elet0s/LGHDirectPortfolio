@@ -237,7 +237,7 @@ GameEngineSampler* GameEngineShaderResourcesHelper::SetSampler(const std::string
 
 	std::string Name = GameEngineString::ToUpperReturn(_Name);
 
-	//return SetSampler(_Name, GameEngineSampler::Find(_TextureName));
+	return SetSampler(_Name, GameEngineSampler::Find(_TextureName));
 
 }
 

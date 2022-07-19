@@ -4,7 +4,6 @@
 #include <iostream>
 #include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineContents/GlobalContentsValue.h>
-#include "ScoreTestComponent.h"
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
 #include <GameEngineCore/GameEngineRenderingPipeLine.h>
 #include <GameEngineCore/GameEngineVertexShader.h>
@@ -63,7 +62,6 @@ void Player::Start()
 
 	GetTransform().SetLocalScale({ 1, 1, 1 });
 
-	ScoreTestComponent* ScoreCom = CreateComponent<ScoreTestComponent>();
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });

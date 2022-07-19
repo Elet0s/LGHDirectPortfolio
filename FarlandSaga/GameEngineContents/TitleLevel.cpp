@@ -45,7 +45,7 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
-		GEngine::ChangeLevel("Play");
+		GEngine::ChangeLevel("Stage01");
 	}
 
 	// 레벨 바뀌어서 오면 초기화

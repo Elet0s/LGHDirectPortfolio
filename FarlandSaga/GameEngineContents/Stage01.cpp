@@ -1,26 +1,25 @@
-
 #include "PreCompile.h"
-#include "PlayLevel.h"
+#include"Stage01.h"
 #include "GlobalContentsValue.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
-#include "Player.h"
 #include "Monster.h"
+#include "Player.h"
 #include <Windows.h>
 
-PlayLevel::PlayLevel()
+Stage01::Stage01()
 	:ptMouse1(),
 	ptMouse2(),
 	ptMouse3()
 {
 }
 
-PlayLevel::~PlayLevel()
+Stage01::~Stage01()
 {
 }
 
-void PlayLevel::Start()
+void Stage01::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
 	{
@@ -53,13 +52,13 @@ void PlayLevel::Start()
 	{
 		Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
 		actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
-		actor->GetTransform().SetWorldScale(float4(1.0f,1.0f, 1.0f));
+		actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
 		actor->SetParent(NewPlayer);
 	}
 
 
 }
-void PlayLevel::Update(float _DeltaTime)
+void Stage01::Update(float _DeltaTime)
 {
 
 
@@ -133,4 +132,4 @@ void PlayLevel::Update(float _DeltaTime)
 
 
 }
-void PlayLevel::End() {}
+void Stage01::End() {}

@@ -2,6 +2,3 @@
 #include "GlobalContentsValue.h"
 
 Monster* GlobalContentsValue::Actors::TestMonster = nullptr;
-
-
-

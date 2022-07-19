@@ -1,7 +1,7 @@
 #include "PreCompile.h"
 #include "ContentsCore.h"
 #include "GameEngineContents/TitleLevel.h"
-#include "GameEngineContents/PlayLevel.h"
+#include "GameEngineContents/Stage01.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -17,6 +17,9 @@ ContentsCore::~ContentsCore()
 void ContentsCore::Start()
 {
 
+
+	/////////////////리소스 불러오는 부분/////////////////
+	
 	GameEngineDirectory Dir;
 
 	Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -41,19 +44,13 @@ void ContentsCore::Start()
 	Dir.Move("AN");
 
 	GameEngineFolderTexture::Load(Dir.GetFullPath());
-	// 이걸 해줘야 합니다.
 
-	// 리소스를 로드하는데.
 
-	// RTTI 런 타임 타입 인포메이션
+	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	CreateLevel<TitleLevel>("Title");
-	CreateLevel<PlayLevel>("Play");
+	CreateLevel<Stage01>("Stage01");
 	ChangeLevel("Title");
 
-	// 게임컨텐츠 정의
-	// 이 게임에는 타이틀화면
-	//            스테이지1
-	//            스테이지2
 }
 
 void ContentsCore::Update(float _DeltaTime)

@@ -8,8 +8,6 @@ enum class OBJECTORDER
 	Monster,
 };
 
-
-// Ό³Έν :
 class GlobalContentsValue
 {
 public:
@@ -32,4 +30,3 @@ private:
 
 	~GlobalContentsValue() {	}
 };
-

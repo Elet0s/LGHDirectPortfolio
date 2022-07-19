@@ -184,15 +184,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PreCompile.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ScoreTestComponent.h">
+    <ClInclude Include="Stage01.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -222,17 +218,13 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <SubType>
       </SubType>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="ScoreTestComponent.cpp">
+    <ClCompile Include="Stage01.cpp">
       <SubType>
       </SubType>
     </ClCompile>

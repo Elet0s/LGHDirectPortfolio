@@ -13,17 +13,41 @@
     <Filter Include="Global">
       <UniqueIdentifier>{d0791d11-f97b-4b44-9845-4bf7c2abe563}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\Play">
-      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Title">
-      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Play\Com">
-      <UniqueIdentifier>{c994f204-506b-4a3e-9ef5-79a745d95f9d}</UniqueIdentifier>
-    </Filter>
     <Filter Include="PreCompile">
       <UniqueIdentifier>{8f97320b-7e97-41f8-b6cb-e84026fbb289}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI">
+      <UniqueIdentifier>{bbb49886-6e6d-427c-9260-4e7f8c9559b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Stage">
+      <UniqueIdentifier>{4218ad22-2932-403f-8e50-dfc7d3e9150f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Event">
+      <UniqueIdentifier>{be5b9e27-665c-441c-be0a-41c474e16ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\StageUI">
+      <UniqueIdentifier>{bbae671b-1e6c-44cb-8ac8-d7c2ad6519df}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\TitleUI">
+      <UniqueIdentifier>{d9df9561-b971-44fd-b1da-045530c2f715}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\BG">
+      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\UI\EventUI">
+      <UniqueIdentifier>{5e5565b5-04dd-4731-8c6b-40cd12de0a16}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Com">
+      <UniqueIdentifier>{5d9067c8-de08-4558-9ad9-d2b3de6e6894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit">
+      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit\MonsterUnit">
+      <UniqueIdentifier>{5ace06b5-da67-4ed0-8e6a-3d80491e55c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\Unit\PlayerUnit">
+      <UniqueIdentifier>{9c37b6ec-e405-49b7-8088-16ee7164d0e3}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -33,54 +57,48 @@
     <ClInclude Include="Enums.h">
       <Filter>Global</Filter>
     </ClInclude>
-    <ClInclude Include="PlayLevel.h">
-      <Filter>Level</Filter>
-    </ClInclude>
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
     <ClInclude Include="TitleLogo.h">
-      <Filter>Actor\Title</Filter>
-    </ClInclude>
-    <ClInclude Include="ScoreTestComponent.h">
-      <Filter>Actor\Play\Com</Filter>
-    </ClInclude>
-    <ClInclude Include="Monster.h">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\BG</Filter>
     </ClInclude>
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
     <ClInclude Include="GlobalContentsValue.h" />
+    <ClInclude Include="Stage01.h">
+      <Filter>Level\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Actor\Unit\MonsterUnit</Filter>
+    </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\Unit\PlayerUnit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
       <Filter>Contents</Filter>
     </ClCompile>
-    <ClCompile Include="PlayLevel.cpp">
-      <Filter>Level</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor\Play</Filter>
-    </ClCompile>
     <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor\Title</Filter>
-    </ClCompile>
-    <ClCompile Include="ScoreTestComponent.cpp">
-      <Filter>Actor\Play\Com</Filter>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Play</Filter>
+      <Filter>Actor\BG</Filter>
     </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp" />
+    <ClCompile Include="Stage01.cpp">
+      <Filter>Level\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Actor\Unit\MonsterUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Actor\Unit\PlayerUnit</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
