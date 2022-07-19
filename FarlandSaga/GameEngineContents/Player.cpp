@@ -24,7 +24,7 @@ Player::~Player()
 {
 }
 
-void Player::Test2Start(const FrameAnimation_DESC& _Info)
+void Player::Test2End(const FrameAnimation_DESC& _Info)
 {
 
 	GameEngineDebug::OutPutString("½ºÅ¸Æ®\n");
@@ -33,10 +33,11 @@ void Player::Test2Start(const FrameAnimation_DESC& _Info)
 
 
 
-void Test2End(const FrameAnimation_DESC& _Info)
+void Player::Test1End(const FrameAnimation_DESC& _Info)
 {
 
 	GameEngineDebug::OutPutString("¾Øµå\n");
+	Renderer->ChangeFrameAnimation("Test2");
 
 }
 
@@ -69,13 +70,12 @@ void Player::Start()
 		Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("CUP", 0.1f));
 		Renderer->CreateFrameAnimationFolder("Test1", FrameAnimation_DESC("AN", 0.1f));
 		Renderer->ChangeFrameAnimation("Test2");
-		Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2Start, this, std::placeholders::_1));
 
 	}
 }
 
 void Player::Update(float _DeltaTime)
 {
-
-
+	Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2End, this, std::placeholders::_1));
+	Renderer->AnimationBindEnd("Test1", std::bind(&Player::Test2End, this, std::placeholders::_1));
 }
