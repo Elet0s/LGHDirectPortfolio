@@ -25,7 +25,7 @@ void TitleLevel::Start()
 	// 카메라를 먼저 만들어서 세계를 볼 준비를 하고
 	GameEngineCameraActor* CameraActor = CreateActor<GameEngineCameraActor>();
 	CameraActor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-	CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, 0.0f });
+	CameraActor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 
 	// [1][0][0][0]
 	// [0][1][0][0]

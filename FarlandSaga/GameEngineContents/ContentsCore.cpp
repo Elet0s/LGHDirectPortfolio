@@ -45,11 +45,14 @@ void ContentsCore::Start()
 
 	GameEngineFolderTexture::Load(Dir.GetFullPath());
 
+	///////////////// 이미지 cut /////////////////
+
+	GameEngineTexture::Cut("LeonIdle.png", 3, 1);
 
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<Stage01>("Stage01");
-	ChangeLevel("Title");
+	ChangeLevel("Stage01");
 
 }
 
