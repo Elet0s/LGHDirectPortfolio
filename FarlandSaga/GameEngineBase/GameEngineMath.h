@@ -777,7 +777,12 @@ public:
 
 	void ViewPort(float _Width, float _Height, float _Left, float _Right, float _ZMin, float _ZMax)
 	{
+		// 크기 자전 이동 뷰 투영 뷰포트 => 모니터에
+//                                마우스포지션은
+//                       * 마우스포지션은
 
+//             -1~1사이의 값이
+//            640
 		Arr2D[0][0] = _Width / 2.0f;
 		Arr2D[0][1] = 0.0f;
 		Arr2D[0][2] = 0.0f;

@@ -26,6 +26,7 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 	IndexBuffer = GameEngineIndexBuffer::Find("rect");
 	Rasterizer = GameEngineRasterizer::Find("EngineRasterizer");
 	Blend = GameEngineBlend::Find("AlphaBlend");
+	DepthStencil = GameEngineDepthStencil::Find("EngineBaseDepth");
 }
 
 GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
@@ -226,7 +227,7 @@ void GameEngineRenderingPipeLine::OutputMergerBlendSetting()
 
 void GameEngineRenderingPipeLine::OutputMergerDepthStencilSetting()
 {
-
+	DepthStencil->Setting();
 }
 
 

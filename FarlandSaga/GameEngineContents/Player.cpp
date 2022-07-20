@@ -67,7 +67,7 @@ void Player::Start()
 		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
 		Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("CUP", 0.1f));
 		Renderer->CreateFrameAnimationFolder("Test1", FrameAnimation_DESC("AN", 0.1f));
-		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonIdle.png",0,2,0.1f));
+		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonIdle.png",0,1,0.1f));
 
 		Renderer->ChangeFrameAnimation("LeonIdle");
 	}

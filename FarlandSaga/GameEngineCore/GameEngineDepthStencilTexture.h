@@ -17,6 +17,8 @@ public:
 	GameEngineDepthStencilTexture& operator=(const GameEngineDepthStencilTexture& _Other) = delete;
 	GameEngineDepthStencilTexture& operator=(GameEngineDepthStencilTexture&& _Other) noexcept = delete;
 
+	ID3D11DepthStencilView* CreateDepthStencilView();
+
 protected:
 
 private:

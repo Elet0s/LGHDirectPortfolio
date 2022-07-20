@@ -51,7 +51,7 @@ void FrameAnimation::Update(float _Delta)
 			MsgBoxAssert("텍스처가 세팅되지 않은 애니메이션 입니다.");
 		}
 
-		if (Info.CurFrame >= Info.End)
+		if (Info.CurFrame > Info.End)
 		{
 			if (false == bOnceEnd && nullptr != End)
 			{
@@ -64,7 +64,8 @@ void FrameAnimation::Update(float _Delta)
 			{
 				Info.CurFrame = Info.Start;
 			}
-			else {
+			else
+			{
 				Info.CurFrame = Info.End;
 			}
 		}
@@ -253,7 +254,14 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 	{
 		CurAni = &FrameAni[Name];
 		CurAni->Reset();
-//		SetTexture(CurAni->Texture, CurAni->Info.CurFrame);
+		if (nullptr != CurAni->Texture)
+		{
+			SetTexture(CurAni->Texture, CurAni->Info.CurFrame);
+		}
+		else if (nullptr != CurAni->FolderTexture)
+		{
+			SetTexture(CurAni->FolderTexture->GetTexture(CurAni->Info.CurFrame));
+		}
 	}
 }
 
