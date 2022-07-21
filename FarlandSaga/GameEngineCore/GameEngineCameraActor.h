@@ -21,6 +21,12 @@ public:
 	}
 
 	void FreeCameraModeOnOff();
+	inline bool IsFreeCameraMode()
+	{
+		return FreeCameraMode;
+	}
+
+	void Update(float _DeltaTime) override;
 
 protected:
 	void Start() override;
@@ -30,6 +36,7 @@ protected:
 private:
 	bool FreeCameraMode;
 	float Speed;
+	float RotSpeed;
 
 	GameEngineCamera* CameraComponent;
 

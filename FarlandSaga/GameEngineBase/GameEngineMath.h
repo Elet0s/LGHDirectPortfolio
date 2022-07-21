@@ -11,6 +11,8 @@
 #pragma comment(lib, "d3dcompiler")
 #pragma comment(lib, "dxguid")
 
+
+// 설명 :
 class GameEngineMath
 {
 public:
@@ -37,9 +39,11 @@ public:
 	}
 
 private:
+	// constrcuter destructer
 	GameEngineMath();
 	~GameEngineMath();
 
+	// delete Function
 	GameEngineMath(const GameEngineMath& _Other) = delete;
 	GameEngineMath(GameEngineMath&& _Other) noexcept = delete;
 	GameEngineMath& operator=(const GameEngineMath& _Other) = delete;
@@ -777,12 +781,13 @@ public:
 
 	void ViewPort(float _Width, float _Height, float _Left, float _Right, float _ZMin, float _ZMax)
 	{
-		// 크기 자전 이동 뷰 투영 뷰포트 => 모니터에
-//                                마우스포지션은
-//                       * 마우스포지션은
 
-//             -1~1사이의 값이
-//            640
+		// 크기 자전 이동 뷰 투영 뷰포트 => 모니터에
+		//                                마우스포지션은
+		//                       * 마우스포지션은
+
+		//             -1~1사이의 값이
+		//            640
 		Arr2D[0][0] = _Width / 2.0f;
 		Arr2D[0][1] = 0.0f;
 		Arr2D[0][2] = 0.0f;
@@ -807,47 +812,49 @@ public:
 	// Fov to Degree
 	void PerspectiveFovLH(float _FovDegree, float _Width, float _Height, float _Near, float _Far)
 	{
+		//Direct함수로 대체
+		DirectMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovDegree * GameEngineMath::DegreeToRadian * 0.5f, _Width / _Height, _Near, _Far);
 
-		//assert(NearZ > 0.f && FarZ > 0.f);
-		//assert(!XMScalarNearEqual(FovAngleY, 0.0f, 0.00001f * 2.0f));
-		//assert(!XMScalarNearEqual(AspectRatio, 0.0f, 0.00001f));
-		//assert(!XMScalarNearEqual(FarZ, NearZ, 0.00001f));
+		////assert(NearZ > 0.f && FarZ > 0.f);
+		////assert(!XMScalarNearEqual(FovAngleY, 0.0f, 0.00001f * 2.0f));
+		////assert(!XMScalarNearEqual(AspectRatio, 0.0f, 0.00001f));
+		////assert(!XMScalarNearEqual(FarZ, NearZ, 0.00001f));
 
-		//float    SinFov;
-		//float    CosFov;
-		// XMScalarSinCos(&SinFov, &CosFov, 0.5f * FovAngleY);
+		////float    SinFov;
+		////float    CosFov;
+		//// XMScalarSinCos(&SinFov, &CosFov, 0.5f * FovAngleY);
 
-		//               45                                 
-		float Tan = tanf(_FovDegree * GameEngineMath::DegreeToRadian * 0.5f);
-		float fRange = _Far / (_Far - _Near);
+		////               45                                 
+		//float Tan = tanf(_FovDegree * GameEngineMath::DegreeToRadian * 0.5f);
+		//float fRange = _Far / (_Far - _Near);
 
-		// z가 무슨 z죠?
+		//// z가 무슨 z죠?
 
-		Arr2D[0][0] = 1.0f / (Tan * (_Width / _Height)); // / z
-		Arr2D[0][1] = 0.0f;
-		Arr2D[0][2] = 0.0f;
-		Arr2D[0][3] = 0.0f;
+		//Arr2D[0][0] = 1.0f / (Tan * (_Width / _Height)); // / z
+		//Arr2D[0][1] = 0.0f;
+		//Arr2D[0][2] = 0.0f;
+		//Arr2D[0][3] = 0.0f;
 
-		Arr2D[1][0] = 0.0f;
-		Arr2D[1][1] = 1.0f / Tan;
-		Arr2D[1][2] = 0.0f;
-		Arr2D[1][3] = 0.0f;
+		//Arr2D[1][0] = 0.0f;
+		//Arr2D[1][1] = 1.0f / Tan;
+		//Arr2D[1][2] = 0.0f;
+		//Arr2D[1][3] = 0.0f;
 
-		Arr2D[2][0] = 0.0f;
-		Arr2D[2][1] = 0.0f;
-		Arr2D[2][2] = fRange;
-		Arr2D[2][3] = 1.0f;
+		//Arr2D[2][0] = 0.0f;
+		//Arr2D[2][1] = 0.0f;
+		//Arr2D[2][2] = fRange;
+		//Arr2D[2][3] = 1.0f;
 
-		//    150
-		//[x][y][150][1] * [1][0][0][0] = [][][][150]
-		//                 [0][1][0][0]
-		//                 [0][0][1][1]
-		//                 [0][0][0][0]
+		////    150
+		////[x][y][150][1] * [1][0][0][0] = [][][][150]
+		////                 [0][1][0][0]
+		////                 [0][0][1][1]
+		////                 [0][0][0][0]
 
-		Arr2D[3][0] = 0.0f;
-		Arr2D[3][1] = 0.0f;
-		Arr2D[3][2] = -fRange * _Near;
-		Arr2D[3][3] = 0.0f;
+		//Arr2D[3][0] = 0.0f;
+		//Arr2D[3][1] = 0.0f;
+		//Arr2D[3][2] = -fRange * _Near;
+		//Arr2D[3][3] = 0.0f;
 	}
 
 	void OrthographicLH(float _Width, float _Height, float _Near, float _Far)

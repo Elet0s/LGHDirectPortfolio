@@ -64,7 +64,6 @@ public:
 	{}
 };
 
-
 class GameEngineTransform : public GameEngineDebugObject
 {
 public:
@@ -108,6 +107,12 @@ public:
 		CalculateWorld();
 	}
 
+	inline void SetAddWorldRotation(const float4& _World)
+	{
+		// 프리 카메라 회전 용도로 만듦
+		SetWorldRotation(Data.WorldRotation + _World);
+	}
+
 	inline void SetWorldRotation(const float4& _World)
 	{
 		float4 Local = _World;
@@ -143,7 +148,37 @@ public:
 	{
 		SetLocalPosition(Data.LocalPosition + _Value);
 	}
+	
+	inline void SetWorldForwardMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetForwardVector() * Speed * DeltaTime));
+	}
 
+	inline void SetWorldBackMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetBackVector() * Speed * DeltaTime));
+	}
+
+	inline void SetWorldUpMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetUpVector() * Speed * DeltaTime));
+	}
+
+	inline void SetWorldDownMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetDownVector() * Speed * DeltaTime));
+	}
+
+	inline void SetWorldLeftMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetLeftVector() * Speed * DeltaTime));
+	}
+
+	inline void SetWorldRightMove(const float Speed, const float DeltaTime)
+	{
+		SetWorldPosition(Data.WorldPosition + (GetRightVector() * Speed * DeltaTime));
+	}
+	
 	inline void SetWorldMove(const float4& _Value)
 	{
 		SetWorldPosition(Data.WorldPosition + _Value);
@@ -160,6 +195,11 @@ public:
 	inline float4 GetLocalPosition() const
 	{
 		return Data.LocalPosition;
+	}
+
+	inline float4 GetWorldPosition() const
+	{
+		return Data.WorldPosition;
 	}
 
 	inline float4x4 GetLocalWorld() const

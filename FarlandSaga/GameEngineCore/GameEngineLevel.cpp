@@ -3,6 +3,7 @@
 #include "GameEngineActor.h"
 #include "GameEngineRenderer.h"
 #include "GameEngineCamera.h"
+#include "GameEngineCameraActor.h"
 
 GameEngineLevel::GameEngineLevel()
 	: MainCamera(nullptr)
@@ -115,8 +116,12 @@ void GameEngineLevel::Release(float _DelataTime)
 
 		}
 	}
-
+}	
+GameEngineCameraActor* GameEngineLevel::GetMainCameraActor()
+{
+	return MainCamera->GetActor<GameEngineCameraActor>();
 }
+
 
 void GameEngineLevel::LevelUpdate(float _DeltaTime)
 {

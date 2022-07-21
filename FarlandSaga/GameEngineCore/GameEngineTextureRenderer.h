@@ -78,14 +78,17 @@ class FrameAnimation : public GameEngineNameObject
 	void Update(float _DeltaTime);
 };
 
+// Ό³Έν :
 class GameEngineTextureRenderer : public GameEngineDefaultRenderer
 {
 	friend FrameAnimation;
 
 public:
+	// constrcuter destructer
 	GameEngineTextureRenderer();
 	~GameEngineTextureRenderer();
 
+	// delete Function
 	GameEngineTextureRenderer(const GameEngineTextureRenderer& _Other) = delete;
 	GameEngineTextureRenderer(GameEngineTextureRenderer&& _Other) noexcept = delete;
 	GameEngineTextureRenderer& operator=(const GameEngineTextureRenderer& _Other) = delete;
@@ -119,6 +122,10 @@ public:
 	void AnimationBindTime(const std::string& _AnimationName, std::function<void(const FrameAnimation_DESC&, float)> Function);
 
 	void ScaleToTexture();
+
+	void CurAnimationReset();
+
+	void CurAnimationSetStartPivotFrame(int SetFrame);
 
 protected:
 	void Start() override;
