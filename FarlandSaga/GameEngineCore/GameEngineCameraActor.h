@@ -21,6 +21,7 @@ public:
 	}
 
 	void FreeCameraModeOnOff();
+
 	inline bool IsFreeCameraMode()
 	{
 		return FreeCameraMode;
@@ -30,7 +31,6 @@ public:
 
 protected:
 	void Start() override;
-	void Update(float _DeltaTime) override;
 	void End() override;
 
 private:
