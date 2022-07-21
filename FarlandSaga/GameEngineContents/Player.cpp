@@ -54,7 +54,7 @@ void Player::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("L", 'L');
+		GameEngineInput::GetInst()->CreateKey("PlayerLeft", 'L');
 		GameEngineInput::GetInst()->CreateKey("R", 'R');
 	}
 
@@ -64,7 +64,7 @@ void Player::Start()
 
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 100, 100, 100 });
+		Renderer->GetTransform().SetLocalScale({ 81, 81, 81 });
 		Renderer->CreateFrameAnimationFolder("Test2", FrameAnimation_DESC("CUP", 0.1f));
 		Renderer->CreateFrameAnimationFolder("Test1", FrameAnimation_DESC("AN", 0.1f));
 		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonIdle.png",0,1,0.1f));
@@ -77,4 +77,9 @@ void Player::Update(float _DeltaTime)
 {
 	Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2End, this, std::placeholders::_1));
 	Renderer->AnimationBindEnd("Test1", std::bind(&Player::Test2End, this, std::placeholders::_1));
+
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft"))
+	{
+		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * _DeltaTime);
+	}
 }

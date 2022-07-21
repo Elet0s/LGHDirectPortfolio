@@ -52,7 +52,7 @@ void ContentsCore::Start()
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<Stage01>("Stage01");
-	ChangeLevel("Stage01");
+	ChangeLevel("Title");
 
 }
 
