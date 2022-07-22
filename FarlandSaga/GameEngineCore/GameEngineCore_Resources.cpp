@@ -85,7 +85,7 @@ void EngineSubSetting()
 		GameEngineRasterizer::Create("EngineRasterizer", Desc);
 	}
 	{
-		D3D11_DEPTH_STENCIL_DESC Desc = {};
+		D3D11_DEPTH_STENCIL_DESC Desc = {0};
 
 		Desc.DepthEnable = true;
 		Desc.DepthFunc = D3D11_COMPARISON_FUNC::D3D11_COMPARISON_LESS_EQUAL;

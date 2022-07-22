@@ -19,9 +19,7 @@ GameEngineDepthStencilTexture* GameEngineDepthStencilTexture::Create(const float
 
 void GameEngineDepthStencilTexture::CreateDepthTexture(const float4 _Scale)
 {
-	D3D11_TEXTURE2D_DESC Desc;
-
-	Desc = { 0 };
+	D3D11_TEXTURE2D_DESC Desc={0};
 
 	Desc.ArraySize = 1;
 	Desc.Width = _Scale.uix();

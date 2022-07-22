@@ -72,7 +72,8 @@ GameEngineTexture* GameEngineTexture::Create(ID3D11Texture2D* _Texture)
 
 GameEngineTexture* GameEngineTexture::Create(const D3D11_TEXTURE2D_DESC& _Desc)
 {
-	GameEngineTexture* NewRes = CreateResUnName();	NewRes->TextureCreate(_Desc);
+	GameEngineTexture* NewRes = CreateResUnName();	
+	NewRes->TextureCreate(_Desc);
 	return NewRes;
 }
 

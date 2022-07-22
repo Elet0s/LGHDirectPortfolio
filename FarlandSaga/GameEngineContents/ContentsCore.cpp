@@ -33,21 +33,16 @@ void ContentsCore::Start()
 		GameEngineTexture::Load(Shaders[i].GetFullPath());
 	}
 
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
-	Dir.Move("CUP");
 
-	GameEngineFolderTexture::Load(Dir.GetFullPath());
-
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
-	Dir.Move("AN");
-
-	GameEngineFolderTexture::Load(Dir.GetFullPath());
+//	Dir.MoveParentToExitsChildDirectory("ConstantResources");
+//	Dir.Move("ConstantResources");
+//	Dir.Move("AN");
+//
+//	GameEngineFolderTexture::Load(Dir.GetFullPath());
 
 	///////////////// 이미지 cut /////////////////
 
-	GameEngineTexture::Cut("LeonIdle.png", 3, 1);
+	GameEngineTexture::Cut("LeonWind.bmp", 3, 1);
 
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	CreateLevel<TitleLevel>("Title");
