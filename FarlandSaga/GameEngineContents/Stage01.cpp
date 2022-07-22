@@ -21,6 +21,20 @@ Stage01::~Stage01()
 
 void Stage01::Start()
 {
+
+	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))
+	{
+		GameEngineInput::GetInst()->CreateKey("FreeCameaOnOff", 'O');
+	}
+
+
+
+	{
+		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
+		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
+	}
+
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("CamLeft", 'A');
@@ -60,7 +74,11 @@ void Stage01::Start()
 }
 void Stage01::Update(float _DeltaTime)
 {
-
+	if (GameEngineInput::GetInst()->IsDown("FreeCameaOnOff"))
+	{
+		GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+		GetMainCameraActor()->FreeCameraModeOnOff();
+	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("CamLeft"))
 	{
