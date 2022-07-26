@@ -24,6 +24,11 @@ public:
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera& operator=(GameEngineCamera&& _Other) noexcept = delete;
 
+	CAMERAPROJECTIONMODE GetProjectionMode()
+	{
+		return Mode;
+	}
+
 	void SetProjectionMode(CAMERAPROJECTIONMODE _Mode)
 	{
 		Mode = _Mode;

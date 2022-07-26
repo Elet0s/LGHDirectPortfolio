@@ -443,6 +443,13 @@ public:
 		return DirectX::XMVectorDivide(DirectVector, float4(_Value).DirectVector);
 	}
 
+	float4& operator/=(const float _Value)
+	{
+		DirectVector = DirectX::XMVectorDivide(DirectVector, float4(_Value).DirectVector);
+
+		return *this;
+	}
+
 	float4 operator/(const float4& _Value) const
 	{
 		return DirectX::XMVectorDivide(DirectVector, _Value.DirectVector);
@@ -812,7 +819,7 @@ public:
 	// Fov to Degree
 	void PerspectiveFovLH(float _FovDegree, float _Width, float _Height, float _Near, float _Far)
 	{
-		//Direct함수로 대체
+
 		DirectMatrix = DirectX::XMMatrixPerspectiveFovLH(_FovDegree * GameEngineMath::DegreeToRadian * 0.5f, _Width / _Height, _Near, _Far);
 
 		////assert(NearZ > 0.f && FarZ > 0.f);

@@ -96,4 +96,15 @@ void GameEngineCameraActor::End()
 void GameEngineCameraActor::FreeCameraModeOnOff()
 {
 	FreeCameraMode = !FreeCameraMode;
+	if (true == FreeCameraMode)
+	{
+		PrevMode = CameraComponent->GetProjectionMode();
+		CameraComponent->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
+		OriginTrans.Copy(GetTransform()); //FreeCam모드가 해제될때 시작지점으로 돌아가기위한 Copy
+	}
+	else
+	{
+		CameraComponent->SetProjectionMode(PrevMode);
+		GetTransform().Copy(OriginTrans);
+	}
 }

@@ -19,7 +19,7 @@ GameEngineCamera::GameEngineCamera()
 	ViewPortDesc.Width = Size.x;
 	ViewPortDesc.Height = Size.y;
 	ViewPortDesc.MinDepth = 0.0f;
-	ViewPortDesc.MaxDepth = 0.0f;
+	ViewPortDesc.MaxDepth = 1.0f;
 
 
 }
@@ -59,6 +59,10 @@ void GameEngineCamera::Render(float _DeltaTime)
 		float ScaleTime = GameEngineTime::GetInst()->GetDeltaTime(Group.first);
 		for (GameEngineRenderer* const Renderer : Group.second)
 		{
+			if (false == Renderer->IsUpdate())
+			{
+				continue;
+			}
 			Renderer->GetTransform().SetView(View);
 			Renderer->GetTransform().SetProjection(Projection);
 			Renderer->GetTransform().CalculateWorldViewProjection();

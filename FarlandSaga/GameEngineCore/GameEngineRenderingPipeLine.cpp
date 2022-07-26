@@ -201,12 +201,14 @@ void GameEngineRenderingPipeLine::VertexShaderSetting()
 {
 	VertexShader->Setting();
 	// À§Ä¡ 
-	GameEngineDevice::GetContext()->IASetPrimitiveTopology(Topology);
+
 	// D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 
 void GameEngineRenderingPipeLine::InputAssembler2IndexBufferSetting()
 {
+	GameEngineDevice::GetContext()->IASetPrimitiveTopology(Topology);
+
 	IndexBuffer->Setting();
 }
 

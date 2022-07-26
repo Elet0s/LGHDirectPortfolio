@@ -64,12 +64,16 @@ public:
 	{}
 };
 
+
+// 설명 :
 class GameEngineTransform : public GameEngineDebugObject
 {
 public:
+	// constrcuter destructer
 	GameEngineTransform();
 	~GameEngineTransform();
 
+	// delete Function
 	GameEngineTransform(const GameEngineTransform& _Other) = delete;
 	GameEngineTransform(GameEngineTransform&& _Other) noexcept = delete;
 	GameEngineTransform& operator=(const GameEngineTransform& _Other) = delete;
@@ -109,7 +113,6 @@ public:
 
 	inline void SetAddWorldRotation(const float4& _World)
 	{
-		// 프리 카메라 회전 용도로 만듦
 		SetWorldRotation(Data.WorldRotation + _World);
 	}
 
@@ -148,7 +151,7 @@ public:
 	{
 		SetLocalPosition(Data.LocalPosition + _Value);
 	}
-	
+
 	inline void SetWorldForwardMove(const float Speed, const float DeltaTime)
 	{
 		SetWorldPosition(Data.WorldPosition + (GetForwardVector() * Speed * DeltaTime));
@@ -178,7 +181,7 @@ public:
 	{
 		SetWorldPosition(Data.WorldPosition + (GetRightVector() * Speed * DeltaTime));
 	}
-	
+
 	inline void SetWorldMove(const float4& _Value)
 	{
 		SetWorldPosition(Data.WorldPosition + _Value);
@@ -275,6 +278,8 @@ public:
 	{
 		return Data;
 	}
+
+	void Copy(GameEngineTransform& _Trans);
 
 protected:
 

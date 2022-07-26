@@ -76,7 +76,6 @@ void Stage01::Update(float _DeltaTime)
 {
 	if (GameEngineInput::GetInst()->IsDown("FreeCameaOnOff"))
 	{
-		GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::PersPective);
 		GetMainCameraActor()->FreeCameraModeOnOff();
 	}
 
