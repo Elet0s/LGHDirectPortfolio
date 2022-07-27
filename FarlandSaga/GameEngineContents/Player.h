@@ -29,6 +29,8 @@ protected:
 
 	float4 Color;
 
+	void MyFunction(const FrameAnimation_DESC& _Info);
+
 private:
 
 	float Speed;

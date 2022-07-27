@@ -50,6 +50,11 @@ void Test2Time(const FrameAnimation_DESC& _Info, float _Time)
 	// GameEngineDebug::OutPutString("е╦юс\n");
 }
 
+void Player::MyFunction(const FrameAnimation_DESC& _Info)
+{
+	int a = 0;
+}
+
 void Player::Start()
 {
 	//if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
@@ -70,6 +75,7 @@ void Player::Start()
 		Renderer->CreateFrameAnimation("LeonWind", FrameAnimation_DESC("LeonWind.bmp",0,2,0.1f));
 
 		Renderer->ChangeFrameAnimation("LeonWind");
+
 	}
 }
 
