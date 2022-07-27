@@ -70,6 +70,9 @@
     <Filter Include="GUI\IMGUI">
       <UniqueIdentifier>{e1316d76-6251-4e3e-9f08-9b8cb5a03c11}</UniqueIdentifier>
     </Filter>
+    <Filter Include="GUI\EngineGUIWindow">
+      <UniqueIdentifier>{1dda8729-7c26-4d57-b8a7-de5ce151994f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -206,6 +209,9 @@
     <ClInclude Include="imstb_truetype.h">
       <Filter>GUI\IMGUI</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineStatusWindow.h">
+      <Filter>GUI\EngineGUIWindow</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -334,6 +340,9 @@
     </ClCompile>
     <ClCompile Include="imgui_widgets.cpp">
       <Filter>GUI\IMGUI</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineStatusWindow.cpp">
+      <Filter>GUI\EngineGUIWindow</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

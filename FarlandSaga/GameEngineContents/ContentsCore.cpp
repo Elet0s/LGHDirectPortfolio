@@ -48,7 +48,7 @@ void ContentsCore::Start()
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<Stage01>("Stage01");
 	ChangeLevel("Title");
-
+	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("EngineStatus", nullptr);
 }
 
 void ContentsCore::Update(float _DeltaTime)

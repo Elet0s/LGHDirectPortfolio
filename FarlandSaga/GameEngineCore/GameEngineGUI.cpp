@@ -2,7 +2,8 @@
 #include "GameEngineGUI.h"
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngineDevice.h"
-#include <GameEngineBase/GameEngineString.h>
+
+std::list<GameEngineGUIWindow*> GameEngineGUI::Windows;
 
 GameEngineGUI::GameEngineGUI()
 {
@@ -13,7 +14,7 @@ GameEngineGUI::~GameEngineGUI()
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-//imgui에서 윈도우메세지가 왔을때의 처리는 있지만 넘겨주는 것은 직접해줘야 함
+//imgui에서 윈도우메세지가 왔을때의 처리는 있지만 넘겨주는 것은 내window에서 직접해줘야 함
 
 void GameEngineGUI::Initialize()
 {
@@ -47,29 +48,26 @@ void GameEngineGUI::Initialize()
 
     GameEngineWindow::GetInst()->SetMessageCallBack(ImGui_ImplWin32_WndProcHandler);
 }
-void GameEngineGUI::GUIRender()
+void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
 {
     ImGui_ImplDX11_NewFrame();
     ImGui_ImplWin32_NewFrame();
     ImGui::NewFrame();
 
-    // 비긴과
-    // 앤드로 이루어집니다.
 
-    std::string Text = GameEngineString::AnsiToUTF8Return("게임 불러오기");
-    std::string Button1 = GameEngineString::AnsiToUTF8Return("처음부터");
-    std::string Button2 = GameEngineString::AnsiToUTF8Return("불러오기");
-    std::string Button3 = GameEngineString::AnsiToUTF8Return("취소");
-
-    ImGui::Begin(Text.c_str());
-
-    ImGui::Button(Button1.c_str());
-    ImGui::Button(Button2.c_str());
-    ImGui::Button(Button3.c_str());
-    ImGui::End();
+    for (GameEngineGUIWindow* GUIWIndow : Windows)
+    {
+        if (false == GUIWIndow->IsOpen)
+        {
+            continue;
+        }
+        GUIWIndow->Begin();
+        GUIWIndow->OnGUI(_Level, _DeltaTime);
+        GUIWIndow->End();
+    }
 
     // 여기사이에
-
+    
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
 
@@ -84,6 +82,11 @@ void GameEngineGUI::GUIRender()
 }
 void GameEngineGUI::GUIDestroy()
 {
+    for (GameEngineGUIWindow* GUIWIndow : Windows)
+    {
+        delete GUIWIndow;
+    }
+
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();
     ImGui::DestroyContext();
