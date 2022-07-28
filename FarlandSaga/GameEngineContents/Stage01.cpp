@@ -7,6 +7,8 @@
 #include "Monster.h"
 #include "Player.h"
 #include "UIMaster.h"
+#include "TestStageBG.h"
+
 
 Stage01::Stage01()
 	:ptMouse1(),
@@ -22,6 +24,8 @@ Stage01::~Stage01()
 void Stage01::Start()
 {
 
+	CreateActor<TestStageBG>(OBJECTORDER::BG);
+
 	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))
 	{
 		GameEngineInput::GetInst()->CreateKey("FreeCameaOnOff", 'O');
@@ -31,9 +35,6 @@ void Stage01::Start()
 
 	{
 		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
-		//	GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-		//	actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		//	actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))

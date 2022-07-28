@@ -24,7 +24,7 @@ void ContentsCore::Start()
 
 	Dir.MoveParentToExitsChildDirectory("ConstantResources");
 	Dir.Move("ConstantResources");
-	Dir.Move("BMP");
+	Dir.Move("BG");
 
 	std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 
@@ -33,12 +33,17 @@ void ContentsCore::Start()
 		GameEngineTexture::Load(Shaders[i].GetFullPath());
 	}
 
+	Dir.MoveParentToExitsChildDirectory("ConstantResources");
+	Dir.Move("ConstantResources");
+	Dir.Move("PlayerUnit");
+	Dir.Move("LEON");
 
-//	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-//	Dir.Move("ConstantResources");
-//	Dir.Move("AN");
-//
-//	GameEngineFolderTexture::Load(Dir.GetFullPath());
+	std::vector<GameEngineFile> Shaders2 = Dir.GetAllFile();
+
+	for (size_t i = 0; i < Shaders2.size(); i++)
+	{
+		GameEngineTexture::Load(Shaders2[i].GetFullPath());
+	}
 
 	///////////////// ÀÌ¹ÌÁö cut /////////////////
 

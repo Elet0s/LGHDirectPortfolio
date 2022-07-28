@@ -26,3 +26,6 @@
 
 // core
 #include <GameEngineCore/CoreMinimal.h>
+
+//Contents
+#include "Enums.h"

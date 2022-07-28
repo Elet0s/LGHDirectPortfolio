@@ -13,7 +13,6 @@ TitleLogo::~TitleLogo()
 {
 }
 
-GameEngineRenderer* RendererTest = nullptr;
 
 void TitleLogo::Start()
 {
@@ -39,5 +38,4 @@ void TitleLogo::Update(float _DeltaTime)
 
 void TitleLogo::End()
 {
-	int a = 0;
 }

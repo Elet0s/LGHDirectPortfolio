@@ -30,8 +30,6 @@ void Player::Test2End(const FrameAnimation_DESC& _Info)
 	//Renderer->ChangeFrameAnimation("Test1");
 }
 
-
-
 void Player::Test1End(const FrameAnimation_DESC& _Info)
 {
 
