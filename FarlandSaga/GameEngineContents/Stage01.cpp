@@ -9,6 +9,7 @@
 #include "UIMaster.h"
 #include "TestStageBG.h"
 #include <GameEngineCore/GEngine.h>
+#include "GameEngineBase/GameEngineSound.h"
 
 
 Stage01::Stage01()
@@ -38,13 +39,6 @@ void Stage01::Start()
 
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
 	{
-		GameEngineInput::GetInst()->CreateKey("CamLeft", 'A');
-		GameEngineInput::GetInst()->CreateKey("CamRight", 'D');
-		GameEngineInput::GetInst()->CreateKey("CamUp", 'Q');
-		GameEngineInput::GetInst()->CreateKey("CamDown", 'E');
-		GameEngineInput::GetInst()->CreateKey("CamForward", 'W');
-		GameEngineInput::GetInst()->CreateKey("CamBack", 'S');
-
 		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
 	}
 
@@ -62,40 +56,12 @@ void Stage01::Start()
 		actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
 	}
 
-
 }
 void Stage01::Update(float _DeltaTime)
 {
 	if (GameEngineInput::GetInst()->IsDown("FreeCameaOnOff"))
 	{
 		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("CamLeft"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetRightVector() * 100 * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("CamRight"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetRightVector() * 100 * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("CamUp"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetUpVector() * 100 * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("CamDown"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetUpVector() * 100 * _DeltaTime);
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("CamForward"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetForwardVector() * 100 * _DeltaTime);
-	}
-	if (true == GameEngineInput::GetInst()->IsPress("CamBack"))
-	{
-		GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetForwardVector() * 100 * _DeltaTime);
 	}
 
 	//////// 마우스드래그 맵 이동하는 기능 ///////////

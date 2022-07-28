@@ -3,6 +3,7 @@
 #include "GameEngineContents/TitleLevel.h"
 #include "GameEngineContents/Stage01.h"
 #include"GameEngineContents/EndLevel.h"
+#include <GameEngineBase/GameEngineSound.h>
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -45,18 +46,31 @@ void ContentsCore::Start()
 	}
 	{
 		GameEngineDirectory Dir;
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
-	std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
-	for (size_t i = 0; i < Shaders.size(); i++)
-	{
-		GameEngineTexture::Load(Shaders[i].GetFullPath());
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
 	}
+	{
+
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Sound");
+		Dir.Move("BGM");
+		std::vector<GameEngineFile> Sound = Dir.GetAllFile();
+		for (GameEngineFile& SoundPlay : Sound)
+		{
+			GameEngineSound::LoadRessource(SoundPlay);
+		}
 	}
 	///////////////// 이미지 cut /////////////////
 
 	GameEngineTexture::Cut("LeonWind.png", 3, 1);
-
+	GameEngineTexture::Cut("LeonWalk.png", 4, 1);
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
 	{

@@ -55,12 +55,12 @@ void Player::MyFunction(const FrameAnimation_DESC& _Info)
 
 void Player::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeft"))
+	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeftUP"))
 	{
-		GameEngineInput::GetInst()->CreateKey("PlayerLeft", 'L');
-		GameEngineInput::GetInst()->CreateKey("PlayerRight", 'K');
-		GameEngineInput::GetInst()->CreateKey("PlayerUp", VK_NUMPAD9);
-		GameEngineInput::GetInst()->CreateKey("PlayerDown", VK_NUMPAD7);
+		GameEngineInput::GetInst()->CreateKey("PlayerLeftUP", 'W');
+		GameEngineInput::GetInst()->CreateKey("PlayerLeftDown", 'A');
+		GameEngineInput::GetInst()->CreateKey("PlayerRightUP", 'D');
+		GameEngineInput::GetInst()->CreateKey("PlayerRightDown", 'S');
 	}
 
 
@@ -68,13 +68,13 @@ void Player::Start()
 
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 81, 81, 81 });
-		Renderer->CreateFrameAnimation("LeonWind2", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
-		Renderer->CreateFrameAnimation("LeonWind", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
-		Renderer->ChangeFrameAnimation("LeonWind2");
+		Renderer->GetTransform().SetLocalScale({ 384, 384, 1 });
+		Renderer->CreateFrameAnimation("LeonWalk", FrameAnimation_DESC("LeonWalk.png", 0, 3, 0.1f));
+		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
+		Renderer->ChangeFrameAnimation("LeonIdle");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
-		//Renderer->ScaleToTexture();
+
 		Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 
@@ -91,15 +91,15 @@ void Player::Start()
 
 void Player::IdleStart(const StateInfo& _Info)
 {
-	Renderer->ChangeFrameAnimation("LeonWind");
+	Renderer->ChangeFrameAnimation("LeonIdle");
 }
 
 void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerRight") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerUp") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerDown"))
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
+		true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
+		true == GameEngineInput::GetInst()->IsPress("PlayerRightUP") ||
+		true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
 	{
 		StateManager.ChangeState("Move");
 	}
@@ -107,7 +107,7 @@ void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::MoveStart(const StateInfo& _Info)
 {
-	Renderer->ChangeFrameAnimation("LeonWind2");
+	Renderer->ChangeFrameAnimation("LeonWalk");
 }
 
 void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
@@ -120,35 +120,41 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	//}
 	//
 
-	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeft") &&
-		false == GameEngineInput::GetInst()->IsPress("PlayerRight") &&
-		false == GameEngineInput::GetInst()->IsPress("PlayerUp") &&
-		false == GameEngineInput::GetInst()->IsPress("PlayerDown"))
+	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") &&
+		false == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") &&
+		false == GameEngineInput::GetInst()->IsPress("PlayerRightUP") &&
+		false == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
 	{
 		StateManager.ChangeState("Idle");
 		return;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeft"))
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
 	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * _DeltaTime);
-		Renderer->GetTransform().PixLocalNegativeX();
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerRight"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed *2* _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalPositiveX();
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerUp"))
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
 	{
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+		Renderer->GetTransform().PixLocalPositiveX();
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerDown"))
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
 	{
+		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+		Renderer->GetTransform().PixLocalNegativeX();
+	}
+
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+	{
+		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+		Renderer->GetTransform().PixLocalNegativeX();
 	}
 
 	//GetLevel()->GetMainCameraActorTransform().SetLocalPosition(GetTransform().GetLocalPosition() + float4::BACK * 100.0f);
