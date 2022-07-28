@@ -4,8 +4,9 @@
 
 enum class OBJECTORDER
 {
-	Player = 10,
+	Player,
 	Monster,
+	UI = 1000,
 };
 
 class GlobalContentsValue

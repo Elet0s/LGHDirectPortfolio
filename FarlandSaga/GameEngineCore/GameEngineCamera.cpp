@@ -33,7 +33,6 @@ bool ZSort(GameEngineRenderer* _Left, GameEngineRenderer* _Right)
 	return _Left->GetTransform().GetWorldPosition().z > _Right->GetTransform().GetWorldPosition().z;
 }
 
-
 void GameEngineCamera::Render(float _DeltaTime)
 {
 	// 순서적으로보면 레스터라이저 단계이지만 변경이 거의 없을거기 때문에.
@@ -73,6 +72,7 @@ void GameEngineCamera::Render(float _DeltaTime)
 			{
 				continue;
 			}
+
 			Renderer->GetTransform().SetView(View);
 			Renderer->GetTransform().SetProjection(Projection);
 			Renderer->GetTransform().CalculateWorldViewProjection();
@@ -81,9 +81,14 @@ void GameEngineCamera::Render(float _DeltaTime)
 	}
 }
 
+void GameEngineCamera::SetCameraOrder(CAMERAORDER _Order)
+{
+	GetActor()->GetLevel()->PushCamera(this, _Order);
+}
+
 void GameEngineCamera::Start()
 {
-	GetActor()->GetLevel()->PushCamera(this);
+	// GetActor()->GetLevel()->PushCamera(this);
 }
 
 void GameEngineCamera::PushRenderer(GameEngineRenderer* _Renderer)

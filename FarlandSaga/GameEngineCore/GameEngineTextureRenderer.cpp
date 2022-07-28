@@ -90,9 +90,9 @@ GameEngineTextureRenderer::~GameEngineTextureRenderer()
 {
 }
 
-void GameEngineTextureRenderer::Start()
+void GameEngineTextureRenderer::SetTextureRendererSetting()
 {
-	GameEngineDefaultRenderer::Start();
+
 	SetPipeLine("TextureAtlas");
 
 	FrameData.PosX = 0.0f;
@@ -101,6 +101,15 @@ void GameEngineTextureRenderer::Start()
 	FrameData.SizeY = 1.0f;
 
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
+}
+
+void GameEngineTextureRenderer::Start()
+{
+	GameEngineDefaultRenderer::Start();
+
+	PushRendererToMainCamera();
+
+	SetTextureRendererSetting();
 }
 
 void GameEngineTextureRenderer::SetSamplingModePoint()

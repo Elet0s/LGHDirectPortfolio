@@ -7,6 +7,9 @@
 #include "GameEngineLevel.h"
 #include "GameEngineDevice.h"
 #include "GameEngineGUI.h"
+#include "GameEngineCamera.h"
+#include "GameEngineCameraActor.h"
+
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -155,6 +158,18 @@ void GameEngineCore::WindowCreate(const std::string& _Name, GameEngineCore* _Use
 
 void GameEngineCore::InitializeLevel(GameEngineLevel* _Level, const std::string _Name)
 {
+	{
+		GameEngineCameraActor* actor = _Level->CreateActor<GameEngineCameraActor>();
+		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+	}
+
+	{
+		GameEngineCameraActor* actor = _Level->CreateActor<GameEngineCameraActor>();
+		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+	}
+
 	_Level->Start();
 	_Level->SetName(_Name);
 

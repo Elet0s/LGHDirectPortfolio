@@ -9,6 +9,7 @@ enum class CAMERAPROJECTIONMODE
 	Orthographic,
 };
 
+// Ό³Έν :
 class GameEngineLevel;
 class GameEngineCamera;
 class GameEngineCamera : public GameEngineTransformComponent
@@ -16,9 +17,11 @@ class GameEngineCamera : public GameEngineTransformComponent
 	friend GameEngineLevel;
 
 public:
+	// constrcuter destructer
 	GameEngineCamera();
 	~GameEngineCamera();
 
+	// delete Function
 	GameEngineCamera(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera(GameEngineCamera&& _Other) noexcept = delete;
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
@@ -28,6 +31,8 @@ public:
 	{
 		return Mode;
 	}
+
+	void SetCameraOrder(CAMERAORDER _Order);
 
 	void SetProjectionMode(CAMERAPROJECTIONMODE _Mode)
 	{

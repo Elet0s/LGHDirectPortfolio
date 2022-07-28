@@ -6,7 +6,7 @@
 #include <GameEngineBase/GameEngineInput.h>
 #include "Monster.h"
 #include "Player.h"
-#include <Windows.h>
+#include "UIMaster.h"
 
 Stage01::Stage01()
 	:ptMouse1(),
@@ -30,9 +30,10 @@ void Stage01::Start()
 
 
 	{
-		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
+		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
+	//	GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
+	//	actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+	//	actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
@@ -49,6 +50,9 @@ void Stage01::Start()
 	}
 
 
+	{
+		UIMaster* NewPlayer = CreateActor<UIMaster>(OBJECTORDER::UI);
+	}
 
 	{
 		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();

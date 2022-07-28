@@ -248,6 +248,8 @@ public:
 protected:
 	void Start() override;
 
+	void SetTextureRendererSetting();
+
 	void Update(float _Delta) override;
 
 private:
