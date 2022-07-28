@@ -344,6 +344,22 @@ public:
 		return POINT(ix(), iy());
 	}
 
+
+	float hx() const
+	{
+		return x * 0.5f;
+	}
+
+	float hy() const
+	{
+		return y * 0.5f;
+	}
+
+	float hz() const
+	{
+		return z * 0.5f;
+	}
+
 	int hix() const
 	{
 		return static_cast<int>(x * 0.5f);
@@ -363,6 +379,7 @@ public:
 	{
 		return { x * 0.5f, y * 0.5f , z * 0.5f, 1.0f };
 	}
+
 	float4 ABS3DReturn() const
 	{
 		return float4(fabsf(x), fabsf(y), fabsf(z));

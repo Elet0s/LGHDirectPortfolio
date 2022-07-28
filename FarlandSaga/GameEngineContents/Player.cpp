@@ -75,7 +75,8 @@ void Player::Start()
 		Renderer->CreateFrameAnimation("LeonWind", FrameAnimation_DESC("LeonWind.bmp",0,2,0.1f));
 
 		Renderer->ChangeFrameAnimation("LeonWind");
-
+		//Renderer->ScaleToTexture();
+		Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 }
 
