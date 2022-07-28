@@ -538,6 +538,15 @@ public:
 			iz() == _Value.iz();
 	}
 
+	bool CompareInt4D(const float4& _Value) const
+	{
+		return ix() == _Value.ix() &&
+			iy() == _Value.iy() &&
+			iz() == _Value.iz() &&
+			iw() == _Value.iw();
+	}
+
+
 	float4 RotationToDegreeZ(float _Degree)
 	{
 		return RotationToRadianZAXis(_Degree * GameEngineMath::DegreeToRadian);

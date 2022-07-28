@@ -6,10 +6,14 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
-// 설명 : 
+
+// 설명 :
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
+
+
 public:
+	// constrcuter destructer
 	GameEngineTexture();
 	~GameEngineTexture();
 
@@ -60,11 +64,13 @@ public:
 	void TextureLoad(const std::string& _Path);
 
 	float4 GetScale()
-	{
+	{								//(Metadata.width),(Metadata.height)이거쓰면 0,0되서 텍스쳐 생성에 실패함 뜸
 		return { static_cast<float>(Desc.Width), static_cast<float>(Desc.Height) };
 	}
 
 	void TextureCreate(const D3D11_TEXTURE2D_DESC& _Desc);
+
+	float4 GetPixel(int _x, int _y);
 
 protected:
 

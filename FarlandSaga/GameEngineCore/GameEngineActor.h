@@ -31,6 +31,12 @@ public:
 		return ParentLevel;
 	}
 
+	template<typename LevelType>
+	inline LevelType* GetLevel()
+	{
+		return dynamic_cast<LevelType*>(ParentLevel);
+	}
+
 	template<typename ComponentType>
 	ComponentType* CreateComponent(const std::string& _Name = "")
 	{

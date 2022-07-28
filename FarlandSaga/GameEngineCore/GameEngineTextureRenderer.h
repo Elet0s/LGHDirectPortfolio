@@ -110,6 +110,8 @@ public:
 
 	void SetFrame(UINT _Index);
 
+	GameEngineTexture* GetCurTexture();
+
 	void SetTexture(const std::string& _Name, UINT _Index);
 
 	void SetPivot();

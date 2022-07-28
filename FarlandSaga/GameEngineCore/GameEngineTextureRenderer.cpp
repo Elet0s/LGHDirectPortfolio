@@ -159,6 +159,10 @@ void GameEngineTextureRenderer::SetFrame(UINT _Index)
 	FrameData = CurTex->GetFrameData(_Index);
 }
 
+GameEngineTexture* GameEngineTextureRenderer::GetCurTexture()
+{
+	return CurTex;
+}
 
 void GameEngineTextureRenderer::SetTexture(const std::string& _Name, UINT _Index)
 {
