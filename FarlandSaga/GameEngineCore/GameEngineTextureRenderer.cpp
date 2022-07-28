@@ -21,10 +21,12 @@ void FrameAnimation::Update(float _Delta)
 	}
 
 	if (false == bOnceStart
-		&& Info.CurFrame == Info.Start
-		&& nullptr != Start)
+		&& Info.CurFrame == Info.Start)
 	{
-		Start(Info);
+		if (nullptr != Start)
+		{
+			Start(Info);
+		}
 		bOnceStart = true;
 		bOnceEnd = false;
 	}
@@ -82,7 +84,7 @@ void FrameAnimation::Update(float _Delta)
 GameEngineTextureRenderer::GameEngineTextureRenderer()
 	: CurAni(nullptr)
 	, CurTex(nullptr)
-	, PivotMode(PIVOTMODE::CENTER)
+	, PivotMode(PIVOTMODE::CUSTOM)
 {
 }
 

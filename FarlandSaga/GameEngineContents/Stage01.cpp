@@ -31,9 +31,9 @@ void Stage01::Start()
 
 	{
 		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
-	//	GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-	//	actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-	//	actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
+		//	GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
+		//	actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		//	actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
 	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
@@ -46,32 +46,20 @@ void Stage01::Start()
 		GameEngineInput::GetInst()->CreateKey("CamBack", 'S');
 
 		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
-
 	}
 
+	{
+		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
+	}
 
 	{
 		UIMaster* NewPlayer = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}
 
 	{
-		GameEngineCameraActor* actor = CreateActor<GameEngineCameraActor>();
-		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -500.0f });
-	}
-
-
-	Player* NewPlayer;
-
-	{
-		NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
-	}
-
-	{
 		Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
 		actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
 		actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
-		actor->SetParent(NewPlayer);
 	}
 
 

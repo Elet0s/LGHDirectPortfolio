@@ -1,16 +1,13 @@
 #pragma once
 #include <GameEngineCore/CoreMinimal.h>
 
-// Ό³Έν :
 class GameEngineTextureRenderer;
 class Player : public GameEngineActor
 {
 public:
-	// constrcuter destructer
 	Player();
 	~Player();
 
-	// delete Function
 	Player(const Player& _Other) = delete;
 	Player(Player&& _Other) noexcept = delete;
 	Player& operator=(const Player& _Other) = delete;
@@ -31,8 +28,17 @@ protected:
 
 	void MyFunction(const FrameAnimation_DESC& _Info);
 
+
+	void IdleStart(const StateInfo& _Info);
+	void IdleUpdate(float _DeltaTime, const StateInfo& _Info);
+
+	void MoveStart(const StateInfo& _Info);
+	void MoveUpdate(float _DeltaTime, const StateInfo& _Info);
+
 private:
 
 	float Speed;
+
+	GameEngineStateManager StateManager;
 };
 

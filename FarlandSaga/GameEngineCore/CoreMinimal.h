@@ -17,6 +17,7 @@
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 #include <GameEngineCore/GameEngineUIRenderer.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
+#include <GameEngineCore/GameEngineStateManager.h>
 // GUI
 #include <GameEngineCore/GameEngineGUI.h>
 #include <GameEngineCore/GameEngineStatusWindow.h>
