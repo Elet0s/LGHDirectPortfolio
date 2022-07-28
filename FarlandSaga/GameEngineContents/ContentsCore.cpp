@@ -2,6 +2,7 @@
 #include "ContentsCore.h"
 #include "GameEngineContents/TitleLevel.h"
 #include "GameEngineContents/Stage01.h"
+#include"GameEngineContents/EndLevel.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -19,40 +20,54 @@ void ContentsCore::Start()
 
 
 	/////////////////리소스 불러오는 부분/////////////////
-	
-	GameEngineDirectory Dir;
-
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("BG");
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("PlayerUnit");
+		Dir.Move("LEON");
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+	{
+		GameEngineDirectory Dir;
 	Dir.MoveParentToExitsChildDirectory("ConstantResources");
 	Dir.Move("ConstantResources");
-	Dir.Move("BG");
-
 	std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
-
 	for (size_t i = 0; i < Shaders.size(); i++)
 	{
 		GameEngineTexture::Load(Shaders[i].GetFullPath());
 	}
-
-	Dir.MoveParentToExitsChildDirectory("ConstantResources");
-	Dir.Move("ConstantResources");
-	Dir.Move("PlayerUnit");
-	Dir.Move("LEON");
-
-	std::vector<GameEngineFile> Shaders2 = Dir.GetAllFile();
-
-	for (size_t i = 0; i < Shaders2.size(); i++)
-	{
-		GameEngineTexture::Load(Shaders2[i].GetFullPath());
 	}
-
 	///////////////// 이미지 cut /////////////////
 
-	GameEngineTexture::Cut("LeonWind.bmp", 3, 1);
+	GameEngineTexture::Cut("LeonWind.png", 3, 1);
 
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
+	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
+	{
+		GameEngineInput::GetInst()->CreateKey("LevelChange", 'P');
+	}
+
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<Stage01>("Stage01");
+	CreateLevel<EndLevel>("Ending");
 	ChangeLevel("Title");
+
 	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("불러올 파일을 선택하세요", nullptr);
 }
 

@@ -171,7 +171,31 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="EndingBG.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="EndLevel.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Enums.h" />
+    <ClInclude Include="Event01.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Event02.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Event03.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Flower.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GlobalContentsValue.h">
       <SubType>
       </SubType>
@@ -189,6 +213,14 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Stage01.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage02.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="Stage03.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -214,6 +246,30 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="EndingBG.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="EndLevel.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Event01.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Event02.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Event03.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp">
       <SubType>
       </SubType>
@@ -233,6 +289,14 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="Stage01.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage02.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="Stage03.cpp">
       <SubType>
       </SubType>
     </ClCompile>

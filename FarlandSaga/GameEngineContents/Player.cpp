@@ -69,9 +69,9 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 81, 81, 81 });
-		Renderer->CreateFrameAnimation("Test2", FrameAnimation_DESC("LeonWind.bmp", 0, 2, 0.1f));
-		Renderer->CreateFrameAnimation("LeonWind", FrameAnimation_DESC("LeonWind.bmp", 0, 2, 0.1f));
-		Renderer->ChangeFrameAnimation("Test2");
+		Renderer->CreateFrameAnimation("LeonWind2", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
+		Renderer->CreateFrameAnimation("LeonWind", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
+		Renderer->ChangeFrameAnimation("LeonWind2");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
 		//Renderer->ScaleToTexture();
@@ -107,7 +107,7 @@ void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::MoveStart(const StateInfo& _Info)
 {
-	Renderer->ChangeFrameAnimation("Test2");
+	Renderer->ChangeFrameAnimation("LeonWind2");
 }
 
 void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)

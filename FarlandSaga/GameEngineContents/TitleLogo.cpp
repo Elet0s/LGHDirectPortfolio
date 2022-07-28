@@ -18,7 +18,7 @@ void TitleLogo::Start()
 {
 	// 1280 720
 	//1024¡¿768
-	GetTransform().SetLocalPosition({ 1, 1, 1 });
+	GetTransform().SetLocalPosition({ 0, 0, 1 });
 
 	{
 		//TimeAngle = 0.0f;

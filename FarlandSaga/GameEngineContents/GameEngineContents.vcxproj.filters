@@ -66,7 +66,6 @@
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
-    <ClInclude Include="GlobalContentsValue.h" />
     <ClInclude Include="Stage01.h">
       <Filter>Level\Stage</Filter>
     </ClInclude>
@@ -82,6 +81,33 @@
     <ClInclude Include="TestStageBG.h">
       <Filter>Actor\BG</Filter>
     </ClInclude>
+    <ClInclude Include="GlobalContentsValue.h">
+      <Filter>Global</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage02.h">
+      <Filter>Level\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="Stage03.h">
+      <Filter>Level\Stage</Filter>
+    </ClInclude>
+    <ClInclude Include="EndLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="Event01.h">
+      <Filter>Level\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event02.h">
+      <Filter>Level\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="Event03.h">
+      <Filter>Level\Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingBG.h">
+      <Filter>Actor\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower.h">
+      <Filter>Actor\UI\EventUI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -96,7 +122,6 @@
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
-    <ClCompile Include="GlobalContentsValue.cpp" />
     <ClCompile Include="Stage01.cpp">
       <Filter>Level\Stage</Filter>
     </ClCompile>
@@ -111,6 +136,33 @@
     </ClCompile>
     <ClCompile Include="TestStageBG.cpp">
       <Filter>Actor\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="GlobalContentsValue.cpp">
+      <Filter>Global</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage02.cpp">
+      <Filter>Level\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="Stage03.cpp">
+      <Filter>Level\Stage</Filter>
+    </ClCompile>
+    <ClCompile Include="EndLevel.cpp">
+      <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="Event01.cpp">
+      <Filter>Level\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event02.cpp">
+      <Filter>Level\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="Event03.cpp">
+      <Filter>Level\Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingBG.cpp">
+      <Filter>Actor\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <Filter>Actor\UI\EventUI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
