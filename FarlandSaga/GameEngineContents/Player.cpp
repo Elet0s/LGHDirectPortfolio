@@ -69,8 +69,9 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 384, 384, 1 });
-		Renderer->CreateFrameAnimation("LeonWalk", FrameAnimation_DESC("LeonWalk.png", 0, 3, 0.1f));
-		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonWind.png", 0, 2, 0.1f));
+		Renderer->CreateFrameAnimation("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.1f));
+		Renderer->CreateFrameAnimation("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.1f));
+		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.1f));
 		Renderer->ChangeFrameAnimation("LeonIdle");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
@@ -107,7 +108,17 @@ void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::MoveStart(const StateInfo& _Info)
 {
-	Renderer->ChangeFrameAnimation("LeonWalk");
+	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
+		true == GameEngineInput::GetInst()->IsPress("PlayerRightUp"))
+	{
+		Renderer->ChangeFrameAnimation("LeonWalkU");
+		
+	}
+	else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
+		true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+	{
+		Renderer->ChangeFrameAnimation("LeonWalkD");
+	}
 }
 
 void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
