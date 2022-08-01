@@ -6,18 +6,14 @@
 
 #pragma comment(lib, "DirectXTex.lib")
 
-
-// 설명 :
 class GameEngineTexture : public GameEngineRes<GameEngineTexture>
 {
 
 
 public:
-	// constrcuter destructer
 	GameEngineTexture();
 	~GameEngineTexture();
 
-	// delete Function
 	GameEngineTexture(const GameEngineTexture& _Other) = delete;
 	GameEngineTexture(GameEngineTexture&& _Other) noexcept = delete;
 	GameEngineTexture& operator=(const GameEngineTexture& _Other) = delete;
@@ -46,6 +42,11 @@ public:
 	void VSSetting(int _BindPoint);
 	void PSSetting(int _BindPoint);
 
+	size_t GetCutCount()
+	{
+		return CutData.size();
+	}
+
 	float4 GetFrameData(UINT _Index)
 	{
 		if (true == CutData.empty())
@@ -66,6 +67,11 @@ public:
 	float4 GetScale()
 	{								//(Metadata.width),(Metadata.height)이거쓰면 0,0되서 텍스쳐 생성에 실패함 뜸
 		return { static_cast<float>(Desc.Width), static_cast<float>(Desc.Height) };
+	}
+
+	float4 GetCutScale(int _Index)
+	{
+		return { CutData[_Index].SizeX * static_cast<float>(Desc.Width), CutData[_Index].SizeY * static_cast<float>(Desc.Height) };
 	}
 
 	void TextureCreate(const D3D11_TEXTURE2D_DESC& _Desc);

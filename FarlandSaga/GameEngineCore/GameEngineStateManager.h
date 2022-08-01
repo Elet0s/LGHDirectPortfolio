@@ -40,16 +40,12 @@ public:
 
 	}
 };
-
-// 설명 :
 class GameEngineStateManager final // 더는 상속 못내려
 {
 public:
-	// constrcuter destructer
 	GameEngineStateManager();
 	~GameEngineStateManager();
 
-	// delete Function
 	GameEngineStateManager(const GameEngineStateManager& _Other) = delete;
 	GameEngineStateManager(GameEngineStateManager&& _Other) noexcept = delete;
 	GameEngineStateManager& operator=(const GameEngineStateManager& _Other) = delete;
@@ -87,6 +83,16 @@ public:
 	}
 
 	void Update(float _DeltaTime);
+
+	std::string GetCurStateStateName()//현재 스테이트를 알수있는 기능
+	{
+		if (nullptr != CurState)
+		{
+			return "";
+		}
+
+		return CurState->GetNameCopy();
+	}
 
 	void ChangeState(const std::string& _StateName)
 	{
