@@ -24,7 +24,8 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
-		GameEngineSound::SoundPlayOneShot("BGM01.MID");
+		BGM.SoundPlayControl("BGM01.MID", 1);
+	
 		GEngine::ChangeLevel("Stage01");
 	}
 

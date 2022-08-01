@@ -2,6 +2,7 @@
 #include"EndLevel.h"
 #include"Flower.h"
 #include"EndingBG.h"
+#include"GameEngineBase/GameEngineSound.h"
 
 EndLevel::EndLevel()
 {
@@ -19,7 +20,6 @@ void EndLevel::Start()
 }
 void EndLevel::Update(float _DeltaTime)
 {
-
 }
 void EndLevel::End()
 {
