@@ -12,8 +12,8 @@ UIMaster::~UIMaster()
 void UIMaster::Start()
 {
 	{
-		GameEngineUIRenderer* Renderer = CreateComponent<GameEngineUIRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 100, 20, 1 });
-		Renderer->GetTransform().SetLocalPosition({ 300, 300, 1 });
+		//GameEngineUIRenderer* Renderer = CreateComponent<GameEngineUIRenderer>();
+		//Renderer->GetTransform().SetLocalScale({ 100, 20, 1 });
+		//Renderer->GetTransform().SetLocalPosition({ 300, 300, 1 });
 	}
 }

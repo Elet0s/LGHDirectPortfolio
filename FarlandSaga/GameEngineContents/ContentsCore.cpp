@@ -95,7 +95,7 @@ void ContentsCore::Start()
 	CreateLevel<EndLevel>("Ending");
 	ChangeLevel("Title");
 
-	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("불러올 파일을 선택하세요", nullptr);
+	//GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("불러올 파일을 선택하세요", nullptr);
 }
 
 void ContentsCore::Update(float _DeltaTime)
