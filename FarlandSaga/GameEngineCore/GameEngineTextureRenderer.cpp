@@ -291,5 +291,5 @@ void GameEngineTextureRenderer::CurAnimationReset()
 
 void GameEngineTextureRenderer::CurAnimationSetStartPivotFrame(int SetFrame)
 {
-	CurAni->Info.CurFrame += CurAni->Info.Start + SetFrame;
+	CurAni->Info.CurFrame = CurAni->Info.Start + SetFrame;
 }
