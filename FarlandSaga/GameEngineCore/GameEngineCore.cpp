@@ -78,6 +78,9 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 		if (nullptr != CurrentLevel)
 		{
 			CurrentLevel->OffEvent();
+			// 넘어가려는 액터가 이때 존재해야 겠죠?
+
+			CurrentLevel->OverChildMove(NextLevel);
 		}
 
 		CurrentLevel = NextLevel;

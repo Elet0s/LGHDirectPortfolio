@@ -26,6 +26,8 @@
 
 // core
 #include <GameEngineCore/CoreMinimal.h>
+#include <GameEngineCore/GEngine.h>
 
+#include "GlobalContentsValue.h"
 //Contents
 #include "Enums.h"

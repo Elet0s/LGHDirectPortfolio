@@ -4,6 +4,14 @@
 class GameEngineTextureRenderer;
 class Player : public GameEngineActor
 {
+private:
+	static Player* MainPlayer;
+
+public:
+	static Player* GetMainPlayer()
+	{
+		return MainPlayer;
+	}
 public:
 	Player();
 	~Player();

@@ -11,12 +11,11 @@
 #include <GameEngineCore/GameEngineDevice.h>
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 
-
+Player* Player::MainPlayer = nullptr;
 Player::Player()
 	: Speed(50.0f)
 {
-	
-
+	MainPlayer = this;
 }
 
 Player::~Player()
