@@ -7,10 +7,15 @@
 
 enum CollisionType
 {
+	//CT_POINT2D,
+	//CT_SPHERE2D, 
+	//CT_AABB2D, 
+	//CT_OBB2D, 
 	CT_POINT,
 	CT_SPHERE, // 정방원
 	CT_AABB, // 회전하지 않은 박스
 	CT_OBB, // 회전한 박스
+	CT_MAX
 };
 
 class CollisionData

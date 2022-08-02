@@ -1,15 +1,7 @@
 #include "PreCompile.h"
 #include "Player.h"
-#include <GameEngineBase/GameEngineInput.h>
 #include <iostream>
-#include <GameEngineCore/GameEngineLevel.h>
 #include <GameEngineContents/GlobalContentsValue.h>
-#include <GameEngineCore/GameEngineDefaultRenderer.h>
-#include <GameEngineCore/GameEngineRenderingPipeLine.h>
-#include <GameEngineCore/GameEngineVertexShader.h>
-#include <GameEngineCore/GameEngineConstantBuffer.h>
-#include <GameEngineCore/GameEngineDevice.h>
-#include <GameEngineCore/GameEngineTextureRenderer.h>
 
 Player* Player::MainPlayer = nullptr;
 Player::Player()

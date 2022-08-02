@@ -65,8 +65,6 @@ protected:
 private:
 	void AllUpdate(float _ScaleDeltaTime, float _DeltaTime);
 
-	class GameEngineLevel* ParentLevel;
-
 	void SetLevel(GameEngineLevel* _ParentLevel)
 	{
 		ParentLevel = _ParentLevel;
@@ -74,5 +72,6 @@ private:
 
 	bool IsLevelOver;
 
+	class GameEngineLevel* ParentLevel;
 };
 

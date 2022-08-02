@@ -31,6 +31,7 @@ protected:
 
 
 	GameEngineTextureRenderer* Renderer;
+	GameEngineCollision* Collision;
 
 	float4 Color;
 
