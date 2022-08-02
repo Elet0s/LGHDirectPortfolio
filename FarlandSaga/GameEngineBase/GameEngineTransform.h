@@ -5,7 +5,7 @@
 #include <GameEngineBase/GameEngineUpdateObject.h>
 #include <list>
 
-enum CollisionType
+enum class CollisionType
 {
 	CT_POINT2D,
 	CT_SPHERE2D,
