@@ -85,6 +85,10 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);
 	GameEngineTexture::Cut("LeonWalkD.png", 4, 1);
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
+
+	///////////////// 폰트 /////////////////
+	GameEngineFont::Load("궁서");
+
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	if (false == GameEngineInput::GetInst()->IsKey("LevelChange"))
 	{

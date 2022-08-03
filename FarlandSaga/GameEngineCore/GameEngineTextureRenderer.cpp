@@ -70,8 +70,10 @@ void FrameAnimation::Update(float _Delta)
 			}
 			else
 			{
-				if(ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
-				ParentRenderer->ScaleToTexture();
+				if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
+				{
+					ParentRenderer->ScaleToTexture();
+				}
 			}
 		}
 		else if (nullptr != FolderTexture)

@@ -18,6 +18,7 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineDepthStencilTexture.h"
 #include "GameEngineDepthStencil.h"
+#include "GameEngineFont.h"
 
 #include "GameEngineVertexShader.h"
 #include "GameEnginePixelShader.h"
@@ -272,6 +273,7 @@ void EngineMesh()
 
 		GameEngineIndexBuffer::Create("Box", Index);
 	}
+	GameEngineFont::Load("µ¸¿ò");
 }
 
 void GameEngineCore::EngineResourcesInitialize()
@@ -311,7 +313,7 @@ void GameEngineCore::EngineResourcesDestroy()
 	GameEngineBlend::ResourcesDestroy();
 	GameEngineConstantBuffer::ResourcesDestroy();
 	GameEngineSound::ResourcesDestroy();
-
+	GameEngineFont::ResourcesDestroy();
 
 	GameEngineDevice::Destroy();
 }

@@ -21,6 +21,7 @@ public:
 			return;
 		}
 
+		Info.StateTime += _DeltaTime;
 		Update(_DeltaTime, Info);
 	}
 
@@ -123,11 +124,20 @@ public:
 		}
 	}
 
+	float GetCurStateTime()
+	{
+		if (nullptr == CurState)
+		{
+			return 0.0f;
+		}
+
+		return CurState->Info.StateTime;
+	}
+
 protected:
 
 private:
 	std::map<std::string, GameEngineState> AllState;
 	GameEngineState* CurState;
-
 };
 

@@ -224,6 +224,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="GameEngineFont.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="GameEngineFontRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="GameEngineGUI.h">
       <SubType>
       </SubType>
@@ -327,6 +335,7 @@
     <ClInclude Include="imstb_truetype.h" />
     <ClInclude Include="PreCompile.h" />
     <ClInclude Include="ThirdParty\bin\Release\DirectXTex.h" />
+    <ClInclude Include="ThirdParty\inc\FW1FontWrapper.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineActor.cpp">
@@ -379,6 +388,14 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineFolderTexture.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineFont.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="GameEngineFontRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>
