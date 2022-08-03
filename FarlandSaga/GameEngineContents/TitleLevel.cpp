@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "TitleLevel.h"
 #include "TitleLogo.h"
+#include "SoundPlayer.h"
 #include "Enums.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
@@ -24,8 +25,7 @@ void TitleLevel::Update(float _DeltaTime)
 {
 	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
 	{
-		BGM.SoundPlayControl("BGM01.MID", 1);
-	
+		SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
 		GEngine::ChangeLevel("Stage01");
 	}
 

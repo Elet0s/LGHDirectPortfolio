@@ -70,6 +70,7 @@ void FrameAnimation::Update(float _Delta)
 			}
 			else
 			{
+				if(ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
 				ParentRenderer->ScaleToTexture();
 			}
 		}

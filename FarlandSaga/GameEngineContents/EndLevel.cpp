@@ -2,6 +2,7 @@
 #include"EndLevel.h"
 #include"Flower.h"
 #include"EndingBG.h"
+#include"SoundPlayer.h"
 #include"GameEngineBase/GameEngineSound.h"
 
 EndLevel::EndLevel()

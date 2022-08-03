@@ -4,6 +4,7 @@
 #include "GameEngineContents/Stage01.h"
 #include"GameEngineContents/EndLevel.h"
 #include <GameEngineBase/GameEngineSound.h>
+#include "SoundPlayer.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -108,5 +109,5 @@ void ContentsCore::Update(float _DeltaTime)
 
 void ContentsCore::End()
 {
-	int a = 0;
+	SoundPlayer::BGMPlay_->Destory();
 }

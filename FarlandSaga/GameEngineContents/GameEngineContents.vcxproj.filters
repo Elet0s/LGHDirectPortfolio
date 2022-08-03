@@ -108,6 +108,9 @@
     <ClInclude Include="Flower.h">
       <Filter>Actor\UI\EventUI</Filter>
     </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Actor\Com</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -163,6 +166,9 @@
     </ClCompile>
     <ClCompile Include="Flower.cpp">
       <Filter>Actor\UI\EventUI</Filter>
+    </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Actor\Com</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

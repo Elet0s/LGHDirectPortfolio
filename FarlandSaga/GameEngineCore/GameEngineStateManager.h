@@ -40,6 +40,7 @@ public:
 
 	}
 };
+
 class GameEngineStateManager final // 더는 상속 못내려
 {
 public:
@@ -84,7 +85,7 @@ public:
 
 	void Update(float _DeltaTime);
 
-	std::string GetCurStateStateName()//현재 스테이트를 알수있는 기능
+	std::string GetCurStateStateName()
 	{
 		if (nullptr != CurState)
 		{
