@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include "GameEngineDevice.h"
 
+
 std::list<GameEngineGUIWindow*> GameEngineGUI::Windows;
 
 GameEngineGUI::GameEngineGUI()
@@ -14,7 +15,6 @@ GameEngineGUI::~GameEngineGUI()
 }
 
 extern IMGUI_IMPL_API LRESULT ImGui_ImplWin32_WndProcHandler(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
-//imgui에서 윈도우메세지가 왔을때의 처리는 있지만 넘겨주는 것은 내window에서 직접해줘야 함
 
 void GameEngineGUI::Initialize()
 {
@@ -48,6 +48,9 @@ void GameEngineGUI::Initialize()
 
     GameEngineWindow::GetInst()->SetMessageCallBack(ImGui_ImplWin32_WndProcHandler);
 }
+
+
+
 void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
 {
     ImGui_ImplDX11_NewFrame();
@@ -57,7 +60,7 @@ void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
 
     for (GameEngineGUIWindow* GUIWIndow : Windows)
     {
-        if (false == GUIWIndow->IsOpen)
+        if (false == GUIWIndow->IsUpdate())
         {
             continue;
         }
@@ -66,8 +69,28 @@ void GameEngineGUI::GUIRender(GameEngineLevel* _Level, float _DeltaTime)
         GUIWIndow->End();
     }
 
+
+
+    //// 비긴과
+    //// 앤드로 이루어집니다.
+
+    //std::string Text = GameEngineString::AnsiToUTF8Return("윈도우창 하나");
+    //std::string Button = GameEngineString::AnsiToUTF8Return("버튼");
+
+    //// 윈도우 시작
+    //ImGui::Begin(Text.c_str());
+
+    //// 내용
+    //if (true == ImGui::Button(Button.c_str()))
+    //{
+
+    //}
+
+    //// 윈도우 끝
+    //ImGui::End();
+
     // 여기사이에
-    
+
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
 
@@ -86,6 +109,7 @@ void GameEngineGUI::GUIDestroy()
     {
         delete GUIWIndow;
     }
+
 
     ImGui_ImplDX11_Shutdown();
     ImGui_ImplWin32_Shutdown();

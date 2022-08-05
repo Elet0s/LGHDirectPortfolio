@@ -3,6 +3,7 @@
 #include <GameEngineBase/GameEngineDebug.h>
 #include <map>
 
+// 설명 :
 class GameEngineCore
 {
 	friend class GEngine;
@@ -22,6 +23,8 @@ public:
 
 protected:
 	virtual std::string GetWindowTitle() { return "MainWindow"; }
+	virtual float4 StartWindowSize() { return { 1024.0f, 768.0f }; };
+	virtual float4 StartWindowPosition() { return { 0,0 }; };
 
 	// 너희들이 간섭할수 있는 내용.
 	virtual void Start() = 0;
@@ -61,6 +64,7 @@ private:
 	// 헤더 추가하기 싫어서 초기화를 CPP에서 하기 위한 함수.
 	static void InitializeLevel(GameEngineLevel* _Level, const std::string _Name);
 
+	// delete Function
 	GameEngineCore(const GameEngineCore& _Other) = delete;
 	GameEngineCore(GameEngineCore&& _Other) noexcept = delete;
 	GameEngineCore& operator=(const GameEngineCore& _Other) = delete;

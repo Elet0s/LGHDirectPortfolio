@@ -70,6 +70,16 @@ void Player::Start()
 		Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 
+	{
+		Collision = CreateComponent<GameEngineCollision>();
+		Collision->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
+		Collision->ChangeOrder(OBJECTORDER::Player);
+	}
+
+	{
+	//GameEngineFontRenderer* Font = CreateComponent<GameEngineFontRenderer>();
+	//Font->SetText("안녕하세요");
+	}
 	// 무기명 함수를 만들수 있습니다.
 	// 이름없는 인스턴스 함수를 만들수가 있습니다.
 	// [](const StateInfo& _Info) 
@@ -103,6 +113,8 @@ void Player::MoveStart(const StateInfo& _Info)
 		true == GameEngineInput::GetInst()->IsPress("PlayerRightUp"))
 	{
 		Renderer->ChangeFrameAnimation("LeonWalkU");
+
+
 		
 	}
 	else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
@@ -136,6 +148,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed *2* _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalPositiveX();
+		Renderer->GetColorData().MulColor.a -= _DeltaTime;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))

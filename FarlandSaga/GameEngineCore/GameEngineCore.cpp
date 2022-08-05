@@ -10,7 +10,6 @@
 #include "GameEngineCamera.h"
 #include "GameEngineCameraActor.h"
 
-
 #pragma comment(lib, "GameEngineBase.lib")
 
 GameEngineLevel* GameEngineCore::CurrentLevel = nullptr;
@@ -60,7 +59,7 @@ void GameEngineCore::CoreStart(GameEngineCore* _UserCore)
 	EngineResourcesInitialize();
 
 	// 엔진이 뭔가를 할겁니다.
-	// 준비를 먼저하고.
+		// 준비를 먼저하고.
 	_UserCore->Start();
 }
 
@@ -68,8 +67,6 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 {
 	if (nullptr != NextLevel)
 	{
-
-
 		Rectangle(GameEngineWindow::GetInst()->GetHDC()
 			, 0
 			, 0
@@ -142,7 +139,7 @@ void GameEngineCore::CoreEnd(GameEngineCore* _UserCore)
 void GameEngineCore::WindowCreate(const std::string& _Name, GameEngineCore* _UserCore)
 {
 	GameEngineWindow::GetInst()->CreateGameWindow(nullptr, _Name.c_str());
-	GameEngineWindow::GetInst()->SetWindowScaleAndPosition({ 0,0 }, { 1024, 768 });
+	GameEngineWindow::GetInst()->SetWindowScaleAndPosition(_UserCore->StartWindowPosition(), _UserCore->StartWindowSize());
 	GameEngineWindow::GetInst()->ShowGameWindow();
 	GameEngineDevice::Initialize();
 

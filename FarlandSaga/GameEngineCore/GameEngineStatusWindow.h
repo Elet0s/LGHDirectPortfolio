@@ -1,6 +1,20 @@
 #pragma once
 #include "GameEngineGUI.h"
 
+class GameEngineImageShotWindow : public GameEngineGUIWindow
+{
+public:
+	ImTextureID RenderTexture;
+	ImVec2 Size;
+
+public:
+	void RenderTextureSetting(ImTextureID RenderTexture, ImVec2 Size);
+
+public:
+	void Initialize(class GameEngineLevel* _Level) {}
+	void OnGUI(GameEngineLevel* _Level, float _DeltaTime) override;
+};
+
 class GameEngineStatusWindow : public GameEngineGUIWindow
 {
 public:
@@ -15,6 +29,9 @@ public:
 protected:
 
 private:
-	void Initialize(class GameEngineLevel* _Level) override; //순수가상함수 가 있는 클래스->추상클래스
+	void Initialize(class GameEngineLevel* _Level) override;
 	void OnGUI(GameEngineLevel* _Level, float _DeltaTime) override;
+
+	std::list<GameEngineImageShotWindow*> Window;
 };
+

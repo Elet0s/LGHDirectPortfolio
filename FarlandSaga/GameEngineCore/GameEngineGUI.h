@@ -5,26 +5,28 @@
 #include <GameEngineBase/GameEngineNameObject.h>
 #include <GameEngineBase/GameEngineString.h>
 
-class GameEngineGUIWindow : public GameEngineNameObject
+class GameEngineGUIWindow : public GameEngineNameObject, public GameEngineUpdateObject
 {
 	friend class GameEngineGUI;
 
-private:
-	bool IsOpen;
+	void Start() override {}
+	void Update(float _DeltaTime) override { };
 
-	void Begin() 
+
+private:
+	void Begin()
 	{
 		std::string Name = GameEngineString::AnsiToUTF8Return(GetNameConstPtr());
 		ImGui::Begin(Name.c_str());
 	}
 
-	void End() 
+	void End()
 	{
 		ImGui::End();
 	}
 
 public:
-	virtual void Initialize(class GameEngineLevel* _Level) = 0; 
+	virtual void Initialize(class GameEngineLevel* _Level) = 0;
 	virtual void OnGUI(GameEngineLevel* _Level, float _DeltaTime) = 0;
 };
 
@@ -34,7 +36,7 @@ class GameEngineGUI
 {
 	friend GameEngineCore;
 
-public:	
+public:
 	GameEngineGUI();
 	~GameEngineGUI();
 
@@ -45,7 +47,7 @@ public:
 
 	static void Initialize();
 	static void GUIRender(GameEngineLevel* _Level, float _DeltaTime);
-	
+
 	template<typename GUIWindowType>
 	static GUIWindowType* CreateGUIWindow(const std::string& _Name, GameEngineLevel* _Level)
 	{
@@ -61,6 +63,7 @@ protected:
 
 private:
 	static std::list<GameEngineGUIWindow*> Windows;
+
 	static void GUIDestroy();
 };
 
