@@ -277,11 +277,11 @@ void GameEngineTextureRenderer::ChangeFrameAnimation(const std::string& _Animati
 		CurAni->Reset();
 		if (nullptr != CurAni->Texture)
 		{
-			SetTexture(CurAni->Texture, CurAni->Info.CurFrame);
+			SetTexture(CurAni->Texture, CurAni->Info.Frames[CurAni->Info.CurFrame]);
 		}
 		else if (nullptr != CurAni->FolderTexture)
 		{
-			SetTexture(CurAni->FolderTexture->GetTexture(CurAni->Info.CurFrame));
+			SetTexture(CurAni->FolderTexture->GetTexture(CurAni->Info.Frames[CurAni->Info.CurFrame]));
 		}
 	}
 }

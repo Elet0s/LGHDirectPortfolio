@@ -135,7 +135,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	//	return;
 	//}
 	//
-	GameEngineDebug::DrawBox();
+	//GameEngineDebug::DrawBox();
 	// GameEngineDebug::DebugSphereRender();
 	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") &&
 		false == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") &&
