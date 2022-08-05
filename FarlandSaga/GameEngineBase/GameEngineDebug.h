@@ -4,27 +4,31 @@
 #include <assert.h>
 #include <Windows.h>
 
-class GameEngineDebug
+
+// 설명 :
+namespace GameEngineDebug
 {
-public:
-	static void LeakCheckOn();
-	static void ConsoleOpen();
+	//public:
+	void LeakCheckOn();
+	void ConsoleOpen();
 
-	static void OutPutString(const std::string& _Text);
+	void OutPutString(const std::string& _Text);
 
-	static void Destroy();
+	void Destroy();
 
-protected:
+	// protected:
 
-private:
-	static HANDLE hConsole;
-	GameEngineDebug();
-	~GameEngineDebug();
+	// private:
+		// static HANDLE hConsole;
+		// constrcuter destructer
+		//GameEngineDebug();
+		//~GameEngineDebug();
 
-	GameEngineDebug(const GameEngineDebug& _Other) = delete;
-	GameEngineDebug(GameEngineDebug&& _Other) noexcept = delete;
-	GameEngineDebug& operator=(const GameEngineDebug& _Other) = delete;
-	GameEngineDebug& operator=(GameEngineDebug&& _Other) noexcept = delete;
+		//// delete Function
+		//GameEngineDebug(const GameEngineDebug& _Other) = delete;
+		//GameEngineDebug(GameEngineDebug&& _Other) noexcept = delete;
+		//GameEngineDebug& operator=(const GameEngineDebug& _Other) = delete;
+		//GameEngineDebug& operator=(GameEngineDebug&& _Other) noexcept = delete;
 
 };
 
@@ -38,3 +42,8 @@ assert(false);
 #define MsgBoxAssertString(Text) 	MessageBeep(0); \
 MessageBoxA(nullptr, (Text).c_str(), "Error", MB_OK); \
 assert(false); 
+
+//namespace GameEngineDebug
+//{
+//	// 새기능
+//};

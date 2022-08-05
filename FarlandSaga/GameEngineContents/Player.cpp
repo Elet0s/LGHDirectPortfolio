@@ -60,9 +60,9 @@ void Player::Start()
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
 		Renderer->GetTransform().SetLocalScale({ 384, 384, 1 });
-		Renderer->CreateFrameAnimation("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.1f));
-		Renderer->CreateFrameAnimation("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.1f));
-		Renderer->CreateFrameAnimation("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.1f));
+		Renderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.1f));
+		Renderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.1f));
+		Renderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.1f));
 		Renderer->ChangeFrameAnimation("LeonIdle");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
@@ -78,7 +78,7 @@ void Player::Start()
 
 	{
 	GameEngineFontRenderer* Font = CreateComponent<GameEngineFontRenderer>();
-	Font->SetText("¾È³çÇÏ¼¼¿ä", "±Ã¼­");
+	Font->SetText("±è¹äÃµ±¹", "±Ã¼­");
 	Font->SetColor({ 1.0f, 0.0f, 0.0f });
 	Font->SetScreenPostion({ 100.0f, 100.0f });
 	}
@@ -135,7 +135,8 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	//	return;
 	//}
 	//
-
+	GameEngineDebug::DrawBox();
+	// GameEngineDebug::DebugSphereRender();
 	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") &&
 		false == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") &&
 		false == GameEngineInput::GetInst()->IsPress("PlayerRightUP") &&

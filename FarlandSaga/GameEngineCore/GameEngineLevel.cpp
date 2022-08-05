@@ -118,6 +118,12 @@ void GameEngineLevel::Render(float _DelataTime)
 		Cameras[i]->Render(_DelataTime);
 	}
 
+	// GameEngineDebug
+
+	// GameEngineDebug
+
+	// 여기서 그려져야 합니다.
+
 	GameEngineGUI::GUIRender(this, _DelataTime);
 
 	GameEngineDevice::RenderEnd();
