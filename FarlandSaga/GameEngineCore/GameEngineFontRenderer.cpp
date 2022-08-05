@@ -1,64 +1,56 @@
-#pragma once
-#include <GameEngineBase/GameEngineMath.h>
-#include <GameEngineBase/GameEngineWindow.h>
+#include "PreCompile.h"
+#include "GameEngineFontRenderer.h"
 
-// 그래픽카드에 연결
+GameEngineRenderTarget* GameEngineFontRenderer::FontTarget = nullptr;
 
-// 설명 :
-class GameEngineRenderTarget;
-class GameEngineDevice
+GameEngineFontRenderer::GameEngineFontRenderer()
+	: Font(nullptr)
+	, FontSize(20.0f)
+	, Color(float4::WHITE)
+	, ScreenPostion(float4::ZERO)
 {
-public:
-	~GameEngineDevice() {}
+}
 
-	// delete Function
-	GameEngineDevice(const GameEngineDevice& _Other) = delete;
-	GameEngineDevice(GameEngineDevice&& _Other) noexcept = delete;
-	GameEngineDevice& operator=(const GameEngineDevice& _Other) = delete;
-	GameEngineDevice& operator=(GameEngineDevice&& _Other) noexcept = delete;
+GameEngineFontRenderer::~GameEngineFontRenderer()
+{
+}
 
-	static void Initialize();
-	static void DeviceCreate();
-	static void CreateSwapChain();
+void GameEngineFontRenderer::SetText(const std::string& _Text, const std::string& _Font)
+{
+	Text = _Text;
+	Font = GameEngineFont::Find(_Font);
+}
 
-	static void RenderStart();
-	static void RenderEnd();
-
-	static ID3D11Device* GetDevice()
+void GameEngineFontRenderer::Start()
+{
+	if (nullptr == FontTarget)
 	{
-		return Device_;
-	}
-	static ID3D11DeviceContext* GetContext()
-	{
-		return Context_;
+		FontTarget = GameEngineRenderTarget::Create("FontTarget");
+		FontTarget->CreateRenderTargetTexture(GameEngineWindow::GetScale(), float4::ZERO);
 	}
 
-	static GameEngineRenderTarget* GetBackBuffer()
+	PushRendererToMainCamera();
+}
+
+// 랜더링 파이프라인이 필요가 아직은 없어요
+void GameEngineFontRenderer::Render(float _DeltaTime)
+{
+	// 이거는 랜더타겟을 해야겠네요.
+	if (nullptr == Font)
 	{
-		return BackBufferTarget;
+		return;
 	}
 
-	static void Destroy();
+	// 이녀석이 내부에서 무슨짓을 하는지는 모르지만.
+	// 기존 화면에다가 그리면 안되죠?
+	// 랜더타겟
+	// 글자는 또다른 랜더타겟에 그릴겁니다.
 
-protected:
-
-private:
-	// 다이렉트 11로 오면서 업무분담을 하게 인터페이스를 변경했다.
-
-	// 다이렉트 9때는 디바이스밖에 없었는데.
-	// 리소스와 메모리 분야를 맡습니다.
-	// 그래픽카드에 뭔가를 만든다면.
-	static ID3D11Device* Device_;
-
-	// 그래픽카드에 연산을 명령할 수 있게 되는데.
-	// 랜더링과 관련된 모든 명령은 이걸로 내린다.
-	static ID3D11DeviceContext* Context_;
-
-	// api의 백버퍼
-	static IDXGISwapChain* SwapChain_;
-
-	static class GameEngineRenderTarget* BackBufferTarget;
-
-	GameEngineDevice();
-};
-
+	// 이전에 존재했던 랜더타겟을 얻고
+	// GameEngineRenderTarget::GetPrevRenderTarget();
+	//FontTarget->Setting();
+	Font->FontDraw(Text, FontSize, ScreenPostion, Color);
+	GameEngineRenderingPipeLine::AllShaderReset();
+	//GameEngineRenderTarget::SetPrevRenderTarget();
+	// FontTarget->R();
+}

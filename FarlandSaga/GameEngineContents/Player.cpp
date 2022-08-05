@@ -77,8 +77,10 @@ void Player::Start()
 	}
 
 	{
-	//GameEngineFontRenderer* Font = CreateComponent<GameEngineFontRenderer>();
-	//Font->SetText("안녕하세요");
+	GameEngineFontRenderer* Font = CreateComponent<GameEngineFontRenderer>();
+	Font->SetText("안녕하세요", "궁서");
+	Font->SetColor({ 1.0f, 0.0f, 0.0f });
+	Font->SetScreenPostion({ 100.0f, 100.0f });
 	}
 	// 무기명 함수를 만들수 있습니다.
 	// 이름없는 인스턴스 함수를 만들수가 있습니다.
