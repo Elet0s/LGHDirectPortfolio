@@ -23,10 +23,9 @@ void TitleLevel::Start()
 
 void TitleLevel::Update(float _DeltaTime)
 {
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
+	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
-		GEngine::ChangeLevel("Stage01");
+		GEngine::ChangeLevel("Event01");
 	}
 
 	// 레벨 바뀌어서 오면 초기화

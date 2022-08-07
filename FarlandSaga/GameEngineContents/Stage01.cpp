@@ -10,6 +10,7 @@
 #include "TestStageBG.h"
 #include <GameEngineCore/GEngine.h>
 #include "GameEngineBase/GameEngineSound.h"
+#include "SoundPlayer.h"
 
 
 Stage01::Stage01()
@@ -33,11 +34,7 @@ void Stage01::Start()
 		GameEngineInput::GetInst()->CreateKey("FreeCameaOnOff", 'O');
 	}
 
-	{
-		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
-	}
-
-	if (false == GameEngineInput::GetInst()->IsKey("CamLeft"))
+	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
 	}
@@ -55,7 +52,7 @@ void Stage01::Start()
 		//actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
 		//actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
 	}
-
+	SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
 }
 void Stage01::Update(float _DeltaTime)
 {
@@ -108,10 +105,13 @@ void Stage01::Update(float _DeltaTime)
 		}
 	}
 
-	if (true == GameEngineInput::GetInst()->IsDown("LevelChange"))
+	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		GEngine::ChangeLevel("Ending");
+		GEngine::ChangeLevel("Event02");
+		SoundPlayer::BGMPlay_->Stop();
 	}
 
 }
-void Stage01::End() {}
+void Stage01::End() 
+{
+}

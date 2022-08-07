@@ -107,7 +107,16 @@ void Player::Start()
 			// ????????
 			// & 외부의 있는 값의 참조형을 받아오는 것이기 때문에
 			// 지역변수를 쓰면 결과를 장담할수가 없다.
-			Renderer->ChangeFrameAnimation("Move");
+			if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
+				true == GameEngineInput::GetInst()->IsPress("PlayerRightUp"))
+			{
+				Renderer->ChangeFrameAnimation("LeonWalkU");
+			}
+			else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
+				true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+			{
+				Renderer->ChangeFrameAnimation("LeonWalkD");
+			}
 
 		});
 	StateManager.ChangeState("Idle");
@@ -126,23 +135,6 @@ void Player::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 		true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
 	{
 		StateManager.ChangeState("Move");
-	}
-}
-
-void Player::MoveStart(const StateInfo& _Info)
-{
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerRightUp"))
-	{
-		Renderer->ChangeFrameAnimation("LeonWalkU");
-
-
-		
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
-	{
-		Renderer->ChangeFrameAnimation("LeonWalkD");
 	}
 }
 
@@ -199,7 +191,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::Update(float _DeltaTime)
 {
-	GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
+	//GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
 
 	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
 	{

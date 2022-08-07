@@ -49,6 +49,9 @@
     <Filter Include="Actor\Unit\PlayerUnit">
       <UniqueIdentifier>{9c37b6ec-e405-49b7-8088-16ee7164d0e3}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\UI\EndUI">
+      <UniqueIdentifier>{083f6d32-2eb5-4859-959c-228bcddc2a49}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -111,6 +114,9 @@
     <ClInclude Include="SoundPlayer.h">
       <Filter>Actor\Com</Filter>
     </ClInclude>
+    <ClInclude Include="MyDialogBox.h">
+      <Filter>Actor\UI</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -169,6 +175,9 @@
     </ClCompile>
     <ClCompile Include="SoundPlayer.cpp">
       <Filter>Actor\Com</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDialogBox.cpp">
+      <Filter>Actor\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

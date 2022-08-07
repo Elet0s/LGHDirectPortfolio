@@ -204,6 +204,10 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="MyDialogBox.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -279,6 +283,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="MyDialogBox.cpp">
       <SubType>
       </SubType>
     </ClCompile>
