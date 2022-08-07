@@ -9,7 +9,6 @@ enum class CAMERAPROJECTIONMODE
 	Orthographic,
 };
 
-// 설명 :
 class GameEngineLevel;
 class GameEngineCamera;
 class GameEngineCamera : public GameEngineTransformComponent
@@ -17,11 +16,9 @@ class GameEngineCamera : public GameEngineTransformComponent
 	friend GameEngineLevel;
 
 public:
-	// constrcuter destructer
 	GameEngineCamera();
 	~GameEngineCamera();
 
-	// delete Function
 	GameEngineCamera(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera(GameEngineCamera&& _Other) noexcept = delete;
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
@@ -45,6 +42,15 @@ public:
 	float4 GetMouseWorldPosition();
 
 	float4 GetMouseWorldPositionToActor();
+
+	inline float4x4 GetView()
+	{
+		return View;
+	}
+	inline float4x4 GetProjectionMatrix()
+	{
+		return Projection;
+	}
 
 	inline float4 GetMouseWorldDir()
 	{
@@ -71,8 +77,8 @@ protected:
 
 private:
 	float4x4 View; // 바라보는것
-	float4x4 ViewPort;
 	float4x4 Projection;
+	float4x4 ViewPort;
 	CAMERAPROJECTIONMODE Mode;
 
 	float4 PrevMouse;

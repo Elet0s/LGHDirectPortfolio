@@ -72,7 +72,7 @@ void Player::Start()
 
 	{
 		Collision = CreateComponent<GameEngineCollision>();
-		Collision->GetTransform().SetLocalScale({ 100.0f, 100.0f, 1.0f });
+		Collision->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
 		Collision->ChangeOrder(OBJECTORDER::Player);
 	}
 
@@ -88,8 +88,28 @@ void Player::Start()
 	//{
 	//} 람다를 만들겠다 
 
-	StateManager.CreateStateMember("Idle", this, &Player::IdleUpdate, &Player::IdleStart);
-	StateManager.CreateStateMember("Move", this, &Player::MoveUpdate, &Player::MoveStart);
+	StateManager.CreateStateMember("Idle"
+		, std::bind(&Player::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, std::bind(&Player::IdleStart, this, std::placeholders::_1)
+	);
+
+	int MyValue = 10;
+
+	StateManager.CreateStateMember("Move"
+		, std::bind(&Player::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2)
+		, [/*&*/=](const StateInfo& _Info)
+		{
+			// static const int MyValue = 바깥 MyValue;
+
+			int Test = MyValue;
+			// = 지역변수도 쓸수있다.
+			// MyValue가 하나더 생기는 방식으로 컴파일러가 해석한다.
+			// ????????
+			// & 외부의 있는 값의 참조형을 받아오는 것이기 때문에
+			// 지역변수를 쓰면 결과를 장담할수가 없다.
+			Renderer->ChangeFrameAnimation("Move");
+
+		});
 	StateManager.ChangeState("Idle");
 }
 
@@ -135,7 +155,6 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 	//	return;
 	//}
 	//
-	//GameEngineDebug::DrawBox();
 	// GameEngineDebug::DebugSphereRender();
 	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") &&
 		false == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") &&
@@ -180,6 +199,8 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::Update(float _DeltaTime)
 {
+	GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
+
 	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
 	{
 		return;

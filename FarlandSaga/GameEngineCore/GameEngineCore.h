@@ -19,7 +19,10 @@ public:
 		WindowCreate(Core.GetWindowTitle(), &Core);
 	}
 
-
+	static GameEngineLevel* GetCurLevel()
+	{
+		return CurrentLevel;
+	}
 
 protected:
 	virtual std::string GetWindowTitle() { return "MainWindow"; }
