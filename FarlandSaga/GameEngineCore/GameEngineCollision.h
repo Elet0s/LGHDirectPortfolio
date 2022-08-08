@@ -41,9 +41,20 @@ public:
 		, CollisionType _OtherType
 		, std::function<bool(GameEngineCollision* _This, GameEngineCollision* _Other)> _Function = nullptr);
 
+	bool SetDebugSetting(CollisionType _DebugType, float4 _Color)
+	{
+		DebugType = _DebugType;
+		Color = _Color;
+	}
+
+	void DebugRender();
+
 protected:
 
 private:
+	CollisionType DebugType;
+	float4 Color;
+
 	void Start() override;
 };
 

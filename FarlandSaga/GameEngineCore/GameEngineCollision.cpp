@@ -1,12 +1,11 @@
 #include "PreCompile.h"
 #include "GameEngineCollision.h"
+#include "GameEngineCoreDebug.h"
 
 bool (*GameEngineCollision::CollisionFunction[static_cast<int>(CollisionType::CT_MAX)][static_cast<int>(CollisionType::CT_MAX)])(const GameEngineTransform& _Left, const GameEngineTransform& _Right);
 
 class GameEngineCollisionFunctionInit
 {
-
-
 public:
 	GameEngineCollisionFunctionInit()
 	{
@@ -30,6 +29,8 @@ public:
 GameEngineCollisionFunctionInit Inst;
 
 GameEngineCollision::GameEngineCollision()
+	: DebugType(CollisionType::CT_SPHERE)
+	, Color(1.0f, 0.0f, 0.0f, 0.5f)
 {
 }
 
@@ -56,6 +57,7 @@ bool GameEngineCollision::IsCollision(CollisionType _ThisType, int _GroupOrder
 	{
 		return false;
 	}
+
 	int ThisType = static_cast<int>(_ThisType);
 	int OtherType = static_cast<int>(_OtherType);
 
@@ -85,10 +87,43 @@ bool GameEngineCollision::IsCollision(CollisionType _ThisType, int _GroupOrder
 					return true;
 				}
 			}
-			//이부분 잘못됨
-			//return true;
+			// return true; 이부분 잘못됐어요.
 		}
 	}
 
 	return false;
+}
+
+void GameEngineCollision::DebugRender()
+{
+	switch (DebugType)
+	{
+	case CollisionType::CT_POINT2D:
+		break;
+	case CollisionType::CT_SPHERE2D:
+		GameEngineDebug::DrawSphere(GetTransform(), Color);
+		break;
+	case CollisionType::CT_AABB2D:
+		GameEngineDebug::DrawBox(GetTransform(), Color);
+		break;
+	case CollisionType::CT_OBB2D:
+		GameEngineDebug::DrawBox(GetTransform(), Color);
+		break;
+	case CollisionType::CT_POINT:
+		break;
+	case CollisionType::CT_SPHERE:
+		GameEngineDebug::DrawSphere(GetTransform(), Color);
+		break;
+	case CollisionType::CT_AABB:
+		GameEngineDebug::DrawBox(GetTransform(), Color);
+		break;
+	case CollisionType::CT_OBB:
+		GameEngineDebug::DrawBox(GetTransform(), Color);
+		break;
+	case CollisionType::CT_MAX:
+		break;
+	default:
+		break;
+	}
+
 }

@@ -51,19 +51,24 @@ namespace GameEngineDebug
 		DebugTrans.CalculateWorldViewProjection();
 
 		DebugData.push_back(DebugRenderData{ DebugInfo(DebugRenderType::Box, _Color) , DebugTrans.GetTransformData() });
-
-		// DebugData[0].Data = _Trans.Gettransf
 	}
 
-	//void DrawBox(float4 _Postion, float4 _Rot, float4 _Scale)
-	//{
-	//	GameEngineTransform Trans;
-	//	Trans.SetWorldPosition(_Postion);
-	//	Trans.SetWorldRotation(_Rot);
-	//	Trans.SetWorldScale(_Scale);
-	//	// DebugData.push_back(DebugRenderData());
-	//	int a = 0;
-	//}
+	void DrawSphere(const GameEngineTransform& _Trans, const float4& _Color)
+	{
+		DrawSphere(_Trans, GameEngineCore::GetCurLevel()->GetMainCamera(), _Color);
+	}
+	void DrawSphere(const GameEngineTransform& _Trans, GameEngineCamera* _Camera, const float4& _Color)
+	{
+		static GameEngineTransform DebugTrans;
+
+		DebugTrans.Copy(_Trans);
+		DebugTrans.SetView(_Camera->GetView());
+		DebugTrans.SetProjection(_Camera->GetProjectionMatrix());
+		DebugTrans.CalculateWorldViewProjection();
+
+		DebugData.push_back(DebugRenderData{ DebugInfo(DebugRenderType::Sphere, _Color) , DebugTrans.GetTransformData() });
+	}
+
 
 	GameEngineShaderResourcesHelper DebugShaderResources;
 	GameEngineRenderingPipeLine* DebugRenderingPipeLine;
@@ -84,10 +89,6 @@ namespace GameEngineDebug
 		IsOnce = true;
 	}
 
-	void DrawSphere()
-	{
-
-	};
 
 	void Debug3DRender()
 	{

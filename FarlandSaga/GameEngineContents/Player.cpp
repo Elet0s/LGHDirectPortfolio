@@ -186,6 +186,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 void Player::Update(float _DeltaTime)
 {
 	//GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
+	// GameEngineDebug::DrawSphere(Collision->GetTransform(), {1.0f, 0.0f,0.0f, 0.5f});
 
 	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
 	{
