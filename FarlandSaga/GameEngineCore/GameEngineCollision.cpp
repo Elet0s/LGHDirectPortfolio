@@ -52,6 +52,10 @@ bool GameEngineCollision::IsCollision(CollisionType _ThisType, int _GroupOrder
 	, CollisionType _OtherType
 	, std::function<bool(GameEngineCollision* _This, GameEngineCollision* _Other)> _Function /*= nullptr*/)
 {
+	if (false == IsUpdate())
+	{
+		return false;
+	}
 	int ThisType = static_cast<int>(_ThisType);
 	int OtherType = static_cast<int>(_OtherType);
 

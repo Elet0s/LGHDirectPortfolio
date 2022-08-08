@@ -81,7 +81,17 @@ void ContentsCore::Start()
 		}
 	}
 	{
-
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Face");
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
@@ -101,7 +111,7 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
 
 	///////////////// 폰트 /////////////////
-	GameEngineFont::Load("궁서");
+	GameEngineFont::Load("휴먼고딕");
 
 	///////////////// RTTI 런 타임 타입 인포메이션/////////////////
 	if (false == GameEngineInput::GetInst()->IsKey("NextLevel"))

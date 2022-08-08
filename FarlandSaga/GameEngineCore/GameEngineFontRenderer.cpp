@@ -5,7 +5,7 @@ GameEngineRenderTarget* GameEngineFontRenderer::FontTarget = nullptr;
 
 GameEngineFontRenderer::GameEngineFontRenderer()
 	: Font(nullptr)
-	, FontSize(20.0f)
+	, FontSize(23.0f)
 	, Color(float4::WHITE)
 	, ScreenPostion(float4::ZERO)
 {

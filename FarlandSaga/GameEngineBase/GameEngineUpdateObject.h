@@ -146,6 +146,10 @@ public:
 	virtual void Update(float _DeltaTime) = 0;
 
 	void AllUpdate(float _DeltaTime);
+
+	void AllOnEvent();
+
+	void AllOffEvent();
 protected:
 	// 이 오브젝트가 동작을 하기 시작했다.
 	virtual void OnEvent() {}//레벨체인지 스타트

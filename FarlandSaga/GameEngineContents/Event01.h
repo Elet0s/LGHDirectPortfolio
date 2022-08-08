@@ -1,5 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
+
+class MyDialogBox;
 class Event01 : public GameEngineLevel
 {
 public:
@@ -15,5 +17,6 @@ protected:
 	void Update(float _DeltaTime) override;
 	void End() override;
 
+	MyDialogBox* NewMyDialogBox;
 private:
 };
