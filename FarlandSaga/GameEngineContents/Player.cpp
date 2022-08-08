@@ -59,10 +59,10 @@ void Player::Start()
 
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 384, 384, 1 });
-		Renderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.1f));
-		Renderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.1f));
-		Renderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.1f));
+		Renderer->GetTransform().SetLocalScale({ 250,250, 1 });
+		Renderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
+		Renderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
+		Renderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
 		Renderer->ChangeFrameAnimation("LeonIdle");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
@@ -153,10 +153,10 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
 	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed *2* _DeltaTime);
+		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalPositiveX();
-		Renderer->GetColorData().MulColor.a -= _DeltaTime;
+		//Renderer->GetColorData().MulColor.a -= _DeltaTime;
 	}
 
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
@@ -172,7 +172,6 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalNegativeX();
 	}
-
 	if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);

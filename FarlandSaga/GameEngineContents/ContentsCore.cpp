@@ -106,7 +106,6 @@ void ContentsCore::Start()
 	}
 	///////////////// ¿ÃπÃ¡ˆ cut /////////////////
 
-	GameEngineTexture::Cut("LeonWind.png", 3, 1);
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);
 	GameEngineTexture::Cut("LeonWalkD.png", 4, 1);
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
