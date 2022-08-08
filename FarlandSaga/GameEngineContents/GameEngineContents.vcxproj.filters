@@ -52,6 +52,12 @@
     <Filter Include="Actor\UI\EndUI">
       <UniqueIdentifier>{083f6d32-2eb5-4859-959c-228bcddc2a49}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Renderer">
+      <UniqueIdentifier>{9439c78c-c8e5-45c3-9339-a91dab043dde}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Test">
+      <UniqueIdentifier>{6ff090f1-cf8b-4b61-9745-0e884c56a362}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -117,6 +123,12 @@
     <ClInclude Include="MyDialogBox.h">
       <Filter>Actor\UI</Filter>
     </ClInclude>
+    <ClInclude Include="TitleMapRenderer.h">
+      <Filter>Renderer</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorLevel.h">
+      <Filter>Level\Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -178,6 +190,12 @@
     </ClCompile>
     <ClCompile Include="MyDialogBox.cpp">
       <Filter>Actor\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleMapRenderer.cpp">
+      <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorLevel.cpp">
+      <Filter>Level\Test</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -10,6 +10,7 @@
 #include"GameEngineContents/EndLevel.h"
 #include <GameEngineBase/GameEngineSound.h>
 #include "SoundPlayer.h"
+#include "GameEngineContents/MapEditorLevel.h"
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -131,7 +132,8 @@ void ContentsCore::Start()
 	CreateLevel<Event03>("Event03");
 	CreateLevel<Stage03>("Stage03");
 	CreateLevel<EndLevel>("Ending");
-	ChangeLevel("Stage01");
+	CreateLevel<MapEditorLevel>("MapEditor");
+	ChangeLevel("MapEditor");
 
 	//GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("불러올 파일을 선택하세요", nullptr);
 }
