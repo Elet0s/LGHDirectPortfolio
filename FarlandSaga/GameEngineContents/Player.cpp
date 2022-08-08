@@ -67,7 +67,7 @@ void Player::Start()
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 
 
-		Renderer->SetPivot(PIVOTMODE::BOT);
+		//Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 
 	{
@@ -76,12 +76,6 @@ void Player::Start()
 		Collision->ChangeOrder(OBJECTORDER::Player);
 	}
 
-	{
-	GameEngineFontRenderer* Font = CreateComponent<GameEngineFontRenderer>();
-	Font->SetText("김밥천국", "궁서");
-	Font->SetColor({ 1.0f, 0.0f, 0.0f });
-	Font->SetScreenPostion({ 100.0f, 100.0f });
-	}
 	// 무기명 함수를 만들수 있습니다.
 	// 이름없는 인스턴스 함수를 만들수가 있습니다.
 	// [](const StateInfo& _Info) 
