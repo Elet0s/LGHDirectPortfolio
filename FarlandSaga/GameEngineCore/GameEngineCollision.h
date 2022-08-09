@@ -2,6 +2,7 @@
 #include <GameEngineBase/GameEngineTransform.h>
 #include "GameEngineTransformComponent.h"
 
+// Ό³Έν :
 class GameEngineCollisionFunctionInit;
 class GameEngineCollision : public GameEngineTransformComponent
 {
@@ -11,9 +12,11 @@ private:
 	static bool (*CollisionFunction[static_cast<int>(CollisionType::CT_MAX)][static_cast<int>(CollisionType::CT_MAX)])(const GameEngineTransform& _Left, const GameEngineTransform& _Right);
 
 public:
+	// constrcuter destructer
 	GameEngineCollision();
 	~GameEngineCollision();
 
+	// delete Function
 	GameEngineCollision(const GameEngineCollision& _Other) = delete;
 	GameEngineCollision(GameEngineCollision&& _Other) noexcept = delete;
 	GameEngineCollision& operator=(const GameEngineCollision& _Other) = delete;
@@ -41,7 +44,7 @@ public:
 		, CollisionType _OtherType
 		, std::function<bool(GameEngineCollision* _This, GameEngineCollision* _Other)> _Function = nullptr);
 
-	bool SetDebugSetting(CollisionType _DebugType, float4 _Color)
+	void SetDebugSetting(CollisionType _DebugType, float4 _Color)
 	{
 		DebugType = _DebugType;
 		Color = _Color;

@@ -48,7 +48,8 @@ GameEngineLevel::~GameEngineLevel()
 void GameEngineLevel::ActorUpdate(float _DeltaTime)
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
-	{		// float ScaleTime = GameEngineTime::GetInst()->GetDeltaTime(Group.first);
+	{
+		// float ScaleTime = GameEngineTime::GetInst()->GetDeltaTime(Group.first);
 		for (GameEngineActor* const Actor : Group.second)
 		{
 			if (false == Actor->IsUpdate())
@@ -72,11 +73,12 @@ void GameEngineLevel::ActorOnEvent()
 			{
 				continue;
 			}
-			//루트 엑터만 뭔가를 하는 것
+			// 루트 액터만 뭔가를 하는거죠?
 			Actor->AllOnEvent();
 		}
 	}
 }
+
 void GameEngineLevel::ActorOffEvent()
 {
 	for (const std::pair<int, std::list<GameEngineActor*>>& Group : AllActors)
@@ -89,7 +91,6 @@ void GameEngineLevel::ActorOffEvent()
 				continue;
 			}
 			Actor->AllOffEvent();
-
 		}
 	}
 }
@@ -158,6 +159,7 @@ void GameEngineLevel::Render(float _DelataTime)
 			}
 		}
 	}
+
 	GameEngineDevice::RenderStart();
 
 	// 이 사이에서 무언가를 해야 합니다.
@@ -173,7 +175,9 @@ void GameEngineLevel::Render(float _DelataTime)
 
 	// 여기서 그려져야 합니다.
 	GameEngineDebug::Debug3DRender();
+
 	GameEngineGUI::GUIRender(this, _DelataTime);
+
 
 	GameEngineDevice::RenderEnd();
 }
@@ -367,6 +371,32 @@ void GameEngineLevel::OverChildMove(GameEngineLevel* _NextLevel)
 			_NextLevel->AllCollisions[OverActor->GetOrder()].push_back(OverActor);
 		}
 	}
+}
 
+void GameEngineLevel::AllClear()
+{
+	{
+		std::map<int, std::list<GameEngineActor*>>::iterator StartGroupIter = AllActors.begin();
+		std::map<int, std::list<GameEngineActor*>>::iterator EndGroupIter = AllActors.end();
+
+		std::list<GameEngineActor*> OverList;
+
+		for (; StartGroupIter != EndGroupIter; ++StartGroupIter)
+		{
+			std::list<GameEngineActor*>& Group = StartGroupIter->second;
+			std::list<GameEngineActor*>::iterator GroupStart = Group.begin();
+			std::list<GameEngineActor*>::iterator GroupEnd = Group.end();
+			for (; GroupStart != GroupEnd; ++GroupStart)
+			{
+				delete* GroupStart;
+			}
+		}
+	}
+
+	AllActors.clear();
+
+	Cameras.clear();
+
+	AllCollisions.clear();
 }
 

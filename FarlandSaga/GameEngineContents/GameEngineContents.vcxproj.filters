@@ -16,46 +16,61 @@
     <Filter Include="PreCompile">
       <UniqueIdentifier>{8f97320b-7e97-41f8-b6cb-e84026fbb289}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI">
-      <UniqueIdentifier>{bbb49886-6e6d-427c-9260-4e7f8c9559b5}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Level\Stage">
       <UniqueIdentifier>{4218ad22-2932-403f-8e50-dfc7d3e9150f}</UniqueIdentifier>
     </Filter>
     <Filter Include="Level\Event">
       <UniqueIdentifier>{be5b9e27-665c-441c-be0a-41c474e16ecd}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Actor\UI\StageUI">
-      <UniqueIdentifier>{bbae671b-1e6c-44cb-8ac8-d7c2ad6519df}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\UI\TitleUI">
-      <UniqueIdentifier>{d9df9561-b971-44fd-b1da-045530c2f715}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\BG">
-      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\UI\EventUI">
-      <UniqueIdentifier>{5e5565b5-04dd-4731-8c6b-40cd12de0a16}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Com">
-      <UniqueIdentifier>{5d9067c8-de08-4558-9ad9-d2b3de6e6894}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Unit">
-      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Unit\MonsterUnit">
-      <UniqueIdentifier>{5ace06b5-da67-4ed0-8e6a-3d80491e55c4}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\Unit\PlayerUnit">
-      <UniqueIdentifier>{9c37b6ec-e405-49b7-8088-16ee7164d0e3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Actor\UI\EndUI">
-      <UniqueIdentifier>{083f6d32-2eb5-4859-959c-228bcddc2a49}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Renderer">
       <UniqueIdentifier>{9439c78c-c8e5-45c3-9339-a91dab043dde}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Level\Test">
+    <Filter Include="Actor\00.Global">
+      <UniqueIdentifier>{2c3184eb-28d5-4734-92fd-92a1c31e2b34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\99.MapEditor">
+      <UniqueIdentifier>{5e1d5f8e-2831-4b18-a701-6b94876c9a65}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00.Global\Actor">
+      <UniqueIdentifier>{d5718f2d-fc10-49de-960d-fd9c4a9cd4b3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00.Global\GUI">
+      <UniqueIdentifier>{ccc071e1-8b2e-4673-85fe-895c2c54fc40}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\00.Global\Com">
+      <UniqueIdentifier>{5d9067c8-de08-4558-9ad9-d2b3de6e6894}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\01.Title">
+      <UniqueIdentifier>{4b4a579d-e13b-4014-9fc0-0b4ca0841391}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage">
+      <UniqueIdentifier>{73d08b4f-0f34-4f78-adb6-d96797b145ec}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\03.End">
+      <UniqueIdentifier>{bbf64de4-cb0b-4cb7-9b0c-257488912c1b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\Unit">
+      <UniqueIdentifier>{7b41b84d-f1e2-40ab-9d43-67fa8dc56f97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\Unit\MonsterUnit">
+      <UniqueIdentifier>{5ace06b5-da67-4ed0-8e6a-3d80491e55c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\Unit\PlayerUnit">
+      <UniqueIdentifier>{9c37b6ec-e405-49b7-8088-16ee7164d0e3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\UI">
+      <UniqueIdentifier>{bbb49886-6e6d-427c-9260-4e7f8c9559b5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\BG">
+      <UniqueIdentifier>{5d1f4fbd-7000-468d-9669-c2ac02ff14fd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\02.Stage\Com">
+      <UniqueIdentifier>{f0575796-1e81-4426-97ec-48c4250750cb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\03.End\BG">
+      <UniqueIdentifier>{98e21073-8bef-424b-95eb-c1e29e191bdd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Level\Maptest">
       <UniqueIdentifier>{6ff090f1-cf8b-4b61-9745-0e884c56a362}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -69,9 +84,6 @@
     <ClInclude Include="TitleLevel.h">
       <Filter>Level</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Actor\BG</Filter>
-    </ClInclude>
     <ClInclude Include="PreCompile.h">
       <Filter>PreCompile</Filter>
     </ClInclude>
@@ -79,16 +91,16 @@
       <Filter>Level\Stage</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Actor\Unit\MonsterUnit</Filter>
+      <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
     </ClInclude>
     <ClInclude Include="Player.h">
-      <Filter>Actor\Unit\PlayerUnit</Filter>
+      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
     </ClInclude>
     <ClInclude Include="UIMaster.h">
-      <Filter>Actor\UI</Filter>
+      <Filter>Actor\02.Stage\UI</Filter>
     </ClInclude>
     <ClInclude Include="TestStageBG.h">
-      <Filter>Actor\BG</Filter>
+      <Filter>Actor\02.Stage\BG</Filter>
     </ClInclude>
     <ClInclude Include="GlobalContentsValue.h">
       <Filter>Global</Filter>
@@ -111,23 +123,32 @@
     <ClInclude Include="Event03.h">
       <Filter>Level\Event</Filter>
     </ClInclude>
-    <ClInclude Include="EndingBG.h">
-      <Filter>Actor\BG</Filter>
-    </ClInclude>
-    <ClInclude Include="Flower.h">
-      <Filter>Actor\UI\EventUI</Filter>
-    </ClInclude>
-    <ClInclude Include="SoundPlayer.h">
-      <Filter>Actor\Com</Filter>
-    </ClInclude>
-    <ClInclude Include="MyDialogBox.h">
-      <Filter>Actor\UI</Filter>
-    </ClInclude>
-    <ClInclude Include="TitleMapRenderer.h">
+    <ClInclude Include="TileMapRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="SoundPlayer.h">
+      <Filter>Actor\00.Global\Com</Filter>
+    </ClInclude>
+    <ClInclude Include="TileMapActor.h">
+      <Filter>Actor\00.Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MapEditorWindow.h">
+      <Filter>Actor\00.Global\GUI</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Actor\01.Title</Filter>
+    </ClInclude>
+    <ClInclude Include="MyDialogBox.h">
+      <Filter>Actor\02.Stage\Com</Filter>
+    </ClInclude>
+    <ClInclude Include="EndingBG.h">
+      <Filter>Actor\03.End\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="Flower.h">
+      <Filter>Actor\03.End\BG</Filter>
+    </ClInclude>
     <ClInclude Include="MapEditorLevel.h">
-      <Filter>Level\Test</Filter>
+      <Filter>Level\Maptest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -137,9 +158,6 @@
     <ClCompile Include="TitleLevel.cpp">
       <Filter>Level</Filter>
     </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor\BG</Filter>
-    </ClCompile>
     <ClCompile Include="PreCompile.cpp">
       <Filter>PreCompile</Filter>
     </ClCompile>
@@ -147,16 +165,16 @@
       <Filter>Level\Stage</Filter>
     </ClCompile>
     <ClCompile Include="Monster.cpp">
-      <Filter>Actor\Unit\MonsterUnit</Filter>
+      <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Actor\Unit\PlayerUnit</Filter>
+      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
     </ClCompile>
     <ClCompile Include="UIMaster.cpp">
-      <Filter>Actor\UI</Filter>
+      <Filter>Actor\02.Stage\UI</Filter>
     </ClCompile>
     <ClCompile Include="TestStageBG.cpp">
-      <Filter>Actor\BG</Filter>
+      <Filter>Actor\02.Stage\BG</Filter>
     </ClCompile>
     <ClCompile Include="GlobalContentsValue.cpp">
       <Filter>Global</Filter>
@@ -179,23 +197,32 @@
     <ClCompile Include="Event03.cpp">
       <Filter>Level\Event</Filter>
     </ClCompile>
-    <ClCompile Include="EndingBG.cpp">
-      <Filter>Actor\BG</Filter>
-    </ClCompile>
-    <ClCompile Include="Flower.cpp">
-      <Filter>Actor\UI\EventUI</Filter>
-    </ClCompile>
-    <ClCompile Include="SoundPlayer.cpp">
-      <Filter>Actor\Com</Filter>
-    </ClCompile>
-    <ClCompile Include="MyDialogBox.cpp">
-      <Filter>Actor\UI</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleMapRenderer.cpp">
+    <ClCompile Include="TileMapRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
+    <ClCompile Include="SoundPlayer.cpp">
+      <Filter>Actor\00.Global\Com</Filter>
+    </ClCompile>
+    <ClCompile Include="TileMapActor.cpp">
+      <Filter>Actor\00.Global\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MapEditorWindow.cpp">
+      <Filter>Actor\00.Global\GUI</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Actor\01.Title</Filter>
+    </ClCompile>
+    <ClCompile Include="MyDialogBox.cpp">
+      <Filter>Actor\02.Stage\Com</Filter>
+    </ClCompile>
+    <ClCompile Include="EndingBG.cpp">
+      <Filter>Actor\03.End\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="Flower.cpp">
+      <Filter>Actor\03.End\BG</Filter>
+    </ClCompile>
     <ClCompile Include="MapEditorLevel.cpp">
-      <Filter>Level\Test</Filter>
+      <Filter>Level\Maptest</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

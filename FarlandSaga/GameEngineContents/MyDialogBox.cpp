@@ -377,8 +377,8 @@ void MyDialogBox::Update(float _DeltaTime)
 			DialogUpText03->SetText(" ", "ÈÞ¸Õ°íµñ");
 			break;
 		case 4:
-			DialogStack_ = 0;
-			DialogEnd_ = true;
+			//DialogStack_ = 0;
+			//DialogEnd_ = true;
 			break;
 		default:
 			DialogBoxRenderer01->Off();

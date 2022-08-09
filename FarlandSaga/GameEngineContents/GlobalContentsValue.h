@@ -4,17 +4,19 @@
 
 enum class OBJECTORDER
 {
-	BG,
+	TileMap,
 	Player,
 	Monster,
 	UI = 1000,
 };
+
 //enum class COLLISIONORDER
 //{
 //	Player,
 //	Monster,
 //	UI = 1000,
 //};
+
 class GlobalContentsValue
 {
 public:
@@ -37,3 +39,4 @@ private:
 
 	~GlobalContentsValue() {	}
 };
+

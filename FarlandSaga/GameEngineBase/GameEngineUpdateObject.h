@@ -16,6 +16,10 @@ public:
 	GameEngineUpdateObject& operator=(const GameEngineUpdateObject& _Other) = delete;
 	GameEngineUpdateObject& operator=(GameEngineUpdateObject&& _Other) noexcept = delete;
 
+	inline bool& IsUpdateRef()
+	{
+		return IsUpdate_;
+	}
 
 	inline void On()
 	{
