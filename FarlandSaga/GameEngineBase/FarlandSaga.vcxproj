@@ -228,6 +228,9 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="magic_enum.hpp" />
+    <ClInclude Include="magic_enum_format.hpp" />
+    <ClInclude Include="magic_enum_fuse.hpp" />
     <ClInclude Include="PreCompile.h">
       <SubType>
       </SubType>

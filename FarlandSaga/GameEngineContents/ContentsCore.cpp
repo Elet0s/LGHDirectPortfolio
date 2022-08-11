@@ -11,6 +11,7 @@
 #include <GameEngineBase/GameEngineSound.h>
 #include "SoundPlayer.h"
 #include "GameEngineContents/MapEditorLevel.h"
+#include <GameEngineBase/magic_enum.hpp>
 
 #pragma comment(lib, "GameEngineBase.lib")
 
@@ -25,6 +26,9 @@ ContentsCore::~ContentsCore()
 
 void ContentsCore::Start()
 {
+	// string 최적화를 위한녀석.
+	std::string_view Value = magic_enum::enum_name(OBJECTORDER::Player);
+	std::string Name = Value.data();
 	/////////////////리소스 불러오는 부분/////////////////
 	{
 		GameEngineDirectory Dir;

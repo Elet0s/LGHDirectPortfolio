@@ -24,6 +24,58 @@ void TileMapRenderer::Start()
 	PushRendererToMainCamera();
 }
 
+void TileMapRenderer::GetTileIndex(float4 _Pos, int& _X, int& _Y)
+{
+	float fX = (_Pos.x / TileScaleH.x + _Pos.y / -TileScaleH.y) / 2.0f;
+	float fY = (_Pos.y / -TileScaleH.y - _Pos.x / TileScaleH.x) / 2.0f;
+
+	_X = static_cast<int>(roundf(fX));
+	_Y = static_cast<int>(roundf(fY));
+}
+
+void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index)
+{
+	if (0 > _Index)
+	{
+		return;
+	}
+
+	if (TileTextures->GetTextureCount() <= _Index)
+	{
+		return;
+	}
+
+	// _Pos
+	int X = -1;
+	int Y = -1;
+
+	GetTileIndex(_Pos, X, Y);
+
+	if (0 > X)
+	{
+		return;
+	}
+
+	if (TileX <= X)
+	{
+		return;
+	}
+
+	if (0 > Y)
+	{
+		return;
+	}
+
+	if (TileY <= Y)
+	{
+		return;
+	}
+
+	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
+	Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
+
+}
+
 void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
 {
 	TileTextures = GameEngineFolderTexture::Find(_FolderTexture);
@@ -32,6 +84,9 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, 
 	{
 		MsgBoxAssertString("존재하지 않는 폴더텍스처로 타일맵을 만들려고 했습니다" + _FolderTexture);
 	}
+
+	TileX = _X;
+	TileY = _Y;
 
 	Tiles.resize(_Y);
 
@@ -44,6 +99,7 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, 
 
 		for (size_t x = 0; x < Tiles[y].size(); x++)
 		{
+			Tiles[y][x].TileIndex = static_cast<int>(_DefualtIndex);
 			Tiles[y][x].TileImage = TileTextures->GetTexture(_DefualtIndex);
 		}
 	}

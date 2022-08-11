@@ -21,7 +21,7 @@ public:
 		return Textures.size();
 	}
 
-	GameEngineTexture* GetTexture(int _Index)
+	GameEngineTexture* GetTexture(size_t _Index)
 	{
 		if (Textures.size() <= _Index)
 		{

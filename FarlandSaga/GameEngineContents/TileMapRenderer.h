@@ -5,6 +5,7 @@
 class Tile
 {
 public:
+	int TileIndex;
 	GameEngineTexture* TileImage;
 };
 
@@ -23,15 +24,20 @@ public:
 
 	// CreateTileMap(Scale[0], Scale[1], SelectFolderTexture);
 	void CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex = 0);
+	void SetTileIndex(float4 _Pos, size_t _Index);
+
+	void GetTileIndex(float4 _Pos, int& _X, int& _Y);
 
 protected:
 	void Render(float _DeltaTime) override;
 
 private:
 	void Start() override;
-
 	void Update(float _Delta) override;
 
+
+	int TileX;
+	int TileY;
 
 	GameEngineFolderTexture* TileTextures;
 

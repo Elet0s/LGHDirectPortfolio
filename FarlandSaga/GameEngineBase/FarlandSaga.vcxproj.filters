@@ -31,6 +31,9 @@
     <Filter Include="PreCompile">
       <UniqueIdentifier>{9db26297-f51a-4f7c-ab8e-2c4a238004b8}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Enum">
+      <UniqueIdentifier>{9e1ac27d-df72-47d2-bb68-6c240295337c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineDebug.h">
@@ -80,6 +83,15 @@
     </ClInclude>
     <ClInclude Include="GameEnginePath.h">
       <Filter>IO</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum.hpp">
+      <Filter>Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum_format.hpp">
+      <Filter>Enum</Filter>
+    </ClInclude>
+    <ClInclude Include="magic_enum_fuse.hpp">
+      <Filter>Enum</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

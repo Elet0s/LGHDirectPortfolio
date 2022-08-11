@@ -18,6 +18,8 @@ public:
 
 	int Scale[2];
 
+	size_t SelectTile;
+
 
 protected:
 
