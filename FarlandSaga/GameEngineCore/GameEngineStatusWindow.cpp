@@ -52,6 +52,19 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 		GEngine::GetCurrentLevel()->GetMainCameraActor()->FreeCameraModeOnOff();
 	}
 
+	ImGui::Text("Level Select");
+	for (std::pair<std::string, GameEngineLevel*> Pair : GameEngineCore::AllLevels)
+	{
+		if (true == ImGui::Button(Pair.first.c_str()))
+		{
+			GameEngineCore::ChangeLevel(Pair.first);
+		}
+
+		ImGui::SameLine();
+	}
+
+	ImGui::NewLine();
+
 	std::string AllRenderTarget = "AllRenderTarget";
 	ImGui::Text(AllRenderTarget.c_str());
 

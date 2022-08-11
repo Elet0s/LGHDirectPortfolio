@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "MapEditorLevel.h"
-#include "LoginUI.h"
 #include "Enums.h"
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
@@ -32,7 +31,6 @@ void MapEditorLevel::OnEvent()
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
-		Dir.Move("Texture");
 		Dir.Move("Map");
 
 		std::vector<GameEngineFile> Ress = Dir.GetAllFile();

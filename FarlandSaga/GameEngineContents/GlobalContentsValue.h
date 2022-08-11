@@ -8,6 +8,7 @@ enum class OBJECTORDER
 	Player,
 	Monster,
 	UI = 1000,
+	BG
 };
 
 //enum class COLLISIONORDER
