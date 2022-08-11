@@ -67,6 +67,7 @@ void ContentsCore::Start()
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
+		Dir.Move("Map");
 		Dir.Move("Stage01");
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 		for (size_t i = 0; i < Shaders.size(); i++)

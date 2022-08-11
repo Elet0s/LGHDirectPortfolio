@@ -31,7 +31,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         GameEngineDirectory Dir;
         Dir.MoveParentToExitsChildDirectory("ConstantResources");
         Dir.Move("ConstantResources");
-        Dir.Move("Texture");
         Dir.Move("Map");
 
 
