@@ -1,6 +1,8 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
+#include "TileMapRenderer.h"
 
+class TileMapRenderer;
 class TileMapActor : public GameEngineActor
 {
 public:
@@ -11,6 +13,8 @@ public:
 	TileMapActor(TileMapActor&& _Other) noexcept = delete;
 	TileMapActor& operator=(const TileMapActor& _Other) = delete;
 	TileMapActor& operator=(TileMapActor&& _Other) noexcept = delete;
+
+	TileMapRenderer* TileRenderer;
 
 protected:
 	void Start() override;

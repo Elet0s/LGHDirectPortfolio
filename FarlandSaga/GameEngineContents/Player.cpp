@@ -184,7 +184,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::Update(float _DeltaTime)
 {
-	//GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
+	// GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
 	// GameEngineDebug::DrawSphere(Collision->GetTransform(), {1.0f, 0.0f,0.0f, 0.5f});
 
 	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
@@ -193,6 +193,12 @@ void Player::Update(float _DeltaTime)
 	}
 
 	StateManager.Update(_DeltaTime);
+
+	//if (true == Collision->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::UI, CollisionType::CT_OBB2D))
+	//{
+	//	int a = 0;
+	//	// Æ÷Å»°ú ´ê¾Ò´Ù¸é
+	//}
 
 	//Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2End, this, std::placeholders::_1));
 	//Renderer->AnimationBindEnd("Test1", std::bind(&Player::Test2End, this, std::placeholders::_1));

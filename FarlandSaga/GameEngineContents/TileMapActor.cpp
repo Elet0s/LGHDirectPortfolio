@@ -1,6 +1,5 @@
 #include "PreCompile.h"
 #include "TileMapActor.h"
-#include "TileMapRenderer.h"
 
 TileMapActor::TileMapActor()
 {
@@ -13,10 +12,10 @@ TileMapActor::~TileMapActor()
 void TileMapActor::Start()
 {
 	{
-		TileMapRenderer* Renderer = CreateComponent<TileMapRenderer>();
+		TileRenderer = CreateComponent<TileMapRenderer>();
 	}
-
 }
+
 void TileMapActor::Update(float _DeltaTime)
 {
 

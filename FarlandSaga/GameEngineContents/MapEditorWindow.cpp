@@ -1,7 +1,9 @@
 #include "PreCompile.h"
 #include "MapEditorWindow.h"
+#include "TileMapActor.h"
 
 MapEditorWindow::MapEditorWindow()
+    : Scale{ 30, 30 }
 {
 }
 
@@ -15,6 +17,7 @@ void MapEditorWindow::Initialize(class GameEngineLevel* _Level)
 
 }
 
+
 void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
     if (true == ImGui::Button("FolderTextureLoad"))
@@ -22,33 +25,31 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         GameEngineDirectory Dir;
         Dir.MoveParentToExitsChildDirectory("ConstantResources");
         Dir.Move("ConstantResources");
-        Dir.Move("Texture");
         Dir.Move("Map");
 
-        OPENFILENAME OFN;
-        char filePathName[100] = "";
-        char lpstrFile[100] = "";
-        // static char filter[] = "모든 파일\0*.*\0텍스트 파일\0*.txt\0fbx 파일\0*.fbx";
-        static char filter[] = "모든 폴더\0*.\0";
 
-        std::string FullPath = Dir.GetFullPath();
 
-        memset(&OFN, 0, sizeof(OPENFILENAME));
-        OFN.lStructSize = sizeof(OPENFILENAME);
-        OFN.hwndOwner = nullptr;
-        OFN.lpstrFilter = filter;
-        OFN.lpstrFile = lpstrFile;
-        OFN.nMaxFile = 100;
-        OFN.lpstrInitialDir = FullPath.c_str();
-        OFN.Flags = OFN_EXPLORER;
+        std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), Dir.GetFullPath());
 
-        char PrevDir[256] = { 0 };
-        GetCurrentDirectoryA(256, PrevDir);
+        if (false == Path.empty())
+        {
+            SelectFolderTexture = GameEnginePath::GetFileName(Path);
 
-        if (GetOpenFileName(&OFN) != 0) {
-            SetCurrentDirectoryA(PrevDir);
+            GameEngineFolderTexture::Load(Path.c_str());
         }
-
-        int a = 0;
     }
+
+    if (false == SelectFolderTexture.empty())
+    {
+        ImGui::SameLine();
+        ImGui::Text(SelectFolderTexture.c_str());
+        ImGui::InputInt2("Scale", Scale);
+
+        if (true == ImGui::Button("MapCreate"))
+        {
+            TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], { 64, 32 }, SelectFolderTexture, 32);
+        }
+    }
+
+
 }

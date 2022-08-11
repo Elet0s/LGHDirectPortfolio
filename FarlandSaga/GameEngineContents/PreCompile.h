@@ -42,3 +42,4 @@
 #include "GlobalContentsValue.h"
 //Contents
 #include "Enums.h"
+#include "TileMapActor.h"

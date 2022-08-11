@@ -18,7 +18,7 @@ MapEditorLevel::~MapEditorLevel()
 void MapEditorLevel::Start()
 {
 	{
-		TileMapActor* actor = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
+		TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
 	}
 
 }
@@ -41,7 +41,8 @@ void MapEditorLevel::OnEvent()
 		}
 
 		{
-			GameEngineGUI::CreateGUIWindow<MapEditorWindow>("MapEditorGui", this);
+			MapEditorWindow* TileMapEditorGUI = GameEngineGUI::CreateGUIWindow<MapEditorWindow>("MapEditorGui", this);
+			TileMapEditorGUI->TileMap = TileMap;
 		}
 	}
 }
