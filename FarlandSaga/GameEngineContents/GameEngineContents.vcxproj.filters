@@ -150,9 +150,6 @@
     <ClInclude Include="MapEditorLevel.h">
       <Filter>Level\Maptest</Filter>
     </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Actor\Com</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -226,9 +223,6 @@
     </ClCompile>
     <ClCompile Include="MapEditorLevel.cpp">
       <Filter>Level\Maptest</Filter>
-    </ClCompile>
-    <ClCompile Include="Mouse.cpp">
-      <Filter>Actor\Com</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
