@@ -3,8 +3,10 @@
 #include "TileMapActor.h"
 
 MapEditorWindow::MapEditorWindow()
-    : Scale{ 30, 30 }
+    : Scale{ 30, 30 , 1}
+    , ZScale{0}
     , SelectTile(-1)
+    , ButtonCheaker(false)
 {
 }
 
@@ -49,21 +51,33 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
     {
         ImGui::SameLine();
         ImGui::Text(SelectFolderTexture.c_str());
-        ImGui::InputInt2("Scale", Scale);
+        ImGui::InputInt3("Scale", Scale);
 
         if (true == ImGui::Button("MapCreate"))
         {
-            TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], { 64, 32 }, SelectFolderTexture, 32);
+            TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], Scale[2], { 64, 32 }, SelectFolderTexture, 16);
+            ButtonCheaker = true;
         }
 
 
         std::string SelectIndex = "Select Index = ";
         int X;
         int Y;
+        int Z;
+
         TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPositionToActor(), X, Y);//몇번째 타일인지
+        if (ButtonCheaker = true)
+        {
+            TileMap->TileRenderer->SetZIndex(X, Y, Z);
+        }
+
 
         SelectIndex += std::to_string(X);
         SelectIndex += " " + std::to_string(Y);
+        if (X >= 0 && Y >= 0)
+        {
+            SelectIndex += " " + std::to_string(Z);
+        }
 
         ImGui::Text(SelectIndex.c_str());
     }
@@ -102,6 +116,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile);
         int a = 0;
     }
-    // TileMap->TileRenderer->
 
 }
+    // TileMap->TileRenderer->

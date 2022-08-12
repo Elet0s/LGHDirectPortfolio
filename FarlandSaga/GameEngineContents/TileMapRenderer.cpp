@@ -76,7 +76,7 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index)
 
 }
 
-void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
+void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
 {
 	TileTextures = GameEngineFolderTexture::Find(_FolderTexture);
 
@@ -101,6 +101,7 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, float4 _TileScale, 
 		{
 			Tiles[y][x].TileIndex = static_cast<int>(_DefualtIndex);
 			Tiles[y][x].TileImage = TileTextures->GetTexture(_DefualtIndex);
+			Tiles[y][x].Z = _Z;
 		}
 	}
 }
@@ -139,4 +140,17 @@ void TileMapRenderer::Render(float _DeltaTime)
 			GameEngineDefaultRenderer::Render(_DeltaTime);
 		}
 	}
+}
+
+void TileMapRenderer::SetZIndex(int& _X, int& _Y, int& _Z)
+{
+	if (_X>=0)
+	{
+		if (_Y>=0)
+		{
+			float fZ = Tiles[_Y][_X].Z;
+			_Z = static_cast<int>(roundf(fZ));
+		}
+	}
+
 }
