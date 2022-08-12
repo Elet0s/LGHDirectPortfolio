@@ -1,5 +1,4 @@
 #pragma once
-#include <GameEngineCore/GameEngineComponent.h>
 #include<GameEngineBase/GameEngineSound.h>
 
 class SoundPlayer

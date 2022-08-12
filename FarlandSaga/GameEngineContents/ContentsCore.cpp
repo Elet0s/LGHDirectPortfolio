@@ -114,7 +114,9 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);
 	GameEngineTexture::Cut("LeonWalkD.png", 4, 1);
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
+	GameEngineTexture::Cut("click.png", 14, 1);
 
+	
 	///////////////// ÆùÆ® /////////////////
 	GameEngineFont::Load("ÈÞ¸Õ°íµñ");
 
