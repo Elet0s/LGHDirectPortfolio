@@ -29,8 +29,10 @@ void GameEngineActor::DetachObject()
 	GameEngineUpdateObject::DetachObject();
 
 	GetTransform().DetachTransform();
-
-	GetLevel()->PushActor(this, this->GetOrder());
+	if (false == IsDeath())
+	{
+		GetLevel()->PushActor(this, this->GetOrder());
+	}
 }
 
 void GameEngineActor::SetParent(GameEngineUpdateObject* _Object)
