@@ -101,13 +101,13 @@ void Player::Start()
 			// ????????
 			// & 외부의 있는 값의 참조형을 받아오는 것이기 때문에
 			// 지역변수를 쓰면 결과를 장담할수가 없다.
-			if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
-				true == GameEngineInput::GetInst()->IsPress("PlayerRightUp"))
+			if (true == GameEngineInput::GetInst()->IsDown("PlayerLeftUP") ||
+				true == GameEngineInput::GetInst()->IsDown("PlayerRightUp"))
 			{
 				Renderer->ChangeFrameAnimation("LeonWalkU");
 			}
-			else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
-				true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+			else if (true == GameEngineInput::GetInst()->IsDown("PlayerLeftDown") ||
+				true == GameEngineInput::GetInst()->IsDown("PlayerRightDown"))
 			{
 				Renderer->ChangeFrameAnimation("LeonWalkD");
 			}
@@ -159,20 +159,20 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 		//Renderer->GetColorData().MulColor.a -= _DeltaTime;
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
+	else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalPositiveX();
 	}
 
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
+	else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
 		Renderer->GetTransform().PixLocalNegativeX();
 	}
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+	else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
 	{
 		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
 		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);

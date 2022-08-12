@@ -60,7 +60,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         std::string SelectIndex = "Select Index = ";
         int X;
         int Y;
-        TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPosition(), X, Y);
+        TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPositionToActor(), X, Y);
 
         SelectIndex += std::to_string(X);
         SelectIndex += " " + std::to_string(Y);
@@ -96,7 +96,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         && SelectTile < Texture->GetTextureCount())
     {
 
-        float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPosition();
+        float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPositionToActor();
         // GameEngineInput::
 
         TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile);
