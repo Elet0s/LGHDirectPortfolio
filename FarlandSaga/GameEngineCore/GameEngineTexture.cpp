@@ -178,6 +178,18 @@ void GameEngineTexture::Cut(const std::string& _Name, UINT _X, UINT _Y)
 
 	Texture->Cut(_X, _Y);
 }
+void GameEngineTexture::Cut(UINT _StartX, UINT _StartY, UINT _SizeX, UINT _SizeY)
+{
+	float4 FrameData;
+
+	FrameData.PosX = _StartX / GetScale().x;
+	FrameData.PosY = _StartY / GetScale().y;
+	FrameData.SizeX = _SizeX / GetScale().x;
+	FrameData.SizeY = _SizeY / GetScale().y;
+
+	CutData.push_back(FrameData);
+
+}
 
 void GameEngineTexture::Cut(UINT _X, UINT _Y)
 {

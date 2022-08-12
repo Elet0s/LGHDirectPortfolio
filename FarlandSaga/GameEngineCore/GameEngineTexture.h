@@ -105,6 +105,7 @@ public:
 
 	float4 GetPixelToFloat4(int _x, int _y);
 
+	void Cut(UINT _StartX, UINT _StartY, UINT _SizeX, UINT _SizeY);
 
 protected:
 

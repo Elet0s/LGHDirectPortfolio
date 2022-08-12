@@ -6,6 +6,7 @@ class Tile
 {
 public:
 	int TileIndex;
+	int Z;
 	GameEngineTexture* TileImage;
 };
 
