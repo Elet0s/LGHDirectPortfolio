@@ -66,56 +66,59 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         int Z;
 
         TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPositionToActor(), X, Y);//몇번째 타일인지
-        if (ButtonCheaker = true)
+        if (ButtonCheaker == true)
         {
             TileMap->TileRenderer->SetZIndex(X, Y, Z);
         }
 
 
-        SelectIndex += std::to_string(X);
-        SelectIndex += " " + std::to_string(Y);
+        SelectIndex += "X." + std::to_string(X) + " ";
+        SelectIndex += "Y." + std::to_string(Y) + " ";
         if (X >= 0 && Y >= 0)
         {
-            SelectIndex += " " + std::to_string(Z);
+            SelectIndex += "Z." + std::to_string(Z);
         }
 
         ImGui::Text(SelectIndex.c_str());
     }
 
-    GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
-
-    if (nullptr != Texture)
+    if (ButtonCheaker == true)
     {
-        ImGui::BeginChildFrame(reinterpret_cast<ImGuiID>("TileSelect"), { 90 * 5, 500 });
+        GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
 
-        for (size_t i = 0; i < Texture->GetTextureCount(); i++)
+        if (nullptr != Texture)
         {
-            GameEngineTexture* TileImage = Texture->GetTexture(i);
-            if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
-            {
-                SelectTile = i;
-            }
+            ImGui::BeginChildFrame(reinterpret_cast<ImGuiID>("TileSelect"), { 90 * 5, 500 });
 
-            if (0 != (i + 1) % 5)
+            for (size_t i = 0; i < Texture->GetTextureCount(); i++)
             {
-                ImGui::SameLine();
+                GameEngineTexture* TileImage = Texture->GetTexture(i);
+                if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
+                {
+                    SelectTile = i;
+                }
+
+                if (0 != (i + 1) % 5)
+                {
+                    ImGui::SameLine();
+                }
             }
+            ImGui::EndChildFrame();
         }
-        ImGui::EndChildFrame();
+
+        if (true == GameEngineInput::GetInst()->IsDown("TileSet")
+            && nullptr != Texture
+            && -1 != SelectTile
+            && SelectTile < Texture->GetTextureCount())
+        {
+
+            float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPositionToActor();//타일 세팅
+            // GameEngineInput::
+
+            TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile);
+            int a = 0;
+        }
+
     }
-
-    if (true == GameEngineInput::GetInst()->IsDown("TileSet")
-        && nullptr != Texture
-        && -1 != SelectTile
-        && SelectTile < Texture->GetTextureCount())
-    {
-
-        float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPositionToActor();//타일 세팅
-        // GameEngineInput::
-
-        TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile);
-        int a = 0;
-    }
-
 }
     // TileMap->TileRenderer->

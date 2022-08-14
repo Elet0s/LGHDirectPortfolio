@@ -124,10 +124,6 @@ void ContentsCore::Start()
 	if (false == GameEngineInput::GetInst()->IsKey("NextLevel"))
 	{
 		GameEngineInput::GetInst()->CreateKey("NextLevel", 'P');
-		GameEngineInput::GetInst()->CreateKey("MoveTitle", '1');
-		GameEngineInput::GetInst()->CreateKey("MoveStage01", '2');
-		GameEngineInput::GetInst()->CreateKey("MoveStage02", '3');
-		GameEngineInput::GetInst()->CreateKey("MoveStage03", '4');
 	}
 
 	CreateLevel<TitleLevel>("Title");
@@ -141,34 +137,13 @@ void ContentsCore::Start()
 	CreateLevel<MapEditorLevel>("MapEditor");
 	ChangeLevel("Title");
 
-	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("디버그 온!", nullptr);
+	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("GameManager", nullptr);
 }
 
 void ContentsCore::Update(float _DeltaTime)
 {
 	// 서버가 종료되었어.
 	// 무조건 경고 메세지창을 띄워줘야한다.
-	if (true == GameEngineInput::GetInst()->IsDown("MoveTitle"))
-	{
-		SoundPlayer::BGMPlay_->Stop();
-		GEngine::ChangeLevel("Title");
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("MoveStage01"))
-	{
-		SoundPlayer::BGMPlay_->Stop();
-		GEngine::ChangeLevel("Stage01");
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("MoveStage02"))
-	{
-		SoundPlayer::BGMPlay_->Stop();
-		GEngine::ChangeLevel("Stage02");
-	}
-	if (true == GameEngineInput::GetInst()->IsDown("MoveStage03"))
-	{
-		SoundPlayer::BGMPlay_->Stop();
-		GEngine::ChangeLevel("Stage03");
-	}
-
 }
 
 void ContentsCore::End()

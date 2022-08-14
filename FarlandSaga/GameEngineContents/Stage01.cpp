@@ -52,8 +52,20 @@ void Stage01::Start()
 		//actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
 		//actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
 	}
-	SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
+
 }
+
+void Stage01::OnEvent()
+{
+	SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
+
+}
+
+void Stage01::OffEvent()
+{
+	SoundPlayer::BGMPlay_->Stop();
+}
+
 void Stage01::Update(float _DeltaTime)
 {
 	if (GameEngineInput::GetInst()->IsDown("FreeCameaOnOff"))
@@ -107,8 +119,7 @@ void Stage01::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		GEngine::ChangeLevel("Event01");
-		SoundPlayer::BGMPlay_->Stop();
+		GEngine::ChangeLevel("Event02");
 	}
 
 }

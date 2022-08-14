@@ -43,7 +43,13 @@ void Event01::Update(float _DeltaTime)
 			NewMyDialogBox->DialogEnd_ = false;
 		}
 	}	
+	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
+	{
+		GEngine::ChangeLevel("Stage01");
+	}
 }
+
+
 void Event01::End()
 {
 
