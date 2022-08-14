@@ -29,11 +29,13 @@ void TileMapRenderer::GetTileIndex(float4 _Pos, int& _X, int& _Y)
 	float fX = (_Pos.x / TileScaleH.x + _Pos.y / -TileScaleH.y) / 2.0f;
 	float fY = (_Pos.y / -TileScaleH.y - _Pos.x / TileScaleH.x) / 2.0f;
 
+
 	_X = static_cast<int>(roundf(fX));
 	_Y = static_cast<int>(roundf(fY));
+
 }
 
-void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index)
+void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//텍스처 선택해서 누를때
 {
 	if (0 > _Index)
 	{
@@ -41,6 +43,10 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index)
 	}
 
 	if (TileTextures->GetTextureCount() <= _Index)
+	{
+		return;
+	}
+	if (0 > _ZChage)
 	{
 		return;
 	}
@@ -73,7 +79,7 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index)
 
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
-
+	Tiles[Y][X].Z = _ZChage;
 }
 
 void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
@@ -87,6 +93,7 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _Til
 
 	TileX = _X;
 	TileY = _Y;
+	TileZ = _Z;
 
 	Tiles.resize(_Y);
 
@@ -110,6 +117,10 @@ void TileMapRenderer::Update(float _Delta)
 {
 
 }
+void ZChange(int Scale)
+{
+
+}
 void TileMapRenderer::Render(float _DeltaTime)
 {
 	static GameEngineTransform TileTrans;
@@ -118,8 +129,6 @@ void TileMapRenderer::Render(float _DeltaTime)
 	TileTrans.SetView(GetTransform().GetTransformData().ViewMatrix);
 	TileTrans.SetProjection(GetTransform().GetTransformData().ProjectionMatrix);
 	// DebugTrans.CalculateWorldViewProjection();
-
-
 
 	for (size_t y = 0; y < Tiles.size(); y++)
 	{
@@ -130,8 +139,10 @@ void TileMapRenderer::Render(float _DeltaTime)
 			// Pos.y += -TileScale.y * y;
 
 			Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
-			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y);
-			Pos.z = Pos.y;
+
+			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
+	
+			Pos.z = -Tiles[y][x].Z;
 
 			TileTrans.SetLocalPosition(Pos);
 			TileTrans.CalculateWorldViewProjection();

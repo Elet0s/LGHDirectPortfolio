@@ -27,7 +27,7 @@ Stage01::~Stage01()
 void Stage01::Start()
 {
 
-	CreateActor<TestStageBG>(OBJECTORDER::BG);
+	CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 
 	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))
 	{
