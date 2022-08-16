@@ -139,13 +139,8 @@ protected:
 
 
 private:
-	void PushActor(GameEngineActor* _Actor, int _ObjectGroupIndex)
-	{
-		std::list<GameEngineActor*>& Group = AllActors[_ObjectGroupIndex];
+	void PushActor(GameEngineActor* _Actor, int _ObjectGroupIndex);
 
-		Group.push_back(_Actor);
-	}
-	
 	void ActorOnEvent();
 
 	void ActorOffEvent();

@@ -80,6 +80,7 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//텍�
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
 	Tiles[Y][X].Z = _ZChage;
+
 }
 
 void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
@@ -108,14 +109,22 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _Til
 		{
 			Tiles[y][x].TileIndex = static_cast<int>(_DefualtIndex);
 			Tiles[y][x].TileImage = TileTextures->GetTexture(_DefualtIndex);
+			if (_Z >0)
+			{
+				Tiles[y][x].Ztile = TileTextures->GetTexture(1);
+			}
 			Tiles[y][x].Z = _Z;
+
 		}
 	}
 }
 
 void TileMapRenderer::Update(float _Delta)
 {
-
+	//if (true == Tiles[TileY][TileX].TileCol->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::TileMap, CollisionType::CT_OBB2D))
+	//{
+	//	Tiles[TileY][TileX].TileRender->SetTexture("TestStage.png");
+	//}
 }
 void ZChange(int Scale)
 {
@@ -142,7 +151,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
 	
-			Pos.z = -Tiles[y][x].Z;
+			Pos.z = -Tiles[y][x].Z;// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
 
 			TileTrans.SetLocalPosition(Pos);
 			TileTrans.CalculateWorldViewProjection();

@@ -24,7 +24,6 @@ void MapEditorWindow::Initialize(class GameEngineLevel* _Level)
 
 }
 
-
 void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
     // ImGui::PushID
@@ -34,8 +33,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         Dir.MoveParentToExitsChildDirectory("ConstantResources");
         Dir.Move("ConstantResources");
         Dir.Move("Map");
-
-
 
         std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), Dir.GetFullPath());
 
@@ -58,7 +55,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], Scale[2], { 64, 32 }, SelectFolderTexture, 16);
             ButtonCheaker = true;
         }
-        ImGui::InputInt("Z", ZScale);
+        ImGui::InputInt("Change Z", ZScale);
 
         std::string SelectIndex = "Select Index = ";
         int X;

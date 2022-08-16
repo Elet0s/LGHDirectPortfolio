@@ -49,7 +49,8 @@ void GameEngineCollision::ChangeOrder(int _Order)
 	GetActor()->GetLevel()->PushCollision(this, _Order);
 }
 
-bool GameEngineCollision::IsCollision(CollisionType _ThisType, int _GroupOrder
+bool GameEngineCollision::IsCollision(CollisionType _ThisType
+	, int _GroupOrder
 	, CollisionType _OtherType
 	, std::function<bool(GameEngineCollision* _This, GameEngineCollision* _Other)> _Function /*= nullptr*/)
 {

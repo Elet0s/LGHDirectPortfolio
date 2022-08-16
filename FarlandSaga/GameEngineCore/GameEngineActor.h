@@ -58,6 +58,11 @@ public:
 	}
 	void ActorUpdate(float _DeltaTime);
 
+	bool IsRoot()
+	{
+		return nullptr == GetParent();
+	}
+
 protected:
 	virtual void Start() override;
 	virtual void Update(float _DeltaTime) override;

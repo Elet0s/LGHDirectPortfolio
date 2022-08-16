@@ -8,6 +8,8 @@ public:
 	int TileIndex;
 	int Z;
 	GameEngineTexture* TileImage;
+	GameEngineCollision* TileCol;
+	GameEngineTexture* Ztile;
 };
 
 // 타일의 정보
