@@ -84,7 +84,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         {
             ImGui::BeginChildFrame(reinterpret_cast<ImGuiID>("TileSelect"), { 90 * 5, 500 });
 
-            for (size_t i = 0; i < Texture->GetTextureCount(); i++)
+            for (size_t i = 15; i < Texture->GetTextureCount(); i++)
             {
                 GameEngineTexture* TileImage = Texture->GetTexture(i);
                 if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
@@ -99,7 +99,34 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             }
             ImGui::EndChildFrame();
         }
+       
+        ImGui::SameLine();
 
+        if (ButtonCheaker == true)
+        {
+            GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
+
+            if (nullptr != Texture)
+            {
+                ImGui::BeginChildFrame(reinterpret_cast<ImGuiID>("TileSelect02"), { 90 * 5, 500 });
+
+                for (size_t i = 0; i < 15; i++)
+                {
+                    GameEngineTexture* TileImage = Texture->GetTexture(i);
+                    if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
+                    {
+                        SelectTile = i;
+                    }
+
+                    if (0 != (i + 1) % 5)
+                    {
+                        ImGui::SameLine();
+                    }
+                }
+                ImGui::EndChildFrame();
+            }
+
+        }
         if (true == GameEngineInput::GetInst()->IsDown("TileSet")
             && nullptr != Texture
             && -1 != SelectTile
@@ -112,7 +139,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile, ZScale[0]);
             int a = 0;
         }
-
     }
 }
     // TileMap->TileRenderer->

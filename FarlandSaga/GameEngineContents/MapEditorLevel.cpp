@@ -20,9 +20,9 @@ void MapEditorLevel::Start()
 	{
 		TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
 	}
-	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
+	if (false == GameEngineInput::GetInst()->IsKey("MouseRight"))
 	{
-		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
+		GameEngineInput::GetInst()->CreateKey("MouseRight", VK_RBUTTON);
 	}
 }
 
@@ -57,12 +57,12 @@ void MapEditorLevel::Update(float _DeltaTime)
 
 	//////// 마우스드래그 맵 이동하는 기능 ///////////
 	{
-		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
+		if (true == GameEngineInput::GetInst()->IsDown("MouseRight"))
 		{
 			GetCursorPos(&ptMouse1);
 			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
 		}
-		if (true == GameEngineInput::GetInst()->IsPress("MouseLeft"))
+		if (true == GameEngineInput::GetInst()->IsPress("MouseRight"))
 		{
 			GetCursorPos(&ptMouse2);
 			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse2);
