@@ -162,16 +162,20 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			if (Tiles[y][x].Z > 0)
 			{
-				Pos.y -= 16;
-				TileTrans.SetLocalPosition(Pos);
-				TileTrans.CalculateWorldViewProjection();
-				ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
-				if (Tiles[y][x].Ztile == nullptr)
+				for (size_t z = 1; z <= Tiles[y][x].Z; z++)
 				{
-					Tiles[y][x].Ztile = TileTextures->GetTexture(1);
+					Pos.y -= 16;
+					TileTrans.SetLocalPosition(Pos);
+					TileTrans.CalculateWorldViewProjection();
+					ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+					if (Tiles[y][x].Ztile == nullptr)
+					{
+						Tiles[y][x].Ztile = TileTextures->GetTexture(1);
+					}
+					ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
+					GameEngineDefaultRenderer::Render(_DeltaTime);
 				}
-				ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
-				GameEngineDefaultRenderer::Render(_DeltaTime);
+
 			}
 
 	
