@@ -45,6 +45,7 @@ private:
 	int TileX;
 	int TileY;
 	int TileZ;
+	int RenderZ;
 
 	GameEngineFolderTexture* TileTextures;
 

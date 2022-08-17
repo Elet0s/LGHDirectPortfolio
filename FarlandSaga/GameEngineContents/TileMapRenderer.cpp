@@ -152,17 +152,44 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
 			Pos.z = -Tiles[y][x].Front;
-			Pos.z += Tiles[y][x].Z;// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
-			
+			// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
+
 			TileTrans.SetLocalPosition(Pos);
 			TileTrans.CalculateWorldViewProjection();
 			ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
 			ShaderResources.SetTexture("Tex", Tiles[y][x].TileImage);
 			GameEngineDefaultRenderer::Render(_DeltaTime);
-
-			if (Tiles[y][x].Z > 0)
+			if (x+1 < TileX && y + 1 < TileY)
 			{
-				for (size_t z = 1; z <= Tiles[y][x].Z; z++)
+				if (Tiles[y][x].Z > Tiles[y + 1][x + 1].Z)
+				{
+					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z +2;
+				}
+				else if (Tiles[y][x].Z <= Tiles[y + 1][x + 1].Z)
+				{
+					RenderZ = 2;
+				}
+			}
+			else if (x+1 == TileX || y+1 == TileY)
+			{
+				RenderZ = Tiles[y][x].Z;
+			}
+			if (Tiles[y][x].Z > 5)
+			{
+				Pos.y -= 16;
+				TileTrans.SetLocalPosition(Pos);
+				TileTrans.CalculateWorldViewProjection();
+				ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+
+				Tiles[y][x].Ztile = TileTextures->GetTexture(10);
+
+				ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
+				GameEngineDefaultRenderer::Render(_DeltaTime);
+			}
+
+			else if (RenderZ > 0)
+			{
+				for (size_t z = 1; z <= RenderZ; z++)
 				{
 					Pos.y -= 16;
 					TileTrans.SetLocalPosition(Pos);
@@ -175,10 +202,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 					ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
 					GameEngineDefaultRenderer::Render(_DeltaTime);
 				}
-
 			}
-
-	
 		}
 	}
 }
