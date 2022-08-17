@@ -7,6 +7,7 @@ class Tile
 public:
 	int TileIndex;
 	int Z;
+	int Front;
 	GameEngineTexture* TileImage;
 	GameEngineCollision* TileCol;
 	GameEngineTexture* Ztile;
