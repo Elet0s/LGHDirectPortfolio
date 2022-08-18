@@ -8,12 +8,28 @@
 template<typename ResType>
 class GameEngineRes : public GameEngineNameObject
 {
+protected:
+	bool Original;
 
 public:
-	GameEngineRes() {}
+	bool IsOriginal()
+	{
+		return Original;
+	}
+
+public:
+	GameEngineRes()
+		: Original(true)
+	{
+	}
 	virtual ~GameEngineRes() {}
 
-	GameEngineRes(const GameEngineRes& _Other) = delete;
+	GameEngineRes(const GameEngineRes& _Other)
+		: Original(false)
+	{
+
+	}
+
 	GameEngineRes(GameEngineRes&& _Other) noexcept = delete;
 	GameEngineRes& operator=(const GameEngineRes& _Other) = delete;
 	GameEngineRes& operator=(GameEngineRes&& _Other) noexcept = delete;
