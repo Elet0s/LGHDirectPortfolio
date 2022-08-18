@@ -11,6 +11,7 @@
     <FxCompile Include="DebugTexture.hlsl">
       <Filter>Debug</Filter>
     </FxCompile>
+    <FxCompile Include="RenderOption.fx" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">
