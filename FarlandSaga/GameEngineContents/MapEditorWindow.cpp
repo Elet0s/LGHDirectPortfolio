@@ -123,7 +123,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
             if (nullptr != Texture)
             {
-                ImGui::BeginChildFrame(reinterpret_cast<ImGuiID>("TileSelect02"), { 90 * 5, 500 });
+                ImGui::BeginChildFrame(ImGui::GetID("TileSelect2"), { 90 * 5, 500 });
 
                 for (size_t i = 0; i < 15; i++)
                 {
