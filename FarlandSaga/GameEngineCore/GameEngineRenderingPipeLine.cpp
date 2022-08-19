@@ -31,7 +31,6 @@ GameEngineRenderingPipeLine::GameEngineRenderingPipeLine()
 
 GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 {
-
 }
 
 //
@@ -45,6 +44,7 @@ GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 //		return;
 //	}
 //}
+
 void GameEngineRenderingPipeLine::AllShaderReset()
 {
 	GameEngineDevice::GetContext()->VSSetShader(nullptr, nullptr, 0);
@@ -53,10 +53,12 @@ void GameEngineRenderingPipeLine::AllShaderReset()
 	GameEngineDevice::GetContext()->HSSetShader(nullptr, nullptr, 0);
 	GameEngineDevice::GetContext()->PSSetShader(nullptr, nullptr, 0);
 }
+
 GameEngineRenderingPipeLine* GameEngineRenderingPipeLine::Create()
 {
 	return CreateResUnName();
 }
+
 GameEngineRenderingPipeLine* GameEngineRenderingPipeLine::Create(const std::string& _Name)
 {
 	return CreateResName(_Name);
@@ -88,8 +90,6 @@ void GameEngineRenderingPipeLine::SetVertexShader(const std::string& _Name)
 		MsgBoxAssert("존재하지 않는 버텍스 쉐이더를 세팅하려고 했습니다.");
 		return;
 	}
-
-
 
 	// 인풋레이아웃이 만들어지지 않았는데.
 	if (nullptr == InputLayOut && nullptr != VertexBuffer)
@@ -195,7 +195,6 @@ void GameEngineRenderingPipeLine::VertexShaderSetting()
 {
 	VertexShader->Setting();
 	// 위치 
-
 	// D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
 }
 

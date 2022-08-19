@@ -30,7 +30,6 @@ struct RenderOption
     int Option20;
 };
 
-// Ό³Έν :
 class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
 {
@@ -40,11 +39,9 @@ class GameEngineRenderer : public GameEngineTransformComponent
 public:
     RenderOption Option;
 
-    // constrcuter destructer
     GameEngineRenderer();
     ~GameEngineRenderer();
 
-    // delete Function
     GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
     GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
     GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
@@ -52,6 +49,7 @@ public:
 
     // float4x4 ViewPort;
     void ChangeCamera(CAMERAORDER _Order);
+
     GameEngineRenderingPipeLine* GetClonePipeLine(GameEngineRenderingPipeLine* _Rendering);
 
 protected:
