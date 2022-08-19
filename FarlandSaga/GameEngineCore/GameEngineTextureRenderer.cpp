@@ -3,6 +3,11 @@
 #include "GameEngineTexture.h"
 #include "GameEngineFolderTexture.h"
 
+void FrameAnimation::PauseSwtich()
+{
+	Pause = !Pause;
+}
+
 void FrameAnimation::Reset()
 {
 	Info.FrameTime = 0.0f;
@@ -11,57 +16,60 @@ void FrameAnimation::Reset()
 
 void FrameAnimation::Update(float _Delta)
 {
-
-	Info.FrameTime += _Delta;
-
-	if (nullptr != Time)
+	if (false == true)
 	{
-		Time(Info, _Delta);
-	}
 
-	if (false == bOnceStart
-		&& Info.CurFrame == 0)
-	{
-		if (nullptr != Start)
+
+		Info.FrameTime += _Delta;
+
+		if (nullptr != Time)
 		{
-			Start(Info);
-		}
-		bOnceStart = true;
-		bOnceEnd = false;
-	}
-
-	if (Info.Inter <= Info.FrameTime)
-	{
-		if (Info.CurFrame == (Info.Frames.size() - 1)
-			&& false == bOnceEnd
-			&& nullptr != End)
-		{
-			End(Info);
-			bOnceEnd = true;
-			bOnceStart = false;
+			Time(Info, _Delta);
 		}
 
-		++Info.CurFrame;
-		if (nullptr != Frame)
+		if (false == bOnceStart
+			&& Info.CurFrame == 0)
 		{
-			Frame(Info);
-		}
-
-		if (Info.CurFrame >= Info.Frames.size())
-		{
-
-			if (true == Info.Loop)
+			if (nullptr != Start)
 			{
-				Info.CurFrame = 0;
+				Start(Info);
 			}
-			else
-			{
-				Info.CurFrame = static_cast<unsigned int>(Info.Frames.size()) - 1;
-			}
+			bOnceStart = true;
+			bOnceEnd = false;
 		}
-		Info.FrameTime -= Info.Inter;
-	}
 
+		if (Info.Inter <= Info.FrameTime)
+		{
+			if (Info.CurFrame == (Info.Frames.size() - 1)
+				&& false == bOnceEnd
+				&& nullptr != End)
+			{
+				End(Info);
+				bOnceEnd = true;
+				bOnceStart = false;
+			}
+
+			++Info.CurFrame;
+			if (nullptr != Frame)
+			{
+				Frame(Info);
+			}
+
+			if (Info.CurFrame >= Info.Frames.size())
+			{
+
+				if (true == Info.Loop)
+				{
+					Info.CurFrame = 0;
+				}
+				else
+				{
+					Info.CurFrame = static_cast<unsigned int>(Info.Frames.size()) - 1;
+				}
+			}
+			Info.FrameTime -= Info.Inter;
+		}
+	}
 	if (nullptr != Texture)
 	{
 		ParentRenderer->CurTex = Texture;
@@ -128,6 +136,11 @@ void GameEngineTextureRenderer::SetTextureRendererSetting()
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
 	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
 
+}
+
+void GameEngineTextureRenderer::CurAnimationPauseSwitch()
+{
+	CurAni->PauseSwtich();
 }
 
 void GameEngineTextureRenderer::Start()
