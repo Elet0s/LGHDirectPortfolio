@@ -20,7 +20,8 @@ protected:
 	void End() override;
 
 private:
-	void OnEvent() override;
+	void LevelStartEvent() override;
+	void LevelEndEvent() override;
 
 	POINT ptMouse1;
 	POINT ptMouse2;

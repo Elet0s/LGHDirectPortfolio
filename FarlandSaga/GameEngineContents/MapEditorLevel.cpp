@@ -25,8 +25,10 @@ void MapEditorLevel::Start()
 		GameEngineInput::GetInst()->CreateKey("MouseRight", VK_RBUTTON);
 	}
 }
-
-void MapEditorLevel::OnEvent()
+void MapEditorLevel::End()
+{
+}
+void MapEditorLevel::LevelStartEvent()
 {
 	// 2번 로딩 안되도록
 	if (nullptr == GameEngineTexture::Find("PivotTile.png"))
@@ -49,11 +51,13 @@ void MapEditorLevel::OnEvent()
 		}
 	}
 }
-
+void MapEditorLevel::LevelEndEvent()
+{
+}
 void MapEditorLevel::Update(float _DeltaTime)
 {
 	// 그림하나 띄우려고 액터 하나 만드는 건 너무나도 귀찮은 일이기 때문에 만들어 봤습니다.
-	GameEngineDebug::DrawTexture("PivotTile.png", { 0,0,0,1 }, { 0,0,0 });
+	GameEngineDebug::DrawTexture("PivotTile.png", { 0,0-10,1 }, { 0,0,0 });
 
 	//////// 마우스드래그 맵 이동하는 기능 ///////////
 	{
@@ -101,6 +105,5 @@ void MapEditorLevel::Update(float _DeltaTime)
 
 }
 
-void MapEditorLevel::End()
-{
-}
+
+
