@@ -130,6 +130,7 @@
     <FxCompile Include="Color.hlsl" />
     <FxCompile Include="Debug3D.hlsl" />
     <FxCompile Include="DebugTexture.hlsl" />
+    <FxCompile Include="RenderOption.fx" />
     <FxCompile Include="Texture.hlsl" />
     <FxCompile Include="TextureAtlas.hlsl" />
     <FxCompile Include="TransformHeader.fx" />

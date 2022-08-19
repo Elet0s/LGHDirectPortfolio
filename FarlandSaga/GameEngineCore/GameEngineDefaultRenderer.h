@@ -15,11 +15,6 @@ class GameEngineDefaultRenderer : public GameEngineRenderer
 public:
 	GameEngineShaderResourcesHelper ShaderResources;
 
-	GameEngineRenderingPipeLine* GetPipeLine()
-	{
-		return PipeLine;
-	}
-
 	GameEngineDefaultRenderer();
 	~GameEngineDefaultRenderer();
 
@@ -31,6 +26,8 @@ public:
 	virtual void Render(float _DeltaTime);
 
 	void SetPipeLine(const std::string& _Name);
+
+	GameEngineRenderingPipeLine* GetPipeLine();
 
 protected:
 	virtual void Start();

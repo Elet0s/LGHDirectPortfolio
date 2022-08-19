@@ -35,6 +35,11 @@ void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
 		ShaderResources.SetConstantBufferLink("TRANSFORMDATA", &GetTransformData(), sizeof(GetTransformData()));
 	}
 
+	if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
+	{
+		ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
+	}
+
 }
 
 void GameEngineDefaultRenderer::Render(float _DeltaTime)
@@ -49,3 +54,14 @@ void GameEngineDefaultRenderer::Render(float _DeltaTime)
 	PipeLine->Rendering();
 }
 
+
+GameEngineRenderingPipeLine* GameEngineDefaultRenderer::GetPipeLine()
+{
+	if (false == PipeLine->IsOriginal())
+	{
+		return PipeLine;
+	}
+
+	PipeLine = GetClonePipeLine(PipeLine);
+	return PipeLine;
+}

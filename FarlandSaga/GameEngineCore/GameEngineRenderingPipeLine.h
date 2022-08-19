@@ -14,6 +14,8 @@ class GameEngineRenderingPipeLine : public GameEngineRes<GameEngineRenderingPipe
 public:
 	static void AllShaderReset();
 
+	static GameEngineRenderingPipeLine* Create();
+
 	static GameEngineRenderingPipeLine* Create(const std::string& _Name);
 
 public:
@@ -67,6 +69,8 @@ public:
 	{
 		return PixelShader;
 	}
+
+	void Copy(GameEngineRenderingPipeLine* _Original);
 
 protected:
 

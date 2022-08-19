@@ -59,48 +59,46 @@ void FrameAnimation::Update(float _Delta)
 				Info.CurFrame = static_cast<unsigned int>(Info.Frames.size()) - 1;
 			}
 		}
+		Info.FrameTime -= Info.Inter;
+	}
 
-		if (nullptr != Texture)
+	if (nullptr != Texture)
+	{
+		ParentRenderer->CurTex = Texture;
+		ParentRenderer->SetTexture(Texture, Info.Frames[Info.CurFrame]);
+		ParentRenderer->SetPivot();
+
+		// 잘렸다는 거죠?
+		if (Texture->GetCutCount() != 0)
 		{
-			ParentRenderer->CurTex = Texture;
-			ParentRenderer->SetTexture(Texture, Info.Frames[Info.CurFrame]);
-			ParentRenderer->SetPivot();
-
-			// 잘렸다는 거죠?
-			if (Texture->GetCutCount() != 0)
+			if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
 			{
-				if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
-				{
-					ParentRenderer->ScaleToCutTexture(Info.Frames[Info.CurFrame]);
-				}
-			}
-			else
-			{
-				if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
-				{
-					ParentRenderer->ScaleToTexture();
-				}
+				ParentRenderer->ScaleToCutTexture(Info.Frames[Info.CurFrame]);
 			}
 		}
-		else if (nullptr != FolderTexture)
+		else
 		{
-			ParentRenderer->FrameDataReset();
-			ParentRenderer->CurTex = FolderTexture->GetTexture(Info.Frames[Info.CurFrame]);
-			ParentRenderer->SetTexture(FolderTexture->GetTexture(Info.Frames[Info.CurFrame]));
-			ParentRenderer->SetPivot();
-
 			if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
 			{
 				ParentRenderer->ScaleToTexture();
 			}
 		}
-		else
+	}
+	else if (nullptr != FolderTexture)
+	{
+		ParentRenderer->FrameDataReset();
+		ParentRenderer->CurTex = FolderTexture->GetTexture(Info.Frames[Info.CurFrame]);
+		ParentRenderer->SetTexture(FolderTexture->GetTexture(Info.Frames[Info.CurFrame]));
+		ParentRenderer->SetPivot();
+
+		if (ParentRenderer->ScaleMode == SCALEMODE::IMAGE)
 		{
-			MsgBoxAssert("텍스처가 세팅되지 않은 애니메이션 입니다.");
+			ParentRenderer->ScaleToTexture();
 		}
-
-
-		Info.FrameTime -= Info.Inter;
+	}
+	else
+	{
+		MsgBoxAssert("텍스처가 세팅되지 않은 애니메이션 입니다.");
 	}
 }
 
@@ -349,8 +347,7 @@ void GameEngineTextureRenderer::ScaleToTexture()
 
 void GameEngineTextureRenderer::CurAnimationReset()
 {
-	CurAnimationSetStartPivotFrame(0);
-	// CurAni->Info.CurFrame = CurAni->Info.Start;
+	CurAni->Reset();
 }
 
 void GameEngineTextureRenderer::CurAnimationSetStartPivotFrame(int SetFrame)
