@@ -125,7 +125,7 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _Til
 		{
 			Tiles[y][x].TileIndex = static_cast<int>(_DefualtIndex);
 			Tiles[y][x].TileImage = TileTextures->GetTexture(_DefualtIndex);
-			Tiles[y][x].Front = (x + y)*2;
+			Tiles[y][x].TileDepth = (x + y)*2;
 			if (_Z >5)
 			{
 				Tiles[y][x].Ztile = TileTextures->GetTexture(9);
@@ -170,9 +170,24 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
-			Pos.z = -Tiles[y][x].Front;
+			Pos.z = -Tiles[y][x].TileDepth;
 			// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
-			TileTrans.SetLocalScale(float4(64, 32));
+			if (Tiles[y][x].TileIndex > 60)
+			{
+				switch (Tiles[y][x].TileIndex)
+				{
+				case 64:
+					TileTrans.SetLocalScale(float4(64, 55));
+					break;
+				default:
+					TileTrans.SetLocalScale(float4(64, 48));
+					break;
+				}
+			}
+			else
+			{
+				TileTrans.SetLocalScale(float4(64, 32));
+			}
 			TileTrans.SetLocalPosition(Pos);
 			TileTrans.CalculateWorldViewProjection();
 			ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());

@@ -19,6 +19,7 @@ public:
 	int Scale[3];
 	int ZScale[1];
 	size_t SelectTile;
+	bool LoadCheaker;
 
 
 protected:

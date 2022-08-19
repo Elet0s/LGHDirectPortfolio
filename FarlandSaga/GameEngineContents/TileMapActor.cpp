@@ -14,6 +14,11 @@ void TileMapActor::Start()
 	{
 		TileRenderer = CreateComponent<TileMapRenderer>();
 	}
+	{
+		TileCol = CreateComponent<GameEngineCollision>();
+		TileCol->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
+		TileCol->ChangeOrder(OBJECTORDER::Player);
+	}
 }
 
 void TileMapActor::Update(float _DeltaTime)
