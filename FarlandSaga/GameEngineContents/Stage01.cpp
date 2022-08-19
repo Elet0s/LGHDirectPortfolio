@@ -55,13 +55,13 @@ void Stage01::Start()
 
 }
 
-void Stage01::OnEvent()
+void Stage01::LevelStartEvent()
 {
 	SoundPlayer::BGMPlay_->ChangeBgm("BGM01.MID", 1);
 
 }
 
-void Stage01::OffEvent()
+void Stage01::LevelEndEvent()
 {
 	SoundPlayer::BGMPlay_->Stop();
 }

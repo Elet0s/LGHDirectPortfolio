@@ -2,7 +2,7 @@
 #include "GameEngineMath.h"
 #include <DirectXCollision.h>
 #include <GameEngineBase/GameEngineDebugObject.h>
-#include <GameEngineBase/GameEngineUpdateObject.h>
+
 #include <list>
 
 enum class CollisionType

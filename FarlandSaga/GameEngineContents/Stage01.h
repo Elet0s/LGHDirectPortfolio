@@ -16,8 +16,8 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;
 	void End() override;
-	void OnEvent() override;
-	void OffEvent()	override;
+	void LevelStartEvent() override;
+	void LevelEndEvent()	override;
 private:
 	POINT ptMouse1;
 	POINT ptMouse2;

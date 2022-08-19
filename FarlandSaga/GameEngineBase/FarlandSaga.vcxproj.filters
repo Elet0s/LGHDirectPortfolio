@@ -57,9 +57,6 @@
     <ClInclude Include="GameEngineNameObject.h">
       <Filter>Object</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineUpdateObject.h">
-      <Filter>Object</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineString.h">
       <Filter>String</Filter>
     </ClInclude>
@@ -117,9 +114,6 @@
       <Filter>Math</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineNameObject.cpp">
-      <Filter>Object</Filter>
-    </ClCompile>
-    <ClCompile Include="GameEngineUpdateObject.cpp">
       <Filter>Object</Filter>
     </ClCompile>
     <ClCompile Include="GameEngineString.cpp">

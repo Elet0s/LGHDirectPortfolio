@@ -220,10 +220,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineUpdateObject.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GameEngineWindow.h">
       <SubType>
       </SubType>
@@ -292,10 +288,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineTransform_Collision.cpp" />
-    <ClCompile Include="GameEngineUpdateObject.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
     <ClCompile Include="GameEngineWindow.cpp">
       <SubType>
       </SubType>

@@ -1,6 +1,6 @@
 #pragma once
 #include <GameEngineBase/GameEngineNameObject.h>
-#include <GameEngineBase/GameEngineUpdateObject.h>
+#include "GameEngineUpdateObject.h"
 
 class GameEngineComponent :
 	public GameEngineNameObject,

@@ -236,6 +236,9 @@
     <ClInclude Include="portable-file-dialogs.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineUpdateObject.h">
+      <Filter>Object</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -379,6 +382,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineCoreDebug.cpp">
       <Filter>Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineUpdateObject.cpp">
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
