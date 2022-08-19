@@ -24,16 +24,19 @@ public:
 	inline void On()
 	{
 		IsUpdate_ = true;
+		OnEvent();
 	}
 
 	inline void Off()
 	{
 		IsUpdate_ = false;
+		OnEvent();
 	}
 
 	inline void OnOffSwitch()
 	{
 		IsUpdate_ = !IsUpdate_;
+		IsUpdate_ == true ? OnEvent() : OffEvent();
 	}
 
 	inline bool IsUpdate()
