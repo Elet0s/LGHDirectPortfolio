@@ -5,6 +5,11 @@ TileMapRenderer::TileMapRenderer()
 	:
 	ShortIndex(0)
 	, LongIndex(9)
+	, TileX(0)
+	, TileY(0)
+	, TileZ(0)
+	, RenderZ(0)
+	, TileTextures(nullptr)
 {
 }
 

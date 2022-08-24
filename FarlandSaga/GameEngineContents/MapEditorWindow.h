@@ -20,6 +20,7 @@ public:
 	int ZScale[1];
 	size_t SelectTile;
 	bool LoadCheaker;
+	bool MapObjectSet;
 
 
 protected:

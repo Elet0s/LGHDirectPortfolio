@@ -29,3 +29,5 @@
 #include "GameEngineLevel.h"
 #include <GameEngineBase/GameEngineDirectory.h>
 #include <GameEngineBase/GameEngineFile.h>
+#include <GameEngineBase/GameEngineWriteFile.h>
+#include <GameEnginEBase/GameEngineReadFile.h>

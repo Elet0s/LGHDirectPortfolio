@@ -26,16 +26,6 @@ public:
 
 	void Open(OpenMode _Mode, FileMode _Open);
 
-	void ReadOpen()
-	{
-		Open(OpenMode::Read);
-	}
-
-	void WriteOpen()
-	{
-		Open(OpenMode::Write);
-	}
-
 	void Close();
 
 	void Create()

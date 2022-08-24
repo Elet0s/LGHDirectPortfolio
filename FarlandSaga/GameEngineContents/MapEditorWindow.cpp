@@ -8,6 +8,7 @@ MapEditorWindow::MapEditorWindow()
     , SelectTile(-1)
     , ButtonCheaker(false)
     , LoadCheaker(false)
+    ,MapObjectSet(false)
 {
 }
 

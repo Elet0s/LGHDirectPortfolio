@@ -15,7 +15,6 @@ public:
 	TileMapActor& operator=(TileMapActor&& _Other) noexcept = delete;
 
 	TileMapRenderer* TileRenderer;
-	GameEngineCollision* TileCol;
 protected:
 	void Start() override;
 	void Update(float _DeltaTime);
