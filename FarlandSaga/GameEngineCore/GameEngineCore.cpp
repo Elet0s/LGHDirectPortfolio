@@ -168,12 +168,6 @@ void GameEngineCore::InitializeLevel(GameEngineLevel* _Level, const std::string 
 		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
 	}
 
-	{
-		GameEngineCameraActor* actor = _Level->CreateActor<GameEngineCameraActor>();
-		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
-	}
-
 	_Level->Start();
 	_Level->SetName(_Name);
 

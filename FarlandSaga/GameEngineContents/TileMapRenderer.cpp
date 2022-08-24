@@ -205,18 +205,30 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			///////////////////////////////////////////////////////////////////////////////////////
 
-			if (x + 1 < TileX && y + 1 < TileY) // 비교할 타일이 있음
+			if (x + 1 < TileX && y + 1 < TileY) // 가장자리 안쪽
 			{
-				if (Tiles[y][x].Z > Tiles[y + 1][x + 1].Z) //뒤쪽 타일이 더 크면
+				if (Tiles[y][x].Z > Tiles[y + 1][x+1].Z) //내가 높다면
 				{
-					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z + 2;
+					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z+2; //차이만큼 그려라
 				}
-				else if (Tiles[y][x].Z <= Tiles[y + 1][x + 1].Z) // 앞쪽 타일이 더 크거나 같으면
+				else if (Tiles[y][x].Z < Tiles[y + 1][x + 1].Z)//앞 타일이 크면
 				{
-					RenderZ = 2;
+					RenderZ = 1;
 				}
+				else if (Tiles[y][x].Z = Tiles[y + 1][x + 1].Z) // 앞쪽 타일이같으면
+				{
+					if (Tiles[y][x].Z == 0) //바닥일경우
+					{
+						RenderZ = 0;
+					}
+					else
+					{
+						RenderZ = 2;
+					}
+				}
+
 			}
-			else if (x + 1 == TileX || y + 1 == TileY) // 비교할 타일이 없음
+			else if (x + 1 == TileX || y + 1 == TileY) // 타일 가장자리
 			{
 				RenderZ = Tiles[y][x].Z;
 			}
@@ -268,5 +280,4 @@ void TileMapRenderer::SetZIndex(int& _X, int& _Y, int& _Z)
 			_Z = static_cast<int>(roundf(fZ));
 		}
 	}
-
 }
