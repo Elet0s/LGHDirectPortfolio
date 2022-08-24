@@ -158,29 +158,33 @@ void TileMapRenderer::Render(float _DeltaTime)
 	TileTrans.SetLocalScale(TileScale);
 	TileTrans.SetView(GetTransform().GetTransformData().ViewMatrix);
 	TileTrans.SetProjection(GetTransform().GetTransformData().ProjectionMatrix);
-	// DebugTrans.CalculateWorldViewProjection();
 
 	for (size_t y = 0; y < Tiles.size(); y++)
 	{
 		for (size_t x = 0; x < Tiles[y].size(); x++)
 		{
 			float4 Pos = GetTransform().GetWorldPosition();
-			// Pos.x += TileScale.x * x;
-			// Pos.y += -TileScale.y * y;
 
 			Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
-			Pos.z = -Tiles[y][x].TileDepth;
 			// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
-			if (Tiles[y][x].TileIndex > 60)
+			Pos.z = -Tiles[y][x].TileDepth;
+
+			if (Tiles[y][x].TileIndex > 60) //특수 타일
 			{
 				switch (Tiles[y][x].TileIndex)
 				{
+				case 61:
+					Pos.y += 6;
+					TileTrans.SetWorldScale(float4(64, 48));
+					break;
 				case 64:
-					TileTrans.SetLocalScale(float4(64, 55));
+					Pos.y += 11;
+					TileTrans.SetWorldScale(float4(64, 55));
 					break;
 				default:
-					TileTrans.SetLocalScale(float4(64, 48));
+					Pos.y += 8;
+					TileTrans.SetWorldScale(float4(64, 48));
 					break;
 				}
 			}
@@ -193,42 +197,46 @@ void TileMapRenderer::Render(float _DeltaTime)
 			ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
 			ShaderResources.SetTexture("Tex", Tiles[y][x].TileImage);
 			GameEngineDefaultRenderer::Render(_DeltaTime);
-			if (x+1 < TileX && y + 1 < TileY) // 비교할 타일이 있음
+
+			///////////////////////////////////////////////////////////////////////////////////////
+
+			if (x + 1 < TileX && y + 1 < TileY) // 비교할 타일이 있음
 			{
 				if (Tiles[y][x].Z > Tiles[y + 1][x + 1].Z) //뒤쪽 타일이 더 크면
 				{
-					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z +2;
+					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z + 2;
 				}
 				else if (Tiles[y][x].Z <= Tiles[y + 1][x + 1].Z) // 앞쪽 타일이 더 크거나 같으면
 				{
 					RenderZ = 2;
 				}
 			}
-			else if (x+1 == TileX || y+1 == TileY) // 비교할 타일이 없음
+			else if (x + 1 == TileX || y + 1 == TileY) // 비교할 타일이 없음
 			{
 				RenderZ = Tiles[y][x].Z;
 			}
 
 			if (RenderZ > 5) //그려야할 타일이 5개이상이면
 			{
-					Pos.y -= 56;
-					TileTrans.SetLocalScale(float4(64, 112));
-					TileTrans.SetLocalPosition(Pos);
-					TileTrans.CalculateWorldViewProjection();
-					ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
-					if (Tiles[y][x].Ztile == nullptr)
-					{
-						Tiles[y][x].Ztile = TileTextures->GetTexture(9);
-					}
-					ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
-					GameEngineDefaultRenderer::Render(_DeltaTime);
-				
+				Pos.y -= 56;
+				TileTrans.SetLocalScale(float4(64, 112));
+				TileTrans.SetLocalPosition(Pos);
+				TileTrans.CalculateWorldViewProjection();
+				ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+				if (Tiles[y][x].Ztile == nullptr)
+				{
+					Tiles[y][x].Ztile = TileTextures->GetTexture(9);
+				}
+				ShaderResources.SetTexture("Tex", Tiles[y][x].Ztile);
+				GameEngineDefaultRenderer::Render(_DeltaTime);
+
 			}
 
 			else if (RenderZ > 0)// 그려야할 타일이 5개이하면
 			{
 				for (size_t z = 1; z <= RenderZ; z++)
 				{
+					TileTrans.SetLocalScale(float4(64, 32));
 					Pos.y -= 16;
 					TileTrans.SetLocalPosition(Pos);
 					TileTrans.CalculateWorldViewProjection();

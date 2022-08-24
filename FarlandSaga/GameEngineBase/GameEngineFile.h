@@ -26,6 +26,16 @@ public:
 
 	void Open(OpenMode _Mode, FileMode _Open);
 
+	void ReadOpen()
+	{
+		Open(OpenMode::Read);
+	}
+
+	void WriteOpen()
+	{
+		Open(OpenMode::Write);
+	}
+
 	void Close();
 
 	void Create()
@@ -39,7 +49,6 @@ public:
 	// 받는용 버퍼
 	void Read(void* _ReadData, size_t _BufferSize, size_t _ReadSize);
 
-	void Read();
 
 	std::string GetString();
 

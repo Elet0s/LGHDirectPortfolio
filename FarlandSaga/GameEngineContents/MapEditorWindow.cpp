@@ -15,21 +15,18 @@ MapEditorWindow::~MapEditorWindow()
 {
 }
 
-
 void MapEditorWindow::Initialize(class GameEngineLevel* _Level)
 {
     if (false == GameEngineInput::GetInst()->IsKey("TileSet"))
     {
         GameEngineInput::GetInst()->CreateKey("TileSet", VK_LBUTTON);
     }
-
 }
 
 void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
-    if (LoadCheaker == false)
+    if (LoadCheaker == false)//텍스처 로드
     {
-        // ImGui::PushID
         if (true == ImGui::Button("FolderTextureLoad"))
         {
             GameEngineDirectory Dir;
@@ -49,56 +46,44 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         }
     }
 
+    if (false == SelectFolderTexture.empty())
+    {
 
+        ImGui::Text("LodingFolder ->");           
+        ImGui::SameLine();
+        ImGui::Text(SelectFolderTexture.c_str());
+        ImGui::InputInt3("Scale", Scale);
 
-        if (false == SelectFolderTexture.empty())
+        if (true == ImGui::Button("MapCreate"))
         {
-
-            ImGui::Text("LodingFolder ->");            ImGui::SameLine();
-            ImGui::Text(SelectFolderTexture.c_str());
-            ImGui::InputInt3("Scale", Scale);
-
-            if (true == ImGui::Button("MapCreate"))
-            {
-                TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], Scale[2], { 64, 32 }, SelectFolderTexture, 16);
-                ButtonCheaker = true;
-            }
-
+            TileMap->TileRenderer->CreateIsometricTileMap(Scale[0], Scale[1], Scale[2], { 64, 32 }, SelectFolderTexture, 16);
+            ButtonCheaker = true;
         }
+    }
     
     if (ButtonCheaker == true)
     {
-
         if (!ImGui::CollapsingHeader("SetTile"))
             return;
 
         ImGui::InputInt("Change Z", ZScale);
-
         std::string SelectIndex = "Select Index = ";
         int X;
         int Y;
         int Z;
-
         TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPositionToActor(), X, Y);//몇번째 타일인지
-
         TileMap->TileRenderer->SetZIndex(X, Y, Z);
-
         SelectIndex += "X." + std::to_string(X) + " ";
         SelectIndex += "Y." + std::to_string(Y) + " ";
         if (X >= 0 && Y >= 0)
         {
             SelectIndex += "Z." + std::to_string(Z);
         }
-
         ImGui::Text(SelectIndex.c_str());
-
-
         GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
-
         if (nullptr != Texture)
         {
             ImGui::BeginChildFrame(ImGui::GetID("TileSelect"), { 90 * 5, 500 });
-
             for (size_t i = 15; i < Texture->GetTextureCount(); i++)
             {
                 GameEngineTexture* TileImage = Texture->GetTexture(i);
@@ -106,7 +91,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                 {
                     SelectTile = i;
                 }
-
                 if (0 != (i + 1) % 5)
                 {
                     ImGui::SameLine();
@@ -114,17 +98,14 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             }
             ImGui::EndChildFrame();
         }
-       
         ImGui::SameLine();
 
         if (ButtonCheaker == true)
         {
             GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
-
             if (nullptr != Texture)
             {
                 ImGui::BeginChildFrame(ImGui::GetID("TileSelect2"), { 90 * 5, 500 });
-
                 for (size_t i = 0; i < 15; i++)
                 {
                     GameEngineTexture* TileImage = Texture->GetTexture(i);
@@ -132,7 +113,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                     {
                         SelectTile = i;
                     }
-
                     if (0 != (i + 1) % 5)
                     {
                         ImGui::SameLine();
@@ -142,17 +122,22 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             }
 
         }
-        if (true == GameEngineInput::GetInst()->IsDown("TileSet")
+
+        if (true == GameEngineInput::GetInst()->IsDown("TileSet") // 선택한 설정으로 타일 설정
             && nullptr != Texture
             && -1 != SelectTile
             && SelectTile < Texture->GetTextureCount())
         {
-
             float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPositionToActor();//현재 마우스 위치 가져오는 부분
-
             TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile, ZScale[0]);
         }
+        if (true == ImGui::Button("Save"))
+        {
+            GameEngineDirectory Dir;
+            Dir.MoveParentToExitsChildDirectory("ConstantResources");
+            Dir.Move("ConstantResources");
+            Dir.Move("Data");
+            GameEngineFile SaveFile = (Dir.GetFullPath() + "\\" + SelectFolderTexture + ".MapData").c_str();
+        }
     }
-
 }
-    // TileMap->TileRenderer->
