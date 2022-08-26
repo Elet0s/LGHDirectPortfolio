@@ -29,6 +29,7 @@ public:
 	{
 		return Context_;
 	}
+	static IDXGIAdapter* GetHighPerformanceAdapter();
 
 	static void Destroy();
 

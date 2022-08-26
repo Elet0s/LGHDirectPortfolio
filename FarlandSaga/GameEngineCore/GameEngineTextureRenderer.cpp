@@ -243,6 +243,7 @@ void GameEngineTextureRenderer::CreateFrameAnimationFolder(const std::string& _A
 
 	FrameAnimation& NewAni = FrameAni[Name];
 	NewAni.Info = _Desc;
+	NewAni.Info.Renderer = this;
 	NewAni.ParentRenderer = this;
 	NewAni.Texture = nullptr;
 	NewAni.FolderTexture = GameEngineFolderTexture::Find(_Desc.TextureName);
@@ -268,6 +269,7 @@ void GameEngineTextureRenderer::CreateFrameAnimationCutTexture(const std::string
 
 	FrameAnimation& NewAni = FrameAni[Name];
 	NewAni.Info = _Desc;
+	NewAni.Info.Renderer = this;
 	NewAni.ParentRenderer = this;
 	NewAni.Texture = GameEngineTexture::Find(_Desc.TextureName);
 	NewAni.FolderTexture = nullptr;
