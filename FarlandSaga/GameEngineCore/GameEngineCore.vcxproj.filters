@@ -242,6 +242,9 @@
     <ClInclude Include="GameEngineUpdateObject.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineBlur.h">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="GameEngineStateManager.cpp">
@@ -388,6 +391,9 @@
     </ClCompile>
     <ClCompile Include="GameEngineUpdateObject.cpp">
       <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineBlur.cpp">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
