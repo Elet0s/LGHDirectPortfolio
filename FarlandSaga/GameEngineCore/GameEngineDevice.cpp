@@ -28,6 +28,7 @@ void GameEngineDevice::Destroy()
 		Device_ = nullptr;
 	}
 }
+
 IDXGIAdapter* GameEngineDevice::GetHighPerformanceAdapter()
 {
 	/*
@@ -78,6 +79,7 @@ IDXGIAdapter* GameEngineDevice::GetHighPerformanceAdapter()
 	pF->Release();
 	return pA;
 }
+
 void GameEngineDevice::DeviceCreate()
 {
 	if (nullptr == GameEngineWindow::GetHWND())
@@ -94,7 +96,9 @@ void GameEngineDevice::DeviceCreate()
 
 	// 
 	D3D_FEATURE_LEVEL Level = D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0;
+
 	IDXGIAdapter* pA = GetHighPerformanceAdapter();
+
 	// soft
 	if (
 		S_OK != D3D11CreateDevice(
@@ -102,6 +106,7 @@ void GameEngineDevice::DeviceCreate()
 			pA,
 			// 일반적인 표준하에서 만들어지는 그래픽카드를 사용할겁니다.
 			D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_UNKNOWN,
+			// 일반적인 표준하에서 만들어지는 그래픽카드를 사용할겁니다.
 			// D3D_DRIVER_TYPE::D3D_DRIVER_TYPE_HARDWARE,
 			nullptr,
 			iFlag,
@@ -116,11 +121,13 @@ void GameEngineDevice::DeviceCreate()
 	{
 		MsgBoxAssert("디바이스 생성이 실패했습니다.");
 	}
+
 	if (nullptr != pA)
 	{
 		pA->Release();
 		pA = nullptr;
 	}
+
 	if (Level != D3D_FEATURE_LEVEL::D3D_FEATURE_LEVEL_11_0)
 	{
 		MsgBoxAssert("11을 지원하지 않는 디바이스 입니다.");
@@ -216,7 +223,7 @@ void GameEngineDevice::CreateSwapChain()
 void GameEngineDevice::Initialize()
 {
 	DeviceCreate();
-	CreateSwapChain();
+	// CreateSwapChain();
 }
 
 void GameEngineDevice::RenderStart()

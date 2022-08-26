@@ -2,7 +2,6 @@
 #include "GameEngineMath.h"
 #include <DirectXCollision.h>
 #include <GameEngineBase/GameEngineDebugObject.h>
-
 #include <list>
 
 enum class CollisionType
@@ -86,6 +85,11 @@ public:
 
 
 public:
+	inline void AddLocalScale(const float4& _Value)
+	{
+		SetLocalScale(Data.LocalScaling + _Value);
+	}
+
 	inline void SetLocalScale(const float4& _Value)
 	{
 		CalculateWorldScale(_Value);
@@ -318,6 +322,7 @@ private:
 			Child->CalculateWorldScale(Child->Data.LocalScaling);
 			Child->CalculateWorldPosition(Child->Data.LocalPosition);
 		}
+
 		CollisionDataSetting();
 	}
 	void CalculateWorldRotation(const float4& _Local)
@@ -342,7 +347,8 @@ private:
 			Child->CalculateWorldRotation(Child->Data.LocalRotation);
 			Child->CalculateWorldPosition(Child->Data.LocalPosition);
 		}
-		CollisionRotationSetting();
+
+		CollisionDataSetting();
 	}
 
 	void CalculateWorldPosition(const float4& _Local)
@@ -365,8 +371,9 @@ private:
 		for (GameEngineTransform* Child : Childs)
 		{
 			Child->CalculateWorldPosition(Child->Data.LocalPosition);
-		}		
-		CollisionPositionSetting();
+		}
+
+		CollisionDataSetting();
 	}
 
 	CollisionData CollisionDataObject;
