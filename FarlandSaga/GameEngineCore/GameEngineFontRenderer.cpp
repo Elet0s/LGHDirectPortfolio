@@ -1,6 +1,7 @@
 #include "PreCompile.h"
 #include "GameEngineFontRenderer.h"
 #include "GameEngineBlend.h"
+#include "GameEngineCamera.h"
 
 GameEngineRenderTarget* GameEngineFontRenderer::FontTarget = nullptr;
 
@@ -48,13 +49,16 @@ void GameEngineFontRenderer::Render(float _DeltaTime)
 	// 글자는 또다른 랜더타겟에 그릴겁니다.
 
 	// 이전에 존재했던 랜더타겟을 얻고
-	// GameEngineRenderTarget::GetPrevRenderTarget();
+	//GameEngineRenderTarget::GetPrevRenderTarget();
 	//FontTarget->Setting();
 
-	//GameEngineBlend* Blend = GameEngineBlend::Find("AlphaBlend");
-	//Blend->Setting();
+	FontTarget->Clear();
+	FontTarget->Setting();
+
 	Font->FontDraw(Text, FontSize, ScreenPostion, Color, static_cast<int>(LR) | static_cast<int>(TB));
 	GameEngineRenderingPipeLine::AllShaderReset();
+	Camera->GetCameraRenderTarget()->Merge(FontTarget);
+
 	//GameEngineRenderTarget::SetPrevRenderTarget();
 	// FontTarget->R();
 }
