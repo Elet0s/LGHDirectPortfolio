@@ -175,6 +175,15 @@ public:
 		return ScaleRatio;
 	}
 
+	bool IsCurAnimation()
+	{
+		if (nullptr == CurAni)
+		{
+			return false;
+		}
+		return true;
+	}
+
 	void SetTexture(GameEngineTexture* _Texture);
 
 	void SetTexture(const std::string& _Name);
@@ -205,6 +214,12 @@ public:
 	void ScaleToCutTexture(int _Index);
 
 	void CurAnimationPauseSwitch();
+
+	void CurAnimationPauseOn();
+
+	void CurAnimationPauseOff();
+
+	bool IsCurAnimationPause();
 
 	void CurAnimationReset();
 
