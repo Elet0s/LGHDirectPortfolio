@@ -239,14 +239,6 @@ void EngineRenderingPipeLine()
 		NewPipe->SetVertexShader("DebugTexture.hlsl");
 		NewPipe->SetPixelShader("DebugTexture.hlsl");
 	}
-	// PostEffect
-	{
-		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("Blur");
-		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
-		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
-		NewPipe->SetVertexShader("Blur.hlsl");
-		NewPipe->SetPixelShader("Blur.hlsl");
-	}
 }
 
 void EngineMesh()

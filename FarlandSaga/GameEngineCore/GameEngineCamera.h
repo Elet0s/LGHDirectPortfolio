@@ -9,18 +9,20 @@ enum class CAMERAPROJECTIONMODE
 	Orthographic,
 };
 
+// Ό³Έν :
 class GameEngineLevel;
 class GameEngineCamera;
 class GameEngineRenderTarget;
 class GameEngineCamera : public GameEngineTransformComponent
 {
 	friend GameEngineLevel;
-	friend GameEngineRenderer;
-public:
 
+public:
+	// constrcuter destructer
 	GameEngineCamera();
 	~GameEngineCamera();
 
+	// delete Function
 	GameEngineCamera(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera(GameEngineCamera&& _Other) noexcept = delete;
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
@@ -81,8 +83,6 @@ public:
 
 protected:
 	void Start();
-
-	void ChangeRenderingOrder(GameEngineRenderer* _Renderer, int _ChangeOrder);
 
 private:
 	void Render(float _DeltaTime);

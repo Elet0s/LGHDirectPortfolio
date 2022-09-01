@@ -11,7 +11,7 @@
 #include <GameEngineCore/GEngine.h>
 #include "GameEngineBase/GameEngineSound.h"
 #include "SoundPlayer.h"
-#include <GameEngineCore/GameEngineBlur.h>
+
 
 Stage01::Stage01()
 	:ptMouse1(),
@@ -26,8 +26,7 @@ Stage01::~Stage01()
 
 void Stage01::Start()
 {
-	//GetMainCamera()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
-	GetMainCamera()->GetCameraRenderTarget()->AddEffect<GameEngineBlur>();
+
 	CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 
 	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))

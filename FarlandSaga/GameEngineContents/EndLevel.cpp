@@ -16,9 +16,6 @@ EndLevel::~EndLevel()
 
 void EndLevel::Start()
 {
-
-
-
 	CreateActor<EndingBG>(GameObjectGroup::BG);
 	CreateActor<Flower>(GameObjectGroup::UI);
 }

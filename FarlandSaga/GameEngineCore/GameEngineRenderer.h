@@ -29,17 +29,6 @@ struct RenderOption
     int Option19;
     int Option20;
 };
-//
-//class GameEngineRenderSet 
-//{
-//public:
-//    // 이미 만들어진 랜더링 파이프라인을 얻어와서 쓴다.
-//    GameEngineRenderingPipeLine* PipeLine;
-//    GameEngineShaderResourcesHelper ShaderHelper;
-//
-//
-//
-//};
 
 class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
@@ -63,13 +52,6 @@ public:
 
     GameEngineRenderingPipeLine* GetClonePipeLine(GameEngineRenderingPipeLine* _Rendering);
 
-    inline int GetRenderingOrder()
-    {
-        return RenderingOrder;
-    }
-
-    void SetRenderingOrder(int _Order);
-
 protected:
     virtual void Start();
     virtual void Update(float _DeltaTime) {}
@@ -79,9 +61,8 @@ protected:
     void PushRendererToUICamera();
 
 
-    class GameEngineCamera* Camera;
     CAMERAORDER CameraOrder;
-    int RenderingOrder;
+
 
 private:
     virtual void Render(float _DeltaTime) = 0;
