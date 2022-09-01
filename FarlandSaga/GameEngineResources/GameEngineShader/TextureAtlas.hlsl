@@ -67,21 +67,15 @@ Output TextureAtlas_VS(Input _Input)
     return NewOutPut;
 }
 
-cbuffer PixelData : register(b0)
+cbuffer ColorData : register(b0)
 {
     float4 MulColor;
     float4 PlusColor;
-    float4 Slice;
 }
 
 Texture2D Tex : register(t0);
 SamplerState Smp : register(s0);
 float4 TextureAtlas_PS(Output _Input) : SV_Target0
 {
-    if (_Input.Tex.x < Slice.x)
-    {
-        clip(-1);
-    }
-    
     return (Tex.Sample(Smp, _Input.Tex.xy) * MulColor) + PlusColor;
 }

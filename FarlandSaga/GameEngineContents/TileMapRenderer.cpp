@@ -27,7 +27,7 @@ void TileMapRenderer::Start()
 	FrameData.SizeY = 1.0f;
 
 	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
-	ShaderResources.SetConstantBufferLink("PixelData", PixelData);
+	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
 
 	PushRendererToMainCamera();
 }
