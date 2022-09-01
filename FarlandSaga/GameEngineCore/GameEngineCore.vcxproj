@@ -180,10 +180,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="GameEngineBlur.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="GameEngineCamera.h">
       <SubType>
       </SubType>
@@ -353,10 +349,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="GameEngineBlend.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="GameEngineBlur.cpp">
       <SubType>
       </SubType>
     </ClCompile>

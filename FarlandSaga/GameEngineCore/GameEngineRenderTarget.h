@@ -43,6 +43,7 @@ public:
 
 	}
 };
+
 class GameEngineStatusWindow;
 class GameEngineDepthStencilTexture;
 class GameEngineRenderTarget : public GameEngineRes <GameEngineRenderTarget>
