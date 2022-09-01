@@ -403,18 +403,3 @@ void GameEngineTextureRenderer::CurAnimationSetStartPivotFrame(int SetFrame)
 {
 	CurAni->Info.CurFrame = SetFrame;
 }
-
-void GameEngineTextureRenderer::CurAnimationPauseOn()
-{
-	CurAni->Pause = true;
-}
-
-void GameEngineTextureRenderer::CurAnimationPauseOff()
-{
-	CurAni->Pause = false;
-}
-
-bool GameEngineTextureRenderer::IsCurAnimationPause()
-{
-	return CurAni->Pause;
-}
