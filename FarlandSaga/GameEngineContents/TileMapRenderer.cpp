@@ -42,6 +42,60 @@ void TileMapRenderer::GetTileIndex(float4 _Pos, int& _X, int& _Y)
 	_Y = static_cast<int>(roundf(fY));
 
 }
+void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z)
+{
+	if (0 > _Index)
+	{
+		return;
+	}
+
+	if (TileTextures->GetTextureCount() <= _Index)
+	{
+		return;
+	}
+	if (0 > _Z)
+	{
+		return;
+	}
+
+	int X = _x;
+	int Y = _y;
+	if (0 > X)
+	{
+		return;
+	}
+
+	if (TileX <= X)
+	{
+		return;
+	}
+
+	if (0 > Y)
+	{
+		return;
+	}
+
+	if (TileY <= Y)
+	{
+		return;
+	}
+	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
+	Tiles[Y][X].Z = _Z;
+	if (_Index < 9)
+	{
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
+		ShortIndex = _Index;
+	}
+	else if (_Index < 15)
+	{
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
+		LongIndex = _Index;
+	}
+	else
+	{
+		Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
+	}
+}
 
 void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//텍스처 선택해서 누를때
 {
@@ -205,28 +259,27 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 			///////////////////////////////////////////////////////////////////////////////////////
 
-			if (x + 1 < TileX && y + 1 < TileY) // 가장자리 안쪽
+			if (x + 1 < TileX && y + 1 < TileY) //내가 고른타일이 만들어진 타일 범위 안에 있다면
 			{
-				if (Tiles[y][x].Z > Tiles[y + 1][x+1].Z) //내가 높다면
+				if (Tiles[y][x].Z > Tiles[y + 1][x + 1].Z) //앞 타일이 낮음
 				{
-					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z+2; //차이만큼 그려라
+					RenderZ = Tiles[y][x].Z - Tiles[y + 1][x + 1].Z + 2;
 				}
-				else if (Tiles[y][x].Z < Tiles[y + 1][x + 1].Z)//앞 타일이 크면
+				else if (Tiles[y][x].Z < Tiles[y + 1][x + 1].Z)//앞 타일이 높음
 				{
-					RenderZ = 1;
+					RenderZ = 0;
 				}
-				else if (Tiles[y][x].Z = Tiles[y + 1][x + 1].Z) // 앞쪽 타일이같으면
+				else if (Tiles[y][x].Z == Tiles[y + 1][x + 1].Z) //같을때
 				{
-					if (Tiles[y][x].Z == 0) //바닥일경우
-					{
-						RenderZ = 0;
-					}
-					else
+					if (Tiles[y][x].Z > Tiles[y + 1][x].Z || Tiles[y][x].Z > Tiles[y][x + 1].Z)
 					{
 						RenderZ = 2;
 					}
+					else
+					{
+						RenderZ = 1;
+					}
 				}
-
 			}
 			else if (x + 1 == TileX || y + 1 == TileY) // 타일 가장자리
 			{
@@ -270,14 +323,16 @@ void TileMapRenderer::Render(float _DeltaTime)
 	}
 }
 
-void TileMapRenderer::SetZIndex(int& _X, int& _Y, int& _Z)
+void TileMapRenderer::SetZIndex(int& _X, int& _Y, int& _Z,int& _Index)
 {
 	if (_X>=0&& TileX>_X)
 	{
 		if (_Y>=0&&TileY > _Y)
 		{
 			float fZ = Tiles[_Y][_X].Z;
+			float fTileIndex = Tiles[_Y][_X].TileIndex;
 			_Z = static_cast<int>(roundf(fZ));
+			_Index = fTileIndex;
 		}
 	}
 }

@@ -6,8 +6,6 @@ class Tile
 {
 public:
 	int TileIndex; //깔린 타일의 인덱스번호
-	int ZIndex;
-	int ObjectIndex;
 
 	int Z;//이매트릭스 상의 z값(높이)
 	int TileDepth; //카메라상의 z값(깊이)
@@ -38,7 +36,10 @@ public:
 	void SetTileIndex(float4 _Pos, size_t _Index, int _ZChage);
 	void GetTileIndex(float4 _Pos, int& _X, int& _Y);
 
-	void SetZIndex(int& _X, int& _Y, int& _Z);
+	void SetZIndex(int& _X, int& _Y, int& _Z, int& _Index);
+	void LoadTileIndex(int _x, int _y, int _Index, int _Z);
+
+		std::vector<std::vector<Tile>> Tiles;
 
 protected:
 	void Render(float _DeltaTime) override;
@@ -59,7 +60,7 @@ private:
 
 	float4 TileScale;
 	float4 TileScaleH;
-	std::vector<std::vector<Tile>> Tiles;
+
 	float4 FrameData;
 	ColorData ColorData;
 };
