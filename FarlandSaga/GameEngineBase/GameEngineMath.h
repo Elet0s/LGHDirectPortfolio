@@ -228,7 +228,7 @@ public:
 
 
 
-	static float4 Lerp(const float4& p1, const float4& p2, float Time)
+	static float4 Lerp(const float4& p1, const float4& p2, float Time)//선형보간 공식
 	{
 		return p1 * (1.0f - Time) + p2 * Time;
 	}
