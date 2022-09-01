@@ -79,9 +79,6 @@
     <Filter Include="Debug">
       <UniqueIdentifier>{35ef434f-bb54-4be6-9fc8-d2f792366e79}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Component\Rendering\PostEffect">
-      <UniqueIdentifier>{387197b6-4f64-4de6-8d98-9cabd416656a}</UniqueIdentifier>
-    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameEngineStateManager.h">
@@ -188,6 +185,9 @@
     <ClInclude Include="GameEngineFolderTexture.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineDepthStencilTexture.h">
+      <Filter>Resources\OutputMerger</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngineGUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -236,11 +236,8 @@
     <ClInclude Include="portable-file-dialogs.h">
       <Filter>GUI</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineRenderSet.h">
-      <Filter>Object\Component\Rendering</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineUpdateObject.h">
-      <Filter>Object\Component</Filter>
+      <Filter>Object</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -347,6 +344,9 @@
     <ClCompile Include="GameEngineFolderTexture.cpp">
       <Filter>Resources\Texture</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineDepthStencilTexture.cpp">
+      <Filter>Resources\OutputMerger</Filter>
+    </ClCompile>
     <ClCompile Include="GameEngineGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -383,11 +383,8 @@
     <ClCompile Include="GameEngineCoreDebug.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineRenderSet.cpp">
-      <Filter>Object\Component\Rendering</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineUpdateObject.cpp">
-      <Filter>Object\Component</Filter>
+      <Filter>Object</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

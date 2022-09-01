@@ -4,14 +4,8 @@
 enum class PIVOTMODE
 {
 	CENTER,
-	BOT,
-	TOP,
-	LEFT,
-	RIGHT,
 	LEFTTOP,
-	RIGHTTOP,
-	LEFTBOT,
-	RIGHTBOT,
+	BOT,
 	CUSTOM,
 };
 
@@ -34,14 +28,6 @@ struct ColorData
 	}
 };
 
-struct AtlasData
-{
-public:
-	float4 FrameData;
-	float4 PivotPos;
-};
-
-
 class FrameAnimation_DESC
 {
 public:
@@ -57,9 +43,7 @@ public:
 
 	bool Loop;
 	// 아틀라스 애니메이션
-
 	class GameEngineTextureRenderer* Renderer;
-
 public:
 	FrameAnimation_DESC()
 		: Loop(false)
@@ -141,17 +125,14 @@ public:
 	}
 };
 
-// 설명 :
 class GameEngineTextureRenderer : public GameEngineDefaultRenderer
 {
 	friend FrameAnimation;
 
 public:
-	// constrcuter destructer
 	GameEngineTextureRenderer();
 	~GameEngineTextureRenderer();
 
-	// delete Function
 	GameEngineTextureRenderer(const GameEngineTextureRenderer& _Other) = delete;
 	GameEngineTextureRenderer(GameEngineTextureRenderer&& _Other) noexcept = delete;
 	GameEngineTextureRenderer& operator=(const GameEngineTextureRenderer& _Other) = delete;
@@ -192,8 +173,6 @@ public:
 	void SetPivotToVector(const float4& _Value);
 
 	void SetTexture(GameEngineTexture* _Texture, UINT _Index);
-
-	void SetFolderTextureToIndex(const std::string& _Text, UINT _Index);
 
 	void CreateFrameAnimationFolder(const std::string& _AnimationName, const FrameAnimation_DESC& _Desc);
 
@@ -283,9 +262,9 @@ private:
 	float ScaleRatio;
 
 	GameEngineTexture* CurTex;
+	float4 FrameData;
 
 	ColorData ColorData;
-	AtlasData AtlasDataInst;
 
 	std::map<std::string, FrameAnimation> FrameAni;
 	FrameAnimation* CurAni;

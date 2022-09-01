@@ -4,14 +4,11 @@
 
 // 그래픽카드에 연결
 
-// 설명 :
-class GameEngineRenderTarget;
 class GameEngineDevice
 {
 public:
 	~GameEngineDevice() {}
 
-	// delete Function
 	GameEngineDevice(const GameEngineDevice& _Other) = delete;
 	GameEngineDevice(GameEngineDevice&& _Other) noexcept = delete;
 	GameEngineDevice& operator=(const GameEngineDevice& _Other) = delete;
@@ -32,12 +29,6 @@ public:
 	{
 		return Context_;
 	}
-
-	static GameEngineRenderTarget* GetBackBuffer()
-	{
-		return BackBufferTarget;
-	}
-
 	static IDXGIAdapter* GetHighPerformanceAdapter();
 
 	static void Destroy();

@@ -9,38 +9,29 @@ enum class CAMERAPROJECTIONMODE
 	Orthographic,
 };
 
-// 설명 :
 class GameEngineLevel;
 class GameEngineCamera;
-class GameEngineRenderTarget;
 class GameEngineCamera : public GameEngineTransformComponent
 {
 	friend GameEngineLevel;
 
 public:
-	// constrcuter destructer
 	GameEngineCamera();
 	~GameEngineCamera();
 
-	// delete Function
 	GameEngineCamera(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera(GameEngineCamera&& _Other) noexcept = delete;
 	GameEngineCamera& operator=(const GameEngineCamera& _Other) = delete;
 	GameEngineCamera& operator=(GameEngineCamera&& _Other) noexcept = delete;
 
-	inline CAMERAPROJECTIONMODE GetProjectionMode()
+	CAMERAPROJECTIONMODE GetProjectionMode()
 	{
 		return Mode;
 	}
 
-	inline GameEngineRenderTarget* GetCameraRenderTarget()
-	{
-		return CameraRenderTarget;
-	}
-
 	void SetCameraOrder(CAMERAORDER _Order);
 
-	inline void SetProjectionMode(CAMERAPROJECTIONMODE _Mode)
+	void SetProjectionMode(CAMERAPROJECTIONMODE _Mode)
 	{
 		Mode = _Mode;
 	}
@@ -85,20 +76,6 @@ protected:
 	void Start();
 
 private:
-	void Render(float _DeltaTime);
-
-	void PushRenderer(GameEngineRenderer* _Renderer);
-
-	void Release(float _DelataTime);
-
-	void Update(float _DeltaTime) override;
-
-	void OverRenderer(GameEngineCamera* _NextOver);
-
-	class GameEngineRenderTarget* CameraRenderTarget;
-
-	std::map<int, std::list<class GameEngineRenderer*>> AllRenderer_;
-
 	float4x4 View; // 바라보는것
 	float4x4 Projection;
 	float4x4 ViewPort;
@@ -116,5 +93,17 @@ private:
 
 	// Perspective
 	float Fov;
+
+	std::map<int, std::list<class GameEngineRenderer*>> AllRenderer_;
+
+	void Render(float _DeltaTime);
+
+	void PushRenderer(GameEngineRenderer* _Renderer);
+
+	void Release(float _DelataTime);
+
+	void Update(float _DeltaTime) override;
+
+	void OverRenderer(GameEngineCamera* _NextOver);
 };
 

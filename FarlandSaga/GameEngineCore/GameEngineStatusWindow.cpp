@@ -3,7 +3,6 @@
 #include "GameEngineRenderTarget.h"
 #include "GameEngineCameraActor.h"
 #include "GEngine.h"
-std::map<std::string, GameEngineRenderTarget*> GameEngineStatusWindow::DebugRenderTarget;
 
 void GameEngineImageShotWindow::RenderTextureSetting(ImTextureID _RenderTexture, ImVec2 _Size)
 {
@@ -32,17 +31,7 @@ GameEngineStatusWindow::~GameEngineStatusWindow()
 
 void GameEngineStatusWindow::Initialize(class GameEngineLevel* _Level)
 {
-	
-}
 
-void GameEngineStatusWindow::AddDebugRenderTarget(const std::string& _DebugName, GameEngineRenderTarget* _RenderTarget)
-{
-	if (DebugRenderTarget.end() != DebugRenderTarget.find(_DebugName))
-	{
-		MsgBoxAssert("이미 존재하는 디버그 랜더타겟입니다.");
-	}
-
-	DebugRenderTarget.insert(std::make_pair(_DebugName, _RenderTarget));
 }
 
 void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
@@ -79,7 +68,7 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	std::string AllRenderTarget = "AllRenderTarget";
 	ImGui::Text(AllRenderTarget.c_str());
 
-	for (std::pair<std::string, GameEngineRenderTarget*> RenderTargetPair : DebugRenderTarget)
+	for (std::pair<std::string, GameEngineRenderTarget*> RenderTargetPair : GameEngineRenderTarget::NamedRes)
 	{
 		// ImGui::Text(RenderTarget.first.c_str());
 
@@ -101,6 +90,5 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 			ImGui::TreePop();
 		}
 	}
-	DebugRenderTarget.clear();
 
 }
