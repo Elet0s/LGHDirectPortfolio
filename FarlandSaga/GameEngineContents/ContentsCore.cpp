@@ -126,6 +126,8 @@ void ContentsCore::Start()
 	{
 		GameEngineInput::GetInst()->CreateKey("NextLevel", 'P');
 	}
+	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("GameManager", nullptr);
+	CreateLevel<MapEditorLevel>("MapEditor");
 
 	CreateLevel<TitleLevel>("Title");
 	CreateLevel<Event01>("Event01");
@@ -135,10 +137,11 @@ void ContentsCore::Start()
 	CreateLevel<Event03>("Event03");
 	CreateLevel<Stage03>("Stage03");
 	CreateLevel<EndLevel>("Ending");
-	CreateLevel<MapEditorLevel>("MapEditor");
 	ChangeLevel("Title");
 
-	GameEngineGUI::CreateGUIWindow<GameEngineStatusWindow>("GameManager", nullptr);
+
+
+
 }
 
 void ContentsCore::Update(float _DeltaTime)

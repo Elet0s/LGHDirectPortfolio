@@ -40,6 +40,8 @@ public:
 	void LoadTileIndex(int _x, int _y, int _Index, int _Z);
 
 		std::vector<std::vector<Tile>> Tiles;
+		void Load(std::string _Stage);
+
 
 protected:
 	void Render(float _DeltaTime) override;

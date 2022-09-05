@@ -158,6 +158,46 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//≈ÿΩ
 
 }
 
+
+void TileMapRenderer::Load(std::string _Stage)
+{
+
+	GameEngineDirectory Dir;
+	Dir.MoveParentToExitsChildDirectory("ConstantResources");
+	Dir.Move("ConstantResources");
+	Dir.Move("Data");
+
+	GameEngineFile LoadFile = (Dir.GetFullPath() + "\\" + _Stage + ".MapData").c_str();
+	LoadFile.Open(OpenMode::Read, FileMode::Binary);
+
+	int Size = 0;
+	LoadFile.Read(&Size, sizeof(int), sizeof(int));
+
+	for (size_t y = 0; y < Size; y++)
+	{
+		int XSize = 0;
+		LoadFile.Read(&XSize, sizeof(int), sizeof(int));
+
+		for (size_t x = 0; x < XSize; x++)
+		{
+			int Tileindex = Tiles[y][x].TileIndex;;
+			LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
+			//  TileMap->TileRenderer->Tiles[y][x].TileIndex = Tileindex;
+
+			int TileZ = Tiles[y][x].Z;;
+			LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
+			//   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
+			LoadTileIndex(x, y, Tileindex, TileZ);
+
+			//     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
+			//     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
+			//     TileMap->TileRenderer->Tiles[y][x].TileDepth = TileDepth;
+
+		}
+
+	}
+}
+
 void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex)
 {
 	TileTextures = GameEngineFolderTexture::Find(_FolderTexture);

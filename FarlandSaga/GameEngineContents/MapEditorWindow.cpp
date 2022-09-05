@@ -24,6 +24,8 @@ void MapEditorWindow::Initialize(class GameEngineLevel* _Level)
     }
 }
 
+
+
 void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 {
     if (LoadCheaker == false)//텍스처 로드
@@ -74,7 +76,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         int Z;
         int Index;
         TileMap->TileRenderer->GetTileIndex(_Level->GetMainCamera()->GetMouseWorldPositionToActor(), X, Y);//몇번째 타일인지
-        TileMap->TileRenderer->SetZIndex(X, Y, Z,Index);
+        TileMap->TileRenderer->SetZIndex(X, Y, Z, Index);
         SelectIndex += "X." + std::to_string(X) + " ";
         SelectIndex += "Y." + std::to_string(Y) + " ";
         if (X >= 0 && Y >= 0)
@@ -158,8 +160,8 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                     SaveFile.Write(&Tileindex, sizeof(int));
                     int TileZ = TileMap->TileRenderer->Tiles[y][x].Z;
                     SaveFile.Write(&TileZ, sizeof(int));
-                 //  int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
-                 //  SaveFile.Write(&TileDepth, sizeof(int));
+                    //  int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
+                    //  SaveFile.Write(&TileDepth, sizeof(int));
                 }
             }
         }
@@ -185,18 +187,19 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                 {
                     int Tileindex = TileMap->TileRenderer->Tiles[y][x].TileIndex;;
                     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
-                  //  TileMap->TileRenderer->Tiles[y][x].TileIndex = Tileindex;
+                    //  TileMap->TileRenderer->Tiles[y][x].TileIndex = Tileindex;
 
                     int TileZ = TileMap->TileRenderer->Tiles[y][x].Z;;
                     LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
-                 //   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
+                    //   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
                     TileMap->TileRenderer->LoadTileIndex(x, y, Tileindex, TileZ);
 
-               //     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
-               //     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
-               //     TileMap->TileRenderer->Tiles[y][x].TileDepth = TileDepth;
+                    //     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
+                    //     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
+                    //     TileMap->TileRenderer->Tiles[y][x].TileDepth = TileDepth;
 
                 }
+
             }
         }
     }

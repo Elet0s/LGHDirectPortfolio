@@ -11,6 +11,7 @@
 #include <GameEngineCore/GEngine.h>
 #include "GameEngineBase/GameEngineSound.h"
 #include "SoundPlayer.h"
+#include"MapEditorLevel.h"
 
 
 Stage01::Stage01()
@@ -27,7 +28,31 @@ Stage01::~Stage01()
 void Stage01::Start()
 {
 
-	CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
+
+	StageName = "Stage01";
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
+		Dir.Move("Map");
+
+		std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), Dir.GetFullPath());
+
+		if (false == Path.empty())
+		{
+			StageName = GameEnginePath::GetFileName(Path);
+
+			GameEngineFolderTexture::Load(Path.c_str());
+		}
+	}
+
+	S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
+	S01TileMap->TileRenderer->CreateIsometricTileMap(5,5,0,  { 64, 32 }, StageName, 16);
+	S01TileMap->TileRenderer->Load(StageName);
+
+
+
+	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 
 	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))
 	{

@@ -12,6 +12,9 @@ public:
 	Stage01& operator=(const Stage01& _Other) = delete;
 	Stage01& operator=(Stage01&& _Other) noexcept = delete;
 
+	TileMapActor* S01TileMap;
+
+	std::string StageName;
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

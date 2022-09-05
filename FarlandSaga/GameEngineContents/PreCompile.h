@@ -43,3 +43,4 @@
 //Contents
 #include "Enums.h"
 #include "TileMapActor.h"
+#include "MapEditorWindow.h"

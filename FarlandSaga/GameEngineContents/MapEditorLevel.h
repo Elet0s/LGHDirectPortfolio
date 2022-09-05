@@ -13,7 +13,6 @@ public:
 	MapEditorLevel& operator=(MapEditorLevel&& _Other) noexcept = delete;
 
 	TileMapActor* TileMap;
-
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

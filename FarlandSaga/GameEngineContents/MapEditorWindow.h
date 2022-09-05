@@ -23,6 +23,7 @@ public:
 	bool MapObjectSet;
 
 
+
 protected:
 
 private:
