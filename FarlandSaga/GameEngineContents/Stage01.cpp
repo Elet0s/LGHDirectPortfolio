@@ -67,9 +67,11 @@ void Stage01::Start()
 	{
 		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
 	}
-
 	{
-		UIMaster* NewPlayer = CreateActor<UIMaster>(OBJECTORDER::UI);
+		Monster* NewMonster = CreateActor<Monster>(OBJECTORDER::Monster);
+	}
+	{
+		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}
 
 	{

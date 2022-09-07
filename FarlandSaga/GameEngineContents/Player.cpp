@@ -65,8 +65,6 @@ void Player::Start()
 		Renderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
 		Renderer->ChangeFrameAnimation("LeonIdle");
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
-
-
 		//Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 

@@ -36,6 +36,7 @@ cbuffer AtlasData : register(b1)
 {
     float2 TextureFramePos;
     float2 TextureFrameSize;
+    float4 PivotPos;
 };
 
 
@@ -66,6 +67,7 @@ cbuffer ColorData : register(b0)
 {
     float4 MulColor;
     float4 PlusColor;
+    float4 Slice;
 }
 
 Texture2D Tex : register(t0);

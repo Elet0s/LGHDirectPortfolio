@@ -1,6 +1,12 @@
 #pragma once
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
 
+struct Atlas2Data
+{
+public:
+	float4 FrameData;
+	float4 PivotPos;
+};
 
 class Tile
 {
@@ -63,7 +69,7 @@ private:
 	float4 TileScale;
 	float4 TileScaleH;
 
-	float4 FrameData;
+	Atlas2Data AtlasDatainst;
 	ColorData ColorData;
 };
 

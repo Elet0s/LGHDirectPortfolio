@@ -21,12 +21,13 @@ void TileMapRenderer::Start()
 {
 	SetPipeLine("TextureAtlas");
 
-	FrameData.PosX = 0.0f;
-	FrameData.PosY = 0.0f;
-	FrameData.SizeX = 1.0f;
-	FrameData.SizeY = 1.0f;
-
-	ShaderResources.SetConstantBufferLink("AtlasData", FrameData);
+	AtlasDatainst.FrameData.PosX = 0.0f;
+	AtlasDatainst.FrameData.PosY = 0.0f;
+	AtlasDatainst.FrameData.SizeX = 1.0f;
+	AtlasDatainst.FrameData.SizeY = 1.0f;
+	AtlasDatainst.PivotPos = float4::ZERO;
+	
+	ShaderResources.SetConstantBufferLink("AtlasData", AtlasDatainst);
 	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
 
 	PushRendererToMainCamera();
