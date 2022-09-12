@@ -21,7 +21,6 @@ class GameEngineDevice;
 class GameEngineFontRenderer : public GameEngineDefaultRenderer
 {
 	friend GameEngineDevice;
-	static GameEngineRenderTarget* FontTarget;
 
 public:
 	GameEngineFontRenderer();
@@ -31,9 +30,6 @@ public:
 	GameEngineFontRenderer(GameEngineFontRenderer&& _Other) noexcept = delete;
 	GameEngineFontRenderer& operator=(const GameEngineFontRenderer& _Other) = delete;
 	GameEngineFontRenderer& operator=(GameEngineFontRenderer&& _Other) noexcept = delete;
-
-	//LeftAndRightSort LR;
-	//TopAndBotSort TB;
 
 	void SetLeftAndRightSort(LeftAndRightSort _Value)
 	{
@@ -57,6 +53,11 @@ public:
 		ScreenPostion = _ScreenPostion;
 	}
 
+	float4 SetScreenPostion()
+	{
+		return ScreenPostion;
+	}
+
 	void SetColor(float4 _Color)
 	{
 		Color = _Color;
@@ -71,6 +72,8 @@ protected:
 	virtual void Start();
 
 	virtual void Render(float _DeltaTime);
+
+	static GameEngineRenderTarget* FontTarget;
 
 	std::string Text;
 	GameEngineFont* Font;
