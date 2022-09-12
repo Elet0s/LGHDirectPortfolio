@@ -20,6 +20,7 @@ void SelectTileUi::Start()
 	Renderer = CreateComponent<GameEngineTextureRenderer>();
 	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
 	Renderer->SetTexture("ST01.png");
+	Renderer->GetTransform().SetWorldPosition({0.0f,0.0f,-99.0f,0.0f });
 }
 void SelectTileUi::Update(float _DeltaTime)
 {

@@ -192,7 +192,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                     int TileZ = TileMap->TileRenderer->Tiles[y][x].Z;;
                     LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
                     //   TileMap->TileRenderer->Tiles[y][x].Z = TileZ; 
-                    TileMap->TileRenderer->LoadTileIndex((int)x, (int)y, Tileindex, TileZ);
+                    TileMap->TileRenderer->LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ);
 
                     //     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
                     //     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));

@@ -188,7 +188,7 @@ void TileMapRenderer::Load(std::string _Stage) //이미 만들어진 타일맵Data불러오�
 			int TileZ = Tiles[y][x].Z;;
 			LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
 			//   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
-			LoadTileIndex(static_cast<int>( x),static_cast<int>(y), Tileindex, TileZ);
+			LoadTileIndex(static_cast<int>( y),static_cast<int>(x), Tileindex, TileZ);
 
 			//     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
 			//     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));

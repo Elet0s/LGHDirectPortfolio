@@ -12,13 +12,13 @@
 #include "GameEngineBase/GameEngineSound.h"
 #include "SoundPlayer.h"
 #include"MapEditorLevel.h"
+#include"SelectTileUi.h"
 
 
 Stage01::Stage01()
 	:ptMouse1(),
 	ptMouse2(),
-	ptMouse3(),
-	S01TileMap()
+	ptMouse3()
 {
 }
 
@@ -65,7 +65,9 @@ void Stage01::Start()
 	{
 		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}
-
+	{
+		SelectTileUi* NewTileUi = CreateActor<SelectTileUi>(OBJECTORDER::UI);
+	}
 	{
 		//Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
 		//actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
