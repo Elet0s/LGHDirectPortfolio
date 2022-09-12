@@ -150,6 +150,9 @@
     <ClInclude Include="MapEditorLevel.h">
       <Filter>Level\Maptest</Filter>
     </ClInclude>
+    <ClInclude Include="SelectTileUi.h">
+      <Filter>Actor\00.Global\Actor</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -223,6 +226,9 @@
     </ClCompile>
     <ClCompile Include="MapEditorLevel.cpp">
       <Filter>Level\Maptest</Filter>
+    </ClCompile>
+    <ClCompile Include="SelectTileUi.cpp">
+      <Filter>Actor\00.Global\Actor</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

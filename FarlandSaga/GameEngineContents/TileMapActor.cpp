@@ -2,6 +2,7 @@
 #include "TileMapActor.h"
 
 TileMapActor::TileMapActor()
+	:TileRenderer(nullptr)
 {
 }
 

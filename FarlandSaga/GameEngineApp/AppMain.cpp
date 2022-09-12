@@ -4,7 +4,7 @@
 #pragma comment(lib, "GameEngineCore.lib")
 #pragma comment(lib, "GameEngineContents.lib")
 
-#include <GameEngineContents/ContentsCore.h>\
+#include <GameEngineContents/ContentsCore.h>
 #include<GameEngineBase/GameEngineMath.h>
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,

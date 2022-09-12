@@ -22,7 +22,7 @@ public:
 	bool LoadCheaker;
 	bool MapObjectSet;
 
-
+	GameEngineTextureRenderer* Renderer;
 
 protected:
 

@@ -188,7 +188,7 @@ void TileMapRenderer::Load(std::string _Stage) //이미 만들어진 타일맵Data불러오�
 			int TileZ = Tiles[y][x].Z;;
 			LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
 			//   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
-			LoadTileIndex(x, y, Tileindex, TileZ);
+			LoadTileIndex(static_cast<int>( x),static_cast<int>(y), Tileindex, TileZ);
 
 			//     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
 			//     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
@@ -225,7 +225,7 @@ void TileMapRenderer::CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _Til
 		{
 			Tiles[y][x].TileIndex = static_cast<int>(_DefualtIndex);
 			Tiles[y][x].TileImage = TileTextures->GetTexture(_DefualtIndex);
-			Tiles[y][x].TileDepth = (x + y)*2;
+			Tiles[y][x].TileDepth = static_cast<int>((x + y)*2);
 			if (_Z >5)
 			{
 				Tiles[y][x].Ztile = TileTextures->GetTexture(9);
@@ -268,7 +268,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 			Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
 			// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
-			Pos.z = -Tiles[y][x].TileDepth;
+			Pos.z = static_cast<float>(-Tiles[y][x].TileDepth);
 
 			if (Tiles[y][x].TileIndex > 60) //특수 타일
 			{
@@ -370,10 +370,10 @@ void TileMapRenderer::SetZIndex(int& _X, int& _Y, int& _Z,int& _Index)
 	{
 		if (_Y>=0&&TileY > _Y)
 		{
-			float fZ = Tiles[_Y][_X].Z;
-			float fTileIndex = Tiles[_Y][_X].TileIndex;
+			float fZ = static_cast<float>(Tiles[_Y][_X].Z);
+			float fTileIndex = static_cast<float>(Tiles[_Y][_X].TileIndex);
 			_Z = static_cast<int>(roundf(fZ));
-			_Index = fTileIndex;
+			_Index = static_cast<int>(fTileIndex);
 		}
 	}
 }

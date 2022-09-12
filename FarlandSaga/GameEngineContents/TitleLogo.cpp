@@ -6,6 +6,7 @@
 
 TitleLogo::TitleLogo()
 	: TimeAngle(0.0f)
+	, Renderer(nullptr)
 {
 }
 

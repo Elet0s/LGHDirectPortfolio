@@ -7,6 +7,10 @@
 
 
 MapEditorLevel::MapEditorLevel()
+	:TileMap()
+	, ptMouse1()
+	, ptMouse2()
+	, ptMouse3()
 {
 }
 
@@ -77,13 +81,13 @@ void MapEditorLevel::Update(float _DeltaTime)
 
 		if (ptMouse3.x > 0)
 		{
-			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetRightVector() * ptMouse3.x);
+			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetRightVector() * static_cast<float>(ptMouse3.x));
 			ptMouse3.x = 0;
 			ptMouse1.x = ptMouse2.x;
 		}
 		else if (ptMouse3.x < 0)
 		{
-			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetRightVector() * -ptMouse3.x);
+			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetRightVector() * static_cast<float>( - ptMouse3.x));
 			ptMouse3.x = 0;
 			ptMouse1.x = ptMouse2.x;
 
@@ -91,13 +95,13 @@ void MapEditorLevel::Update(float _DeltaTime)
 
 		if (ptMouse3.y > 0)
 		{
-			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetUpVector() * ptMouse3.y);
+			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetUpVector() * static_cast<float>(ptMouse3.y));
 			ptMouse3.y = 0;
 			ptMouse1.y = ptMouse2.y;
 		}
 		else if (ptMouse3.y < 0)
 		{
-			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetUpVector() * -ptMouse3.y);
+			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetUpVector() * static_cast<float>( - ptMouse3.y));
 			ptMouse3.y = 0;
 			ptMouse1.y = ptMouse2.y;
 		}
