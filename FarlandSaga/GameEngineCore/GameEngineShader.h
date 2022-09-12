@@ -80,6 +80,17 @@ public:
 	GameEngineSampler* Res;
 };
 
+class GameEngineStructuredBuffer;
+class GameEngineStructuredBufferSetter : public ShaderResSetter
+{
+public:
+	void Setting() const;
+
+public:
+	GameEngineStructuredBuffer* Res;
+};
+
+
 
 class GameEngineShaderResourcesHelper;
 class GameEngineShader
@@ -119,6 +130,7 @@ private:
 	std::map<std::string, GameEngineConstantBufferSetter> ConstantBufferMap;
 	std::map<std::string, GameEngineTextureSetter> TextureMap;
 	std::map<std::string, GameEngineSamplerSetter> SamplerMap;
+	std::map<std::string, GameEngineStructuredBufferSetter> StructuredBufferMap;
 
 	std::string EntryPoint;
 

@@ -135,6 +135,7 @@
     <FxCompile Include="TargetMerge.hlsl" />
     <FxCompile Include="Texture.hlsl" />
     <FxCompile Include="TextureAtlas.hlsl" />
+    <FxCompile Include="TextureAtlas_Inst.hlsl" />
     <FxCompile Include="TransformHeader.fx" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
