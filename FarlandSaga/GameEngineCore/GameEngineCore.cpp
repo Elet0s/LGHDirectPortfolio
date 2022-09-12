@@ -59,6 +59,9 @@ void GameEngineCore::CoreStart(GameEngineCore* _UserCore)
 	// 엔진 리소스는 완성되어야 합니다.
 	EngineResourcesInitialize();
 
+	// 
+	GameEngineDevice::CreateSwapChain();
+
 	GameEngineDebug::Debug3DInitialize();
 
 	// 엔진이 뭔가를 할겁니다.
@@ -88,6 +91,7 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 		NextLevel = nullptr;
 		CurrentLevel->LevelStartEvent();
 		CurrentLevel->ActorLevelStartEvent();
+
 		// ex) 타이틀에서 5초후 => 플레이 레벨로 이동
 		//     플레이 레벨에서 => 다시 타이틀레벨로
 		CurrentLevel->ReSetAccTime();
@@ -162,6 +166,12 @@ void GameEngineCore::WindowCreate(const std::string& _Name, GameEngineCore* _Use
 
 void GameEngineCore::InitializeLevel(GameEngineLevel* _Level, const std::string _Name)
 {
+	{
+		GameEngineCameraActor* actor = _Level->CreateActor<GameEngineCameraActor>();
+		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);
+		actor->GetTransform().SetLocalPosition({ 0.0f, 0.0f, -100.0f });
+	}
+
 	{
 		GameEngineCameraActor* actor = _Level->CreateActor<GameEngineCameraActor>();
 		actor->GetCameraComponent()->SetProjectionMode(CAMERAPROJECTIONMODE::Orthographic);

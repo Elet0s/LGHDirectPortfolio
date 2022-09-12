@@ -28,7 +28,7 @@ void TileMapRenderer::Start()
 	AtlasDatainst.PivotPos = float4::ZERO;
 	
 	ShaderResources.SetConstantBufferLink("AtlasData", AtlasDatainst);
-	ShaderResources.SetConstantBufferLink("ColorData", ColorData);
+	ShaderResources.SetConstantBufferLink("PixelData", PixelData);
 
 	PushRendererToMainCamera();
 }

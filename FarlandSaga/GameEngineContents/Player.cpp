@@ -59,11 +59,12 @@ void Player::Start()
 
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 250,250, 1 });
+		Renderer->GetTransform().SetLocalScale({ 100,100, 1 });
 		Renderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
 		Renderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
 		Renderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
 		Renderer->ChangeFrameAnimation("LeonIdle");
+		Renderer->GetTransform().SetWorldPosition(float4(0,0,-100));
 		//Renderer->AnimationBindEnd("LeonWind", &Player::MyFunction, this);
 		//Renderer->SetPivot(PIVOTMODE::BOT);
 	}

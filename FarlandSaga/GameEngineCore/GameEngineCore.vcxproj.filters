@@ -7,20 +7,8 @@
     <Filter Include="Core">
       <UniqueIdentifier>{a36217f0-6412-47c1-8c0a-a59393668086}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object">
-      <UniqueIdentifier>{261262b7-cc97-4c90-b552-15d0eb2b9007}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources">
       <UniqueIdentifier>{f37f0b2a-e49b-4400-83bf-6f19e2229768}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Component">
-      <UniqueIdentifier>{cf74b637-dc3a-4b5c-92be-723561dc62c3}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Component\Rendering">
-      <UniqueIdentifier>{ee51c5b6-d555-4a55-93d0-6ee01ed55d97}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Object\Component\Collision">
-      <UniqueIdentifier>{091c4cff-cce4-43ae-bfd6-9fec38d46cdc}</UniqueIdentifier>
     </Filter>
     <Filter Include="Device">
       <UniqueIdentifier>{fcca89f2-3fed-4ae3-b27a-5d31791bf724}</UniqueIdentifier>
@@ -58,9 +46,6 @@
     <Filter Include="ThirdParty\inc">
       <UniqueIdentifier>{8883bb33-905a-4ff0-ae79-572c3e2e0453}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Object\Component\Rendering\Content">
-      <UniqueIdentifier>{5bce0168-5fc2-43e8-98a9-ab1f17e066be}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Resources\Rasterizer">
       <UniqueIdentifier>{bb4c61f4-546b-4f48-b4c8-1d895052c767}</UniqueIdentifier>
     </Filter>
@@ -78,6 +63,24 @@
     </Filter>
     <Filter Include="Debug">
       <UniqueIdentifier>{35ef434f-bb54-4be6-9fc8-d2f792366e79}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object">
+      <UniqueIdentifier>{261262b7-cc97-4c90-b552-15d0eb2b9007}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component">
+      <UniqueIdentifier>{cf74b637-dc3a-4b5c-92be-723561dc62c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering">
+      <UniqueIdentifier>{ee51c5b6-d555-4a55-93d0-6ee01ed55d97}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering\Content">
+      <UniqueIdentifier>{5bce0168-5fc2-43e8-98a9-ab1f17e066be}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Rendering\PostEffect">
+      <UniqueIdentifier>{3d56100f-374a-4671-9eab-1f727a371148}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Component\Collision">
+      <UniqueIdentifier>{091c4cff-cce4-43ae-bfd6-9fec38d46cdc}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -185,9 +188,6 @@
     <ClInclude Include="GameEngineFolderTexture.h">
       <Filter>Resources\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="GameEngineDepthStencilTexture.h">
-      <Filter>Resources\OutputMerger</Filter>
-    </ClInclude>
     <ClInclude Include="GameEngineGUI.h">
       <Filter>GUI</Filter>
     </ClInclude>
@@ -236,8 +236,17 @@
     <ClInclude Include="portable-file-dialogs.h">
       <Filter>GUI</Filter>
     </ClInclude>
+    <ClInclude Include="GameEngineBlur.h">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineRenderSet.h">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClInclude>
+    <ClInclude Include="GameEngineStructuredBuffer.h">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClInclude>
     <ClInclude Include="GameEngineUpdateObject.h">
-      <Filter>Object</Filter>
+      <Filter>Object\Component</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -344,9 +353,6 @@
     <ClCompile Include="GameEngineFolderTexture.cpp">
       <Filter>Resources\Texture</Filter>
     </ClCompile>
-    <ClCompile Include="GameEngineDepthStencilTexture.cpp">
-      <Filter>Resources\OutputMerger</Filter>
-    </ClCompile>
     <ClCompile Include="GameEngineGUI.cpp">
       <Filter>GUI</Filter>
     </ClCompile>
@@ -383,8 +389,17 @@
     <ClCompile Include="GameEngineCoreDebug.cpp">
       <Filter>Debug</Filter>
     </ClCompile>
+    <ClCompile Include="GameEngineBlur.cpp">
+      <Filter>Object\Component\Rendering\PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineRenderSet.cpp">
+      <Filter>Object\Component\Rendering</Filter>
+    </ClCompile>
+    <ClCompile Include="GameEngineStructuredBuffer.cpp">
+      <Filter>Resources\ShaderResources</Filter>
+    </ClCompile>
     <ClCompile Include="GameEngineUpdateObject.cpp">
-      <Filter>Object</Filter>
+      <Filter>Object\Component</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

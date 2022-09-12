@@ -43,6 +43,7 @@ cbuffer AtlasData : register(b1)
 Output TextureAtlas_VS(Input _Input)
 {
     Output NewOutPut = (Output) 0;
+    _Input.Pos += PivotPos;
     NewOutPut.Pos = mul(_Input.Pos, WorldViewProjection);
     NewOutPut.PosLocal = _Input.Pos;
     
@@ -63,7 +64,7 @@ Output TextureAtlas_VS(Input _Input)
     return NewOutPut;
 }
 
-cbuffer ColorData : register(b0)
+cbuffer PixelData : register(b0)
 {
     float4 MulColor;
     float4 PlusColor;

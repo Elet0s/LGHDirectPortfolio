@@ -4,6 +4,7 @@
 
 // 그래픽카드에 연결
 
+class GameEngineRenderTarget;
 class GameEngineDevice
 {
 public:
@@ -29,6 +30,12 @@ public:
 	{
 		return Context_;
 	}
+
+	static GameEngineRenderTarget* GetBackBuffer()
+	{
+		return BackBufferTarget;
+	}
+
 	static IDXGIAdapter* GetHighPerformanceAdapter();
 
 	static void Destroy();

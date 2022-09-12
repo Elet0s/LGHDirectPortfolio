@@ -18,6 +18,12 @@
     <FxCompile Include="TextureAtlas.hlsl">
       <Filter>Object</Filter>
     </FxCompile>
+    <FxCompile Include="Blur.hlsl">
+      <Filter>TargetEffect</Filter>
+    </FxCompile>
+    <FxCompile Include="TargetMerge.hlsl">
+      <Filter>TargetEffect</Filter>
+    </FxCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Debug">

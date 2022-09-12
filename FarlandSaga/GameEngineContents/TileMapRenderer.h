@@ -70,6 +70,6 @@ private:
 	float4 TileScaleH;
 
 	Atlas2Data AtlasDatainst;
-	ColorData ColorData;
+	PixelData PixelData;
 };
 
