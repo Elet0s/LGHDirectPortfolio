@@ -27,37 +27,28 @@ Stage01::~Stage01()
 
 void Stage01::Start()
 {
-
-
-	StageName = "Stage01";
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
 		Dir.Move("Map");
+		Dir.Move("Stage01");
 
-		std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), Dir.GetFullPath());
+		std::string Path = Dir.GetFullPath();
 
 		if (false == Path.empty())
 		{
 			StageName = GameEnginePath::GetFileName(Path);
-
+		
 			GameEngineFolderTexture::Load(Path.c_str());
 		}
 	}
 
 	S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
-	S01TileMap->TileRenderer->CreateIsometricTileMap(5,5,0,  { 64, 32 }, StageName, 16);
+	S01TileMap->TileRenderer->CreateIsometricTileMap(30,30,0,  { 64, 32 }, StageName, 16);
 	S01TileMap->TileRenderer->Load(StageName);
 
-
-
 	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
-
-	if (false == GameEngineInput::GetInst()->IsKey("FreeCameaOnOff"))
-	{
-		GameEngineInput::GetInst()->CreateKey("FreeCameaOnOff", 'O');
-	}
 
 	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
 	{
@@ -98,11 +89,6 @@ void Stage01::Update(float _DeltaTime)
 	GameEngineStatusWindow::AddDebugRenderTarget("BackBuffer", GameEngineDevice::GetBackBuffer());
 	GameEngineStatusWindow::AddDebugRenderTarget("MainCamera", GetMainCamera()->GetCameraRenderTarget());
 	GameEngineStatusWindow::AddDebugRenderTarget("UICamera", GetUICamera()->GetCameraRenderTarget());
-
-	if (GameEngineInput::GetInst()->IsDown("FreeCameaOnOff"))
-	{
-		GetMainCameraActor()->FreeCameraModeOnOff();
-	}
 
 	//////// 마우스드래그 맵 이동하는 기능 ///////////
 	{

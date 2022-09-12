@@ -14,11 +14,10 @@ Flower::~Flower()
 }
 void Flower::Start()
 {
-	GetTransform().SetLocalPosition({ 0, -214, 1 });
-
+	GetTransform().SetLocalPosition({ 0, -150, 1 });
 	{
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 1024, 340, 0 });
+		Renderer->GetTransform().SetLocalScale({ 440.0f, 170.0f, 0.0f });
 		Renderer->SetTexture("gameover.bmp");
 	}
 

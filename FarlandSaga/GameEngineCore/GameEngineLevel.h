@@ -38,11 +38,9 @@ class GameEngineLevel :
 	// 레벨이 현재까지 얼마나 켜져있었는지 시간을 잴수 있게 한다.
 
 public:
-	// constrcuter destructer
 	GameEngineLevel();
 	virtual ~GameEngineLevel() = 0;
 
-	// delete Function
 	GameEngineLevel(const GameEngineLevel& _Other) = delete;
 	GameEngineLevel(GameEngineLevel&& _Other) noexcept = delete;
 	GameEngineLevel& operator=(const GameEngineLevel& _Other) = delete;

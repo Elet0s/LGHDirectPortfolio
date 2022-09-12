@@ -43,7 +43,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             {
                 SelectFolderTexture = GameEnginePath::GetFileName(Path);
 
-                GameEngineFolderTexture::Load(Path.c_str());
+                //GameEngineFolderTexture::Load(Path.c_str());
             }
             LoadCheaker = true;
         }

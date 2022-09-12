@@ -23,7 +23,7 @@ void TitleLogo::Start()
 	{
 		//TimeAngle = 0.0f;
 		Renderer = CreateComponent<GameEngineTextureRenderer>();
-		Renderer->GetTransform().SetLocalScale({ 1024, 768, 0 });
+		Renderer->GetTransform().SetLocalScale({ 640.0f, 480.0f, 0.0f });
 		Renderer->SetTexture("title.bmp");
 	}
 }

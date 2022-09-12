@@ -160,7 +160,7 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//텍�
 }
 
 
-void TileMapRenderer::Load(std::string _Stage)
+void TileMapRenderer::Load(std::string _Stage) //이미 만들어진 타일맵Data불러오기
 {
 
 	GameEngineDirectory Dir;
@@ -318,7 +318,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 					}
 					else
 					{
-						RenderZ = 1;
+						RenderZ = 0;
 					}
 				}
 			}
