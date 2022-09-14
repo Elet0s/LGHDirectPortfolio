@@ -110,6 +110,7 @@ void GameEngineCore::CoreUpdate(GameEngineCore* _UserCore)
 	float DeltaTime = GameEngineTime::GetDeltaTime();
 
 	GameEngineInput::GetInst()->Update(DeltaTime);
+	GameEngineSound::Update();
 	// 엔진수준에서 유저가 하고 싶은일.
 	_UserCore->Update(DeltaTime);
 
