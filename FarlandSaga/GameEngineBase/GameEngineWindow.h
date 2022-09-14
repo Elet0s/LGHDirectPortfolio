@@ -55,7 +55,10 @@ public:
 	{
 		MessageCallBack = _MessageCallBack;
 	}
-
+	static inline HWND GethWnd()
+	{
+		return Inst_->hWnd_;
+	}
 protected:
 
 private:

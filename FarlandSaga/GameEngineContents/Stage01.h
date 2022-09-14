@@ -22,8 +22,5 @@ protected:
 	void LevelStartEvent() override;
 	void LevelEndEvent()	override;
 private:
-	POINT ptMouse1;
-	POINT ptMouse2;
-	POINT ptMouse3;
 };
 

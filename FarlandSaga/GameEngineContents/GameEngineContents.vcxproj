@@ -216,6 +216,14 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="ObjectActor.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="ObjectRenderer.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
     <ClInclude Include="Player.h">
       <SubType>
       </SubType>
@@ -224,7 +232,7 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="SelectTileUi.h">
+    <ClInclude Include="MouseUI.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -318,6 +326,14 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="ObjectActor.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="ObjectRenderer.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
     <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
@@ -328,7 +344,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="SelectTileUi.cpp">
+    <ClCompile Include="MouseUI.cpp">
       <SubType>
       </SubType>
     </ClCompile>

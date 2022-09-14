@@ -12,13 +12,12 @@
 #include "GameEngineBase/GameEngineSound.h"
 #include "SoundPlayer.h"
 #include"MapEditorLevel.h"
-#include"SelectTileUi.h"
+#include"MouseUI.h"
 
 
 Stage01::Stage01()
-	:ptMouse1(),
-	ptMouse2(),
-	ptMouse3()
+	:S01TileMap()
+	, StageName()
 {
 }
 
@@ -48,13 +47,8 @@ void Stage01::Start()
 	S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
 	S01TileMap->TileRenderer->CreateIsometricTileMap(30,30,0,  { 64, 32 }, StageName, 16);
 	S01TileMap->TileRenderer->Load(StageName);
-
+	GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-400.0f,0.0f,0.0f });
 	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
-
-	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
-	{
-		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
-	}
 
 	{
 		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
@@ -66,7 +60,8 @@ void Stage01::Start()
 		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}
 	{
-		SelectTileUi* NewTileUi = CreateActor<SelectTileUi>(OBJECTORDER::UI);
+		MouseUI* NewMouseUi = CreateActor<MouseUI>(OBJECTORDER::UI);
+		NewMouseUi->Level = this;
 	}
 	{
 		//Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
@@ -93,49 +88,7 @@ void Stage01::Update(float _DeltaTime)
 	GameEngineStatusWindow::AddDebugRenderTarget("MainCamera", GetMainCamera()->GetCameraRenderTarget());
 	GameEngineStatusWindow::AddDebugRenderTarget("UICamera", GetUICamera()->GetCameraRenderTarget());
 
-	//////// 마우스드래그 맵 이동하는 기능 ///////////
-	{
-		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
-		{
-			GetCursorPos(&ptMouse1);
-			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
-		}
-		if (true == GameEngineInput::GetInst()->IsPress("MouseLeft"))
-		{
-			GetCursorPos(&ptMouse2);
-			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse2);
-			//SetCursorPos(ptMouse1.x, ptMouse1.y);
-		}
-		ptMouse3.x = ptMouse2.x - ptMouse1.x;
-		ptMouse3.y = ptMouse2.y - ptMouse1.y;
 
-		if (ptMouse3.x > 0)
-		{
-			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetRightVector() * static_cast<float>(ptMouse3.x));
-			ptMouse3.x = 0;
-			ptMouse1.x = ptMouse2.x;
-		}
-		else if (ptMouse3.x < 0)
-		{
-			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetRightVector() * static_cast<float>( - ptMouse3.x));
-			ptMouse3.x = 0;
-			ptMouse1.x = ptMouse2.x;
-
-		}
-
-		if (ptMouse3.y > 0)
-		{
-			GetMainCameraActorTransform().SetLocalMove(GetMainCameraActorTransform().GetUpVector() * static_cast<float>(ptMouse3.y));
-			ptMouse3.y = 0;
-			ptMouse1.y = ptMouse2.y;
-		}
-		else if (ptMouse3.y < 0)
-		{
-			GetMainCameraActorTransform().SetLocalMove(-GetMainCameraActorTransform().GetUpVector() * static_cast<float>( - ptMouse3.y));
-			ptMouse3.y = 0;
-			ptMouse1.y = ptMouse2.y;
-		}
-	}
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{

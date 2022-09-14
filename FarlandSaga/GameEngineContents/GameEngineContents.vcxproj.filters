@@ -150,8 +150,14 @@
     <ClInclude Include="MapEditorLevel.h">
       <Filter>Level\Maptest</Filter>
     </ClInclude>
-    <ClInclude Include="SelectTileUi.h">
+    <ClInclude Include="MouseUI.h">
       <Filter>Actor\00.Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectActor.h">
+      <Filter>Actor\00.Global\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="ObjectRenderer.h">
+      <Filter>Renderer</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -227,8 +233,14 @@
     <ClCompile Include="MapEditorLevel.cpp">
       <Filter>Level\Maptest</Filter>
     </ClCompile>
-    <ClCompile Include="SelectTileUi.cpp">
+    <ClCompile Include="MouseUI.cpp">
       <Filter>Actor\00.Global\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectActor.cpp">
+      <Filter>Actor\00.Global\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="ObjectRenderer.cpp">
+      <Filter>Renderer</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>
