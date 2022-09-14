@@ -32,6 +32,14 @@ void GameEngineShaderResourcesHelper::AllResourcesSetting()
 	}
 }
 
+void GameEngineShaderResourcesHelper::AllResourcesReset()
+{
+	for (const std::pair<std::string, GameEngineTextureSetter>& Setter : TextureSettingMap)
+	{
+		Setter.second.Reset();
+	}
+}
+
 void GameEngineShaderResourcesHelper::ResourcesCheck(GameEngineRenderingPipeLine* _Line)
 {
 	if (nullptr == _Line)
@@ -278,9 +286,11 @@ void GameEngineShaderResourcesHelper::BindTexture(GameEngineTextureSetter& _Sett
 	{
 	case ShaderType::Vertex:
 		_Setter.SettingFunction = std::bind(&GameEngineTexture::VSSetting, _Setter.Res, _Setter.BindPoint);
+		_Setter.ResetFunction = std::bind(&GameEngineTexture::VSReset, _Setter.Res, _Setter.BindPoint);
 		break;
 	case ShaderType::Pixel:
 		_Setter.SettingFunction = std::bind(&GameEngineTexture::PSSetting, _Setter.Res, _Setter.BindPoint);
+		_Setter.ResetFunction = std::bind(&GameEngineTexture::PSReset, _Setter.Res, _Setter.BindPoint);
 		break;
 	default:
 		break;

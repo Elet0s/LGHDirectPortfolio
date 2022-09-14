@@ -37,7 +37,7 @@ void GameEngineDefaultRenderer::SetPipeLine(const std::string& _Name)
 
 	if (true == ShaderResources.IsConstantBuffer("RENDEROPTION"))
 	{
-		ShaderResources.SetConstantBufferLink("RENDEROPTION", &Option, sizeof(Option));
+		ShaderResources.SetConstantBufferLink("RENDEROPTION", &renderOption, sizeof(renderOption));
 	}
 
 }
@@ -52,6 +52,7 @@ void GameEngineDefaultRenderer::Render(float _DeltaTime)
 	// 준비된 모든 리소스들을 다 세팅해준다.
 	ShaderResources.AllResourcesSetting();
 	PipeLine->Rendering();
+	ShaderResources.AllResourcesReset();
 }
 
 

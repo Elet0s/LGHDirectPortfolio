@@ -49,7 +49,7 @@ class GameEngineRenderer : public GameEngineTransformComponent
     friend class GameEngineCamera;
 
 public:
-    RenderOption Option;
+    RenderOption renderOption;
 
     // constrcuter destructer
     GameEngineRenderer();

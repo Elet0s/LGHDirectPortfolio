@@ -93,6 +93,7 @@ void GameEngineRenderTarget::Effect(GameEngineRenderingPipeLine* _Other, GameEng
 	Setting();
 	_ShaderResourcesHelper->AllResourcesSetting();
 	_Other->Rendering();
+	_ShaderResourcesHelper->AllResourcesReset();
 }
 
 void GameEngineRenderTarget::CreateRenderTargetTexture(ID3D11Texture2D* _Texture, float4 _Color)

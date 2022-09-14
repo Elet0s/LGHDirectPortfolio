@@ -20,7 +20,7 @@ public:
 	ShaderType ShaderType;
 	int BindPoint;
 	std::function<void()> SettingFunction;
-
+	std::function<void()> ResetFunction;
 public:
 	ShaderResSetter()
 		: ShaderType(ShaderType::MAX)
@@ -65,7 +65,7 @@ class GameEngineTextureSetter : public ShaderResSetter
 
 public:
 	void Setting() const;
-
+	void Reset() const;
 public:
 	GameEngineTexture* Res;
 };
