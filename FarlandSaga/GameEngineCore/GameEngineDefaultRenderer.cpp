@@ -3,7 +3,8 @@
 #include "GameEngineRenderingPipeLine.h"
 
 GameEngineDefaultRenderer::GameEngineDefaultRenderer()
-	:PipeLine(nullptr)
+	:PipeLine(nullptr),
+	IsInstancing(false)
 {
 }
 
@@ -65,4 +66,10 @@ GameEngineRenderingPipeLine* GameEngineDefaultRenderer::GetPipeLine()
 
 	PipeLine = GetClonePipeLine(PipeLine);
 	return PipeLine;
+}
+void GameEngineDefaultRenderer::InstanceOn()
+{
+	IsInstancing = true;
+
+	InstanceSetting();
 }

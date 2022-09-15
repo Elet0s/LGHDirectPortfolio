@@ -12,7 +12,7 @@ class Tile
 {
 public:
 	int TileIndex; //깔린 타일의 인덱스번호
-
+	int Zindex;
 	int Z;//이매트릭스 상의 z값(높이)
 	int TileDepth; //카메라상의 z값(깊이)
 

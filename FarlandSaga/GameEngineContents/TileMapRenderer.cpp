@@ -144,6 +144,7 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//≈ÿΩ
 	Tiles[Y][X].Z = _ZChage;
 	if (_Index<9)
 	{
+		Tiles[Y][X].Zindex = _Index;
 		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
 		ShortIndex = _Index;
 	}

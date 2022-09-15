@@ -45,14 +45,14 @@ GameEngineRenderingPipeLine::~GameEngineRenderingPipeLine()
 //	}
 //}
 
-void GameEngineRenderingPipeLine::AllShaderReset()
-{
-	GameEngineDevice::GetContext()->VSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->GSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->DSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->HSSetShader(nullptr, nullptr, 0);
-	GameEngineDevice::GetContext()->PSSetShader(nullptr, nullptr, 0);
-}
+	void GameEngineRenderingPipeLine::AllShaderReset()
+	{
+		GameEngineDevice::GetContext()->VSSetShader(nullptr, nullptr, 0);
+		GameEngineDevice::GetContext()->GSSetShader(nullptr, nullptr, 0);
+		GameEngineDevice::GetContext()->DSSetShader(nullptr, nullptr, 0);
+		GameEngineDevice::GetContext()->HSSetShader(nullptr, nullptr, 0);
+		GameEngineDevice::GetContext()->PSSetShader(nullptr, nullptr, 0);
+	}
 
 GameEngineRenderingPipeLine* GameEngineRenderingPipeLine::Create()
 {
@@ -160,8 +160,14 @@ void GameEngineRenderingPipeLine::SetOutputMergerBlend(const std::string& _Name)
 	}
 }
 
-void GameEngineRenderingPipeLine::Rendering()
+void GameEngineRenderingPipeLine::Rendering(bool IsInstancing /*= false*/)
 {
+	if (true == IsInstancing)
+	{
+		// 데이터 수집을 한다.
+		InstancingDataCollect();
+		return;
+	}
 	InputAssembler1VertexBufferSetting();
 
 	VertexShaderSetting();
@@ -179,7 +185,10 @@ void GameEngineRenderingPipeLine::Rendering()
 	Draw();
 
 }
-
+void GameEngineRenderingPipeLine::InstancingDataCollect()
+{
+	// InstancingDraw();
+}
 // 실직적으로 세팅의 순서는 그다지 중요하지 않다.
 
 void GameEngineRenderingPipeLine::InputAssembler1VertexBufferSetting()

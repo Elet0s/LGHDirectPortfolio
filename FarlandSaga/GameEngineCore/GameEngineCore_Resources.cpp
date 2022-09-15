@@ -207,7 +207,14 @@ void EngineRenderingPipeLine()
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlas");
 		NewPipe->SetVertexShader("TextureAtlas.hlsl");
 		NewPipe->SetPixelShader("TextureAtlas.hlsl");
+		// NewPipe->InstancingSetting();
 	}
+
+	//{
+//	GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("TextureAtlas_Inst");
+//	NewPipe->SetVertexShader("TextureAtlas_Inst.hlsl");
+//	NewPipe->SetPixelShader("TextureAtlas_Inst.hlsl");
+//}
 
 	{
 		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("3DDebug");
