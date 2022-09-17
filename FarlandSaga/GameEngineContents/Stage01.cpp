@@ -47,7 +47,7 @@ void Stage01::Start()
 	S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
 	S01TileMap->TileRenderer->CreateIsometricTileMap(30,30,0,  { 64, 32 }, StageName, 16);
 	S01TileMap->TileRenderer->Load(StageName);
-	GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-400.0f,0.0f,0.0f });
+	GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-0.0f,0.0f,0.0f });
 	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 
 	{
