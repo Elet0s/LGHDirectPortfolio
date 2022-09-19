@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{8321373f-45a4-4a94-8b6d-af35c2f4a384}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Texture">
+      <UniqueIdentifier>{95886f15-66f9-4e3d-9139-db3d1291a172}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="RGBAEffect.hlsl">
+      <Filter>Texture</Filter>
+    </FxCompile>
+  </ItemGroup>
+</Project>
