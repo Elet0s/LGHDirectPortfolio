@@ -30,6 +30,31 @@ void ContentsCore::Start()
 	std::string_view Value = magic_enum::enum_name(OBJECTORDER::Player);
 	std::string Name = Value.data();
 
+	/////////////////쉐이더 불러오는 부분/////////////////
+
+	{
+		GameEngineDirectory Dir;
+
+		Dir.MoveParentToExitsChildDirectory("GameEngineResources");
+		Dir.Move("ContentsShaderResource");
+		Dir.Move("Shader");
+
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile("hlsl");
+
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineShader::AutoCompile(Shaders[i].GetFullPath());
+		}
+	}
+
+	{
+		GameEngineRenderingPipeLine* NewPipe = GameEngineRenderingPipeLine::Create("RGBAEffect");
+		NewPipe->SetInputAssembler1VertexBuffer("FullRect");
+		NewPipe->SetInputAssembler2IndexBuffer("FullRect");
+		NewPipe->SetVertexShader("RGBAEffect.hlsl");
+		NewPipe->SetPixelShader("RGBAEffect.hlsl");
+	}
+
 	/////////////////리소스 불러오는 부분/////////////////
 	{
 		GameEngineDirectory Dir;

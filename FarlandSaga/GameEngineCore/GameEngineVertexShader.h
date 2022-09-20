@@ -4,8 +4,8 @@
 
 class GameEngineInputLayOut;
 class GameEngineVertexShader
-	: public GameEngineRes<GameEngineVertexShader>
-	, public GameEngineShader
+	: public GameEngineShader
+	, public GameEngineRes<GameEngineVertexShader>
 
 {
 	friend GameEngineInputLayOut;
@@ -28,12 +28,22 @@ private:
 public:
 	void Setting();
 
+	bool IsInstancing()
+	{
+		return InstancingShaderPtr != nullptr;
+	}
+
 protected:
 
 	void ShaderCompile(std::string _Path, std::string _EntryPoint, UINT _VersionHigh, UINT _VersionLow);
 
+	void InstancingShaderCompile(std::string _Path, std::string _EntryPoint, UINT _VersionHigh = 5, UINT _VersionLow = 0);
+
 private:
 	ID3D11VertexShader* ShaderPtr;
+
+	ID3D11VertexShader* InstancingShaderPtr;
+	ID3DBlob* InstancingBinaryPtr;
 
 };
 
