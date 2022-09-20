@@ -73,6 +73,9 @@
     <Filter Include="Global\PreCompile">
       <UniqueIdentifier>{8f97320b-7e97-41f8-b6cb-e84026fbb289}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\04.PostEffect">
+      <UniqueIdentifier>{045158ad-d148-41a1-b89e-95cd76dc880e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -159,6 +162,9 @@
     <ClInclude Include="ObjectRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
+    <ClInclude Include="RGBAEffect.h">
+      <Filter>Actor\04.PostEffect</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -241,6 +247,9 @@
     </ClCompile>
     <ClCompile Include="ObjectRenderer.cpp">
       <Filter>Renderer</Filter>
+    </ClCompile>
+    <ClCompile Include="RGBAEffect.cpp">
+      <Filter>Actor\04.PostEffect</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

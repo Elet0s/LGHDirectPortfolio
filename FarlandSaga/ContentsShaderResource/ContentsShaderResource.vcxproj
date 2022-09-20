@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{1855ab5b-36a3-4e07-a574-a704d5c976e0}</ProjectGuid>
-    <RootNamespace>ContentsResources</RootNamespace>
+    <ProjectGuid>{fb22bab3-722a-4261-96b2-3c2fa6ea87e9}</ProjectGuid>
+    <RootNamespace>ContentsShaderResource</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />

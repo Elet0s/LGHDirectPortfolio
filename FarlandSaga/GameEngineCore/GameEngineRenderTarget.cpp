@@ -200,6 +200,11 @@ void GameEngineRenderTarget::EffectProcess()
 
 	for (GameEnginePostEffect* Effect : Effects)
 	{
+		if (false == Effect->IsUpdate())
+		{
+			continue;
+		}
+
 		Effect->Effect(this);
 	}
 }

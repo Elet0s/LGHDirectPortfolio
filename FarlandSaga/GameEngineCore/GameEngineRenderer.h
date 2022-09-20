@@ -4,30 +4,10 @@
 
 struct RenderOption
 {
-    float DeltaTime;
-    int IsMask;
-    int IsJump;
-    int Option00;
-    int Option01;
-    int Option02;
-    int Option03;
-    int Option04;
-    int Option05;
-    int Option06;
-    int Option07;
-    int Option08;
-    int Option09;
-    int Option10;
-    int Option11;
-    int Option12;
-    int Option13;
-    int Option14;
-    int Option15;
-    int Option16;
-    int Option17;
-    int Option18;
-    int Option19;
-    int Option20;
+	float DeltaTime = 0.0f;
+	float SumDeltaTime = 0.0f;
+	int Temp0;
+	int Temp1;
 };
 //
 //class GameEngineRenderSet 
@@ -41,53 +21,56 @@ struct RenderOption
 //
 //};
 
-// Ό³Έν :
 class GameEngineRenderingPipeLine;
 class GameEngineRenderer : public GameEngineTransformComponent
 {
-    friend class GameEngineLevel;
-    friend class GameEngineCamera;
+	friend class GameEngineLevel;
+	friend class GameEngineCamera;
 
 public:
-    RenderOption renderOption;
+	RenderOption renderOption;
 
-    // constrcuter destructer
-    GameEngineRenderer();
-    ~GameEngineRenderer();
+	GameEngineRenderer();
+	~GameEngineRenderer();
 
-    // delete Function
-    GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
-    GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
-    GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
-    GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
+	GameEngineRenderer(const GameEngineRenderer& _Other) = delete;
+	GameEngineRenderer(GameEngineRenderer&& _Other) noexcept = delete;
+	GameEngineRenderer& operator=(const GameEngineRenderer& _Other) = delete;
+	GameEngineRenderer& operator=(GameEngineRenderer&& _Other) noexcept = delete;
 
-    // float4x4 ViewPort;
-    void ChangeCamera(CAMERAORDER _Order);
+	// float4x4 ViewPort;
+	void ChangeCamera(CAMERAORDER _Order);
 
-    GameEngineRenderingPipeLine* GetClonePipeLine(GameEngineRenderingPipeLine* _Rendering);
+	GameEngineRenderingPipeLine* GetClonePipeLine(GameEngineRenderingPipeLine* _Rendering);
 
-    inline int GetRenderingOrder()
-    {
-        return RenderingOrder;
-    }
+	inline int GetRenderingOrder()
+	{
+		return RenderingOrder;
+	}
 
-    void SetRenderingOrder(int _Order);
+	void SetRenderingOrder(int _Order);
+
+	virtual void InstancingOn()
+	{
+		IsInstancing = true;
+	};
 
 protected:
-    virtual void Start();
-    virtual void Update(float _DeltaTime) {}
-    virtual void End() {}
+	virtual void Start();
+	virtual void Update(float _DeltaTime) {}
+	virtual void End() {}
 
-    void PushRendererToMainCamera();
-    void PushRendererToUICamera();
+	void PushRendererToMainCamera();
+	void PushRendererToUICamera();
 
 
-    class GameEngineCamera* Camera;
-    CAMERAORDER CameraOrder;
-    int RenderingOrder;
+	class GameEngineCamera* Camera;
+	CAMERAORDER CameraOrder;
+	int RenderingOrder;
+	bool IsInstancing;
 
 private:
-    virtual void Render(float _DeltaTime) = 0;
+	virtual void Render(float _DeltaTime) = 0;
 
 };
 

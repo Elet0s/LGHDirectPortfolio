@@ -1,5 +1,5 @@
 // #include "myshader.hlsli"
-#include "..\..\GameEngineResources\GameEngineShader\RenderOption.fx"
+#include "..\GameEngineResources\GameEngineShader\RenderOption.fx"
 
 // SV_POSITION 시맨틱
 // 그래픽카드에게 이녀석은 이런 부류니까 니가 자동으로 처리하는 녀석이 있으면 하고.

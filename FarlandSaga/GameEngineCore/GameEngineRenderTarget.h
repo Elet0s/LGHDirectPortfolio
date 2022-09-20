@@ -34,6 +34,25 @@
 
 class GameEnginePostEffect
 {
+private:
+	bool IsUpdate_ = true;
+
+public:
+	bool IsUpdate()
+	{
+		return IsUpdate_;
+	}
+
+	virtual void On()
+	{
+		IsUpdate_ = true;
+	}
+
+	virtual void Off()
+	{
+		IsUpdate_ = false;
+	}
+
 public:
 	virtual void EffectInit() = 0;
 	virtual void Effect(class GameEngineRenderTarget* _Render) = 0;
@@ -44,7 +63,6 @@ public:
 	}
 };
 
-// Ό³Έν :
 class GameEngineStatusWindow;
 class GameEngineDepthStencilTexture;
 class GameEngineRenderTarget : public GameEngineRes <GameEngineRenderTarget>
@@ -59,11 +77,9 @@ public:
 	static void SetPrevRenderTarget();
 
 public:
-	// constrcuter destructer
 	GameEngineRenderTarget();
 	~GameEngineRenderTarget();
 
-	// delete Function
 	GameEngineRenderTarget(const GameEngineRenderTarget& _Other) = delete;
 	GameEngineRenderTarget(GameEngineRenderTarget&& _Other) noexcept = delete;
 	GameEngineRenderTarget& operator=(const GameEngineRenderTarget& _Other) = delete;
@@ -131,11 +147,13 @@ private:
 
 public:
 	template<typename EffectType>
-	void AddEffect()
+	EffectType* AddEffect()
 	{
-		EffectType* NewEffect = new EffectType();
+		GameEnginePostEffect* NewEffect = new EffectType();
 		NewEffect->EffectInit();
 		Effects.push_back(NewEffect);
+
+		return reinterpret_cast<EffectType*>(NewEffect);
 	}
 };
 

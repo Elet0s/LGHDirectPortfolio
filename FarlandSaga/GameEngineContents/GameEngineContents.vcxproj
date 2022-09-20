@@ -236,6 +236,7 @@
       <SubType>
       </SubType>
     </ClInclude>
+    <ClInclude Include="RGBAEffect.h" />
     <ClInclude Include="SoundPlayer.h">
       <SubType>
       </SubType>
@@ -348,6 +349,7 @@
       <SubType>
       </SubType>
     </ClCompile>
+    <ClCompile Include="RGBAEffect.cpp" />
     <ClCompile Include="SoundPlayer.cpp">
       <SubType>
       </SubType>
