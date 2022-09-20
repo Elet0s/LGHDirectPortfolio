@@ -165,6 +165,9 @@
     <ClInclude Include="RGBAEffect.h">
       <Filter>Actor\04.PostEffect</Filter>
     </ClInclude>
+    <ClInclude Include="TestLevel.h">
+      <Filter>Level</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="ContentsCore.cpp">
@@ -250,6 +253,9 @@
     </ClCompile>
     <ClCompile Include="RGBAEffect.cpp">
       <Filter>Actor\04.PostEffect</Filter>
+    </ClCompile>
+    <ClCompile Include="TestLevel.cpp">
+      <Filter>Level</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

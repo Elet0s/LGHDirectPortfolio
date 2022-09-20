@@ -19,6 +19,7 @@ public:
 	int Scale[3];
 	int ZScale[1];
 	size_t SelectTile;
+	size_t SelectZTile;
 	bool LoadCheaker;
 	bool MapObjectSet;
 
@@ -32,4 +33,3 @@ private:
 	void Initialize(class GameEngineLevel* _Level) override;
 	void OnGUI(GameEngineLevel* _Level, float _DeltaTime) override;
 };
-

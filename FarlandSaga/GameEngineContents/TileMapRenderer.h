@@ -39,11 +39,11 @@ public:
 
 	// CreateTileMap(Scale[0], Scale[1], SelectFolderTexture);
 	void CreateIsometricTileMap(int _X, int _Y, int _Z, float4 _TileScale, const std::string& _FolderTexture, int _DefualtIndex = 0);
-	void SetTileIndex(float4 _Pos, size_t _Index, int _ZChage);
+	void SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zindex);
 	void GetTileIndex(float4 _Pos, int& _X, int& _Y);
 
 	void SetZIndex(int& _X, int& _Y, int& _Z, int& _Index);
-	void LoadTileIndex(int _x, int _y, int _Index, int _Z);
+	void LoadTileIndex(int _x, int _y, int _Index, int _Z, int _Zindex);
 
 		std::vector<std::vector<Tile>> Tiles;
 		void Load(std::string _Stage);

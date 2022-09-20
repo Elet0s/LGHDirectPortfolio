@@ -43,17 +43,26 @@ void TileMapRenderer::GetTileIndex(float4 _Pos, int& _X, int& _Y)
 	_Y = static_cast<int>(roundf(fY));
 
 }
-void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z)
+void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zindex)
 {
 	if (0 > _Index)
 	{
 		return;
 	}
-
 	if (TileTextures->GetTextureCount() <= _Index)
 	{
 		return;
 	}
+
+	if (0 > _Zindex)
+	{
+		return;
+	}
+	if (TileTextures->GetTextureCount() <= _Zindex)
+	{
+		return;
+	}
+
 	if (0 > _Z)
 	{
 		return;
@@ -80,25 +89,27 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z)
 	{
 		return;
 	}
+
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].Z = _Z;
-	if (_Index < 9)
+	Tiles[Y][X].Zindex = _Zindex;
+	if (_Zindex < 9)
 	{
-		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
-		ShortIndex = _Index;
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
+		ShortIndex = _Zindex;
 	}
-	else if (_Index < 15)
+	else if (_Zindex >= 9)
 	{
-		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
-		LongIndex = _Index;
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
+		LongIndex = _Zindex;
 	}
-	else
+	if (_Index >= 15)
 	{
 		Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
 	}
 }
 
-void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//ÅØ½ºÃ³ ¼±ÅÃÇØ¼­ ´©¸¦¶§
+void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zindex)//ÅØ½ºÃ³ ¼±ÅÃÇØ¼­ ´©¸¦¶§
 {
 	if (0 > _Index)
 	{
@@ -109,7 +120,17 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//ÅØ½
 	{
 		return;
 	}
-	if (0 > _ZChage)
+
+	if (0 > _Zindex)
+	{
+		return;
+	}
+	if (TileTextures->GetTextureCount() <= _Zindex)
+	{
+		return;
+	}
+
+	if (0 > _Z)
 	{
 		return;
 	}
@@ -141,19 +162,19 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _ZChage)//ÅØ½
 	}
 
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
-	Tiles[Y][X].Z = _ZChage;
-	if (_Index<9)
+	Tiles[Y][X].Z = _Z;
+	Tiles[Y][X].Zindex = _Zindex;
+	if (_Zindex < 9)
 	{
-		Tiles[Y][X].Zindex = _Index;
-		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
-		ShortIndex = _Index;
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
+		ShortIndex = _Zindex;
 	}
-	else if (_Index < 15)
+	else if (_Zindex >= 9)
 	{
-		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Index);
-		LongIndex = _Index;
+		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
+		LongIndex = _Zindex;
 	}
-	else
+	if (_Index >= 15)
 	{
 		Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
 	}
@@ -189,7 +210,11 @@ void TileMapRenderer::Load(std::string _Stage) //ÀÌ¹Ì ¸¸µé¾îÁø Å¸ÀÏ¸ÊDataºÒ·¯¿À±
 			int TileZ = Tiles[y][x].Z;;
 			LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
 			//   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
-			LoadTileIndex(static_cast<int>( y),static_cast<int>(x), Tileindex, TileZ);
+
+			int TileZindex = Tiles[y][x].Zindex;;
+			LoadFile.Read(&TileZindex, sizeof(int), sizeof(int));
+
+			LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex);
 
 			//     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
 			//     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
