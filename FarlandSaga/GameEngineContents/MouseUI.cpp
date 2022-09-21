@@ -34,16 +34,24 @@ void MouseUI::Start()
 	Renderer = CreateComponent<GameEngineTextureRenderer>();
 	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
 	Renderer->SetTexture("ST01.png");
-	GetCurPos();
-	Renderer->GetTransform().SetWorldPosition({ static_cast<float>(MousePosition.x),-static_cast<float>(MousePosition.y),-99.0f,0.0f });
 }
 void MouseUI::Update(float _DeltaTime)
 {
-	GetCurPos();
-	Renderer->GetTransform().SetWorldPosition({ static_cast<float>(MousePosition.x),-static_cast<float>(MousePosition.y),-99.0f,0.0f });
+
+	{
+		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
+
+		float fX = (MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f;
+		float fY = (MousePos.y / -16.0f - MousePos.x / 32.0f) / 2.0f;
+
+		float XX = roundf(fX) * 32 + roundf(fY) * -32;
+		float YY = roundf(fX) * -16+ roundf(fY) * -16;
+		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
+		//int a = 0;
+	}
 
 
-	//////// 마우스드래그 맵 이동하는 기능 ///////////
+	//////// 마우스드래그 이동하는 기능 ///////////
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
 		{
