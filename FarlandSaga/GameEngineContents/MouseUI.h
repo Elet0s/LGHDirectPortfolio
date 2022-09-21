@@ -18,6 +18,8 @@ public:
 
 	GameEngineTextureRenderer* Renderer;
 	GameEngineLevel* Level;
+	float MX;
+	float MY;
 
 	inline void GetCurPos()
 	{

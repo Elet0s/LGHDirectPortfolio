@@ -41,11 +41,11 @@ void MouseUI::Update(float _DeltaTime)
 	{
 		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
 
-		float fX = (MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f;
-		float fY = (MousePos.y / -16.0f - MousePos.x / 32.0f) / 2.0f;
+		MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
+		MY = roundf((MousePos.y / -16.0f - MousePos.x / 32.0f) / 2.0f);
 
-		float XX = roundf(fX) * 32 + roundf(fY) * -32;
-		float YY = roundf(fX) * -16+ roundf(fY) * -16;
+		float XX = (MX * 32) + (MY * -32);
+		float YY = (MX * -16) + (MY * -16);
 		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
 		//int a = 0;
 	}
