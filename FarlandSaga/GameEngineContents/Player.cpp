@@ -69,11 +69,6 @@ void Player::Start()
 		//Renderer->SetPivot(PIVOTMODE::BOT);
 	}
 
-	{
-		Collision = CreateComponent<GameEngineCollision>();
-		Collision->GetTransform().SetLocalScale({ 100.0f, 100.0f, 100.0f });
-		Collision->ChangeOrder(OBJECTORDER::Player);
-	}
 
 	// 무기명 함수를 만들수 있습니다.
 	// 이름없는 인스턴스 함수를 만들수가 있습니다.
@@ -183,8 +178,7 @@ void Player::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 void Player::Update(float _DeltaTime)
 {
-	// GameEngineDebug::DrawBox(Collision->GetTransform(), { 1.0f, 0.0f,0.0f, 0.5f });
-	// GameEngineDebug::DrawSphere(Collision->GetTransform(), {1.0f, 0.0f,0.0f, 0.5f});
+
 
 	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
 	{
@@ -193,11 +187,6 @@ void Player::Update(float _DeltaTime)
 
 	StateManager.Update(_DeltaTime);
 
-	//if (true == Collision->IsCollision(CollisionType::CT_OBB2D, OBJECTORDER::UI, CollisionType::CT_OBB2D))
-	//{
-	//	int a = 0;
-	//	// 포탈과 닿았다면
-	//}
 
 	//Renderer->AnimationBindEnd("Test2", std::bind(&Player::Test2End, this, std::placeholders::_1));
 	//Renderer->AnimationBindEnd("Test1", std::bind(&Player::Test2End, this, std::placeholders::_1));

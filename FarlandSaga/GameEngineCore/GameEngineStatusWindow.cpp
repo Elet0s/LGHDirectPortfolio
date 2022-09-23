@@ -54,10 +54,10 @@ void GameEngineStatusWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 	std::string Name = "FPS : " + std::to_string(FPS);
 	ImGui::Text(Name.c_str());
 
-	if (true == ImGui::Button("CollisionDebugSwtich"))
-	{
-		GEngine::CollisionDebugSwitch();
-	}
+//	if (true == ImGui::Button("CollisionDebugSwtich")) //필요없어서 뺌
+//	{
+//		GEngine::CollisionDebugSwitch();
+//	}
 
 	if (true == ImGui::Button("FreeCameaOnOff"))
 	{

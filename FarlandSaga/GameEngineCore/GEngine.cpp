@@ -18,7 +18,7 @@ bool GEngine::IsCollisionDebug()
 	return CollisionDebug;
 }
 
-void GEngine::CollisionDebugSwitch()
+void GEngine::CollisionDebugSwitch() 
 {
 	CollisionDebug = !CollisionDebug;
 }

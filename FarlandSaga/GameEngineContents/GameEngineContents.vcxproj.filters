@@ -156,9 +156,6 @@
     <ClInclude Include="MouseUI.h">
       <Filter>Actor\00.Global\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectActor.h">
-      <Filter>Actor\00.Global\Actor</Filter>
-    </ClInclude>
     <ClInclude Include="ObjectRenderer.h">
       <Filter>Renderer</Filter>
     </ClInclude>
@@ -167,6 +164,12 @@
     </ClInclude>
     <ClInclude Include="TestLevel.h">
       <Filter>Level</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayUnit.h">
+      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="MonUnit.h">
+      <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -245,9 +248,6 @@
     <ClCompile Include="MouseUI.cpp">
       <Filter>Actor\00.Global\Actor</Filter>
     </ClCompile>
-    <ClCompile Include="ObjectActor.cpp">
-      <Filter>Actor\00.Global\Actor</Filter>
-    </ClCompile>
     <ClCompile Include="ObjectRenderer.cpp">
       <Filter>Renderer</Filter>
     </ClCompile>
@@ -256,6 +256,12 @@
     </ClCompile>
     <ClCompile Include="TestLevel.cpp">
       <Filter>Level</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayUnit.cpp">
+      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="MonUnit.cpp">
+      <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

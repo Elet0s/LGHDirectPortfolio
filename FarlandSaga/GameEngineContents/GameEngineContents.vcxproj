@@ -212,11 +212,11 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="MyDialogBox.h">
+    <ClInclude Include="MonUnit.h">
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ObjectActor.h">
+    <ClInclude Include="MyDialogBox.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -225,6 +225,10 @@
       </SubType>
     </ClInclude>
     <ClInclude Include="Player.h">
+      <SubType>
+      </SubType>
+    </ClInclude>
+    <ClInclude Include="PlayUnit.h">
       <SubType>
       </SubType>
     </ClInclude>
@@ -327,11 +331,11 @@
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="MyDialogBox.cpp">
+    <ClCompile Include="MonUnit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
-    <ClCompile Include="ObjectActor.cpp">
+    <ClCompile Include="MyDialogBox.cpp">
       <SubType>
       </SubType>
     </ClCompile>
@@ -340,6 +344,10 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="Player.cpp">
+      <SubType>
+      </SubType>
+    </ClCompile>
+    <ClCompile Include="PlayUnit.cpp">
       <SubType>
       </SubType>
     </ClCompile>
