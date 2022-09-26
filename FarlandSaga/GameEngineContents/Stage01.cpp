@@ -4,15 +4,13 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
-#include "MonUnit.h"
-#include "PlayUnit.h"
 #include "UIMaster.h"
 #include "TestStageBG.h"
 #include <GameEngineCore/GEngine.h>
 #include "GameEngineBase/GameEngineSound.h"
 #include "SoundPlayer.h"
 #include"MapEditorLevel.h"
-#include"MouseUI.h"
+
 
 
 
@@ -63,8 +61,9 @@ void Stage01::Start()
 		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}
 	{
-		MouseUI* NewMouseUi = CreateActor<MouseUI>(OBJECTORDER::UI);
-		NewMouseUi->Level = this;
+		NewMouseActor = CreateActor<MouseActor>(OBJECTORDER::UI);
+		NewMouseActor->SetTileRenderer(S01TileMap->TileRenderer);
+		NewMouseActor->Level = this;
 	}
 	{
 		//Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);

@@ -3,23 +3,28 @@
 #include <GameEngineBase/GameEngineWindow.h>
 
 class GameEngineTextureRenderer;
-class MouseUI : public GameEngineActor
+class TileMapRenderer;
+class MouseActor : public GameEngineActor
 {
 public:
 
-	MouseUI();
-	~MouseUI();
+	MouseActor();
+	~MouseActor();
 
 
-	MouseUI(const MouseUI& _Other) = delete;
-	MouseUI(MouseUI&& _Other) noexcept = delete;
-	MouseUI& operator=(const MouseUI& _Other) = delete;
-	MouseUI& operator=(MouseUI&& _Other) noexcept = delete;
+	MouseActor(const MouseActor& _Other) = delete;
+	MouseActor(MouseActor&& _Other) noexcept = delete;
+	MouseActor& operator=(const MouseActor& _Other) = delete;
+	MouseActor& operator=(MouseActor&& _Other) noexcept = delete;
 
 	GameEngineTextureRenderer* Renderer;
 	GameEngineLevel* Level;
 	float MX;
 	float MY;
+	int MZ;
+	TileMapRenderer* TileMap;
+
+	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
 
 	inline void GetCurPos()
 	{

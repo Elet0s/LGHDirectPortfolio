@@ -1,26 +1,34 @@
-
 #include "PreCompile.h"
-#include"MouseUI.h"
+#include"MouseActor.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
 #include <GameEngineCore/GameEngineTextureRenderer.h>
 
-MouseUI::MouseUI()
+MouseActor::MouseActor()
 	:Renderer(nullptr),
 	 ptMouse1(),
 	ptMouse2(),
 	ptMouse3(),
 	Level(),
-	MousePosition()
+	MousePosition(),
+	MX(0),
+	MY(0),
+	MZ(0),
+	TileMap()
 {
 
 }
-MouseUI::~MouseUI()
+MouseActor::~MouseActor()
 {
 
 }
 
-void MouseUI::Start()
+void MouseActor::SetTileRenderer(TileMapRenderer* _TileMapRenderer)
+{
+	TileMap = _TileMapRenderer;
+}
+
+void MouseActor::Start()
 {
 	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
 	{
@@ -35,17 +43,28 @@ void MouseUI::Start()
 	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
 	Renderer->SetTexture("ST01.png");
 }
-void MouseUI::Update(float _DeltaTime)
+void MouseActor::Update(float _DeltaTime)
 {
 
 	{
 		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
 
 		MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
-		MY = roundf((MousePos.y / -16.0f - MousePos.x / 32.0f) / 2.0f);
+		MY = roundf((MousePos.x / -32.0f + MousePos.y / -16.0f) / 2.0f);
+
+		int XIndex = MX;
+		int YIndex = MY;
+		if (XIndex >=0 && YIndex >=0)
+		{
+			MZ = TileMap->Tiles[YIndex][XIndex].Z;
+		}
+		else
+		{
+			MZ = 0;
+		}
 
 		float XX = (MX * 32) + (MY * -32);
-		float YY = (MX * -16) + (MY * -16);
+		float YY = (MX * -16) + (MY * -16)+ (MZ*16);
 		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
 		//int a = 0;
 	}
@@ -94,7 +113,7 @@ void MouseUI::Update(float _DeltaTime)
 		}
 	}
 }
-void MouseUI::End()
+void MouseActor::End()
 {
 
 }

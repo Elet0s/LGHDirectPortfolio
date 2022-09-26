@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineLevel.h>
 
+
 class Stage01 : public GameEngineLevel
 {
 public:
@@ -14,7 +15,10 @@ public:
 
 	TileMapActor* S01TileMap;
 	PlayUnit* UnitLEON;
+	MouseActor* NewMouseActor;
 	std::string StageName;
+
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

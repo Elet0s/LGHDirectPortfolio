@@ -44,3 +44,6 @@
 #include "Enums.h"
 #include "TileMapActor.h"
 #include "MapEditorWindow.h"
+#include "MouseActor.h"
+#include "PlayUnit.h"
+#include "MonUnit.h"
