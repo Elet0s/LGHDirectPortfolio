@@ -3,6 +3,7 @@
 #include "Enums.h"
 
 class GameEngineTextureRenderer;
+class TileMapRenderer;
 class PlayUnit : public GameEngineActor
 {
 public:
@@ -14,10 +15,17 @@ public:
 	PlayUnit& operator=(const PlayUnit& _Other) = delete;
 	PlayUnit& operator=(PlayUnit&& _Other) noexcept = delete;
 
+	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
 	void SetUnit(int _X, int _Y, std::string _UnitName);
 	void UnitMove(size_t _MoveConter, std::string _Direction);
+
+
 	PlayUnitGroup UnitType;
 	GameEngineTextureRenderer* UnitRenderer;
+	TileMapRenderer* TileMap;
+	float UnitX;
+	float UnitY;
+	float UnitZ;
 
 protected:
 	void Start() override;

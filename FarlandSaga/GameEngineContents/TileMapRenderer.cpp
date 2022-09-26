@@ -203,16 +203,17 @@ void TileMapRenderer::Load(std::string _Stage) //이미 만들어진 타일맵Data불러오�
 
 		for (size_t x = 0; x < XSize; x++)
 		{
-			int Tileindex = Tiles[y][x].TileIndex;;
+			int Tileindex =0;
 			LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
-			//  TileMap->TileRenderer->Tiles[y][x].TileIndex = Tileindex;
+			Tiles[y][x].TileIndex = Tileindex;
 
-			int TileZ = Tiles[y][x].Z;;
+			int TileZ = 0;
 			LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
-			//   TileMap->TileRenderer->Tiles[y][x].Z = TileZ;
+			Tiles[y][x].Z = TileZ;
 
-			int TileZindex = Tiles[y][x].Zindex;;
+			int TileZindex = 0;
 			LoadFile.Read(&TileZindex, sizeof(int), sizeof(int));
+			Tiles[y][x].Zindex = TileZindex;
 
 			LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex);
 
@@ -289,7 +290,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 	{
 		for (size_t x = 0; x < Tiles[y].size(); x++)
 		{
-			float4 Pos = GetTransform().GetWorldPosition();
+			float4 Pos;// = GetTransform().GetWorldPosition();
 
 			Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 			Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);

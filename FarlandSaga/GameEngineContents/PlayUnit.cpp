@@ -36,10 +36,6 @@ void PlayUnit::Start()
 	StateManager1.CreateStateMember("Idle", std::bind(&PlayUnit::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&PlayUnit::IdleStart, this, std::placeholders::_1));
 	StateManager1.CreateStateMember("Move", std::bind(&PlayUnit::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2), [/*&*/=](const StateInfo& _Info)
 		{
-			// = 지역변수도 쓸수있다.
-			// MyValue가 하나더 생기는 방식으로 컴파일러가 해석한다.
-			// & 외부의 있는 값의 참조형을 받아오는 것이기 때문에
-			// 지역변수를 쓰면 결과를 장담할수가 없다.
 			if (true == GameEngineInput::GetInst()->IsDown("PlayerLeftUP") || true == GameEngineInput::GetInst()->IsDown("PlayerRightUp"))
 			{
 				UnitRenderer->ChangeFrameAnimation("LeonWalkU");
@@ -119,10 +115,26 @@ void PlayUnit::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 
 }
 
+void PlayUnit::SetTileRenderer(TileMapRenderer* _TileMapRenderer)
+{
+	TileMap = _TileMapRenderer;
+}
 
 void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 {
 	GameEngineString::ToUpper(_UnitName);// 대문자로변환해서 조건문 으로 체크 한뒤 유닛 정보를 세팅
+
+	UnitX = _X;
+	UnitY = _Y;
+	UnitZ = TileMap->Tiles[_Y][_X].Z;
+
+	float4 Pos;
+	float4 Half = {32,16,0,0};
+
+	Pos.x = (_X * Half.x) + (_Y * -Half.x);
+	Pos.y = (_X * -Half.y) + (_Y * -Half.y) + (UnitZ * 16.0f);
+	UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y+16.0f, -100));
+
 	if (_UnitName == "LEON")
 	{
 

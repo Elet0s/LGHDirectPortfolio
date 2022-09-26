@@ -53,7 +53,9 @@ void Stage01::Start()
 
 	{
 		//Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
-		PlayUnit* UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitLEON->SetTileRenderer(S01TileMap->TileRenderer);
+		UnitLEON->SetUnit(1,0,"LEON");
 		//UnitLEON->SetUnit(3,3,"Leon");
 	}
 

@@ -13,7 +13,7 @@ public:
 	Stage01& operator=(Stage01&& _Other) noexcept = delete;
 
 	TileMapActor* S01TileMap;
-
+	PlayUnit* UnitLEON;
 	std::string StageName;
 protected:
 	void Start() override;
