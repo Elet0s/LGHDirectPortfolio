@@ -224,10 +224,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PlayUnit.h">
       <SubType>
       </SubType>
@@ -340,10 +336,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="ObjectRenderer.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
       <SubType>
       </SubType>
     </ClCompile>

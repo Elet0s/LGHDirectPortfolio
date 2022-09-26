@@ -1,6 +1,8 @@
 #pragma once
-#include"GameEngineCore/GameEngineActor.h"
+#include <GameEngineCore/CoreMinimal.h>
+#include "Enums.h"
 
+class GameEngineTextureRenderer;
 class PlayUnit : public GameEngineActor
 {
 public:
@@ -16,10 +18,17 @@ public:
 	void UnitMove(size_t _MoveConter, std::string _Direction);
 	PlayUnitGroup UnitType;
 	GameEngineTextureRenderer* UnitRenderer;
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime);
 	void End();
-private:
 
+	void IdleStart(const StateInfo& _Info);
+	void IdleUpdate(float _DeltaTime, const StateInfo& _Info);
+	void MoveUpdate(float _DeltaTime, const StateInfo& _Info);
+
+private:
+	GameEngineStateManager StateManager1;
+	float Speed;
 };

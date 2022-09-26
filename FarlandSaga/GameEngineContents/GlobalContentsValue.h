@@ -1,22 +1,17 @@
 #pragma once
-#include "Player.h"
-#include "Monster.h"
+#include "PlayUnit.h"
+#include "MonUnit.h"
 
 enum class OBJECTORDER
 {
 	TileMap,
 	Player,
 	Monster,
-	UI = 1000,
+	UI ,
 	BG
 };
 
-//enum class COLLISIONORDER
-//{
-//	Player,
-//	Monster,
-//	UI = 1000,
-//};
+
 
 class GlobalContentsValue
 {
@@ -28,7 +23,6 @@ public:
 	class Actors
 	{
 	public:
-		static Monster* TestMonster;
 
 	private:
 		Actors() {		}

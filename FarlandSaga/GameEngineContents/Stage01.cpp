@@ -4,8 +4,8 @@
 #include <GameEngineBase/GameEngineWindow.h>
 #include <GameEngineCore/GameEngineCameraActor.h>
 #include <GameEngineBase/GameEngineInput.h>
-#include "Monster.h"
-#include "Player.h"
+#include "MonUnit.h"
+#include "PlayUnit.h"
 #include "UIMaster.h"
 #include "TestStageBG.h"
 #include <GameEngineCore/GEngine.h>
@@ -13,6 +13,7 @@
 #include "SoundPlayer.h"
 #include"MapEditorLevel.h"
 #include"MouseUI.h"
+
 
 
 Stage01::Stage01()
@@ -51,11 +52,11 @@ void Stage01::Start()
 	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 
 	{
-		Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
+		//Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
+		PlayUnit* UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		//UnitLEON->SetUnit(3,3,"Leon");
 	}
-	{
-		Monster* NewMonster = CreateActor<Monster>(OBJECTORDER::Monster);
-	}
+
 	{
 		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
 	}

@@ -96,9 +96,6 @@
     <ClInclude Include="Monster.h">
       <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h">
-      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
-    </ClInclude>
     <ClInclude Include="UIMaster.h">
       <Filter>Actor\02.Stage\UI</Filter>
     </ClInclude>
@@ -187,9 +184,6 @@
     </ClCompile>
     <ClCompile Include="Monster.cpp">
       <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
-    </ClCompile>
-    <ClCompile Include="Player.cpp">
-      <Filter>Actor\02.Stage\Unit\PlayerUnit</Filter>
     </ClCompile>
     <ClCompile Include="UIMaster.cpp">
       <Filter>Actor\02.Stage\UI</Filter>
