@@ -44,10 +44,12 @@ public:
 	size_t Dark_;
 	size_t Light_;
 
-///  버프
-	bool Heyste_;
-	bool Detect_;
-
+	///  버프
+	size_t Strength_;
+	size_t Detect_;
+	size_t Intelligence_;
+	size_t Reflection_;
+	size_t Heyste_;
 
 protected:
 	void Start() override;
