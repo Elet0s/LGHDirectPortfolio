@@ -45,7 +45,6 @@ void MouseActor::Start()
 }
 void MouseActor::Update(float _DeltaTime)
 {
-
 	{
 		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
 
@@ -67,6 +66,22 @@ void MouseActor::Update(float _DeltaTime)
 		float YY = (MX * -16) + (MY * -16)+ (MZ*16);
 		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
 		//int a = 0;
+
+		if (XIndex >= 0 && YIndex >= 0 && YIndex  >=0 && XIndex + 1)
+		{
+			if (TileMap->Tiles[YIndex][XIndex].Z + 2 <= TileMap->Tiles[YIndex + 1][XIndex + 1].Z)
+			{
+				Renderer->SetTexture("ST02.png");
+
+			}
+			else
+			{
+
+				Renderer->SetTexture("ST01.png");
+			}
+
+
+		}
 	}
 
 

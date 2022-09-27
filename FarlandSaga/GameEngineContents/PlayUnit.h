@@ -26,6 +26,12 @@ public:
 	float UnitX;
 	float UnitY;
 	float UnitZ;
+	int _Hp;
+	int _Mp;
+	int _Atk;
+	int _Def;
+	int _Move;
+	
 
 protected:
 	void Start() override;

@@ -150,7 +150,7 @@ void ContentsCore::Start()
 	CreateLevel<Event03>("Event03");
 	CreateLevel<Stage03>("Stage03");
 	CreateLevel<EndLevel>("Ending");
-	ChangeLevel("Title");
+	ChangeLevel("Stage01");
 
 
 

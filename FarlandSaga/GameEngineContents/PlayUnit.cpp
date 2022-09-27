@@ -7,6 +7,11 @@ PlayUnit::PlayUnit()
 	: UnitType(PlayUnitGroup::None)
 	, Speed(50.0f)
 	, UnitRenderer()
+	, _Hp()
+	, _Mp()
+	, _Atk()
+	, _Def()
+	, _Move()
 {
 
 }
