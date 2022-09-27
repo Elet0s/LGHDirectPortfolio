@@ -7,13 +7,31 @@ PlayUnit::PlayUnit()
 	: UnitType(PlayUnitGroup::None)
 	, Speed(50.0f)
 	, UnitRenderer()
-	, _Hp()
-	, _Mp()
-	, _Atk()
-	, _Def()
-	, _Move()
+	,UnitX(0)
+	, UnitY(0)
+	, UnitZ(0)
+	, TileMap()
+	, Hp_(0)
+	, Mp_(0)
+	, Atk_(0)
+	, Def_(0)
+	, Matk_(0)
+	, MDef_(0)
+	, Dex_(0)
+	, Exp_(0)
+	, Level_(0)
+	, Fire_(0)
+	, Water_(0)
+	, Earth_(0)
+	, Wind_(0)
+	, Dark_(0)
+	, Light_(0)
+	, Strength_(0)
+	, Detect_(0)
+	, Intelligence_(0)
+	, Reflection_(0)
+	, Heyste_(0)
 {
-
 }
 PlayUnit::~PlayUnit()
 {
@@ -22,35 +40,6 @@ PlayUnit::~PlayUnit()
 
 void PlayUnit::Start()
 {
-	if (false == GameEngineInput::GetInst()->IsKey("PlayerLeftUP"))
-	{
-		GameEngineInput::GetInst()->CreateKey("PlayerLeftUP", 'W');
-		GameEngineInput::GetInst()->CreateKey("PlayerLeftDown", 'A');
-		GameEngineInput::GetInst()->CreateKey("PlayerRightUP", 'D');
-		GameEngineInput::GetInst()->CreateKey("PlayerRightDown", 'S');
-	}
-	{
-		UnitRenderer = CreateComponent<GameEngineTextureRenderer>();
-		UnitRenderer->GetTransform().SetLocalScale({ 100,100, 1 });
-		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
-		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
-		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
-		UnitRenderer->ChangeFrameAnimation("LeonIdle");
-		UnitRenderer->GetTransform().SetWorldPosition(float4(0, 0, -100));
-	}
-	StateManager1.CreateStateMember("Idle", std::bind(&PlayUnit::IdleUpdate, this, std::placeholders::_1, std::placeholders::_2), std::bind(&PlayUnit::IdleStart, this, std::placeholders::_1));
-	StateManager1.CreateStateMember("Move", std::bind(&PlayUnit::MoveUpdate, this, std::placeholders::_1, std::placeholders::_2), [/*&*/=](const StateInfo& _Info)
-		{
-			if (true == GameEngineInput::GetInst()->IsDown("PlayerLeftUP") || true == GameEngineInput::GetInst()->IsDown("PlayerRightUp"))
-			{
-				UnitRenderer->ChangeFrameAnimation("LeonWalkU");
-			}
-			else if (true == GameEngineInput::GetInst()->IsDown("PlayerLeftDown") || true == GameEngineInput::GetInst()->IsDown("PlayerRightDown"))
-			{
-				UnitRenderer->ChangeFrameAnimation("LeonWalkD");
-			}
-		});
-	StateManager1.ChangeState("Idle");
 }
 
 void PlayUnit::Update(float _DeltaTime)
@@ -59,7 +48,7 @@ void PlayUnit::Update(float _DeltaTime)
 	{
 		return;
 	}
-	StateManager1.Update(_DeltaTime);
+//	StateManager1.Update(_DeltaTime);
 }
 
 void PlayUnit::End() 
@@ -69,55 +58,42 @@ void PlayUnit::End()
 
 void PlayUnit::IdleStart(const StateInfo& _Info)
 {
-	UnitRenderer->ChangeFrameAnimation("LeonIdle");
+
 }
 void PlayUnit::IdleUpdate(float _DeltaTime, const StateInfo& _Info)
 {
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerRightUP") ||
-		true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
-	{
-		StateManager1.ChangeState("Move");
-	}
 }
 
 void PlayUnit::MoveUpdate(float _DeltaTime, const StateInfo& _Info)
 {
 
-	if (false == GameEngineInput::GetInst()->IsPress("PlayerLeftUP") && false == GameEngineInput::GetInst()->IsPress("PlayerLeftDown") && false == GameEngineInput::GetInst()->IsPress("PlayerRightUP") && false == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
-	{
-		StateManager1.ChangeState("Idle");
-		return;
-	}
-
-	if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
-		UnitRenderer->GetTransform().PixLocalPositiveX();
-		//Renderer->GetColorData().MulColor.a -= _DeltaTime;
-	}
-
-	else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
-		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
-		UnitRenderer->GetTransform().PixLocalPositiveX();
-	}
-
-	else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
-		GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
-		UnitRenderer->GetTransform().PixLocalNegativeX();
-	}
-	else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
-	{
-		GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
-		GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
-		UnitRenderer->GetTransform().PixLocalNegativeX();
-	}
+	//if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalPositiveX();
+	//	//Renderer->GetColorData().MulColor.a -= _DeltaTime;
+	//}
+	//
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalPositiveX();
+	//}
+	//
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalNegativeX();
+	//}
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalNegativeX();
+	//}
 
 }
 
@@ -139,11 +115,16 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 
 	Pos.x = (_X * Half.x) + (_Y * -Half.x);
 	Pos.y = (_X * -Half.y) + (_Y * -Half.y) + (UnitZ * 16.0f);
+	UnitRenderer = CreateComponent<GameEngineTextureRenderer>();
+	UnitRenderer->GetTransform().SetLocalScale({ 100,100, 1 });
 	UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y+16.0f, -100));
 
 	if (_UnitName == "LEON")
 	{
-
+		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
+		UnitRenderer->ChangeFrameAnimation("LeonIdle");
 	}
 	else if(_UnitName == "RALF")
 	{

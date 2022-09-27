@@ -47,10 +47,8 @@ void MouseActor::Update(float _DeltaTime)
 {
 	{
 		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
-
 		MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
 		MY = roundf((MousePos.x / -32.0f + MousePos.y / -16.0f) / 2.0f);
-
 		int XIndex = MX;
 		int YIndex = MY;
 		if (XIndex >=0 && YIndex >=0)
@@ -61,22 +59,18 @@ void MouseActor::Update(float _DeltaTime)
 		{
 			MZ = 0;
 		}
-
 		float XX = (MX * 32) + (MY * -32);
 		float YY = (MX * -16) + (MY * -16)+ (MZ*16);
 		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
-		//int a = 0;
 
 		if (XIndex >= 0 && YIndex >= 0 && YIndex  >=0 && XIndex + 1)
 		{
 			if (TileMap->Tiles[YIndex][XIndex].Z + 2 <= TileMap->Tiles[YIndex + 1][XIndex + 1].Z)
 			{
 				Renderer->SetTexture("ST02.png");
-
 			}
 			else
 			{
-
 				Renderer->SetTexture("ST01.png");
 			}
 
@@ -89,6 +83,7 @@ void MouseActor::Update(float _DeltaTime)
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
 		{
+
 			GetCursorPos(&ptMouse1);
 			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
 		}

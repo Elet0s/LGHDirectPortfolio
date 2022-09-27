@@ -11,16 +11,28 @@ public:
 class Tile
 {
 public:
+	Tile()
+		: TileIndex(0),
+		Zindex(0),
+		Z(0),
+		TileDepth(0),
+		IsMapObject(false),
+		IsUnit(false),
+		TileImage(),
+		Ztile(),
+		MapObject()
+	{
+	}
 	int TileIndex; //깔린 타일의 인덱스번호
 	int Zindex;
 	int Z;//이매트릭스 상의 z값(높이)
 	int TileDepth; //카메라상의 z값(깊이)
-
+	bool IsMapObject;
+	bool IsUnit;
 
 	GameEngineTexture* TileImage;
 	GameEngineTexture* Ztile;
 	GameEngineTexture* MapObject;
-
 };
 
 // 타일의 정보

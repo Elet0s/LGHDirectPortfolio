@@ -37,8 +37,8 @@ public:
 	size_t Dex_;
 	size_t Exp_;
 	size_t Level_;
-	size_t Water_;
 	size_t Fire_;
+	size_t Water_;
 	size_t Earth_;
 	size_t Wind_;
 	size_t Dark_;
