@@ -22,11 +22,48 @@ enum class PlayUnitGroup
 {
 	None,
 	Leon,
-	Ralf
+	Ralf,
+	Brian,
+	TT,
+	Mascia,
+	farm,
+	Karin,
+	Rian,
+	Ophelia
 };
 
 enum class MonUnitGroup
 {
 	Wolf,
 	Imf
+};
+
+enum class MoveDirection
+{
+	Up,
+	Down,
+	Left,
+	Right
+};
+
+enum class IdleDirection
+{
+	RUP,
+	LUP,
+	RDOWN,
+	LDOWN
+};
+
+enum class Conditions
+{
+	None,
+	Faint,
+	Sleep,
+	Silence,
+	Poison,
+	Freezing,
+	Paralysis,
+	Fascination,
+	petrification,
+	Restraint
 };

@@ -149,33 +149,60 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	{
 
 	}
+	else if (_UnitName == "BRIAN")
+	{
+
+	}
+	else if (_UnitName == "TT")
+	{
+
+	}
+	else if (_UnitName ==  "Mascia")
+	{
+
+	}
+	else if (_UnitName == "farm")
+	{
+
+	}
+	else if (_UnitName == "Karin")
+	{
+
+	}
+	else if (_UnitName == " Rian")
+	{
+
+	}
+	else if (_UnitName ==  "Ophelia")
+	{
+
+	}
 }
 
-void PlayUnit::UnitMove(size_t _MoveConter, std::string _Direction)
+void PlayUnit::UnitMove(size_t _MoveConter, MoveDirection _MoveDirection)
 {
-	GameEngineString::ToUpper(_Direction);
-	if (_Direction == "UP")
+	if (_MoveDirection == MoveDirection::Up)
 	{
 		for (size_t i = 0; i < _MoveConter; i++)
 		{
 
 		}
 	}
-	else if (_Direction == "DOWN")
+	else if (_MoveDirection == MoveDirection::Down)
 	{
 		for (size_t i = 0; i < _MoveConter; i++)
 		{
 
 		}
 	}
-	else if (_Direction == "RIGNT")
+	else if (_MoveDirection == MoveDirection::Left)
 	{
 		for (size_t i = 0; i < _MoveConter; i++)
 		{
 
 		}
 	}
-	else if (_Direction == "LEFT")
+	else if (_MoveDirection == MoveDirection::Right)
 	{
 		for (size_t i = 0; i < _MoveConter; i++)
 		{
