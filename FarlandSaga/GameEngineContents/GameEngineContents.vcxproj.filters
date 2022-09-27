@@ -153,9 +153,6 @@
     <ClInclude Include="MouseActor.h">
       <Filter>Actor\00.Global\Actor</Filter>
     </ClInclude>
-    <ClInclude Include="ObjectRenderer.h">
-      <Filter>Renderer</Filter>
-    </ClInclude>
     <ClInclude Include="RGBAEffect.h">
       <Filter>Actor\04.PostEffect</Filter>
     </ClInclude>
@@ -241,9 +238,6 @@
     </ClCompile>
     <ClCompile Include="MouseActor.cpp">
       <Filter>Actor\00.Global\Actor</Filter>
-    </ClCompile>
-    <ClCompile Include="ObjectRenderer.cpp">
-      <Filter>Renderer</Filter>
     </ClCompile>
     <ClCompile Include="RGBAEffect.cpp">
       <Filter>Actor\04.PostEffect</Filter>

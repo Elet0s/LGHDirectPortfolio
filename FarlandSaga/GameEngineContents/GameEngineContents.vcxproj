@@ -220,10 +220,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="ObjectRenderer.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="PlayUnit.h">
       <SubType>
       </SubType>
@@ -332,10 +328,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MyDialogBox.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="ObjectRenderer.cpp">
       <SubType>
       </SubType>
     </ClCompile>

@@ -21,7 +21,6 @@ public:
 	GameEngineTexture* Ztile;
 	GameEngineTexture* MapObject;
 
-
 };
 
 // 타일의 정보
