@@ -32,12 +32,12 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
     {
         if (true == ImGui::Button("FolderTextureLoad"))
         {
-            GameEngineDirectory Dir;
-            Dir.MoveParentToExitsChildDirectory("ConstantResources");
-            Dir.Move("ConstantResources");
-            Dir.Move("Map");
+            GameEngineDirectory TextureDir;
+            TextureDir.MoveParentToExitsChildDirectory("ConstantResources");
+            TextureDir.Move("ConstantResources");
+            TextureDir.Move("Map");
 
-            std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), Dir.GetFullPath());
+            std::string Path = GameEngineGUI::OpenFolderDlg(GameEngineString::AnsiToUTF8Return("폴더 텍스처 로드"), TextureDir.GetFullPath());
 
             if (false == Path.empty())
             {
@@ -66,6 +66,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
     if (ButtonCheaker == true)
     {
+
         if (!ImGui::CollapsingHeader("SetTile"))
             return;
         ImGui::InputInt("Change Z", ZScale);
@@ -85,11 +86,13 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         }
         ImGui::Text(SelectIndex.c_str());
 
+
+
         GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
         if (nullptr != Texture)
         {
             ImGui::BeginChildFrame(ImGui::GetID("TileSelect"), { 90 * 5, 500 });
-            for (size_t i = 15; i < Texture->GetTextureCount(); i++)
+            for (size_t i = 15; i < 64; i++)
             {
                 GameEngineTexture* TileImage = Texture->GetTexture(i);
                 if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
@@ -105,9 +108,6 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         }
         ImGui::SameLine();
 
-        if (ButtonCheaker == true)
-        {
-            GameEngineFolderTexture* Texture = GameEngineFolderTexture::Find(SelectFolderTexture);
             if (nullptr != Texture)
             {
                 ImGui::BeginChildFrame(ImGui::GetID("TileSelect2"), { 90 * 5, 500 });
@@ -126,6 +126,22 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                 ImGui::EndChildFrame();
             }
 
+        if (nullptr != Texture)
+        {
+            ImGui::BeginChildFrame(ImGui::GetID("ObjectSelect3"), { 90 * 5, 500 });
+            for (size_t i = 64; i < 90; i++)
+            {
+                GameEngineTexture* Ztile = Texture->GetTexture(i);
+                if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(Ztile->CreateShaderResourceView()), { 64, 32 }))
+                {
+                    SelectZTile = i;
+                }
+                if (0 != (i + 1) % 5)
+                {
+                    ImGui::SameLine();
+                }
+            }
+            ImGui::EndChildFrame();
         }
 
         if (true == GameEngineInput::GetInst()->IsDown("TileSet") // 선택한 설정으로 타일 설정

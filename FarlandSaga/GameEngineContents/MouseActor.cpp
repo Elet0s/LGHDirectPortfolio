@@ -41,40 +41,38 @@ void MouseActor::Start()
 
 	Renderer = CreateComponent<GameEngineTextureRenderer>();
 	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
-	Renderer->SetTexture("ST01.png");
 }
 void MouseActor::Update(float _DeltaTime)
 {
 	{
 		float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
 		MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
-		MY = roundf((MousePos.x / -32.0f + MousePos.y / -16.0f) / 2.0f);
-		int XIndex = MX;
-		int YIndex = MY;
-		if (XIndex >=0 && YIndex >=0)
-		{
-			MZ = TileMap->Tiles[YIndex][XIndex].Z;
-		}
-		else
-		{
-			MZ = 0;
-		}
-		float XX = (MX * 32) + (MY * -32);
-		float YY = (MX * -16) + (MY * -16)+ (MZ*16);
-		Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
+		MY = roundf((MousePos.x / -32.0f + MousePos.y/ -16.0f) / 2.0f);
+		int XIndex = static_cast<int>(MX);
+		int YIndex = static_cast<int>(MY);
 
-		if (XIndex >= 0 && YIndex >= 0 && YIndex  >=0 && XIndex + 1)
+		if (XIndex >= 0 && YIndex >= 0 && XIndex + 1 <= TileMap->TileX && YIndex + 1 <= TileMap->TileY)
 		{
-			if (TileMap->Tiles[YIndex][XIndex].Z + 2 <= TileMap->Tiles[YIndex + 1][XIndex + 1].Z)
+			if (TileMap->Tiles[YIndex][XIndex].IsMapObject == false)
 			{
-				Renderer->SetTexture("ST02.png");
-			}
-			else
-			{
-				Renderer->SetTexture("ST01.png");
-			}
+				MZ = TileMap->Tiles[YIndex][XIndex].Z;
 
-
+				float XX = (MX * 32) + (MY * -32);
+				float YY = (MX * -16) + (MY * -16) + (MZ * 16) - 16;
+				Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
+				if (XIndex + 1 == TileMap->TileX || YIndex + 1 == TileMap->TileY)
+				{
+					Renderer->SetTexture("ST01.png");
+				}
+				else if (TileMap->Tiles[YIndex][XIndex].Z + 2 <= TileMap->Tiles[YIndex + 1][XIndex + 1].Z)
+				{
+					Renderer->SetTexture("ST02.png");
+				}
+				else
+				{
+					Renderer->SetTexture("ST01.png");
+				}
+			}
 		}
 	}
 

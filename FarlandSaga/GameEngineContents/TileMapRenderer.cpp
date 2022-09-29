@@ -62,12 +62,10 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zin
 	{
 		return;
 	}
-
 	if (0 > _Z)
 	{
 		return;
 	}
-
 	int X = _x;
 	int Y = _y;
 	if (0 > X)
@@ -293,8 +291,6 @@ void TileMapRenderer::Render(float _DeltaTime)
 			float4 Pos;// = GetTransform().GetWorldPosition();
 			if (Tiles[y][x].Z != 0)
 			{
-
-
 				Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 				Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
 				// Z값과 order순서를 내가 편하게 사용하기 위해서 음수로 바꿔서 넣어줌
@@ -306,14 +302,17 @@ void TileMapRenderer::Render(float _DeltaTime)
 					{
 					case 61:
 						Pos.y += 6;
+						Pos.y -= 16;
 						TileTrans.SetWorldScale(float4(64, 48));
 						break;
 					case 64:
 						Pos.y += 11;
+						Pos.y -= 1616;
 						TileTrans.SetWorldScale(float4(64, 55));
 						break;
 					default:
 						Pos.y += 8;
+						Pos.y -= 16;
 						TileTrans.SetWorldScale(float4(64, 48));
 						break;
 					}
@@ -321,6 +320,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 				else
 				{
 					TileTrans.SetLocalScale(float4(64, 32));
+					Pos.y -= 16;
 				}
 				TileTrans.SetLocalPosition(Pos);
 				TileTrans.CalculateWorldViewProjection();

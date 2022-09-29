@@ -18,6 +18,7 @@ public:
 		TileDepth(0),
 		IsMapObject(false),
 		IsUnit(false),
+		IsMon(false),
 		TileImage(),
 		Ztile(),
 		MapObject()
@@ -29,6 +30,7 @@ public:
 	int TileDepth; //카메라상의 z값(깊이)
 	bool IsMapObject;
 	bool IsUnit;
+	bool IsMon;
 
 	GameEngineTexture* TileImage;
 	GameEngineTexture* Ztile;
@@ -58,7 +60,8 @@ public:
 
 		std::vector<std::vector<Tile>> Tiles;
 		void Load(std::string _Stage);
-
+		int TileX;
+		int TileY;
 
 protected:
 	void Render(float _DeltaTime) override;
@@ -68,8 +71,7 @@ private:
 	void Update(float _Delta) override;
 
 
-	int TileX;
-	int TileY;
+
 	int TileZ;
 	int RenderZ;
 	size_t ShortIndex;

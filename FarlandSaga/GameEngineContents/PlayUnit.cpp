@@ -109,12 +109,28 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	UnitX = _X;
 	UnitY = _Y;
 	UnitZ = TileMap->Tiles[_Y][_X].Z;
+	if (TileMap->Tiles[_Y][_X].IsUnit == true)
+	{
+		MsgBoxAssert("설치하려는 자리에 이미 동료가 있습니다.");
+		return;
+	}
+	if (TileMap->Tiles[_Y][_X].IsMapObject	== true)
+	{
+		MsgBoxAssert("설치하려는 자리에 이미 오브젝트가 있습니다.");
+		return;
+	}
+	if (TileMap->Tiles[_Y][_X].IsMon == true)
+	{
+		MsgBoxAssert("설치하려는 자리에 이미 몬스터가 있습니다.");
+		return;
+	}
+	
 
 	float4 Pos;
 	float4 Half = {32,16,0,0};
 
 	Pos.x = (_X * Half.x) + (_Y * -Half.x);
-	Pos.y = (_X * -Half.y) + (_Y * -Half.y) + (UnitZ * 16.0f);
+	Pos.y = (_X * -Half.y) + (_Y * -Half.y) + (UnitZ * 16.0f) -16;
 	UnitRenderer = CreateComponent<GameEngineTextureRenderer>();
 	UnitRenderer->GetTransform().SetLocalScale({ 100,100, 1 });
 	UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y+16.0f, -100));
