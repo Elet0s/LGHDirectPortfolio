@@ -92,7 +92,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         if (nullptr != Texture)
         {
             ImGui::BeginChildFrame(ImGui::GetID("TileSelect"), { 90 * 5, 500 });
-            for (size_t i = 15; i < 64; i++)
+            for (size_t i = 15; i < 65; i++)
             {
                 GameEngineTexture* TileImage = Texture->GetTexture(i);
                 if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(TileImage->CreateShaderResourceView()), { 64, 32 }))
@@ -129,12 +129,12 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         if (nullptr != Texture)
         {
             ImGui::BeginChildFrame(ImGui::GetID("ObjectSelect3"), { 90 * 5, 500 });
-            for (size_t i = 64; i < 90; i++)
+            for (size_t i = 65; i < 93; i++)
             {
                 GameEngineTexture* Ztile = Texture->GetTexture(i);
                 if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(Ztile->CreateShaderResourceView()), { 64, 32 }))
                 {
-                    SelectZTile = i;
+                    SelectOTile = i;
                 }
                 if (0 != (i + 1) % 5)
                 {
@@ -150,7 +150,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             && SelectTile < Texture->GetTextureCount())
         {
             float4 MousePos = _Level->GetMainCamera()->GetMouseWorldPositionToActor();//현재 마우스 위치 가져오는 부분
-            TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile, ZScale[0], SelectZTile);
+            TileMap->TileRenderer->SetTileIndex(MousePos, SelectTile, ZScale[0], SelectZTile , SelectOTile);
         }
         if (true == ImGui::Button("Save"))
         {
@@ -178,6 +178,8 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
                     SaveFile.Write(&TileZ, sizeof(int));
                     int TileZindex = TileMap->TileRenderer->Tiles[y][x].Zindex;
                     SaveFile.Write(&TileZindex, sizeof(int));
+                    int TileOindex = TileMap->TileRenderer->Tiles[y][x].Oindex;
+                    SaveFile.Write(&TileOindex, sizeof(int));
                     //  int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
                     //  SaveFile.Write(&TileDepth, sizeof(int));
                 }
@@ -203,18 +205,21 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
 
                 for (size_t x = 0; x < XSize; x++)
                 {
-                    int Tileindex = TileMap->TileRenderer->Tiles[y][x].TileIndex;;
+                    int Tileindex = TileMap->TileRenderer->Tiles[y][x].TileIndex;
                     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
                     //  TileMap->TileRenderer->Tiles[y][x].TileIndex = Tileindex;
 
-                    int TileZ = TileMap->TileRenderer->Tiles[y][x].Z;;
+                    int TileZ = TileMap->TileRenderer->Tiles[y][x].Z;
                     LoadFile.Read(&TileZ, sizeof(int), sizeof(int));
                     //   TileMap->TileRenderer->Tiles[y][x].Z = TileZ; 
 
-                    int TileZindex = TileMap->TileRenderer->Tiles[y][x].Zindex;;
+                    int TileZindex = TileMap->TileRenderer->Tiles[y][x].Zindex;
                     LoadFile.Read(&TileZindex, sizeof(int), sizeof(int));
 
-                    TileMap->TileRenderer->LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex);
+                    int TileOindex = TileMap->TileRenderer->Tiles[y][x].Zindex;
+                    LoadFile.Read(&TileZindex, sizeof(int), sizeof(int));
+
+                    TileMap->TileRenderer->LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex, TileOindex);
 
                     //     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
                     //     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));

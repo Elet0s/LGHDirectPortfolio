@@ -43,7 +43,7 @@ void TileMapRenderer::GetTileIndex(float4 _Pos, int& _X, int& _Y)
 	_Y = static_cast<int>(roundf(fY));
 
 }
-void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zindex)
+void TileMapRenderer::LoadTileIndex(int _y, int _x, size_t _Index, int _Z, size_t _Zindex, size_t _Oindex)
 {
 	if (0 > _Index)
 	{
@@ -62,6 +62,16 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zin
 	{
 		return;
 	}
+
+	if (0 > _Oindex)
+	{
+		return;
+	}
+	if (TileTextures->GetTextureCount() <= _Oindex)
+	{
+		return;
+	}
+
 	if (0 > _Z)
 	{
 		return;
@@ -91,6 +101,7 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zin
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].Z = _Z;
 	Tiles[Y][X].Zindex = _Zindex;
+	Tiles[Y][X].Oindex = _Oindex;
 	if (_Zindex < 9)
 	{
 		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
@@ -105,9 +116,14 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, int _Index, int _Z, int _Zin
 	{
 		Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
 	}
+	if (_Oindex >= 65)
+	{
+		Tiles[Y][X].MapObject = TileTextures->GetTexture(_Oindex);
+		Tiles[Y][X].IsMapObject = true;
+	}
 }
 
-void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zindex)//텍스처 선택해서 누를때
+void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, size_t _Zindex, size_t _Oindex)//텍스처 선택해서 누를때
 {
 	if (0 > _Index)
 	{
@@ -124,6 +140,15 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zind
 		return;
 	}
 	if (TileTextures->GetTextureCount() <= _Zindex)
+	{
+		return;
+	}
+
+	if (0 > _Oindex)
+	{
+		return;
+	}
+	if (TileTextures->GetTextureCount() <= _Oindex)
 	{
 		return;
 	}
@@ -162,6 +187,8 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zind
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].Z = _Z;
 	Tiles[Y][X].Zindex = _Zindex;
+	Tiles[Y][X].Oindex = _Oindex;
+
 	if (_Zindex < 9)
 	{
 		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
@@ -175,6 +202,11 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, int _Zind
 	if (_Index >= 15)
 	{
 		Tiles[Y][X].TileImage = TileTextures->GetTexture(_Index);
+	}
+	if (_Oindex >= 65)
+	{
+		Tiles[Y][X].MapObject = TileTextures->GetTexture(_Oindex);
+		Tiles[Y][X].IsMapObject = true;
 	}
 
 }
@@ -213,7 +245,12 @@ void TileMapRenderer::Load(std::string _Stage) //이미 만들어진 타일맵Data불러오�
 			LoadFile.Read(&TileZindex, sizeof(int), sizeof(int));
 			Tiles[y][x].Zindex = TileZindex;
 
-			LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex);
+
+			int TileOindex = 0;
+			LoadFile.Read(&TileOindex, sizeof(int), sizeof(int));
+			Tiles[y][x].Oindex = TileOindex;
+
+			LoadTileIndex(static_cast<int>(y), static_cast<int>(x), Tileindex, TileZ, TileZindex, TileOindex);
 
 			//     int TileDepth = TileMap->TileRenderer->Tiles[y][x].TileDepth;
 			//     LoadFile.Read(&Tileindex, sizeof(int), sizeof(int));
@@ -327,7 +364,41 @@ void TileMapRenderer::Render(float _DeltaTime)
 				ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
 				ShaderResources.SetTexture("Tex", Tiles[y][x].TileImage);
 				GameEngineDefaultRenderer::Render(_DeltaTime);
+				///////////////////////////////////////////////////////////////////////////////////////
 
+				if (Tiles[y][x].Oindex == 65)
+				{
+					Tiles[y][x].IsMapObject = false;
+				}
+				else if (Tiles[y][x].IsMapObject == true)
+				{
+
+					if (Tiles[y][x].Oindex > 64) //특수 타일
+					{
+						switch (Tiles[y][x].IsMapObject)
+						{
+						case 66:
+							Pos.y += 5;
+							TileTrans.SetWorldScale(float4(64, 43));
+							break;
+						case 67:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 56));
+							break;
+						default:
+							TileTrans.SetWorldScale(float4(64, 48));
+							break;
+
+						}
+						//Pos.y += 16;
+						TileTrans.SetLocalScale(float4(64, 43));
+						TileTrans.SetLocalPosition(Pos);
+						TileTrans.CalculateWorldViewProjection();
+						ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+						ShaderResources.SetTexture("Tex", Tiles[y][x].MapObject);
+						GameEngineDefaultRenderer::Render(_DeltaTime);
+					}
+				}
 				///////////////////////////////////////////////////////////////////////////////////////
 
 				if (x + 1 < TileX && y + 1 < TileY) //내가 고른타일이 만들어진 타일 범위 안에 있다면
