@@ -14,13 +14,15 @@ MouseActor::MouseActor()
 	MX(0),
 	MY(0),
 	MZ(0),
-	TileMap()
+	TileMap(),
+	 OnUnit(false),
+	 OnMon(false)
 {
 
 }
 MouseActor::~MouseActor()
 {
-
+	
 }
 
 void MouseActor::SetTileRenderer(TileMapRenderer* _TileMapRenderer)
@@ -60,7 +62,7 @@ void MouseActor::Update(float _DeltaTime)
 				float XX = (MX * 32) + (MY * -32);
 				float YY = (MX * -16) + (MY * -16) + (MZ * 16) - 16;
 				Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
-				if (XIndex + 1 == TileMap->TileX || YIndex + 1 == TileMap->TileY)
+				 if (XIndex + 1 == TileMap->TileX || YIndex + 1 == TileMap->TileY)
 				{
 					Renderer->SetTexture("ST01.png");
 				}
@@ -72,18 +74,39 @@ void MouseActor::Update(float _DeltaTime)
 				{
 					Renderer->SetTexture("ST01.png");
 				}
+
+
+				if (TileMap->Tiles[YIndex][XIndex].IsUnit != PlayUnitGroup::None)
+				{
+					//HP,Mp, 상태이상 Ui On 해줘야함
+					TileMap->Tiles[YIndex][XIndex].MouseOnUint = true;
+				}
+				else 
+				{
+					TileMap->Tiles[YIndex][XIndex].MouseOnUint = false;
+				}
+				 if (TileMap->Tiles[YIndex][XIndex].IsMon != MonUnitGroup::None)
+				{
+					 TileMap->Tiles[YIndex][XIndex].MouseOnUint = true;
+				} 
+				 else
+				 {
+					 TileMap->Tiles[YIndex][XIndex].MouseOnUint = false;
+				 }
+			}
+			else if (TileMap->Tiles[YIndex][XIndex].IsMapObject == true)
+			{
+				Renderer->SetTexture("ST00.png");
 			}
 		}
 	}
-
 
 	//////// 마우스드래그 이동하는 기능 ///////////
 	{
 		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
 		{
-
-			GetCursorPos(&ptMouse1);
-			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
+				GetCursorPos(&ptMouse1);
+				ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
 		}
 		if (true == GameEngineInput::GetInst()->IsPress("MouseLeft"))
 		{

@@ -83,6 +83,18 @@ void ContentsCore::Start()
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
+		Dir.Move("MonUnit");
+		Dir.Move("Goblin");
+		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
+		for (size_t i = 0; i < Shaders.size(); i++)
+		{
+			GameEngineTexture::Load(Shaders[i].GetFullPath());
+		}
+	}
+	{
+		GameEngineDirectory Dir;
+		Dir.MoveParentToExitsChildDirectory("ConstantResources");
+		Dir.Move("ConstantResources");
 		std::vector<GameEngineFile> Shaders = Dir.GetAllFile();
 		for (size_t i = 0; i < Shaders.size(); i++)
 		{
@@ -128,8 +140,7 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);
 	GameEngineTexture::Cut("LeonWalkD.png", 4, 1);
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
-	GameEngineTexture::Cut("click.png", 14, 1);
-
+	GameEngineTexture::Cut("GoblinIdle.png", 3, 1);
 	
 	///////////////// ÆùÆ® /////////////////
 	GameEngineFont::Load("ÈÞ¸Õ°íµñ");

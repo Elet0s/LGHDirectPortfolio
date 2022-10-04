@@ -15,6 +15,7 @@ public:
 
 	TileMapActor* S01TileMap;
 	PlayUnit* UnitLEON;
+	MonUnit* Goblin1;
 	MouseActor* NewMouseActor;
 	std::string StageName;
 

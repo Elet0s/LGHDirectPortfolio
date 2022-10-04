@@ -11,12 +11,12 @@
 #include "SoundPlayer.h"
 #include"MapEditorLevel.h"
 
-
-
-
 Stage01::Stage01()
 	:S01TileMap()
 	, StageName()
+	,NewMouseActor()
+	,UnitLEON()
+	,Goblin1()
 {
 }
 
@@ -26,6 +26,7 @@ Stage01::~Stage01()
 
 void Stage01::Start()
 {
+	/////////////////////////타일맵 로드///////////////////////////
 	{
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
@@ -38,38 +39,39 @@ void Stage01::Start()
 		if (false == Path.empty())
 		{
 			StageName = GameEnginePath::GetFileName(Path);
-		
+
 			GameEngineFolderTexture::Load(Path.c_str());
 		}
 	}
-
-	S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
-	S01TileMap->TileRenderer->CreateIsometricTileMap(30,30,0,  { 64, 32 }, StageName, 16);
-	S01TileMap->TileRenderer->Load(StageName);
-	GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-0.0f,0.0f,0.0f });
-	//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
-
 	{
-		//Player* NewPlayer = CreateActor<Player>(OBJECTORDER::Player);
+		S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
+		S01TileMap->TileRenderer->CreateIsometricTileMap(30, 30, 0, { 64, 32 }, StageName, 16);
+		S01TileMap->TileRenderer->Load(StageName);
+		GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-0.0f,0.0f,0.0f });
+		//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
+	}
+
+	/////////////////////////플레이어 유닛 로드///////////////////////////
+	{
 		UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
 		UnitLEON->SetTileRenderer(S01TileMap->TileRenderer);
-		UnitLEON->SetUnit(1,0,"LEON");
-		//UnitLEON->SetUnit(3,3,"Leon");
+		UnitLEON->SetUnit(1, 0, "LEON");
+	}
+	/////////////////////////몬스터 유닛 로드///////////////////////////
+	{
+		Goblin1 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		Goblin1->SetTileRenderer(S01TileMap->TileRenderer);
+			Goblin1->SetUnit(2 , 0, "GOBLIN");
 	}
 
-	{
-		UIMaster* NewUI = CreateActor<UIMaster>(OBJECTORDER::UI);
-	}
+	/////////////////////////마우스 로드///////////////////////////
 	{
 		NewMouseActor = CreateActor<MouseActor>(OBJECTORDER::UI);
 		NewMouseActor->SetTileRenderer(S01TileMap->TileRenderer);
 		NewMouseActor->Level = this;
 	}
-	{
-		//Monster* actor = CreateActor<Monster>(OBJECTORDER::Monster);
-		//actor->GetTransform().SetLocalPosition({ 300.0f, 0.0f, 0.0f });
-		//actor->GetTransform().SetWorldScale(float4(1.0f, 1.0f, 1.0f));
-	}
+
+
 
 }
 

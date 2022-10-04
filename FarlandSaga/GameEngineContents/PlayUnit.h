@@ -28,15 +28,27 @@ public:
 	float UnitZ;
 
 	///  Ω∫≈»
+
+	size_t MaxHP_;
 	size_t Hp_;
+
+	size_t MaxMP_;
 	size_t Mp_;
+
 	size_t Atk_;
 	size_t Def_;
 	size_t Matk_;
 	size_t MDef_;
 	size_t Dex_;
-	size_t Exp_;
+
 	size_t Level_;
+	size_t MaxExp_;
+	size_t Exp_;
+
+
+
+
+	/// º”º∫
 	size_t Fire_;
 	size_t Water_;
 	size_t Earth_;

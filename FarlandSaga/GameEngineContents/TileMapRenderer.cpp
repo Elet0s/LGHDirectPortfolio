@@ -100,8 +100,8 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, size_t _Index, int _Z, size_
 
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].Z = _Z;
-	Tiles[Y][X].Zindex = _Zindex;
-	Tiles[Y][X].Oindex = _Oindex;
+	Tiles[Y][X].Zindex = static_cast<int>(_Zindex);
+	Tiles[Y][X].Oindex = static_cast<int>(_Oindex);
 	if (_Zindex < 9)
 	{
 		Tiles[Y][X].Ztile = TileTextures->GetTexture(_Zindex);
@@ -375,23 +375,119 @@ void TileMapRenderer::Render(float _DeltaTime)
 
 					if (Tiles[y][x].Oindex > 64) //특수 타일
 					{
-						switch (Tiles[y][x].IsMapObject)
+						switch (Tiles[y][x].Oindex)
 						{
 						case 66:
-							Pos.y += 5;
+							Pos.y += 5.5;
 							TileTrans.SetWorldScale(float4(64, 43));
 							break;
 						case 67:
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 56));
 							break;
-						default:
+						case 68:
+							Pos.y += 12.5;
+							TileTrans.SetWorldScale(float4(64, 73));
+							break;
+						case 69:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 50));
+							break;
+						case 70:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 67));
+							break;
+						case 71:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 67));
+							break;
+						case 72:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 62));
+							break;
+						case 73:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 62));
+							break;
+						case 74:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 130));
+							break;
+						case 75:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 120));
+							break;
+						case 76:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 109));
+							break;
+						case 77:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 42));
+							break;
+						case 78:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 42));
+							break;
+						case 79:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 97));
+							break;
+						case 80:
+							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 48));
 							break;
-
+						case 81:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 65));
+							break;
+						case 82://대형집
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(228, 260));
+							break;
+						case 83://대형집
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(289, 226));
+							break;
+						case 84:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 48));
+							break;
+						case 85:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 55));
+							break;
+						case 86:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 55));
+							break;
+						case 87:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 55));
+							break;
+						case 88://강 애니메이션
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 32));
+							break;
+						case 89:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 130));
+							break;
+						case 90:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 141));
+							break;
+						case 91:
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(64, 172));
+							break;
+						case 92://대형나무
+							Pos.y += 12;
+							TileTrans.SetWorldScale(float4(256,324));
+							break;
+						default:
+							break;
 						}
-						//Pos.y += 16;
-						TileTrans.SetLocalScale(float4(64, 43));
 						TileTrans.SetLocalPosition(Pos);
 						TileTrans.CalculateWorldViewProjection();
 						ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
@@ -465,8 +561,8 @@ void TileMapRenderer::Render(float _DeltaTime)
 								break;
 							}
 						}
-						TileTrans.SetLocalScale(float4(64, 32));
 						Pos.y -= 16;
+						TileTrans.SetLocalScale(float4(64, 32));
 						TileTrans.SetLocalPosition(Pos);
 						TileTrans.CalculateWorldViewProjection();
 						ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());

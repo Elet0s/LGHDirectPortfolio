@@ -31,6 +31,9 @@ PlayUnit::PlayUnit()
 	, Intelligence_(0)
 	, Reflection_(0)
 	, Heyste_(0)
+	 ,MaxHP_(10)
+	 ,MaxMP_(10)
+	,  MaxExp_(0)
 {
 }
 PlayUnit::~PlayUnit()
@@ -44,10 +47,15 @@ void PlayUnit::Start()
 
 void PlayUnit::Update(float _DeltaTime)
 {
-	if (true == GetLevel()->GetMainCameraActor()->IsFreeCameraMode())
+	if (TileMap->Tiles[UnitY][UnitX].IsUnit != PlayUnitGroup::None)
 	{
-		return;
+		if (TileMap->Tiles[UnitX][UnitY].MouseOnUint == true)
+		{
+
+		}
 	}
+
+
 //	StateManager1.Update(_DeltaTime);
 }
 
@@ -106,10 +114,10 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 {
 	GameEngineString::ToUpper(_UnitName);// 대문자로변환해서 조건문 으로 체크 한뒤 유닛 정보를 세팅
 
-	UnitX = _X;
-	UnitY = _Y;
-	UnitZ = TileMap->Tiles[_Y][_X].Z;
-	if (TileMap->Tiles[_Y][_X].IsUnit == true)
+	UnitX = static_cast<float>(_X);
+	UnitY = static_cast<float>(_Y);
+	UnitZ = static_cast<float>(TileMap->Tiles[_Y][_X].Z);
+	if (TileMap->Tiles[_Y][_X].IsUnit != PlayUnitGroup::None)
 	{
 		MsgBoxAssert("설치하려는 자리에 이미 동료가 있습니다.");
 		return;
@@ -119,7 +127,7 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 		MsgBoxAssert("설치하려는 자리에 이미 오브젝트가 있습니다.");
 		return;
 	}
-	if (TileMap->Tiles[_Y][_X].IsMon == true)
+	if (TileMap->Tiles[_Y][_X].IsMon != MonUnitGroup::None)
 	{
 		MsgBoxAssert("설치하려는 자리에 이미 몬스터가 있습니다.");
 		return;
@@ -141,6 +149,7 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
 		UnitRenderer->ChangeFrameAnimation("LeonIdle");
+		TileMap->Tiles[UnitY][UnitX].IsUnit = PlayUnitGroup::Leon;
 	}
 	else if(_UnitName == "RALF")
 	{

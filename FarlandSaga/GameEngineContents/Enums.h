@@ -34,8 +34,9 @@ enum class PlayUnitGroup
 
 enum class MonUnitGroup
 {
+	None,
+	Goblin,
 	Wolf,
-	Imf
 };
 
 enum class MoveDirection

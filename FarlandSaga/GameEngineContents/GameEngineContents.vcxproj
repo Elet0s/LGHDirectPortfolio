@@ -208,10 +208,6 @@
       <SubType>
       </SubType>
     </ClInclude>
-    <ClInclude Include="Monster.h">
-      <SubType>
-      </SubType>
-    </ClInclude>
     <ClInclude Include="MonUnit.h">
       <SubType>
       </SubType>
@@ -316,10 +312,6 @@
       </SubType>
     </ClCompile>
     <ClCompile Include="MapEditorWindow.cpp">
-      <SubType>
-      </SubType>
-    </ClCompile>
-    <ClCompile Include="Monster.cpp">
       <SubType>
       </SubType>
     </ClCompile>

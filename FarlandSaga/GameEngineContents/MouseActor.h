@@ -22,6 +22,8 @@ public:
 	float MX;
 	float MY;
 	int MZ;
+	bool OnUnit;
+	bool OnMon;
 	TileMapRenderer* TileMap;
 
 	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
