@@ -1,5 +1,6 @@
 #pragma once
 #include <GameEngineCore/GameEngineDefaultRenderer.h>
+#include <GameEngineBase/GameEngineTime.h>
 
 struct Atlas2Data
 {
@@ -23,7 +24,9 @@ public:
 		TileImage(),
 		Ztile(),
 		MapObject(),
-		Oindex(0)
+		Oindex(0),
+		Deltime(0.0f),
+		TlieAniImage(nullptr)
 	{
 	}
 	int TileIndex; //깔린 타일의 인덱스번호
@@ -33,12 +36,14 @@ public:
 	int TileDepth; //카메라상의 z값(깊이)
 	bool IsMapObject;
 	bool MouseOnUint;
+	float Deltime;
 
 	PlayUnitGroup IsUnit;
 	MonUnitGroup IsMon;
 	GameEngineTexture* TileImage;
 	GameEngineTexture* Ztile;
 	GameEngineTexture* MapObject;
+	GameEngineTexture* TlieAniImage;
 };
 
 // 타일의 정보
@@ -80,6 +85,8 @@ private:
 	int RenderZ;
 	size_t ShortIndex;
 	size_t LongIndex;
+	GameEngineTime* Delta;
+	float TimeChker;
 
 	GameEngineFolderTexture* TileTextures;
 

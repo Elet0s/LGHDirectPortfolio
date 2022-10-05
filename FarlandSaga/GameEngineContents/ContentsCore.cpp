@@ -135,6 +135,7 @@ void ContentsCore::Start()
 			GameEngineSound::LoadRessource(SoundPlay);
 		}
 	}
+
 	///////////////// ¿ÃπÃ¡ˆ cut /////////////////
 
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);

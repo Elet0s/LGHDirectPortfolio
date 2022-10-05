@@ -47,16 +47,16 @@ void PlayUnit::Start()
 
 void PlayUnit::Update(float _DeltaTime)
 {
-	if (TileMap->Tiles[UnitY][UnitX].IsUnit != PlayUnitGroup::None)
+	if (TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit != PlayUnitGroup::None)
 	{
-		if (TileMap->Tiles[UnitX][UnitY].MouseOnUint == true)
+		if (TileMap->Tiles[static_cast<size_t>(UnitX)][static_cast<size_t>(UnitY)].MouseOnUint == true)
 		{
 
 		}
 	}
 
 
-//	StateManager1.Update(_DeltaTime);
+	//	StateManager1.Update(_DeltaTime);
 }
 
 void PlayUnit::End() 
@@ -149,7 +149,7 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
 		UnitRenderer->ChangeFrameAnimation("LeonIdle");
-		TileMap->Tiles[UnitY][UnitX].IsUnit = PlayUnitGroup::Leon;
+		TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit = PlayUnitGroup::Leon;
 	}
 	else if(_UnitName == "RALF")
 	{

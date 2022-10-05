@@ -10,6 +10,8 @@ TileMapRenderer::TileMapRenderer()
 	, TileZ(0)
 	, RenderZ(0)
 	, TileTextures(nullptr)
+	, TimeChker(0)
+	,Delta(0)
 {
 }
 
@@ -186,8 +188,8 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, size_t _Z
 
 	Tiles[Y][X].TileIndex = static_cast<int>(_Index);
 	Tiles[Y][X].Z = _Z;
-	Tiles[Y][X].Zindex = _Zindex;
-	Tiles[Y][X].Oindex = _Oindex;
+	Tiles[Y][X].Zindex = static_cast<int>(_Zindex);
+	Tiles[Y][X].Oindex = static_cast<int>(_Oindex);
 
 	if (_Zindex < 9)
 	{
@@ -308,6 +310,8 @@ void TileMapRenderer::Update(float _Delta)
 	//{
 	//	Tiles[TileY][TileX].TileRender->SetTexture("TestStage.png");
 	//}
+
+
 }
 void ZChange(int Scale)
 {
@@ -320,7 +324,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 	TileTrans.SetLocalScale(TileScale);
 	TileTrans.SetView(GetTransform().GetTransformData().ViewMatrix);
 	TileTrans.SetProjection(GetTransform().GetTransformData().ProjectionMatrix);
-	
+
 	for (size_t y = 0; y < Tiles.size(); y++)
 	{
 		for (size_t x = 0; x < Tiles[y].size(); x++)
@@ -483,7 +487,7 @@ void TileMapRenderer::Render(float _DeltaTime)
 							break;
 						case 92://대형나무
 							Pos.y += 12;
-							TileTrans.SetWorldScale(float4(256,324));
+							TileTrans.SetWorldScale(float4(256, 324));
 							break;
 						default:
 							break;
@@ -574,6 +578,36 @@ void TileMapRenderer::Render(float _DeltaTime)
 						GameEngineDefaultRenderer::Render(_DeltaTime);
 					}
 				}
+			}
+			else if (Tiles[y][x].Z == 0)
+			{
+				Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
+				Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16)+1;
+				Pos.z = static_cast<float>(-Tiles[y][x].TileDepth);
+
+				Tiles[y][x].Deltime += Delta->GetDeltaTime();
+				if (0.25f <= Tiles[y][x].Deltime)
+				{
+					Tiles[y][x].Deltime = 0;
+					if (Tiles[y][x].TlieAniImage != TileTextures->GetTexture(20))
+					{
+						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(20);
+					}
+					else if (Tiles[y][x].TlieAniImage == TileTextures->GetTexture(20))
+					{
+						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(30);
+					}
+				}			
+				if (Tiles[y][x].TlieAniImage == nullptr)
+				{
+					Tiles[y][x].TlieAniImage = TileTextures->GetTexture(20);
+				}
+				Pos.y -= 16;
+				TileTrans.SetLocalPosition(Pos);
+				TileTrans.CalculateWorldViewProjection();
+				ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+				ShaderResources.SetTexture("Tex", Tiles[y][x].TlieAniImage);
+				GameEngineDefaultRenderer::Render(_DeltaTime);
 			}
 		}
 	}

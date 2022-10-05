@@ -92,7 +92,7 @@ void MonUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	{
 		UnitRenderer->CreateFrameAnimationCutTexture("GoblinIdle", FrameAnimation_DESC("GoblinIdle.png", 0, 2, 0.2f));
 		UnitRenderer->ChangeFrameAnimation("GoblinIdle");
-		TileMap->Tiles[UnitY][UnitX].IsMon = MonUnitGroup::Goblin;
+		TileMap->Tiles[static_cast<float>(UnitY)][static_cast<float>(UnitX)].IsMon = MonUnitGroup::Goblin;
 	}
 	else if (_UnitName == "WOLF")
 	{
