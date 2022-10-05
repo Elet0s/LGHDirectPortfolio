@@ -129,7 +129,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
         if (nullptr != Texture)
         {
             ImGui::BeginChildFrame(ImGui::GetID("ObjectSelect3"), { 90 * 5, 500 });
-            for (size_t i = 65; i < 93; i++)
+            for (size_t i = 65; i < 92; i++)
             {
                 GameEngineTexture* Ztile = Texture->GetTexture(i);
                 if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(Ztile->CreateShaderResourceView()), { 64, 32 }))

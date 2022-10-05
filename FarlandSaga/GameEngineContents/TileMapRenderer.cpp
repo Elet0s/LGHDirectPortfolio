@@ -469,23 +469,19 @@ void TileMapRenderer::Render(float _DeltaTime)
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 55));
 							break;
-						case 88://강 애니메이션
-							Pos.y += 12;
-							TileTrans.SetWorldScale(float4(64, 32));
-							break;
-						case 89:
+						case 88:
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 130));
 							break;
-						case 90:
+						case 89:
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 141));
 							break;
-						case 91:
+						case 90:
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(64, 172));
 							break;
-						case 92://대형나무
+						case 91://대형나무
 							Pos.y += 12;
 							TileTrans.SetWorldScale(float4(256, 324));
 							break;
@@ -589,13 +585,13 @@ void TileMapRenderer::Render(float _DeltaTime)
 				if (0.25f <= Tiles[y][x].Deltime)
 				{
 					Tiles[y][x].Deltime = 0;
-					if (Tiles[y][x].TlieAniImage != TileTextures->GetTexture(20))
+					if (Tiles[y][x].TlieAniImage != TileTextures->GetTexture(92))
 					{
-						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(20);
+						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(92);
 					}
-					else if (Tiles[y][x].TlieAniImage == TileTextures->GetTexture(20))
+					else if (Tiles[y][x].TlieAniImage == TileTextures->GetTexture(92))
 					{
-						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(30);
+						Tiles[y][x].TlieAniImage = TileTextures->GetTexture(93);
 					}
 				}			
 				if (Tiles[y][x].TlieAniImage == nullptr)
