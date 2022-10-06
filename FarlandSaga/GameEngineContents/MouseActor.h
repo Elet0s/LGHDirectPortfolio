@@ -25,7 +25,9 @@ public:
 	bool OnUnit;
 	bool OnMon;
 	TileMapRenderer* TileMap;
-
+	GameEngineCollision* MouseCol_;
+	int MouseOnX;
+	int MouseOnY;
 	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
 
 	inline void GetCurPos()

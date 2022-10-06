@@ -76,6 +76,12 @@
     <Filter Include="Actor\04.PostEffect">
       <UniqueIdentifier>{045158ad-d148-41a1-b89e-95cd76dc880e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Actor\01.Title\BG">
+      <UniqueIdentifier>{e139efdb-398b-44a9-ba50-f4dd69b33b01}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Actor\01.Title\UI">
+      <UniqueIdentifier>{6df4da43-6619-4804-b8c5-132bb87a8de2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="ContentsCore.h">
@@ -132,9 +138,6 @@
     <ClInclude Include="MapEditorWindow.h">
       <Filter>Actor\00.Global\GUI</Filter>
     </ClInclude>
-    <ClInclude Include="TitleLogo.h">
-      <Filter>Actor\01.Title</Filter>
-    </ClInclude>
     <ClInclude Include="MyDialogBox.h">
       <Filter>Actor\02.Stage\Com</Filter>
     </ClInclude>
@@ -161,6 +164,12 @@
     </ClInclude>
     <ClInclude Include="MonUnit.h">
       <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleLogo.h">
+      <Filter>Actor\01.Title\BG</Filter>
+    </ClInclude>
+    <ClInclude Include="TitleMainUi.h">
+      <Filter>Actor\01.Title\UI</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -215,9 +224,6 @@
     <ClCompile Include="MapEditorWindow.cpp">
       <Filter>Actor\00.Global\GUI</Filter>
     </ClCompile>
-    <ClCompile Include="TitleLogo.cpp">
-      <Filter>Actor\01.Title</Filter>
-    </ClCompile>
     <ClCompile Include="MyDialogBox.cpp">
       <Filter>Actor\02.Stage\Com</Filter>
     </ClCompile>
@@ -244,6 +250,12 @@
     </ClCompile>
     <ClCompile Include="MonUnit.cpp">
       <Filter>Actor\02.Stage\Unit\MonsterUnit</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleLogo.cpp">
+      <Filter>Actor\01.Title\BG</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleMainUi.cpp">
+      <Filter>Actor\01.Title\UI</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

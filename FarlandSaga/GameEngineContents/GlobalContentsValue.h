@@ -8,6 +8,7 @@ enum class OBJECTORDER
 	Player,
 	Monster,
 	UI ,
+	Mouse,
 	BG
 };
 

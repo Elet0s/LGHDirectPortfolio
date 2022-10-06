@@ -16,7 +16,9 @@ MouseActor::MouseActor()
 	MZ(0),
 	TileMap(),
 	 OnUnit(false),
-	 OnMon(false)
+	 OnMon(false),
+	MouseOnX(0),
+	MouseOnY(0)
 {
 
 }
@@ -28,10 +30,16 @@ MouseActor::~MouseActor()
 void MouseActor::SetTileRenderer(TileMapRenderer* _TileMapRenderer)
 {
 	TileMap = _TileMapRenderer;
+	Renderer = CreateComponent<GameEngineTextureRenderer>();
+	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
 }
 
 void MouseActor::Start()
 {
+	MouseCol_ = CreateComponent<GameEngineCollision>();
+	MouseCol_->GetTransform().SetLocalScale({ 16.0f, 20.0f , 0.0f });
+	MouseCol_->ChangeOrder(OBJECTORDER::Mouse);
+
 	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
@@ -40,83 +48,92 @@ void MouseActor::Start()
 	{
 		GameEngineInput::GetInst()->CreateKey("MouseRight", VK_RBUTTON);
 	}
-
-	Renderer = CreateComponent<GameEngineTextureRenderer>();
-	Renderer->GetTransform().SetLocalScale({ 64.0f, 32.0f, 0.0f });
 }
 void MouseActor::Update(float _DeltaTime)
 {
 
 	float4 MousePos = Level->GetMainCamera()->GetMouseWorldPositionToActor();
+	MouseCol_->GetTransform().SetLocalPosition(MousePos);
 	MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
 	MY = roundf((MousePos.x / -32.0f + MousePos.y / -16.0f) / 2.0f);
-	int XIndex = static_cast<int>(MX);
-	int YIndex = static_cast<int>(MY);
+	 MouseOnX = static_cast<int>(MX);
+	 MouseOnY = static_cast<int>(MY);
 
-	if (XIndex >= 0 && YIndex >= 0 && XIndex + 1 <= TileMap->TileX && YIndex + 1 <= TileMap->TileY)
+	if (TileMap != nullptr)
 	{
-		if (TileMap->Tiles[YIndex][XIndex].IsMapObject == false)
+		if (MouseOnX >= 0 && MouseOnY >= 0 && MouseOnX + 1 <= TileMap->TileX && MouseOnY + 1 <= TileMap->TileY)
 		{
-			MZ = TileMap->Tiles[YIndex][XIndex].Z;
+			if (Renderer->IsUpdate() == false)
+			{
+				Renderer->On();
+			}
+			if (TileMap->Tiles[MouseOnY][MouseOnX].IsMapObject == false)
+			{
+				MZ = TileMap->Tiles[MouseOnY][MouseOnX].Z;
 
-			float XX = (MX * 32) + (MY * -32);
-			float YY = (MX * -16) + (MY * -16) + (MZ * 16) - 16;
-			Renderer->GetTransform().SetWorldPosition({ XX, YY,-99.0f,0.0f });
-			if (XIndex + 1 == TileMap->TileX || YIndex + 1 == TileMap->TileY)
-			{
-				Renderer->SetTexture("ST01.png");
-			}
-			else if (TileMap->Tiles[YIndex][XIndex].Z + 2 <= TileMap->Tiles[YIndex + 1][XIndex + 1].Z)
-			{
-				Renderer->SetTexture("ST02.png");
-			}
-			else
-			{
-				Renderer->SetTexture("ST01.png");
-			}
+				float XX = (MX * 32) + (MY * -32);
+				float YY = (MX * -16) + (MY * -16) + (MZ * 16) - 16;
+
+				Renderer->GetTransform().SetWorldPosition({ XX, YY,-(TileMap->Tiles[MouseOnY][MouseOnX].TileDepth+0.5f),0.0f });
+				if (MouseOnX + 1 == TileMap->TileX || MouseOnY + 1 == TileMap->TileY)
+				{
+					Renderer->SetTexture("ST01.png");
+				}
+				else if (TileMap->Tiles[MouseOnY][MouseOnX].Z + 2 <= TileMap->Tiles[MouseOnY + 1][MouseOnX + 1].Z)
+				{
+					Renderer->SetTexture("ST02.png");
+				}
+				else
+				{
+					Renderer->SetTexture("ST01.png");
+				}
 
 
-			if (TileMap->Tiles[YIndex][XIndex].IsUnit != PlayUnitGroup::None)
-			{
-				//HP,Mp, 상태이상 Ui On 해줘야함
-				OnUnit = true;
-			}
-			else
-			{
-				OnUnit = false;
-				//off
+				if (TileMap->Tiles[MouseOnY][MouseOnX].IsUnit != PlayUnitGroup::None)
+				{
+					//HP,Mp, 상태이상 Ui On 해줘야함
+					OnUnit = true;
+				}
+				else
+				{
+					OnUnit = false;
+					//off
 
-			}
-			if (TileMap->Tiles[YIndex][XIndex].IsMon != MonUnitGroup::None)
-			{
+				}
+				if (TileMap->Tiles[MouseOnY][MouseOnX].IsMon != MonUnitGroup::None)
+				{
 
-				//몬스터 정보 ui on
-				OnMon = true;
+					//몬스터 정보 ui on
+					OnMon = true;
+				}
+				else
+				{
+					//off
+					OnMon = false;
+				}
 			}
-			else
+			else if (TileMap->Tiles[MouseOnY][MouseOnX].IsMapObject == true)
 			{
-				//off
-				OnMon = false;
+				Renderer->Off();
+			}
+
+			if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
+			{
+				if (OnUnit == true)
+				{
+					TileMap->Tiles[MouseOnY][MouseOnX].ClickOnUint = true;
+				}
+				else if (OnMon == true)
+				{
+					TileMap->Tiles[MouseOnY][MouseOnX].ClickOnUint = true;
+				}
 			}
 		}
-		else if (TileMap->Tiles[YIndex][XIndex].IsMapObject == true)
+		else
 		{
-			Renderer->SetTexture("ST00.png");
-		}
-
-		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
-		{
-			if (OnUnit == true)
-			{
-				TileMap->Tiles[YIndex][XIndex].ClickOnUint = true;
-			}
-			else if(OnMon == true)
-			{
-				TileMap->Tiles[YIndex][XIndex].ClickOnUint = true;
-			}
+			Renderer->Off();
 		}
 	}
-
 	//////// 마우스드래그 이동하는 기능 ///////////
 	if (OnUnit == false && OnMon == false)
 	{

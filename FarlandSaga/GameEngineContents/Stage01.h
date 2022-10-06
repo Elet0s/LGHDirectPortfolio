@@ -21,6 +21,7 @@ public:
 	bool MainCameraSet;
 	size_t Turn;
 
+
 	std::vector<PlayUnit*> PlayGroup;
 	std::vector<MonUnit*> MonGroup;
 

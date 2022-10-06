@@ -255,6 +255,25 @@ void PlayUnit::Update(float _DeltaTime)
 					}
 				}
 			}
+			if (true == GameEngineInput::GetInst()->IsUp("MouseLeft"))
+			{
+
+			}
+			if (true == GameEngineInput::GetInst()->IsUp("MouseRight"))
+			{
+				TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].ClickOnUint = false;
+				for ( size_t y = 0; y <  TileMap->Tiles.size(); y++)
+				{
+					for (size_t x = 0; x < TileMap->Tiles[y].size(); x++)
+					{
+						if (TileMap->Tiles[y][x].IsMoveOnTile == true)
+						{
+							TileMap->Tiles[y][x].IsMoveOnTile = false;
+							MoveCheakerStart_ = false;
+						}
+					}
+				}
+			}
 		}
 	}
 }
