@@ -20,13 +20,15 @@ public:
 		IsMapObject(false),
 		IsUnit(PlayUnitGroup::None),
 		IsMon(MonUnitGroup::None),
-		MouseOnUint(false),
+		ClickOnUint(false),
 		TileImage(),
 		Ztile(),
 		MapObject(),
 		Oindex(0),
 		Deltime(0.0f),
-		TlieAniImage(nullptr)
+		TlieAniImage(nullptr),
+		MoveOnTile(),
+		IsMoveOnTile(false)
 	{
 	}
 	int TileIndex; //깔린 타일의 인덱스번호
@@ -35,11 +37,13 @@ public:
 	int Z;//이매트릭스 상의 z값(높이)
 	int TileDepth; //카메라상의 z값(깊이)
 	bool IsMapObject;
-	bool MouseOnUint;
+	bool ClickOnUint;
 	float Deltime;
+	bool IsMoveOnTile;
 
 	PlayUnitGroup IsUnit;
 	MonUnitGroup IsMon;
+	GameEngineTexture* MoveOnTile;
 	GameEngineTexture* TileImage;
 	GameEngineTexture* Ztile;
 	GameEngineTexture* MapObject;
@@ -78,8 +82,6 @@ protected:
 private:
 	void Start() override;
 	void Update(float _Delta) override;
-
-
 
 	int TileZ;
 	int RenderZ;

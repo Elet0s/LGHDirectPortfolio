@@ -15,8 +15,8 @@ Stage01::Stage01()
 	:S01TileMap()
 	, StageName()
 	,NewMouseActor()
-	,UnitLEON()
-	,Goblin1()
+	, MainCameraSet(false)
+	,Turn(1)
 {
 }
 
@@ -53,15 +53,19 @@ void Stage01::Start()
 
 	/////////////////////////플레이어 유닛 로드///////////////////////////
 	{
-		UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		PlayUnit* UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
 		UnitLEON->SetTileRenderer(S01TileMap->TileRenderer);
+		UnitLEON->SetTurn(Turn);
 		UnitLEON->SetUnit(1, 0, "LEON");
+		PlayGroup.push_back(UnitLEON);
 	}
 	/////////////////////////몬스터 유닛 로드///////////////////////////
 	{
-		Goblin1 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		MonUnit* Goblin1 = CreateActor<MonUnit>(OBJECTORDER::Monster);
 		Goblin1->SetTileRenderer(S01TileMap->TileRenderer);
-			Goblin1->SetUnit(2 , 0, "GOBLIN");
+		Goblin1->SetTurn(Turn);
+		Goblin1->SetUnit(2, 0, "GOBLIN");
+		MonGroup.push_back(Goblin1);
 	}
 
 	/////////////////////////마우스 로드///////////////////////////
@@ -88,11 +92,15 @@ void Stage01::LevelEndEvent()
 
 void Stage01::Update(float _DeltaTime)
 {
+	if (MainCameraSet==false)
+	{
+		this->GetMainCameraActorTransform().SetWorldPosition(float4(0, 0, -100, 1));
+		MainCameraSet = true;
+	}
+
 	GameEngineStatusWindow::AddDebugRenderTarget("BackBuffer", GameEngineDevice::GetBackBuffer());
 	GameEngineStatusWindow::AddDebugRenderTarget("MainCamera", GetMainCamera()->GetCameraRenderTarget());
 	GameEngineStatusWindow::AddDebugRenderTarget("UICamera", GetUICamera()->GetCameraRenderTarget());
-
-
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{

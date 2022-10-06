@@ -41,18 +41,18 @@ enum class MonUnitGroup
 
 enum class MoveDirection
 {
-	Up,
-	Down,
-	Left,
-	Right
+	RigntUp,
+	LeftUp,
+	RigntDown,
+	LeftDown
 };
 
 enum class IdleDirection
 {
-	RUP,
-	LUP,
-	RDOWN,
-	LDOWN
+	RigntUp,
+	LeftUp,
+	RigntDown,
+	LeftDown
 };
 
 enum class Conditions

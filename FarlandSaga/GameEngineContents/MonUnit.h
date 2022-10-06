@@ -18,6 +18,7 @@ public:
 	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
 	void SetUnit(int _X, int _Y, std::string _UnitName);
 	void UnitMove(size_t _MoveConter, MoveDirection _MoveDirection);
+	void SetTurn(size_t _Turn);
 
 	MonUnitGroup MonType;
 	GameEngineTextureRenderer* UnitRenderer;
@@ -27,6 +28,8 @@ public:
 	float UnitY;
 	float UnitZ;
 
+	IdleDirection IdleDirection_;
+	size_t Turn_;
 	///  Ω∫≈»
 
 	size_t MaxHP_;
@@ -40,6 +43,7 @@ public:
 	size_t Matk_;
 	size_t MDef_;
 	size_t Dex_;
+	size_t MoveCount_;
 
 	size_t Level_;
 	size_t MaxExp_;

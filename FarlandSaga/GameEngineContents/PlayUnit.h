@@ -2,6 +2,7 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include "Enums.h"
 
+
 class GameEngineTextureRenderer;
 class TileMapRenderer;
 class PlayUnit : public GameEngineActor
@@ -18,6 +19,10 @@ public:
 	void SetTileRenderer(TileMapRenderer* _TileMapRenderer);
 	void SetUnit(int _X, int _Y, std::string _UnitName);
 	void UnitMove(size_t _MoveConter, MoveDirection _MoveDirection);
+	void SetTurn(size_t _Turn);
+
+	void MoveCheaker(MoveDirection _MoveDirection, float _X, float _Y, int _MoveCount);
+
 
 	PlayUnitGroup UnitType;
 	GameEngineTextureRenderer* UnitRenderer;
@@ -27,6 +32,9 @@ public:
 	float UnitY;
 	float UnitZ;
 
+	IdleDirection IdleDirection_;
+	size_t Turn_;
+	bool MoveCheakerStart_;
 	///  Ω∫≈»
 
 	size_t MaxHP_;
@@ -41,12 +49,13 @@ public:
 	size_t MDef_;
 	size_t Dex_;
 
+	size_t AtkRange_;
+	int MoveCount_;
+	int MaxCounter_;
+
 	size_t Level_;
 	size_t MaxExp_;
 	size_t Exp_;
-
-
-
 
 	/// º”º∫
 	size_t Fire_;
@@ -67,10 +76,6 @@ protected:
 	void Start() override;
 	void Update(float _DeltaTime);
 	void End();
-
-	void IdleStart(const StateInfo& _Info);
-	void IdleUpdate(float _DeltaTime, const StateInfo& _Info);
-	void MoveUpdate(float _DeltaTime, const StateInfo& _Info);
 
 private:
 

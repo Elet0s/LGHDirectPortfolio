@@ -131,8 +131,8 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             ImGui::BeginChildFrame(ImGui::GetID("ObjectSelect3"), { 90 * 5, 500 });
             for (size_t i = 69; i < 96; i++)
             {
-                GameEngineTexture* Ztile = Texture->GetTexture(i);
-                if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(Ztile->CreateShaderResourceView()), { 64, 32 }))
+                GameEngineTexture* Otile = Texture->GetTexture(i);
+                if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(Otile->CreateShaderResourceView()), { 64, 32 }))
                 {
                     SelectOTile = i;
                 }
@@ -143,6 +143,25 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             }
             ImGui::EndChildFrame();
         }
+
+        if (nullptr != Texture)
+        {
+            ImGui::BeginChildFrame(ImGui::GetID("ObjectSelect3"), { 90 * 5, 500 });
+            for (size_t i = 96; i <= 97; i++)
+            {
+                GameEngineTexture* MoveOnTile = Texture->GetTexture(i);
+            if (ImGui::ImageButton(reinterpret_cast<ImTextureID>(MoveOnTile->CreateShaderResourceView()), { 64, 32 }))
+            {
+                SelectOTile = i;
+            }
+            if (0 != (i + 1) % 5)
+            {
+                ImGui::SameLine();
+            }
+        }
+        ImGui::EndChildFrame();
+        }
+
 
         if (true == GameEngineInput::GetInst()->IsDown("TileSet") // 선택한 설정으로 타일 설정
             && nullptr != Texture

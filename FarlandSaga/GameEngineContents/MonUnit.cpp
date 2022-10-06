@@ -86,7 +86,7 @@ void MonUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	Pos.y = (_X * -Half.y) + (_Y * -Half.y) + (UnitZ * 16.0f) - 16;
 	UnitRenderer = CreateComponent<GameEngineTextureRenderer>();
 	UnitRenderer->GetTransform().SetLocalScale({ 100,100, 1 });
-	UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -100));
+	UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[UnitY][UnitX].TileDepth + 1)));
 
 	if (_UnitName == "GOBLIN")
 	{
@@ -102,28 +102,28 @@ void MonUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 void MonUnit::UnitMove(size_t _MoveConter, MoveDirection _MoveDirection)
 {
 
-		if (_MoveDirection == MoveDirection::Up)
+		if (_MoveDirection == MoveDirection::RigntUp)
 		{
 			for (size_t i = 0; i < _MoveConter; i++)
 			{
 
 			}
 		}
-		else if (_MoveDirection == MoveDirection::Down)
+		else if (_MoveDirection == MoveDirection::LeftDown)
 		{
 			for (size_t i = 0; i < _MoveConter; i++)
 			{
 
 			}
 		}
-		else if (_MoveDirection == MoveDirection::Left)
+		else if (_MoveDirection == MoveDirection::LeftUp)
 		{
 			for (size_t i = 0; i < _MoveConter; i++)
 			{
 
 			}
 		}
-		else if (_MoveDirection == MoveDirection::Right)
+		else if (_MoveDirection == MoveDirection::RigntDown)
 		{
 			for (size_t i = 0; i < _MoveConter; i++)
 			{
@@ -131,4 +131,8 @@ void MonUnit::UnitMove(size_t _MoveConter, MoveDirection _MoveDirection)
 			}
 		}
 	
+}
+void MonUnit::SetTurn(size_t _Turn)
+{
+	Turn_ = _Turn;
 }
