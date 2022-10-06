@@ -50,6 +50,12 @@ void Stage01::Start()
 		GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-0.0f,0.0f,0.0f });
 		//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
 	}
+	/////////////////////////마우스 로드///////////////////////////
+	{
+		NewMouseActor = CreateActor<MouseActor>(OBJECTORDER::UI);
+		NewMouseActor->SetTileRenderer(S01TileMap->TileRenderer);
+		NewMouseActor->Level = this;
+	}
 
 	/////////////////////////플레이어 유닛 로드///////////////////////////
 	{
@@ -57,6 +63,7 @@ void Stage01::Start()
 		UnitLEON->SetTileRenderer(S01TileMap->TileRenderer);
 		UnitLEON->SetTurn(Turn);
 		UnitLEON->SetUnit(1, 0, "LEON");
+		UnitLEON->SetUnitMouse(NewMouseActor);
 		PlayGroup.push_back(UnitLEON);
 	}
 	/////////////////////////몬스터 유닛 로드///////////////////////////
@@ -68,12 +75,7 @@ void Stage01::Start()
 		MonGroup.push_back(Goblin1);
 	}
 
-	/////////////////////////마우스 로드///////////////////////////
-	{
-		NewMouseActor = CreateActor<MouseActor>(OBJECTORDER::UI);
-		NewMouseActor->SetTileRenderer(S01TileMap->TileRenderer);
-		NewMouseActor->Level = this;
-	}
+
 
 
 

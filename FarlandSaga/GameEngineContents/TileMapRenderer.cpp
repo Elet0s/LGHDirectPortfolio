@@ -127,6 +127,10 @@ void TileMapRenderer::LoadTileIndex(int _y, int _x, size_t _Index, int _Z, size_
 	{
 		Tiles[Y][X].MoveOnTile = TileTextures->GetTexture(96);
 	}
+	if (Tiles[Y][X].AtkOnTile == nullptr)
+	{
+		Tiles[Y][X].AtkOnTile = TileTextures->GetTexture(97);
+	}
 }
 
 void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, size_t _Zindex, size_t _Oindex)//텍스처 선택해서 누를때
@@ -217,6 +221,10 @@ void TileMapRenderer::SetTileIndex(float4 _Pos, size_t _Index, int _Z, size_t _Z
 	if (Tiles[Y][X].MoveOnTile == nullptr)
 	{
 		Tiles[Y][X].MoveOnTile = TileTextures->GetTexture(96);
+	}
+	if (Tiles[Y][X].AtkOnTile == nullptr)
+	{
+		Tiles[Y][X].AtkOnTile = TileTextures->GetTexture(97);
 	}
 
 
@@ -601,7 +609,6 @@ void TileMapRenderer::Render(float _DeltaTime)
 				}
 			}
 			{
-
 				float4 Pos;
 				Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
 				Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
@@ -614,6 +621,22 @@ void TileMapRenderer::Render(float _DeltaTime)
 					TileTrans.CalculateWorldViewProjection();
 					ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
 					ShaderResources.SetTexture("Tex", Tiles[y][x].MoveOnTile);
+					GameEngineDefaultRenderer::Render(_DeltaTime);
+				}
+			}
+			{
+				float4 Pos;
+				Pos.x = (x * TileScaleH.x) + (y * -TileScaleH.x);
+				Pos.y = (x * -TileScaleH.y) + (y * -TileScaleH.y) + (Tiles[y][x].Z * 16);
+				Pos.z = static_cast<float>(-(Tiles[y][x].TileDepth + 1));
+				if (Tiles[y][x].IsAtkOnTile == true)
+				{
+					Pos.y -= 16;
+					TileTrans.SetLocalScale(float4(64, 32));
+					TileTrans.SetLocalPosition(Pos);
+					TileTrans.CalculateWorldViewProjection();
+					ShaderResources.SetConstantBufferLink("TransformData", TileTrans.GetTransformData());
+					ShaderResources.SetTexture("Tex", Tiles[y][x].AtkOnTile);
 					GameEngineDefaultRenderer::Render(_DeltaTime);
 				}
 			}

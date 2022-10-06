@@ -27,8 +27,10 @@ public:
 		Oindex(0),
 		Deltime(0.0f),
 		TlieAniImage(nullptr),
-		MoveOnTile(),
-		IsMoveOnTile(false)
+		MoveOnTile(nullptr),
+		IsMoveOnTile(false),
+		IsAtkOnTile(false),
+		AtkOnTile(nullptr)
 	{
 	}
 	int TileIndex; //깔린 타일의 인덱스번호
@@ -40,10 +42,12 @@ public:
 	bool ClickOnUint;
 	float Deltime;
 	bool IsMoveOnTile;
+	bool IsAtkOnTile;
 
 	PlayUnitGroup IsUnit;
 	MonUnitGroup IsMon;
 	GameEngineTexture* MoveOnTile;
+	GameEngineTexture* AtkOnTile;
 	GameEngineTexture* TileImage;
 	GameEngineTexture* Ztile;
 	GameEngineTexture* MapObject;

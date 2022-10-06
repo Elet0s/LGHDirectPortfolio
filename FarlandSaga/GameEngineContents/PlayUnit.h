@@ -2,7 +2,7 @@
 #include <GameEngineCore/CoreMinimal.h>
 #include "Enums.h"
 
-
+class MouseActor;
 class GameEngineTextureRenderer;
 class TileMapRenderer;
 class PlayUnit : public GameEngineActor
@@ -20,13 +20,15 @@ public:
 	void SetUnit(int _X, int _Y, std::string _UnitName);
 	void UnitMove(size_t _MoveConter, MoveDirection _MoveDirection);
 	void SetTurn(size_t _Turn);
+	void SetUnitMouse(MouseActor* _UnitMouse);
 
 	void MoveCheaker(MoveDirection _MoveDirection, float _X, float _Y, int _MoveCount);
-
+	void MonCheaker(MoveDirection _CheakDirection, float _X, float _Y, int _AtkRange);
 
 	PlayUnitGroup UnitType;
 	GameEngineTextureRenderer* UnitRenderer;
 	TileMapRenderer* TileMap;
+	MouseActor* UnitMouse;
 
 	float UnitX;
 	float UnitY;
@@ -35,6 +37,8 @@ public:
 	IdleDirection IdleDirection_;
 	size_t Turn_;
 	bool MoveCheakerStart_;
+	bool RangeCheakerStart_;
+	bool EnterMon_;
 	///  Ω∫≈»
 
 	size_t MaxHP_;

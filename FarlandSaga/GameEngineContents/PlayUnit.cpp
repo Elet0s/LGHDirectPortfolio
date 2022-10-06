@@ -41,6 +41,8 @@ PlayUnit::PlayUnit()
 	, MaxCounter_(0)
 	, MoveCheakerStart_(false)
 	, AtkRange_(0)
+	, RangeCheakerStart_(false)
+	, EnterMon_(false)
 {
 }
 PlayUnit::~PlayUnit()
@@ -151,6 +153,106 @@ void PlayUnit::MoveCheaker(MoveDirection _MoveDirection, float _X, float _Y,int 
 		}
 	}
 }
+void PlayUnit::MonCheaker(MoveDirection _CheakDirection, float _X, float _Y, int _AtkRange)
+{
+	if (_AtkRange > 0)
+	{
+		if (TileMap->Tiles[_Y][_X].IsMon != MonUnitGroup::None)//현재 타일에 뭐 있다면
+		{
+			EnterMon_ = true;//몬스터 발견
+			TileMap->Tiles[_Y][_X].IsAtkOnTile = true; //공격가능
+		}
+		_AtkRange -= 1;
+		if (_X > 0 && _Y > 0 && _X < TileMap->Tiles.size() && _Y < TileMap->Tiles.size()) //타일 범위 안에있을때
+		{
+			MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+			MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+		}
+		else if (_X == 0)
+		{
+			MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+
+			if (_Y == 0)
+			{
+				MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			}
+			if (_Y == TileMap->Tiles.size())
+			{
+				MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+			}
+		}
+		else if (_Y == 0)
+		{
+			MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+			if (_X == 0)
+			{
+				MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			}
+			if (_X == TileMap->Tiles.size())
+			{
+				MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+			}
+		}
+		else if (_X == TileMap->Tiles.size())
+		{
+			MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			if (_Y == 0)
+			{
+				MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			}
+			if (_Y == TileMap->Tiles.size())
+			{
+				MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::LeftDown, _X, _Y + 1, _AtkRange);
+			}
+		}
+		else if (_Y == TileMap->Tiles.size())
+		{
+			MonCheaker(MoveDirection::RigntUp, _X, _Y - 1, _AtkRange);
+			if (_X == 0)
+			{
+				MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			}
+			if (_X == TileMap->Tiles.size())
+			{
+				MonCheaker(MoveDirection::LeftUp, _X - 1, _Y, _AtkRange);
+			}
+			else
+			{
+				MonCheaker(MoveDirection::RigntDown, _X + 1, _Y, _AtkRange);
+			}
+		}
+	}
+}
 void PlayUnit::Update(float _DeltaTime)
 {
 
@@ -163,113 +265,269 @@ void PlayUnit::Update(float _DeltaTime)
 				if (MoveCheakerStart_ == false)//캐릭터 눌렀을때 한번만 체크해줘야함
 				{
 					TileMap->Tiles[UnitY][UnitX].IsMoveOnTile = true;
-					//MoveCount_ = MaxCounter_;
 					MoveCheakerStart_ = true;
 				}
-				if (UnitX > 0 && UnitY > 0 && UnitX < TileMap->Tiles.size() && UnitY < TileMap->Tiles.size()) //타일 범위 안에있을때
+				if (RangeCheakerStart_ == false)
 				{
-					MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
-					MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY +1, MaxCounter_);
-				}
-				else if (UnitX == 0)
-				{
-					MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+					if (UnitX > 0 && UnitY > 0 && UnitX < TileMap->Tiles.size() && UnitY < TileMap->Tiles.size()) //타일 범위 안에있을때
+					{
+						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+					}
+					else if (UnitX == 0)
+					{
+						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
 
-					if (UnitY == 0)
-					{
-						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					}
-					if (UnitY == TileMap->Tiles.size())
-					{
-						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
-					}
-				}
-				else if(UnitY == 0)
-				{
-					MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
-					if (UnitX == 0)
-					{
-						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					}
-					if (UnitX == TileMap->Tiles.size())
-					{
-						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
-					}
-				}
-				else if (UnitX == TileMap->Tiles.size())
-				{
-					MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					if (UnitY == 0)
-					{
-						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					}
-					if (UnitY == TileMap->Tiles.size())
-					{
-						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
-					}
-				}
-				else if (UnitY == TileMap->Tiles.size())
-				{
-					MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
-					if (UnitX == 0)
-					{
-						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					}
-					if (UnitX == TileMap->Tiles.size())
-					{
-						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
-					}
-					else
-					{
-						MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
-					}
-				}
-			}
-			if (true == GameEngineInput::GetInst()->IsUp("MouseLeft"))
-			{
-
-			}
-			if (true == GameEngineInput::GetInst()->IsUp("MouseRight"))
-			{
-				TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].ClickOnUint = false;
-				for ( size_t y = 0; y <  TileMap->Tiles.size(); y++)
-				{
-					for (size_t x = 0; x < TileMap->Tiles[y].size(); x++)
-					{
-						if (TileMap->Tiles[y][x].IsMoveOnTile == true)
+						if (UnitY == 0)
 						{
-							TileMap->Tiles[y][x].IsMoveOnTile = false;
-							MoveCheakerStart_ = false;
+							MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						}
+						if (UnitY == TileMap->Tiles.size())
+						{
+							MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+						}
+					}
+					else if (UnitY == 0)
+					{
+						MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+						if (UnitX == 0)
+						{
+							MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						}
+						if (UnitX == TileMap->Tiles.size())
+						{
+							MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+						}
+					}
+					else if (UnitX == TileMap->Tiles.size())
+					{
+						MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						if (UnitY == 0)
+						{
+							MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						}
+						if (UnitY == TileMap->Tiles.size())
+						{
+							MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::LeftDown, UnitX, UnitY + 1, MaxCounter_);
+						}
+					}
+					else if (UnitY == TileMap->Tiles.size())
+					{
+						MoveCheaker(MoveDirection::RigntUp, UnitX, UnitY - 1, MaxCounter_);
+						if (UnitX == 0)
+						{
+							MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						}
+						if (UnitX == TileMap->Tiles.size())
+						{
+							MoveCheaker(MoveDirection::LeftUp, UnitX - 1, UnitY, MaxCounter_);
+						}
+						else
+						{
+							MoveCheaker(MoveDirection::RigntDown, UnitX + 1, UnitY, MaxCounter_);
+						}
+					}
+				}
+			}
+
+			if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
+			{
+				if (UnitMouse->MouseOnX >= 0 && UnitMouse->MouseOnY >= 0 && UnitMouse->MouseOnX < TileMap->Tiles.size() && UnitMouse->MouseOnY < TileMap->Tiles.size())
+				{
+					if (TileMap->Tiles[UnitMouse->MouseOnX][UnitMouse->MouseOnY].IsMoveOnTile == true)//마우스 클릭했을때 마우스가 있는 타일 
+					{
+						int X = UnitMouse->MouseOnX;
+						int Y = UnitMouse->MouseOnY;
+						if (X > 0 && Y > 0 && X < TileMap->Tiles.size() && Y < TileMap->Tiles.size()) //타일 범위 안에있을때
+						{
+							MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+							MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+						}
+						else if (X == 0)
+						{
+							MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+
+							if (Y == 0)
+							{
+								MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							}
+							if (Y == TileMap->Tiles.size())
+							{
+								MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+							}
+						}
+						else if (Y == 0)
+						{
+							MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+							if (X == 0)
+							{
+								MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							}
+							if (X == TileMap->Tiles.size())
+							{
+								MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+							}
+						}
+						else if (X == TileMap->Tiles.size())
+						{
+							MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							if (Y == 0)
+							{
+								MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							}
+							if (Y == TileMap->Tiles.size())
+							{
+								MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::LeftDown, X, Y + 1, AtkRange_);
+							}
+						}
+						else if (Y == TileMap->Tiles.size())
+						{
+							MonCheaker(MoveDirection::RigntUp, X, Y - 1, AtkRange_);
+							if (X == 0)
+							{
+								MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							}
+							if (X == TileMap->Tiles.size())
+							{
+								MonCheaker(MoveDirection::LeftUp, X - 1, Y, AtkRange_);
+							}
+							else
+							{
+								MonCheaker(MoveDirection::RigntDown, X + 1, Y, AtkRange_);
+							}
+						}
+
+						for (size_t y = 0; y < TileMap->Tiles.size(); y++)
+						{
+							for (size_t x = 0; x < TileMap->Tiles[y].size(); x++)
+							{
+								if (TileMap->Tiles[y][x].IsMoveOnTile == true)
+								{
+									TileMap->Tiles[y][x].IsMoveOnTile = false;
+								}
+							}
+						}
+
+
+						//클릭한 곳으로 캐릭터 옮기기
+						float4 Pos;
+						float4 Half = { 32,16,0,0 };
+						Pos.x = (X * Half.x) + (Y * -Half.x);
+						Pos.y = (X * -Half.y) + (Y * -Half.y) + (UnitZ * 16.0f) - 16;
+						UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[Y][X].TileDepth + 1)));
+
+						if (EnterMon_ == true)	////////////////////////////공격범위내에 몬스터 있음
+						{
+							//클릭한 곳으로 캐릭터 옮겨주고 
+							//현재 타일IsMoveOnTile 활성화
+							//몬스터 한번더 클릭하면 이동후 공격
+							//캐릭터 한번 더 클릭하면 밑에 방향정하기
+							RangeCheakerStart_ = true;
+						}
+						else//////////////////////////////////없을경우 ui다 지우고 방향 정해주기
+						{
+							// 방향 정하기
+							RangeCheakerStart_ = true;
+
+						}
+					}
+				}
+			}
+
+			if (true == GameEngineInput::GetInst()->IsDown("MouseRight"))
+			{
+				if (RangeCheakerStart_ == true)
+				{
+					RangeCheakerStart_ = false;
+					float4 Pos;
+					float4 Half = { 32,16,0,0 };
+					Pos.x = (UnitX * Half.x) + (UnitY * -Half.x);
+					Pos.y = (UnitX * -Half.y) + (UnitY * -Half.y) + (UnitZ * 16.0f) - 16;
+					UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[UnitY][UnitX].TileDepth + 1)));
+					TileMap->Tiles[UnitY][UnitX].IsMoveOnTile = true;
+					for (size_t y = 0; y < TileMap->Tiles.size(); y++)
+					{
+						for (size_t x = 0; x < TileMap->Tiles[y].size(); x++)
+						{
+							if (TileMap->Tiles[y][x].IsAtkOnTile == true)
+							{
+								TileMap->Tiles[y][x].IsAtkOnTile = false;
+							}
+						}
+					}
+				}
+				else
+				{
+					TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].ClickOnUint = false;
+					for (size_t y = 0; y < TileMap->Tiles.size(); y++)
+					{
+						for (size_t x = 0; x < TileMap->Tiles[y].size(); x++)
+						{
+							if (TileMap->Tiles[y][x].IsMoveOnTile == true)
+							{
+								TileMap->Tiles[y][x].IsMoveOnTile = false;
+								MoveCheakerStart_ = false;
+							}
 						}
 					}
 				}
@@ -277,6 +535,8 @@ void PlayUnit::Update(float _DeltaTime)
 		}
 	}
 }
+
+	
 
 void PlayUnit::End() 
 {
@@ -415,7 +675,13 @@ void PlayUnit::UnitMove(size_t _MoveConter, MoveDirection _MoveDirection)
 		}
 	}
 }
+
 void PlayUnit::SetTurn(size_t _Turn)
 {
 	Turn_ = _Turn;
+}
+
+void PlayUnit::SetUnitMouse(MouseActor* _UnitMouse)
+{
+	UnitMouse = _UnitMouse;
 }
