@@ -3,7 +3,7 @@
 #include "TileMapActor.h"
 
 MapEditorWindow::MapEditorWindow()
-    : Scale{ 30, 30 , 0}
+    : Scale{ 50, 50 , 0}
     , ZScale{0}
     , SelectTile(-1)
     , ButtonCheaker(false)
@@ -43,7 +43,7 @@ void MapEditorWindow::OnGUI(GameEngineLevel* _Level, float _DeltaTime)
             {
                 SelectFolderTexture = GameEnginePath::GetFileName(Path);
 
-                //GameEngineFolderTexture::Load(Path.c_str());
+                GameEngineFolderTexture::Load(Path.c_str());
             }
             LoadCheaker = true;
         }

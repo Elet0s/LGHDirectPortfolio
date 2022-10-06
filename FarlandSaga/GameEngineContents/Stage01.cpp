@@ -43,12 +43,13 @@ void Stage01::Start()
 			GameEngineFolderTexture::Load(Path.c_str());
 		}
 	}
+
 	{
 		S01TileMap = CreateActor<TileMapActor>(OBJECTORDER::TileMap);
-		S01TileMap->TileRenderer->CreateIsometricTileMap(30, 30, 0, { 64, 32 }, StageName, 16);
+		S01TileMap->TileRenderer->CreateIsometricTileMap(50, 50, 0, { 64, 32 }, StageName, 16);
 		S01TileMap->TileRenderer->Load(StageName);
-		GetMainCameraActorTransform().SetWorldPosition({ 0.0f,-0.0f,0.0f,0.0f });
-		//CreateActor<TestStageBG>(OBJECTORDER::BG);//배경 이미지
+
+
 	}
 	/////////////////////////마우스 로드///////////////////////////
 	{
@@ -62,7 +63,7 @@ void Stage01::Start()
 		PlayUnit* UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
 		UnitLEON->SetTileRenderer(S01TileMap->TileRenderer);
 		UnitLEON->SetTurn(Turn);
-		UnitLEON->SetUnit(1, 0, "LEON");
+		UnitLEON->SetUnit(41, 24, "LEON");
 		UnitLEON->SetUnitMouse(NewMouseActor);
 		PlayGroup.push_back(UnitLEON);
 	}
@@ -96,8 +97,24 @@ void Stage01::Update(float _DeltaTime)
 {
 	if (MainCameraSet==false)
 	{
-		this->GetMainCameraActorTransform().SetWorldPosition(float4(0, 0, -100, 1));
+		this->GetMainCameraActorTransform().SetWorldPosition(float4(280, -770, -100, 1));
 		MainCameraSet = true;
+	}
+	if (this->GetMainCameraActorTransform().GetWorldPosition().PosX >280)
+	{
+		this->GetMainCameraActorTransform().SetWorldPosition({ 280 ,this->GetMainCameraActorTransform().GetWorldPosition().PosY,-100,1});
+	}
+	if (this->GetMainCameraActorTransform().GetWorldPosition().PosX < 70)
+	{
+		this->GetMainCameraActorTransform().SetWorldPosition({ 70 ,this->GetMainCameraActorTransform().GetWorldPosition().PosY,-100,1 });
+	}
+	if (this->GetMainCameraActorTransform().GetWorldPosition().PosY > -760)
+	{
+		this->GetMainCameraActorTransform().SetWorldPosition({ this->GetMainCameraActorTransform().GetWorldPosition().PosX ,-760,-100,1 });
+	}
+	if (this->GetMainCameraActorTransform().GetWorldPosition().PosY < -770)
+	{
+		this->GetMainCameraActorTransform().SetWorldPosition({ this->GetMainCameraActorTransform().GetWorldPosition().PosX ,-770,-100,1 });
 	}
 
 	GameEngineStatusWindow::AddDebugRenderTarget("BackBuffer", GameEngineDevice::GetBackBuffer());

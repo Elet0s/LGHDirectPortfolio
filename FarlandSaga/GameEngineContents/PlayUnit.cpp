@@ -467,8 +467,6 @@ void PlayUnit::Update(float _DeltaTime)
 								}
 							}
 						}
-
-
 						//클릭한 곳으로 캐릭터 옮기기
 						float4 Pos;
 						float4 Half = { 32,16,0,0 };

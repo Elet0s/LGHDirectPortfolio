@@ -67,6 +67,10 @@ void MouseActor::Update(float _DeltaTime)
 			{
 				Renderer->On();
 			}
+			if (TileMap->Tiles[MouseOnY][MouseOnX].TileIndex ==64|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 63|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 62|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 61)
+			{
+				Renderer->Off();
+			}
 			if (TileMap->Tiles[MouseOnY][MouseOnX].IsMapObject == false)
 			{
 				MZ = TileMap->Tiles[MouseOnY][MouseOnX].Z;
@@ -116,7 +120,6 @@ void MouseActor::Update(float _DeltaTime)
 			{
 				Renderer->Off();
 			}
-
 			if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
 			{
 				if (OnUnit == true)
