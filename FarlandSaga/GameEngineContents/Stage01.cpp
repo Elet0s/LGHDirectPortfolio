@@ -102,7 +102,7 @@ void Stage01::Start()
 		MonUnit* Goblin3 = CreateActor<MonUnit>(OBJECTORDER::Monster);
 		Goblin3->SetTileRenderer(S01TileMap->TileRenderer);
 		Goblin3->SetTurn(Turn);
-		Goblin3->SetUnit(22, 30, "GOBLIN");
+		Goblin3->SetUnit(22, 28, "GOBLIN");
 		MonGroup.push_back(Goblin3);
 	}
 	{
@@ -162,7 +162,7 @@ void Stage01::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		GEngine::ChangeLevel("EndLevel");
+		GEngine::ChangeLevel("Ending");
 	}
 
 }

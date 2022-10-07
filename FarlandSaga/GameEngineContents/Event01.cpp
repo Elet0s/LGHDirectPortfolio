@@ -15,6 +15,7 @@ void Event01::Start()
 {
 	/////////////////////////≈∏¿œ∏  ∑ŒµÂ///////////////////////////
 	{
+
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");
