@@ -35,7 +35,7 @@ PlayUnit::PlayUnit()
 	, MaxHP_(10)
 	, MaxMP_(10)
 	, MaxExp_(0)
-	, IdleDirection_(IdleDirection::LeftDown)
+	, IdleDirection_(IdleDirection::LeftUp)
 	, MoveCount_(0)
 	, Turn_(0)
 	, MaxCounter_(0)
@@ -255,6 +255,51 @@ void PlayUnit::MonCheaker(MoveDirection _CheakDirection, float _X, float _Y, int
 }
 void PlayUnit::Update(float _DeltaTime)
 {
+	if (IdleDirection_ == IdleDirection::RigntUp)
+	{
+		UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
+	}
+	if (IdleDirection_ == IdleDirection::LeftUp)
+	{
+		UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
+		UnitRenderer->GetTransform().PixLocalNegativeX();
+	}
+	if (IdleDirection_ == IdleDirection::RigntDown)
+	{
+		UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
+		UnitRenderer->GetTransform().PixLocalNegativeX();
+	}
+	if (IdleDirection_ == IdleDirection::LeftDown)
+	{
+		UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
+	}
+	//if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalPositiveX();
+	//	//Renderer->GetColorData().MulColor.a -= _DeltaTime;
+	//}
+	//
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalPositiveX();
+	//}
+	//
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalNegativeX();
+	//}
+	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
+	//{
+	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
+	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
+	//	UnitRenderer->GetTransform().PixLocalNegativeX();
+	//}
 
 	if (Turn_ % 2 == 1)//홀수턴일때
 	{
@@ -364,7 +409,7 @@ void PlayUnit::Update(float _DeltaTime)
 			{
 				if (UnitMouse->MouseOnX >= 0 && UnitMouse->MouseOnY >= 0 && UnitMouse->MouseOnX < TileMap->Tiles.size() && UnitMouse->MouseOnY < TileMap->Tiles.size())
 				{
-					if (TileMap->Tiles[UnitMouse->MouseOnX][UnitMouse->MouseOnY].IsMoveOnTile == true)//마우스 클릭했을때 마우스가 있는 타일 
+					if (TileMap->Tiles[UnitMouse->MouseOnY][UnitMouse->MouseOnX].IsMoveOnTile == true)//마우스 클릭했을때 마우스가 있는 타일 
 					{
 						int X = UnitMouse->MouseOnX;
 						int Y = UnitMouse->MouseOnY;
@@ -471,13 +516,14 @@ void PlayUnit::Update(float _DeltaTime)
 						float4 Pos;
 						float4 Half = { 32,16,0,0 };
 						Pos.x = (X * Half.x) + (Y * -Half.x);
-						Pos.y = (X * -Half.y) + (Y * -Half.y) + (UnitZ * 16.0f) - 16;
+						Pos.y = (X * -Half.y) + (Y * -Half.y) + (TileMap->Tiles[Y][X].Z * 16.0f) - 16;
+
 						UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[Y][X].TileDepth + 1)));
 
 						if (EnterMon_ == true)	////////////////////////////공격범위내에 몬스터 있음
 						{
-							//클릭한 곳으로 캐릭터 옮겨주고 
-							//현재 타일IsMoveOnTile 활성화
+							TileMap->Tiles[Y][X].IsMoveOnTile = true;
+							//다음클릭
 							//몬스터 한번더 클릭하면 이동후 공격
 							//캐릭터 한번 더 클릭하면 밑에 방향정하기
 							RangeCheakerStart_ = true;
@@ -541,33 +587,7 @@ void PlayUnit::End()
 
 }
 
-	//if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
-	//{
-	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
-	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
-	//	UnitRenderer->GetTransform().PixLocalPositiveX();
-	//	//Renderer->GetColorData().MulColor.a -= _DeltaTime;
-	//}
-	//
-	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftDown"))
-	//{
-	//	GetTransform().SetWorldMove(GetTransform().GetLeftVector() * Speed * 2 * _DeltaTime);
-	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
-	//	UnitRenderer->GetTransform().PixLocalPositiveX();
-	//}
-	//
-	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightUP"))
-	//{
-	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
-	//	GetTransform().SetWorldMove(GetTransform().GetUpVector() * Speed * _DeltaTime);
-	//	UnitRenderer->GetTransform().PixLocalNegativeX();
-	//}
-	//else if (true == GameEngineInput::GetInst()->IsPress("PlayerRightDown"))
-	//{
-	//	GetTransform().SetWorldMove(GetTransform().GetRightVector() * Speed * 2 * _DeltaTime);
-	//	GetTransform().SetWorldMove(GetTransform().GetDownVector() * Speed * _DeltaTime);
-	//	UnitRenderer->GetTransform().PixLocalNegativeX();
-	//}
+
 
 void PlayUnit::SetTileRenderer(TileMapRenderer* _TileMapRenderer)
 {
@@ -610,8 +630,8 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	{
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
 		UnitRenderer->CreateFrameAnimationCutTexture("LeonWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
-		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdle", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
-		UnitRenderer->ChangeFrameAnimation("LeonIdle");
+		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdleLD", FrameAnimation_DESC("LeonIdle.png", 0, 2, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("LeonIdleRU", FrameAnimation_DESC("LeonIdle.png", 3, 5, 0.2f));
 		TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit = PlayUnitGroup::Leon;
 
 		MaxHP_ = 34;

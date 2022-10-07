@@ -72,14 +72,9 @@ void Stage01::Start()
 		MonUnit* Goblin1 = CreateActor<MonUnit>(OBJECTORDER::Monster);
 		Goblin1->SetTileRenderer(S01TileMap->TileRenderer);
 		Goblin1->SetTurn(Turn);
-		Goblin1->SetUnit(2, 0, "GOBLIN");
+		Goblin1->SetUnit(35, 24, "GOBLIN");
 		MonGroup.push_back(Goblin1);
 	}
-
-
-
-
-
 }
 
 void Stage01::LevelStartEvent()

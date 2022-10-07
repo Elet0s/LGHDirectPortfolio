@@ -95,8 +95,8 @@ void MouseActor::Update(float _DeltaTime)
 
 				if (TileMap->Tiles[MouseOnY][MouseOnX].IsUnit != PlayUnitGroup::None)
 				{
-					//HP,Mp, 상태이상 Ui On 해줘야함
 					OnUnit = true;
+					//HP,Mp, 상태이상 Ui On 해줘야함
 				}
 				else
 				{
