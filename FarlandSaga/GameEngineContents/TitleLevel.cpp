@@ -4,6 +4,7 @@
 #include"TitleMainUi.h"
 #include "SoundPlayer.h"
 #include "Enums.h"
+#include"UIMaster.h"
 #include "MouseActor.h"
 #include <GameEngineCore/GEngine.h>
 #include <GameEngineCore/GameEngineCameraActor.h>

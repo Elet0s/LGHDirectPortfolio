@@ -44,10 +44,12 @@ void MouseActor::Start()
 	{
 		GameEngineInput::GetInst()->CreateKey("MouseLeft", VK_LBUTTON);
 	}
-	if (false == GameEngineInput::GetInst()->IsKey("MouseLeft"))
+	if (false == GameEngineInput::GetInst()->IsKey("MouseRight"))
 	{
 		GameEngineInput::GetInst()->CreateKey("MouseRight", VK_RBUTTON);
 	}
+
+
 }
 void MouseActor::Update(float _DeltaTime)
 {
@@ -137,6 +139,7 @@ void MouseActor::Update(float _DeltaTime)
 			Renderer->Off();
 		}
 	}
+
 	//////// 마우스드래그 이동하는 기능 ///////////
 	if (OnUnit == false && OnMon == false)
 	{
@@ -152,7 +155,6 @@ void MouseActor::Update(float _DeltaTime)
 		}
 		ptMouse3.x = ptMouse2.x - ptMouse1.x;
 		ptMouse3.y = ptMouse2.y - ptMouse1.y;
-
 		if (ptMouse3.x > 0)
 		{
 			Level->GetMainCameraActorTransform().SetLocalMove(-Level->GetMainCameraActorTransform().GetRightVector() * static_cast<float>(ptMouse3.x));

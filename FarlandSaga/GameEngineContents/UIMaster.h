@@ -1,6 +1,7 @@
 #pragma once
 #include <GameEngineCore/GameEngineActor.h>
 
+class GameEngineTextureRenderer;
 class UIMaster : public GameEngineActor
 {
 public:
@@ -12,10 +13,12 @@ public:
 	UIMaster& operator=(const UIMaster& _Other) = delete;
 	UIMaster& operator=(UIMaster&& _Other) noexcept = delete;
 
+	GameEngineTextureRenderer* RClickRenderer;
+
 protected:
 	void Start() override;
-	void Update(float _DeltaTime) {}
-	void End() {}
+	void Update(float _DeltaTime);
+	void End();
 
 private:
 
