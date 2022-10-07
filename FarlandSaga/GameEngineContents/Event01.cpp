@@ -46,9 +46,26 @@ void Event01::Start()
 	{
 		PlayUnit* UnitLEON = CreateActor<PlayUnit>(OBJECTORDER::Player);
 		UnitLEON->SetTileRenderer(E01TileMap->TileRenderer);
-		UnitLEON->SetUnit(25, 20, "LEON");
+		UnitLEON->SetUnit(23, 20, "LEON");
 		UnitLEON->IdleDirection_ = IdleDirection::LeftDown;
 		UnitLEON->SetUnitMouse(NewMouseActor);
+	}
+	{
+		PlayUnit* UnitRALF = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitRALF->SetTileRenderer(E01TileMap->TileRenderer);
+		UnitRALF->SetUnit(26, 24, "RALF");
+		UnitRALF->IdleDirection_ = IdleDirection::RigntUp;
+		UnitRALF->SetUnitMouse(NewMouseActor);
+
+
+	}
+	{
+		PlayUnit* UnitBRIAN = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitBRIAN->SetTileRenderer(E01TileMap->TileRenderer);
+		UnitBRIAN->SetUnit(26, 41, "BRIAN");
+		UnitBRIAN->IdleDirection_ = IdleDirection::LeftDown;
+		UnitBRIAN->SetUnitMouse(NewMouseActor);
+
 	}
 	{
 		NewMyDialogBox = CreateActor<MyDialogBox>(OBJECTORDER::UI);

@@ -255,23 +255,69 @@ void PlayUnit::MonCheaker(MoveDirection _CheakDirection, float _X, float _Y, int
 }
 void PlayUnit::Update(float _DeltaTime)
 {
-	if (IdleDirection_ == IdleDirection::RigntUp)
+
+	if (TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit == PlayUnitGroup::Leon)
 	{
-		UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
+		if (IdleDirection_ == IdleDirection::RigntUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
+		}
+		if (IdleDirection_ == IdleDirection::LeftUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::RigntDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::LeftDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
+		}
+	}	
+	else if (TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit == PlayUnitGroup::Ralf)
+	{
+		if (IdleDirection_ == IdleDirection::RigntUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("RalfIdleRU");
+		}
+		if (IdleDirection_ == IdleDirection::LeftUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("RalfIdleRU");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::RigntDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("RalfIdleLD");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::LeftDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("RalfIdleLD");
+		}
 	}
-	if (IdleDirection_ == IdleDirection::LeftUp)
+	else if (TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit == PlayUnitGroup::Brian)
 	{
-		UnitRenderer->ChangeFrameAnimation("LeonIdleRU");
-		UnitRenderer->GetTransform().PixLocalNegativeX();
-	}
-	if (IdleDirection_ == IdleDirection::RigntDown)
-	{
-		UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
-		UnitRenderer->GetTransform().PixLocalNegativeX();
-	}
-	if (IdleDirection_ == IdleDirection::LeftDown)
-	{
-		UnitRenderer->ChangeFrameAnimation("LeonIdleLD");
+		if (IdleDirection_ == IdleDirection::RigntUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("BrianIdleRU");
+		}
+		if (IdleDirection_ == IdleDirection::LeftUp)
+		{
+			UnitRenderer->ChangeFrameAnimation("BrianIdleRU");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::RigntDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("BrianIdleLD");
+			UnitRenderer->GetTransform().PixLocalNegativeX();
+		}
+		if (IdleDirection_ == IdleDirection::LeftDown)
+		{
+			UnitRenderer->ChangeFrameAnimation("BrianIdleLD");
+		}
 	}
 	//if (true == GameEngineInput::GetInst()->IsPress("PlayerLeftUP"))
 	//{
@@ -518,7 +564,11 @@ void PlayUnit::Update(float _DeltaTime)
 						Pos.x = (X * Half.x) + (Y * -Half.x);
 						Pos.y = (X * -Half.y) + (Y * -Half.y) + (TileMap->Tiles[Y][X].Z * 16.0f) - 16;
 
-						UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[Y][X].TileDepth + 1)));
+						if (this->MoveCheakerStart_ == true)
+						{
+							UnitRenderer->GetTransform().SetWorldPosition(float4(Pos.x, Pos.y + 16.0f, -(TileMap->Tiles[Y][X].TileDepth + 1)));
+						}
+							
 
 						if (EnterMon_ == true)	////////////////////////////공격범위내에 몬스터 있음
 						{
@@ -654,11 +704,49 @@ void PlayUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 	}
 	else if (_UnitName == "RALF")
 	{
+		UnitRenderer->CreateFrameAnimationCutTexture("RalfIdleLD", FrameAnimation_DESC("RalfIdle.png", 0, 2, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("RalfIdleRU", FrameAnimation_DESC("RalfIdle.png", 3, 5, 0.2f));
+		TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit = PlayUnitGroup::Ralf;
+		MaxHP_ = 34;
+		Hp_ = 34;
 
+		MaxMP_ = 10;
+		Mp_ = 5;
+
+		Atk_ = 33;
+		Def_ = 19;
+		Matk_ = 10;
+		MDef_ = 14;
+		Dex_ = 23;
+		AtkRange_ = 1;
+		MaxCounter_ = 6;
+
+		Level_ = 1;
+		MaxExp_ = 100;
+		Exp_ = 0;
 	}
 	else if (_UnitName == "BRIAN")
 	{
+		UnitRenderer->CreateFrameAnimationCutTexture("BrianIdleLD", FrameAnimation_DESC("BrianIdle.png", 0, 2, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("BrianIdleRU", FrameAnimation_DESC("BrianIdle.png", 3, 5, 0.2f));
+		TileMap->Tiles[static_cast<size_t>(UnitY)][static_cast<size_t>(UnitX)].IsUnit = PlayUnitGroup::Brian;
+		MaxHP_ = 34;
+		Hp_ = 34;
 
+		MaxMP_ = 10;
+		Mp_ = 5;
+
+		Atk_ = 33;
+		Def_ = 19;
+		Matk_ = 10;
+		MDef_ = 14;
+		Dex_ = 23;
+		AtkRange_ = 2;
+		MaxCounter_ = 6;
+
+		Level_ = 1;
+		MaxExp_ = 100;
+		Exp_ = 0;
 	}
 }
 
