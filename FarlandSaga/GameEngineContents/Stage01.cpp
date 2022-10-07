@@ -162,7 +162,7 @@ void Stage01::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		GEngine::ChangeLevel("Event02");
+		GEngine::ChangeLevel("EndLevel");
 	}
 
 }
