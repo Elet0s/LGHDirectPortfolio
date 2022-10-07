@@ -141,7 +141,17 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("LeonWalkU.png", 4, 1);
 	GameEngineTexture::Cut("LeonWalkD.png", 4, 1);
 	GameEngineTexture::Cut("LeonIdle.png", 6, 1);
+	GameEngineTexture::Cut("LeonAtkLD.png", 5, 1);
+	GameEngineTexture::Cut("LeonAtkLU.png", 5, 1);
+	GameEngineTexture::Cut("LeonDie.png", 2, 1);
+	GameEngineTexture::Cut("LeonHit.png", 2, 1);
+
+	GameEngineTexture::Cut("GoblinWalkD.png", 4, 1);
+	GameEngineTexture::Cut("GoblinWalkU.png", 4, 1);
 	GameEngineTexture::Cut("GoblinIdle.png", 6, 1);
+	GameEngineTexture::Cut("GoblinAttD.png", 5, 1);
+	GameEngineTexture::Cut("GoblinAttU.png", 5, 1);
+	GameEngineTexture::Cut("GoblinHit.png", 2, 1);
 	
 	///////////////// ÆùÆ® /////////////////
 	GameEngineFont::Load("ÈÞ¸Õ°íµñ");

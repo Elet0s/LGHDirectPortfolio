@@ -21,6 +21,7 @@ TitleLevel::~TitleLevel()
 void TitleLevel::Start()
 {
 	{
+		this->SetOrder(1);
 		GameEngineDirectory Dir;
 		Dir.MoveParentToExitsChildDirectory("ConstantResources");
 		Dir.Move("ConstantResources");

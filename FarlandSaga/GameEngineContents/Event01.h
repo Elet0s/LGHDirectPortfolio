@@ -12,6 +12,13 @@ public:
 	Event01(Event01&& _Other) noexcept = delete;
 	Event01& operator=(const Event01& _Other) = delete;
 	Event01& operator=(Event01&& _Other) noexcept = delete;
+
+	TileMapActor* E01TileMap;
+
+	MouseActor* NewMouseActor;
+	std::string StageName;
+	bool MainCameraSet;
+
 protected:
 	void Start() override;
 	void Update(float _DeltaTime) override;

@@ -42,8 +42,12 @@ public:
 	size_t Def_;
 	size_t Matk_;
 	size_t MDef_;
+
 	size_t Dex_;
-	size_t MoveCount_;
+
+	size_t AtkRange_;
+	int MoveCount_;
+	int MaxCounter_;
 
 	size_t Level_;
 	size_t MaxExp_;
