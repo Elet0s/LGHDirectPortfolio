@@ -58,8 +58,8 @@ void MouseActor::Update(float _DeltaTime)
 	MouseCol_->GetTransform().SetLocalPosition(MousePos);
 	MX = roundf((MousePos.x / 32.0f + MousePos.y / -16.0f) / 2.0f);
 	MY = roundf((MousePos.x / -32.0f + MousePos.y / -16.0f) / 2.0f);
-	 MouseOnX = static_cast<int>(MX);
-	 MouseOnY = static_cast<int>(MY);
+	MouseOnX = static_cast<int>(MX);
+	MouseOnY = static_cast<int>(MY);
 
 	if (TileMap != nullptr)
 	{
@@ -69,7 +69,7 @@ void MouseActor::Update(float _DeltaTime)
 			{
 				Renderer->On();
 			}
-			if (TileMap->Tiles[MouseOnY][MouseOnX].TileIndex ==64|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 63|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 62|| TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 61)
+			if (TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 64 || TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 63 || TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 62 || TileMap->Tiles[MouseOnY][MouseOnX].TileIndex == 61)
 			{
 				Renderer->Off();
 			}
@@ -80,7 +80,7 @@ void MouseActor::Update(float _DeltaTime)
 				float XX = (MX * 32) + (MY * -32);
 				float YY = (MX * -16) + (MY * -16) + (MZ * 16) - 16;
 
-				Renderer->GetTransform().SetWorldPosition({ XX, YY,-(TileMap->Tiles[MouseOnY][MouseOnX].TileDepth+0.5f),0.0f });
+				Renderer->GetTransform().SetWorldPosition({ XX, YY,-(TileMap->Tiles[MouseOnY][MouseOnX].TileDepth + 0.5f),0.0f });
 				if (MouseOnX + 1 == TileMap->TileX || MouseOnY + 1 == TileMap->TileY)
 				{
 					Renderer->SetTexture("ST01.png");
@@ -141,44 +141,49 @@ void MouseActor::Update(float _DeltaTime)
 	}
 
 	//////// 마우스드래그 이동하는 기능 ///////////
-	if (OnUnit == false && OnMon == false)
+	if (Level->GetOrder() != 1)
 	{
-		if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
-		{
-			GetCursorPos(&ptMouse1);
-			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
-		}
-		if (true == GameEngineInput::GetInst()->IsPress("MouseLeft"))
-		{
-			GetCursorPos(&ptMouse2);
-			ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse2);
-		}
-		ptMouse3.x = ptMouse2.x - ptMouse1.x;
-		ptMouse3.y = ptMouse2.y - ptMouse1.y;
-		if (ptMouse3.x > 0)
-		{
-			Level->GetMainCameraActorTransform().SetLocalMove(-Level->GetMainCameraActorTransform().GetRightVector() * static_cast<float>(ptMouse3.x));
-			ptMouse3.x = 0;
-			ptMouse1.x = ptMouse2.x;
-		}
-		else if (ptMouse3.x < 0)
-		{
-			Level->GetMainCameraActorTransform().SetLocalMove(Level->GetMainCameraActorTransform().GetRightVector() * static_cast<float>(-ptMouse3.x));
-			ptMouse3.x = 0;
-			ptMouse1.x = ptMouse2.x;
-		}
 
-		if (ptMouse3.y > 0)
+		if (OnUnit == false && OnMon == false)
 		{
-			Level->GetMainCameraActorTransform().SetLocalMove(Level->GetMainCameraActorTransform().GetUpVector() * static_cast<float>(ptMouse3.y));
-			ptMouse3.y = 0;
-			ptMouse1.y = ptMouse2.y;
-		}
-		else if (ptMouse3.y < 0)
-		{
-			Level->GetMainCameraActorTransform().SetLocalMove(-Level->GetMainCameraActorTransform().GetUpVector() * static_cast<float>(-ptMouse3.y));
-			ptMouse3.y = 0;
-			ptMouse1.y = ptMouse2.y;
+			if (true == GameEngineInput::GetInst()->IsDown("MouseLeft"))
+			{
+				GetCursorPos(&ptMouse1);
+				ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse1);
+			}
+			if (true == GameEngineInput::GetInst()->IsPress("MouseLeft"))
+			{
+				GetCursorPos(&ptMouse2);
+				ScreenToClient(GameEngineWindow::GetHWND(), &ptMouse2);
+			}
+			ptMouse3.x = ptMouse2.x - ptMouse1.x;
+			ptMouse3.y = ptMouse2.y - ptMouse1.y;
+
+			if (ptMouse3.x > 0)
+			{
+				Level->GetMainCameraActorTransform().SetLocalMove(-Level->GetMainCameraActorTransform().GetRightVector() * static_cast<float>(ptMouse3.x));
+				ptMouse3.x = 0;
+				ptMouse1.x = ptMouse2.x;
+			}
+			else if (ptMouse3.x < 0)
+			{
+				Level->GetMainCameraActorTransform().SetLocalMove(Level->GetMainCameraActorTransform().GetRightVector() * static_cast<float>(-ptMouse3.x));
+				ptMouse3.x = 0;
+				ptMouse1.x = ptMouse2.x;
+			}
+
+			if (ptMouse3.y > 0)
+			{
+				Level->GetMainCameraActorTransform().SetLocalMove(Level->GetMainCameraActorTransform().GetUpVector() * static_cast<float>(ptMouse3.y));
+				ptMouse3.y = 0;
+				ptMouse1.y = ptMouse2.y;
+			}
+			else if (ptMouse3.y < 0)
+			{
+				Level->GetMainCameraActorTransform().SetLocalMove(-Level->GetMainCameraActorTransform().GetUpVector() * static_cast<float>(-ptMouse3.y));
+				ptMouse3.y = 0;
+				ptMouse1.y = ptMouse2.y;
+			}
 		}
 	}
 }

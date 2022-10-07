@@ -67,6 +67,22 @@ void Stage01::Start()
 		UnitLEON->SetUnitMouse(NewMouseActor);
 		PlayGroup.push_back(UnitLEON);
 	}
+	{
+		PlayUnit* UnitRALF = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitRALF->SetTileRenderer(S01TileMap->TileRenderer);
+		UnitRALF->SetTurn(Turn);
+		UnitRALF->SetUnit(41, 23, "RALF");
+		UnitRALF->SetUnitMouse(NewMouseActor);
+		PlayGroup.push_back(UnitRALF);
+	}
+	{
+		PlayUnit* UnitBRIAN = CreateActor<PlayUnit>(OBJECTORDER::Player);
+		UnitBRIAN->SetTileRenderer(S01TileMap->TileRenderer);
+		UnitBRIAN->SetTurn(Turn);
+		UnitBRIAN->SetUnit(41, 22, "BRIAN");
+		UnitBRIAN->SetUnitMouse(NewMouseActor);
+		PlayGroup.push_back(UnitBRIAN);
+	}
 	/////////////////////////몬스터 유닛 로드///////////////////////////
 	{
 		MonUnit* Goblin1 = CreateActor<MonUnit>(OBJECTORDER::Monster);
@@ -74,6 +90,34 @@ void Stage01::Start()
 		Goblin1->SetTurn(Turn);
 		Goblin1->SetUnit(35, 24, "GOBLIN");
 		MonGroup.push_back(Goblin1);
+	}
+	{
+		MonUnit* Goblin2 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		Goblin2->SetTileRenderer(S01TileMap->TileRenderer);
+		Goblin2->SetTurn(Turn);
+		Goblin2->SetUnit(25, 20, "GOBLIN");
+		MonGroup.push_back(Goblin2);
+	}
+	{
+		MonUnit* Goblin3 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		Goblin3->SetTileRenderer(S01TileMap->TileRenderer);
+		Goblin3->SetTurn(Turn);
+		Goblin3->SetUnit(22, 28, "GOBLIN");
+		MonGroup.push_back(Goblin3);
+	}
+	{
+		MonUnit* Goblin4 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		Goblin4->SetTileRenderer(S01TileMap->TileRenderer);
+		Goblin4->SetTurn(Turn);
+		Goblin4->SetUnit(30, 25, "GOBLIN");
+		MonGroup.push_back(Goblin4);
+	}
+	{
+		MonUnit* Goblin5 = CreateActor<MonUnit>(OBJECTORDER::Monster);
+		Goblin5->SetTileRenderer(S01TileMap->TileRenderer);
+		Goblin5->SetTurn(Turn);
+		Goblin5->SetUnit(15, 15, "GOBLIN");
+		MonGroup.push_back(Goblin5);
 	}
 }
 
@@ -118,7 +162,7 @@ void Stage01::Update(float _DeltaTime)
 
 	if (true == GameEngineInput::GetInst()->IsDown("NextLevel"))
 	{
-		GEngine::ChangeLevel("Event02");
+		GEngine::ChangeLevel("Ending");
 	}
 
 }

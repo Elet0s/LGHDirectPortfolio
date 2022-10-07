@@ -19,58 +19,81 @@ void MyDialogBox::Start()
 		GameEngineInput::GetInst()->CreateKey("NextDialog", VK_SPACE);
 	}
 
-	GetTransform().SetLocalPosition({ 0, 240, 1 });
+
 	{
+
 		DialogBoxRenderer01 = CreateComponent<GameEngineTextureRenderer>();
 		DialogBoxRenderer01->GetTransform().SetLocalScale({ 921, 230, 0 });
-		DialogBoxRenderer01->GetTransform().SetLocalPosition({ 0, 10,0 });
+		DialogBoxRenderer01->GetTransform().SetWorldPosition({ -130, -530,-150 });
 
 		DialogFaceRenderer01 = CreateComponent<GameEngineTextureRenderer>();
 		DialogFaceRenderer01->GetTransform().SetLocalScale({ 360, 288, 0 });
-		DialogFaceRenderer01->GetTransform().SetLocalPosition({ -250, 0,0 });
+		DialogFaceRenderer01->GetTransform().SetWorldPosition({ -380, -550,-150 });
 
 		DialogUpName = CreateComponent<GameEngineFontRenderer>();
 		DialogUpName->SetColor({ 1.0f, 1.0f, 0.0f });
-		DialogUpName->SetScreenPostion({ 430.0f, 50.0f });
+		DialogUpName->SetScreenPostion({ 430.0f, 50.0f,0 });
+		float4 A = DialogUpName->GetTransform().GetWorldPosition();
+		A.z = -151;
+		DialogUpName->GetTransform().SetWorldPosition(A);
 
 		DialogUpText01 = CreateComponent<GameEngineFontRenderer>();
 		DialogUpText01->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogUpText01->SetScreenPostion({ 430.0f, 80.0f });
+		DialogUpText01->SetScreenPostion({ 430.0f, 80.0f,0 });
+		float4 B = DialogUpText01->GetTransform().GetWorldPosition();
+		B.z = -151;
+		DialogUpText01->GetTransform().SetWorldPosition(B);
 
 		DialogUpText02 = CreateComponent<GameEngineFontRenderer>();
 		DialogUpText02->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogUpText02->SetScreenPostion({ 430.0f, 110.0f });
+		DialogUpText02->SetScreenPostion({ 430.0f, 110.0f,0 });
+		float4 C = DialogUpText02->GetTransform().GetWorldPosition();
+		C.z = -151;
+		DialogUpText02->GetTransform().SetWorldPosition(C);
 
 		DialogUpText03 = CreateComponent<GameEngineFontRenderer>();
 		DialogUpText03->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogUpText03->SetScreenPostion({ 430.0f, 140.0f });
-
+		DialogUpText03->SetScreenPostion({ 430.0f, 140.0f,0 });
+		float4 D = DialogUpText03->GetTransform().GetWorldPosition();
+		D.z = -151;
+		DialogUpText03->GetTransform().SetWorldPosition(D);
 	}
 	{
 		DialogBoxRenderer02= CreateComponent<GameEngineTextureRenderer>();
 		DialogBoxRenderer02->GetTransform().SetLocalScale({ 921, 230, 0 });
-		DialogBoxRenderer02->GetTransform().SetLocalPosition({ 0,-490,1 });
+		DialogBoxRenderer02->GetTransform().SetWorldPosition({ -130,-990,-150 });
 
 		DialogFaceRenderer02 = CreateComponent<GameEngineTextureRenderer>();
 		DialogFaceRenderer02->GetTransform().SetLocalScale({ 360, 288, 0 });
-		DialogFaceRenderer02->GetTransform().SetLocalPosition({ 260, -510,0 });
+		DialogFaceRenderer02->GetTransform().SetWorldPosition({ 130, -1010,-150 });
 
 		DialogDownName = CreateComponent<GameEngineFontRenderer>();
 		DialogDownName->SetColor({ 1.0f, 1.0f, 0.0f });
-		DialogDownName->SetScreenPostion({ 80.0f, 550.0f });
+		DialogDownName->SetScreenPostion({ 80.0f, 550.0f,-151.0f });
+		float4 A = DialogDownName->GetTransform().GetWorldPosition();
+		A.z = -151;
+		DialogDownName->GetTransform().SetWorldPosition(A);
 
 		DialogDownText01 = CreateComponent<GameEngineFontRenderer>();
 		DialogDownText01->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogDownText01->SetScreenPostion({ 80.0f, 580.0f });
+		DialogDownText01->SetScreenPostion({ 80.0f, 580.0f,-151.0f });
+		float4 B = DialogDownText01->GetTransform().GetWorldPosition();
+		B.z = -151;
+		DialogDownText01->GetTransform().SetWorldPosition(B);
 
 		DialogDownText02 = CreateComponent<GameEngineFontRenderer>();
 		DialogDownText02->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogDownText02->SetScreenPostion({ 80.0f, 610.0f });
+		DialogDownText02->SetScreenPostion({ 80.0f, 610.0f,-151.0f });
+		float4 C = DialogDownText02->GetTransform().GetWorldPosition();
+		C.z = -151;
+		DialogDownText02->GetTransform().SetWorldPosition(C);
 
 		DialogDownText03 = CreateComponent<GameEngineFontRenderer>();
 		DialogDownText03->SetColor({ 1.0f, 1.0f, 1.0f });
-		DialogDownText03->SetScreenPostion({ 80.0f, 640.0f });
-
+		DialogDownText03->SetScreenPostion({ 80.0f, 640.0f,-151.0f });
+		float4 D = DialogDownText03->GetTransform().GetWorldPosition();
+		D.z = -151;
+		DialogDownText03->GetTransform().SetWorldPosition(D);
 
 	}
 }

@@ -2,35 +2,38 @@
 #include"MonUnit.h"
 
 MonUnit::MonUnit()
-	:  MonType(MonUnitGroup::None),
- UnitRenderer(),
- TileMap(),
- UnitX(0),
- UnitY(0),
- UnitZ(0),
- MaxHP_(0),
- Hp_(0),
- MaxMP_(0),
- Mp_(0),
- Atk_(0),
- Def_(0),
- Matk_(0),
- MDef_(0),
- Dex_(0),
- Level_(0),
- MaxExp_(0),
- Exp_(0),
- Fire_(0),
- Water_(0),
- Earth_(0),
- Wind_(0),
- Dark_(0),
- Light_(0),
- Strength_(0),
- Detect_(0),
- Intelligence_(0),
- Reflection_(0),
- Heyste_(0)
+	: MonType(MonUnitGroup::None),
+	UnitRenderer(),
+	TileMap(),
+	UnitX(0),
+	UnitY(0),
+	UnitZ(0),
+	MaxHP_(0),
+	Hp_(0),
+	MaxMP_(0),
+	Mp_(0),
+	Atk_(0),
+	Def_(0),
+	Matk_(0),
+	MDef_(0),
+	Dex_(0),
+	Level_(0),
+	MaxExp_(0),
+	Exp_(0),
+	Fire_(0),
+	Water_(0),
+	Earth_(0),
+	Wind_(0),
+	Dark_(0),
+	Light_(0),
+	Strength_(0),
+	Detect_(0),
+	Intelligence_(0),
+	Reflection_(0),
+	Heyste_(0),
+	IdleDirection_(IdleDirection::RigntDown),
+	MoveCount_(0),
+	Turn_(0)
 {
 
 }
@@ -43,7 +46,24 @@ void MonUnit::Start()
 }
 void MonUnit::Update(float _DeltaTime)
 {
-
+	if (IdleDirection_ == IdleDirection::RigntUp)
+	{
+		UnitRenderer->ChangeFrameAnimation("GoblinIdleRU");
+	}
+	if (IdleDirection_ == IdleDirection::LeftUp)
+	{
+		UnitRenderer->ChangeFrameAnimation("GoblinIdleRU");
+		UnitRenderer->GetTransform().PixLocalNegativeX();
+	}
+	if (IdleDirection_ == IdleDirection::RigntDown)
+	{
+		UnitRenderer->ChangeFrameAnimation("GoblinIdleLD");
+		UnitRenderer->GetTransform().PixLocalNegativeX();
+	}
+	if (IdleDirection_ == IdleDirection::LeftDown)
+	{
+		UnitRenderer->ChangeFrameAnimation("GoblinIdleLD");
+	}
 }
 void MonUnit::End() 
 {
@@ -90,8 +110,11 @@ void MonUnit::SetUnit(int _X, int _Y, std::string _UnitName)
 
 	if (_UnitName == "GOBLIN")
 	{
-		UnitRenderer->CreateFrameAnimationCutTexture("GoblinIdle", FrameAnimation_DESC("GoblinIdle.png", 0, 2, 0.2f));
-		UnitRenderer->ChangeFrameAnimation("GoblinIdle");
+		UnitRenderer->CreateFrameAnimationCutTexture("GoblinIdleLD", FrameAnimation_DESC("GoblinIdle.png", 0, 2, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("GoblinIdleRU", FrameAnimation_DESC("GoblinIdle.png", 3, 5, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("GoblinWalkU", FrameAnimation_DESC("LeonWalkU.png", 0, 3, 0.2f));
+		UnitRenderer->CreateFrameAnimationCutTexture("GoblinWalkD", FrameAnimation_DESC("LeonWalkD.png", 0, 3, 0.2f));
+
 		TileMap->Tiles[static_cast<float>(UnitY)][static_cast<float>(UnitX)].IsMon = MonUnitGroup::Goblin;
 	}
 	else if (_UnitName == "WOLF")
