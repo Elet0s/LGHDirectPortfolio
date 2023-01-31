@@ -183,7 +183,13 @@ void ContentsCore::Start()
 	GameEngineTexture::Cut("GoblinHit.png", 2, 1);
 	GameEngineTexture::Cut("GoblinAttD.png", 5, 1);
 	GameEngineTexture::Cut("GoblinAttU.png", 5, 1);
-	
+	GameEngineTexture::Cut("GoblinAttU.png", 5, 1);
+
+	GameEngineTexture::Cut("BrianIdle.png", 6, 1);
+
+
+	GameEngineTexture::Cut("RalfIdle.png", 6, 1);
+
 	///////////////// ÆùÆ® /////////////////
 	GameEngineFont::Load("ÈÞ¸Õ°íµñ");
 
